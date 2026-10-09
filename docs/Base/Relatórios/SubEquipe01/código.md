@@ -239,7 +239,56 @@ O exemplo também demonstra a importância de validar os dados, manter responsab
 
 Por se tratar de uma implementação didática, a solução não representa uma integração funcional com o sistema real do Projeto Fórum. Seu objetivo é demonstrar o funcionamento do padrão de projeto e sua possível aplicação em um contexto de publicações.
 
-## 9. Referências
+## 9. Pontos de Vista dos Integrantes
+
+Esta seção apresenta as percepções dos integrantes sobre a implementação do padrão de projeto GoF Builder, considerando sua aplicação na construção de publicações, a organização das responsabilidades e os conhecimentos relacionados à atividade.
+
+### Arthur Fernandes
+
+A elaboração da implementação permite compreender, na prática, como o padrão Builder organiza a criação de objetos com diferentes atributos. A separação entre `Publicacao` e `PublicacaoBuilder` evidencia a distinção entre o objeto final e o processo utilizado para construí-lo.
+
+Outro aspecto relevante é a utilização de métodos encadeados, que tornam a configuração dos atributos mais legível, além da centralização das validações na classe `Publicacao`. A atividade também permite relacionar os conceitos teóricos dos padrões GoF à implementação em JavaScript, considerando a organização do código, a validação de dados e a possibilidade de testar os comportamentos definidos.
+
+## 10. Participação e Evidências
+
+Esta seção registra as atividades relacionadas à implementação e à documentação do padrão Builder. As evidências devem corresponder aos arquivos desenvolvidos e aos resultados efetivamente obtidos.
+
+### Arthur Fernandes
+
+**Atividades desenvolvidas:**
+
+- Organização da documentação da implementação do padrão Builder.
+- Descrição das responsabilidades da classe `Publicacao`.
+- Documentação dos métodos da classe `PublicacaoBuilder`.
+- Apresentação do programa de demonstração em `src/index.js`.
+- Descrição dos procedimentos para execução do programa e dos testes automatizados.
+- Organização das informações técnicas sobre validação dos dados e construção do objeto final.
+
+**Evidências relacionadas:**
+
+| Evidência | Descrição |
+|---|---|
+| `src/Publicacao.js` | Implementação do objeto `Publicacao`, incluindo validação dos campos obrigatórios e tratamento das tags. |
+| `src/PublicacaoBuilder.js` | Implementação do Builder e dos métodos utilizados para configurar os atributos da publicação. |
+| `src/index.js` | Programa de demonstração da construção de uma publicação e exibição do resultado em JSON. |
+| `test/PublicacaoBuilder.test.js` | Arquivo destinado aos testes automatizados do Builder e das validações da publicação. |
+| `package.json` | Configuração do projeto e dos comandos de execução, caso corresponda ao arquivo efetivamente utilizado. |
+| Capturas de tela do terminal | Evidências da execução do programa e dos testes automatizados, após sua realização. |
+| Histórico de commits | [Histórico de commit](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/d96e0b265a936257dbbba7982933105fdb99a34c). |
+
+As evidências devem ser anexadas ou referenciadas no repositório conforme a organização definida pela equipe. A existência dos arquivos, a execução dos testes e os registros de contribuição devem ser verificados antes da entrega.
+
+## 11. Nível de Contribuição dos Integrantes
+
+O nível de contribuição deve considerar as atividades efetivamente realizadas, a complexidade do trabalho desenvolvido e as evidências disponíveis. A classificação deve ser coerente com os critérios adotados pela equipe.
+
+| Integrante | Atividades desenvolvidas | Nível de contribuição | Justificativa |
+|---|---|---|---|
+| [Arthur Fernandes](https://github.com/arthurfernandesj) | Organização e documentação técnica da implementação do padrão Builder, conforme as atividades realizadas. | 33,33% | A classificação deve considerar a participação comprovada na implementação, na documentação e nas atividades relacionadas à entrega. |
+
+**Observação:** o nível de contribuição deve ser definido de acordo com os critérios acordados pela equipe e com as atividades efetivamente realizadas. A tabela não substitui o registro de evidências.
+
+## 12. Referências
 
 GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Software*. Boston: Addison-Wesley, 1994.
 
@@ -247,8 +296,8 @@ NODE.JS. *Node.js Documentation*. Disponível em: <https://nodejs.org/docs/lates
 
 MERMAID. *Mermaid Documentation*. Disponível em: <https://mermaid.js.org/>. Acesso em: 08 out. 2026.
 
-## 10. Histórico de Versões
+## 13. Histórico de Versões
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
-| 1.0 | 08/10/2026 | Documentação da implementação didática do padrão Builder para construção de publicações. | [Arthur Fernandes](https://github.com/arthurfernandesj) | — | Organização da documentação do código, descrição das classes e registro dos procedimentos de execução e testes. |
+| 1.0 | 08/10/2026 | Documentação da implementação didática do padrão Builder para construção de publicações. | [Arthur Fernandes](https://github.com/arthurfernandesj) | — | Organização da documentação técnica, descrição das classes, procedimentos de execução, testes, participação e contribuição. |
