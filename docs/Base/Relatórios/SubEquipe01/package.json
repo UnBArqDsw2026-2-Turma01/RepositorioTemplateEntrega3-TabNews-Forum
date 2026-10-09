@@ -1,0 +1,13 @@
+{
+  "name": "subequipe01-gof-criacionais-builder",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Exemplo didático do padrão GoF Builder aplicado a publicações de fórum",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
