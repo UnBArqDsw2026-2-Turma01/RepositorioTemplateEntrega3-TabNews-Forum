@@ -63,7 +63,7 @@ A implementação principal demonstra a construção de publicações, enquanto 
 
 Os exemplos também permitem demonstrar validação de campos obrigatórios e a separação entre a configuração dos atributos e a criação do objeto final. O Node.js possibilita a execução das demonstrações sem dependências externas específicas do padrão.
 
-O Builder não é necessário para todos os objetos. Quando há poucos atributos e nenhuma complexidade relevante na construção, uma abordagem mais simples pode ser suficiente. A escolha deve ser justificada pelo problema que se pretende resolver.
+O Builder não é necessário para todos os objetos. Quando há poucos atributos eAplicação Complementar do Builder no Cadastro de Usuários nenhuma complexidade relevante na construção, uma abordagem mais simples pode ser suficiente. A escolha deve ser justificada pelo problema que se pretende resolver.
 
 ## 6. Fundamentação Teórica
 
@@ -94,7 +94,7 @@ Nas duas implementações, os métodos de configuração retornam o próprio Bui
 - Não implementa, por si só, persistência, autenticação ou integração com a aplicação real.
 - A existência de dois exemplos demonstrativos não significa que seja necessário utilizar Builder em todos os objetos do sistema.
 
-## 7. Aplicação Complementar do Builder no Cadastro de Usuários
+## 7. 
 
 ### 7.1 Introdução
 
@@ -218,9 +218,9 @@ const CadastroUsuarioBuilder =
 
 try {
     const usuario = new CadastroUsuarioBuilder()
-        .comNome("Giovana Fontes")
-        .comEmail("giovana@example.com")
-        .comNomeUsuario("giovanafontes")
+        .comNome("Nome exemplo")
+        .comEmail("Nome@example.com")
+        .comNomeUsuario("Usuario exemplo")
         .comSenha("senha-de-exemplo")
         .build();
 
@@ -248,9 +248,9 @@ const CadastroUsuarioBuilder =
 
 try {
     const usuario = new CadastroUsuarioBuilder()
-        .comNome("Giovana Fontes")
-        .comEmail("giovana@example.com")
-        .comNomeUsuario("giovanafontes")
+        .comNome("Nome Exemplo")
+        .comEmail("nome@example.com")
+        .comNomeUsuario("usuarioexemplo")
         .build();
 
     console.log(usuario.toJSON());
@@ -297,3 +297,4 @@ NODE.JS. *Node.js Documentation*. Disponível em: https://nodejs.org/docs/latest
 |---|---|---|---|---|---|
 | 1.0 | 08/10/2026 | Criação da documentação inicial sobre o padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj)| A preencher | Versão inicial, a revisar após a execução e a validação do exemplo. |
 | 1.1 | 10/10/2026 | Inclusão de exemplo complementar de construção de usuário com Builder. | [Giovana Fontes](https://github.com/GiovanaFonteS) | A preencher | Versão inicial de exemplo complementar |
+| 1.2 | 13/10/2026 | Inclusão e correção de Exemplos | [Giovana Fontes](https://github.com/GiovanaFonteS) | A preencher | Correção de exemplos citados na "Aplicação Complementar do Builder no Cadastro de Usuários" |

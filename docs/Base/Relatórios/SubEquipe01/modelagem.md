@@ -195,7 +195,47 @@ Não foi criada uma classe *Director*, porque o exemplo possui apenas uma sequê
 
 A modelagem foi mantida proporcional ao objetivo acadêmico: demonstrar um padrão criacional com código executável, sem introduzir componentes que não sejam necessários para o cenário proposto.
 
-## 9. Referências
+
+## 9. Comparação entre a construção tradicional e o padrão Builder
+
+A construção de objetos pode ser realizada diretamente por meio de seus construtores. Entretanto, quando existem vários atributos, essa abordagem pode dificultar a leitura e a organização do código responsável pela criação do objeto.
+
+No contexto da implementação demonstrativa, uma publicação possui título, conteúdo, autor e tags. Sem o padrão Builder, o cliente precisaria fornecer os dados diretamente durante a criação do objeto, concentrando mais detalhes da construção em uma única operação.
+
+Com a utilização da classe `PublicacaoBuilder`, esse processo é dividido em etapas. Os métodos `comTitulo()`, `comConteudo()`, `comAutor()` e `comTags()` permitem configurar os atributos individualmente, enquanto o método `build()` conclui a construção e retorna o objeto `Publicacao`.
+
+Essa abordagem favorece a legibilidade do código cliente e separa a configuração dos dados da criação do objeto final. Entretanto, o Builder também adiciona uma classe à implementação e pode representar complexidade desnecessária em objetos simples, com poucos atributos.
+
+## 10. Aplicabilidade do padrão Builder no contexto do Fórum
+
+O padrão Builder pode ser aplicado ao contexto do Fórum quando a criação de publicações exige a configuração de diferentes atributos antes da obtenção do objeto final.
+
+Na implementação demonstrativa, a classe `PublicacaoBuilder` permite definir progressivamente o título, o conteúdo, o autor e as tags de uma publicação. Essa organização evidencia como o padrão pode facilitar a construção de objetos com múltiplas informações associadas.
+
+Em uma possível evolução do sistema, o mesmo princípio poderia ser utilizado para organizar a configuração de publicações com atributos adicionais, como categorias ou anexos, desde que essas funcionalidades fossem especificadas e implementadas.
+
+A utilização do padrão, entretanto, não implica a existência de integração com banco de dados, serviços de autenticação ou outras funcionalidades da aplicação principal. O exemplo apresentado tem finalidade demonstrativa e evidencia a aplicação do padrão criacional na construção de objetos.
+
+## 11. Manutenibilidade, extensibilidade e limitações da solução
+
+A separação entre `PublicacaoBuilder` e `Publicacao` contribui para a organização da implementação ao distinguir a configuração gradual dos atributos da representação final da publicação. Essa divisão facilita a identificação das responsabilidades de cada classe e permite compreender melhor o fluxo de construção.
+
+A possibilidade de encadear os métodos de configuração também favorece a leitura do código cliente, tornando explícita a sequência utilizada para preparar os dados antes da chamada de `build()`.
+
+Em futuras evoluções, novos atributos poderiam ser incorporados à publicação, exigindo ajustes no Builder, na classe `Publicacao` e nos testes correspondentes. Essa evolução deve ser acompanhada da atualização da documentação e da modelagem para manter a consistência entre os artefatos.
+
+Apesar dessas vantagens, o padrão Builder não substitui a necessidade de regras de negócio, mecanismos de persistência, controles de segurança ou integração com os demais componentes de uma aplicação real. Sua utilização deve ser avaliada conforme a complexidade do objeto e as necessidades do sistema.
+
+## 12. Considerações finais
+
+A modelagem apresentada demonstra como o padrão criacional Builder pode organizar a construção de publicações por meio da separação entre a configuração dos atributos e a criação do objeto final.
+
+A documentação dos participantes, das interações, das regras de validação e da correspondência com a implementação permite compreender o funcionamento da solução e suas principais decisões de projeto.
+
+Conclui-se que o padrão pode favorecer a legibilidade, a organização e a extensibilidade do processo de construção, desde que sua utilização seja adequada à complexidade do cenário. Como a solução apresentada é demonstrativa, possíveis integrações e funcionalidades adicionais dependem de implementação e validação futuras.
+
+
+## 13 Referências
 
 GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. *Design Patterns: Elements of Reusable Object-Oriented Software*. Reading, MA: Addison-Wesley, 1994.
 
@@ -209,4 +249,4 @@ REFACTORING.GURU. *Builder*. Disponível em: https://refactoring.guru/design-pat
 |:---:|:---:|---|---|---|---|
 | 1.0 | 08/10/2026 | Criação inicial da modelagem do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Versão inicial com diagrama de classes, participantes e fluxo de construção. |
 | 1.1 | 08/10/2026 | Ampliação da modelagem e alinhamento com a implementação demonstrativa. | [Arthur Fernandes](https://github.com/arthurfernandesj) | A preencher | Inclusão dos diagramas de sequência e atividades, regras de validação, correspondência com os arquivos de código e referências. |
-| 1.2 | 10 /10/2026 | Am| [Giovana Fontes](https://github.com/GiovanaFontesS) | |  |
+| 1.2 | 10 /10/2026 | Adição de considerações sobre a aplicabilidade do padrão Builder | [Giovana Fontes](https://github.com/GiovanaFontesS) | | Comparação com a construção tradicional e análise de manutenibilidade, extensibilidade e limitações da solução. |
