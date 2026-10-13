@@ -278,6 +278,9 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 
 As evidências devem ser anexadas ou referenciadas no repositório conforme a organização definida pela equipe. A existência dos arquivos, a execução dos testes e os registros de contribuição devem ser verificados antes da entrega.
 
+## Giovana Fontes
+ Elaboração dos diagramadas 
+
 ## 11. Nível de Contribuição dos Integrantes
 
 O nível de contribuição deve considerar as atividades efetivamente realizadas, a complexidade do trabalho desenvolvido e as evidências disponíveis. A classificação deve ser coerente com os critérios adotados pela equipe.

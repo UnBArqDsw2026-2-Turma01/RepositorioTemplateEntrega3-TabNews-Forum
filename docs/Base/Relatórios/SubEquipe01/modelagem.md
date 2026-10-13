@@ -1,4 +1,4 @@
-# 2. Modelagem
+ # 2. Modelagem
 
 ## 1. Introdução
 
@@ -207,5 +207,6 @@ REFACTORING.GURU. *Builder*. Disponível em: https://refactoring.guru/design-pat
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|---|---|---|---|
-| 1.0 | 08/10/2026 | Criação inicial da modelagem do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | A preencher | Versão inicial com diagrama de classes, participantes e fluxo de construção. |
+| 1.0 | 08/10/2026 | Criação inicial da modelagem do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Versão inicial com diagrama de classes, participantes e fluxo de construção. |
 | 1.1 | 08/10/2026 | Ampliação da modelagem e alinhamento com a implementação demonstrativa. | [Arthur Fernandes](https://github.com/arthurfernandesj) | A preencher | Inclusão dos diagramas de sequência e atividades, regras de validação, correspondência com os arquivos de código e referências. |
+| 1.2 | 10 /10/2026 | Am| [Giovana Fontes](https://github.com/GiovanaFontesS) | |  |
