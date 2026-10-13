@@ -2,20 +2,20 @@
 # Padrões GoF Criacionais
 
 > **SubEquipe 02 — Projeto Fórum — Entrega 03**  
-> **Padrão escolhido:** Singleton.  
+> **Padrão escolhido:** Facade.
 > **Tecnologia da demonstração:** Python.
 
 ## 1. Introdução
 
 Os padrões de projeto são soluções recorrentes para problemas comuns no desenvolvimento de software. O catálogo *Design Patterns: Elements of Reusable Object-Oriented Software*, conhecido como GoF (*Gang of Four*), organiza esses padrões em três categorias: criacionais, estruturais e comportamentais.
 
-Os padrões criacionais estão relacionados à criação de objetos e buscam organizar e simplificar as decisões de instanciação. Este trabalho apresenta o padrão criacional Singleton por meio de exemplos didáticos relacionados ao Projeto Fórum.
+Os padrões criacionais estão relacionados à criação de objetos e buscam organizar e simplificar as decisões de instanciação. Este trabalho apresenta o padrão criacional Facade por meio de exemplos didáticos relacionados ao Projeto Fórum.
 
 ## 2. Objetivos
 
 ### 2.1 Objetivo geral
 
-Compreender e demonstrar a aplicação do padrão GoF Singleton por meio da modelagem, implementação e execução de soluções para construir objetos de maneira organizada e condizente com o padrão.
+Compreender e demonstrar a aplicação do padrão GoF Facade por meio da modelagem, implementação e execução de soluções para construir objetos de maneira organizada e condizente com o padrão.
 
 ### 2.2 Objetivos específicos
 
@@ -28,7 +28,7 @@ Compreender e demonstrar a aplicação do padrão GoF Singleton por meio da mode
 
 ## 3. Identificação do Padrão de Projeto
 
-**Nome:** Singleton
+**Nome:** Facade
 **Categoria:** Criacional.
 
 Preencher kk
@@ -43,7 +43,7 @@ Preencher kk
 
 ## 6. Fundamentação Teórica
 
-Os padrões criacionais organizam decisões relativas à criação de objetos. No catálogo GoF, essa categoria inclui Abstract Factory, Builder, Factory Method, Prototype e Singleton.
+Os padrões criacionais organizam decisões relativas à criação de objetos. No catálogo GoF, essa categoria inclui Abstract Factory, Builder, Factory Method, Prototype e Facade.
 
 O Builder concentra-se na construção gradual de um objeto. A configuração ocorre por meio de métodos que definem seus atributos, enquanto a operação `build()` solicita a criação do produto final.
 
@@ -96,11 +96,11 @@ Preencher kk
 
 Preencher kk
 
-### 7.7 Relação com o padrão Singleton
+### 7.7 Relação com o padrão Facade
 
 A implementação complementar apresenta os seguintes participantes:
 
-- **Singleton concreto:** 
+- **Facade concreto:** 
 - **Produto:** 
 - **Cliente:** 
 
@@ -116,4 +116,4 @@ GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. *Design Patterns: 
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |---|---|---|---|---|---|
-| 1.0 | 13/10/2026 | Criação da documentação inicial sobre o padrão Singleton. | [Isaac Menezes](https://github.com/pratamz250)| A preencher | Versão inicial, a revisar após a execução e a validação do exemplo. |
+| 1.0 | 13/10/2026 | Criação da documentação inicial sobre o padrão Facade. | [Isaac Menezes](https://github.com/pratamz250)| A preencher | Versão inicial, a revisar após a execução e a validação do exemplo. |
