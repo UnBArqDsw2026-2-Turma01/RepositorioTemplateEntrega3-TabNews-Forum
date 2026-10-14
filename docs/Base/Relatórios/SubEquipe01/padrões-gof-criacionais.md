@@ -295,6 +295,6 @@ NODE.JS. *Node.js Documentation*. Disponível em: https://nodejs.org/docs/latest
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |---|---|---|---|---|---|
-| 1.0 | 08/10/2026 | Criação da documentação inicial sobre o padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj)| A preencher | Versão inicial, a revisar após a execução e a validação do exemplo. |
-| 1.1 | 10/10/2026 | Inclusão de exemplo complementar de construção de usuário com Builder. | [Giovana Fontes](https://github.com/GiovanaFonteS) | A preencher | Versão inicial de exemplo complementar |
-| 1.2 | 13/10/2026 | Inclusão e correção de Exemplos | [Giovana Fontes](https://github.com/GiovanaFonteS) | A preencher | Correção de exemplos citados na "Aplicação Complementar do Builder no Cadastro de Usuários" |
+| 1.0 | 08/10/2026 | Criação da documentação inicial sobre o padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj)| [Giovana Fontes](https://github.com/GiovanaFontesS) | Versão inicial, a revisar após a execução e a validação do exemplo. |
+| 1.1 | 10/10/2026 | Inclusão de exemplo complementar de construção de usuário com Builder. | [Giovana Fontes](https://github.com/GiovanaFonteS) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Versão inicial de exemplo complementar |
+| 1.2 | 13/10/2026 | Inclusão e correção de Exemplos | [Giovana Fontes](https://github.com/GiovanaFonteS) |  [Arthur Fernandes](https://github.com/arthurfernandesj) | Correção de exemplos citados na "Aplicação Complementar do Builder no Cadastro de Usuários" |
