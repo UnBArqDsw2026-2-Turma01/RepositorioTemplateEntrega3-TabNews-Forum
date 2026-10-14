@@ -65,11 +65,18 @@ Os diagramas foram verificados quanto à sintaxe e conferidos visualmente após 
 
 <p align="center">Tabela 2: Evidências do uso de IA Generativa.</p>
 
+## Referências
+
+ANTHROPIC. **Claude Code overview**. Claude Code Docs. Disponível em: [https://code.claude.com/docs/en/overview](https://code.claude.com/docs/en/overview). Acesso em: 14 out. 2026.
+
+PLANTUML. **PlantUML**. Disponível em: [https://plantuml.com/](https://plantuml.com/). Acesso em: 14 out. 2026.
+
 ## Histórico de Versões
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:------:|:----:|:----------|:----------|:------------|:-------------------|
 | 1.0 | 14/10/2026 | Criação do documento de IA Generativa da SubEquipe_03 e registro da experiência individual do integrante. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Estrutura baseada no documento de IA Generativa da Entrega 02, com seções individuais por integrante e tabelas de evidências. |
+| 1.1 | 14/10/2026 | Inclusão da seção de referências. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Criação da seção de referências, com a documentação do Claude Code, ferramenta de IA Generativa utilizada, e do PlantUML, ferramenta utilizada na elaboração dos diagramas. |
 
 <p align="center">Tabela 3: Histórico de Versões.</p>
 
