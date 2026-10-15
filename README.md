@@ -79,12 +79,6 @@ A documentação também contempla as justificativas das decisões tomadas, as r
         <sub><b>Leonardo Fachinello Bonetti</b></sub>
       </a>
     </td>
-    <td align="center">
-      <a href="#">
-        <img src="https://github.com/identificador-do-github.png" width="100px;" alt="Luciano Alves do Brasil Schindel Machado"/><br />
-        <sub><b>Luciano Alves do Brasil Schindel Machado</b></sub>
-      </a>
-    </td>
   </tr>
 </table>
 
