@@ -1,10 +1,14 @@
-# 2. Modelagem — Complemento GoF Criacionais
+ # 2. Modelagem
 
 ## 1. Introdução
 
-A modelagem do complemento tem como objetivo representar a estrutura e o comportamento dos componentes que implementam três padrões criacionais complementares ao Builder: **Factory Method**, **Prototype** e **Singleton**.
+A modelagem do padrão GoF Builder tem como objetivo representar a estrutura e o comportamento dos componentes responsáveis pela construção de uma publicação no contexto demonstrativo do Projeto Fórum.
 
-Cada padrão é representado por um conjunto de classes do domínio do fórum. O Factory Method é ilustrado pela criação de `Publicacao` e `Comentario`; o Prototype, pelo `ModeloPublicacao` clonado em rascunhos; e o Singleton, pelo `RegistroAtividade`.
+A solução foi elaborada para demonstrar a construção gradual de um objeto que possui diferentes atributos, separando a configuração dos dados da criação da publicação final. Para isso, são utilizadas duas classes principais: `PublicacaoBuilder` e `Publicacao`.
+
+A classe `PublicacaoBuilder` permite configurar os atributos individualmente, enquanto a classe `Publicacao` representa o objeto construído e realiza as validações dos campos obrigatórios.
+
+Além dessas classes, o arquivo `src/index.js` representa o cliente da solução, responsável por utilizar o Builder e demonstrar a construção de uma publicação.
 
 Esta modelagem corresponde à implementação demonstrativa em JavaScript. Ela não representa uma integração já realizada ao sistema principal do Projeto Fórum.
 
@@ -13,132 +17,258 @@ Esta modelagem corresponde à implementação demonstrativa em JavaScript. Ela n
 O diagrama de classes apresenta os componentes da solução, seus atributos, métodos e relacionamentos.
 
 <p align="center">
-  <img src="diagrama_classes.png" alt="Diagrama de Classes UML do complemento GoF" width="800">
+  <img src="../../../images/diagrama_classes.png" alt="Diagrama de Classes UML" width="300">
 </p>
 
 <p align="center">
-  <strong>Figura 1 — Diagrama de classes UML dos padrões Factory Method, Prototype e Singleton.</strong><br>
+  <strong>Figura 1 — Diagrama de classes UML do padrão Builder aplicado à construção de publicações.</strong><br>
   Fonte: elaboração da SubEquipe01.
 </p>
+
 
 ### 2.1 Interpretação do diagrama
 
-O diagrama apresenta três agrupamentos:
+O diagrama apresenta três componentes:
 
-- **Factory Method:** a classe abstrata `Conteudo` é especializada em `Publicacao` e `Comentario`. A classe abstrata `ConteudoCreator` define o método `fabricar()`, implementado por `PublicacaoCreator` e `ComentarioCreator`. A função `obterCreator()` seleciona o criador concreto a partir do tipo solicitado.
-- **Prototype:** `ModeloPublicacao` expõe `clonar()`, que devolve um novo objeto independente.
-- **Singleton:** `RegistroAtividade` tem construtor protegido por chave privada e uma única instância acessada por `getInstance()`.
+- **Cliente:** representa o programa `src/index.js`, que inicia o processo de construção e solicita a criação da publicação.
+- **PublicacaoBuilder:** mantém temporariamente os dados informados e disponibiliza métodos para configurar os atributos da publicação.
+- **Publicacao:** representa o objeto final, responsável por armazenar os atributos e validar os campos obrigatórios.
 
-As relações de criação (`PublicacaoCreator` → `Publicacao`, `ComentarioCreator` → `Comentario`) são representadas como dependências, pois o criador apenas instancia o produto durante `fabricar()`, sem manter uma associação permanente.
+O cliente depende de `PublicacaoBuilder` para iniciar e configurar a construção. Por sua vez, `PublicacaoBuilder` depende de `Publicacao`, pois utiliza essa classe para criar o objeto final durante a execução do método `build()`.
+
+As relações foram representadas como dependências porque os componentes utilizam os serviços uns dos outros, sem estabelecer uma associação estrutural permanente entre as instâncias.
+
+## 3. Participantes do padrão Builder
+
+O padrão Builder permite separar o processo de construção de um objeto de sua representação final. Na implementação proposta, seus participantes são organizados da seguinte maneira.
+
+### 3.1 Builder concreto — `PublicacaoBuilder`
+
+A classe `PublicacaoBuilder` implementa as operações necessárias para configurar os dados da publicação.
+
+Seus métodos são:
+
+| Método | Responsabilidade |
+|---|---|
+| `comTitulo(titulo)` | Define o título da publicação. |
+| `comConteudo(conteudo)` | Define o conteúdo da publicação. |
+| `comAutor(autor)` | Define o autor da publicação. |
+| `comTags(tags)` | Define a lista de tags, exigindo um array. |
+| `build()` | Cria e retorna uma instância de `Publicacao`. |
+
+Os métodos de configuração retornam `this`, permitindo encadear chamadas consecutivas.
+
+Por exemplo:
+
+```javascript
+new PublicacaoBuilder()
+    .comTitulo("Padrões de Projeto GoF")
+    .comConteudo("Estudo do padrão Builder.")
+    .comAutor("Autor demonstrativo")
+    .comTags(["GoF", "Arquitetura"])
+    .build();
+```
+
+Essa abordagem torna a construção mais explícita e facilita a leitura do código cliente.
+
+### 3.2 Produto — `Publicacao`
+
+A classe `Publicacao` representa o objeto produzido pelo Builder.
+
+Ela contém os seguintes atributos:
+
+| Atributo | Tipo | Descrição |
+|---|---|---|
+| `titulo` | String | Título da publicação. |
+| `conteudo` | String | Texto principal da publicação. |
+| `autor` | String | Identificação textual demonstrativa do autor. |
+| `tags` | Array | Lista de tags associadas à publicação. |
+
+O construtor verifica se título, conteúdo e autor foram informados. Caso algum desses campos esteja ausente ou vazio, é lançado um erro.
+
+A classe também remove espaços externos dos campos textuais e elimina tags repetidas ou vazias.
+
+O método `toJSON()` disponibiliza os dados da publicação em um objeto adequado para serialização JSON.
+
+### 3.3 Cliente — `src/index.js`
+
+O cliente é responsável por utilizar o Builder para construir uma publicação.
+
+Ele define os atributos por meio de chamadas encadeadas, executa o método `build()` e apresenta o resultado no terminal.
+
+O cliente não precisa construir manualmente o objeto final nem executar diretamente suas validações. Essas responsabilidades ficam concentradas nas classes correspondentes.
+
+## 4. Director
+
+O Director encapsula uma sequência de construção predefinida. No Fórum, tutoriais e notícias seguem estruturas que se repetem, e o Director concentra essas estruturas em um único lugar.
+
+O Director não conhece `Publicacao` diretamente: ele apenas chama os métodos do Builder. Por isso, o mesmo Builder pode ser reutilizado com ou sem Director.
+
+```javascript
+const diretor = new DiretorPublicacao();
+const tutorial = diretor.montarTutorial({
+    titulo: "Como usar o Builder em JavaScript",
+    autor: "Autor demonstrativo",
+    contexto: "Objetos com muitos atributos ficam difíceis de ler com construtores longos.",
+    passos: ["Crie o builder", "Configure os campos", "Chame build()"],
+    conclusao: "O Builder separa configuração e criação.",
+    tags: ["javascript"],
+});
+// tags resultantes: ["tutorial", "javascript"]
+```
+
+O método `montarTutorial()` gera a seção "Contexto", a lista numerada de passos e a seção "Conclusão", além da tag `tutorial`. O método `montarNoticia()` acrescenta a fonte ao texto e a tag `noticia`.
+
+### 4.1 Quando usar o Director
+
+O Director se justifica quando:
+
+- a mesma sequência de configuração aparece em mais de um ponto do sistema;
+- a estrutura do objeto precisa ser padronizada entre autores;
+- a sequência muda com frequência e deve ser alterada em um único lugar.
+
+Quando cada chamada de construção é diferente, o Director acrescenta uma classe sem benefício. Esse é o caso dos exemplos da modelagem original, que por isso não o utilizam.
 
 ## 3. Diagrama de Sequência UML
 
-O diagrama de sequência representa a ordem das interações durante a criação de uma publicação pelo Factory Method.
+O diagrama de sequência representa a interação entre o usuário, o arquivo principal, o Builder e o objeto `Publicacao` durante o processo de construção de uma publicação.
 
 <p align="center">
-  <img src="diagrama_sequencia.png" alt="Diagrama de Sequência UML do Factory Method" width="700">
+  <img src="../../../images/diagrama_sequencia_UML.png" alt="Diagrama de Sequência UML" width="550">
 </p>
 
 <p align="center">
-  <strong>Figura 2 — Diagrama de sequência do padrão Factory Method aplicado à criação de publicações.</strong><br>
+  <strong>Figura 2 — Diagrama de sequência do padrão Builder aplicado à construção de publicações.</strong><br>
+  Fonte: elaboração da SubEquipe 01.
+</p>
+
+### 4.1 Descrição da sequência
+
+O processo começa quando o programa cliente é executado. Em seguida, ele instancia `PublicacaoBuilder` e configura os atributos da publicação.
+
+Cada método de configuração armazena o valor recebido e retorna o próprio Builder, permitindo a continuidade da sequência.
+
+Depois da configuração, o cliente chama `build()`. O Builder utiliza os dados armazenados para instanciar `Publicacao`.
+
+Durante a criação, a classe `Publicacao` valida os campos obrigatórios. Se os dados forem válidos, o objeto é retornado ao Builder e, posteriormente, ao cliente.
+
+Por fim, o cliente serializa os dados em JSON e apresenta o resultado no terminal.
+
+Se um campo obrigatório estiver ausente ou vazio, a construção lançará um erro. Nesse caso, o fluxo não chegará à apresentação normal do resultado.
+
+## 5. Diagrama de Atividades UML
+
+O diagrama de atividades apresenta as etapas e decisões envolvidas na construção da publicação.
+
+<p align="center">
+  <img src="../../../images/diagrama_de_atividades.png" alt="Diagrama de Atividades UML" width="400">
+</p>
+
+<p align="center">
+  <strong>Figura 3 — Diagrama de atividades do processo de construção e validação de publicações utilizando o padrão Builder.</strong><br>
   Fonte: elaboração da SubEquipe01.
 </p>
 
-### 3.1 Descrição da sequência
+### 5.1 Descrição das atividades
 
-O cliente solicita à fábrica o criador correspondente ao tipo `"publicacao"`. Se o tipo for conhecido, a fábrica devolve um `PublicacaoCreator`; caso contrário, um erro é gerado.
+O fluxo inicia com a instanciação do Builder. Em seguida, o cliente define os atributos da publicação e solicita sua construção.
 
-Em seguida, o cliente chama `criar()` com os dados da publicação. O criador delega a `fabricar()`, que instancia `Publicacao`. A validação do título ocorre no construtor do produto: se o título estiver ausente, o erro é propagado de volta ao cliente.
+A validação dos campos obrigatórios ocorre durante a criação do objeto `Publicacao`.
 
-## 4. Participantes dos padrões
+Quando os dados são válidos, a publicação é criada e seus atributos são exibidos em JSON. Caso contrário, ocorre uma exceção e o programa não conclui o fluxo normal de apresentação.
 
-### 4.1 Factory Method
+O diagrama representa o comportamento esperado da implementação demonstrativa.
 
-| Participante | Papel | Implementação |
-|---|---|---|
-| Produto | Interface comum dos objetos criados | `Conteudo` (abstrata) |
-| Produto concreto | Tipos de conteúdo | `Publicacao`, `Comentario` |
-| Criador | Declara a fabricação e a operação comum | `ConteudoCreator` |
-| Criador concreto | Decide o produto a criar | `PublicacaoCreator`, `ComentarioCreator` |
-| Seletor | Escolhe o criador a partir do tipo | `obterCreator()` |
-
-### 4.2 Prototype
-
-| Participante | Papel | Implementação |
-|---|---|---|
-| Protótipo | Objeto que sabe se copiar | `ModeloPublicacao` |
-| Cliente | Solicita o clone e aplica sobrescritas | `src/index.js` |
-
-### 4.3 Singleton
-
-| Participante | Papel | Implementação |
-|---|---|---|
-| Singleton | Classe com instância única e acesso global controlado | `RegistroAtividade` |
-
-## 5. Regras de criação e validação
+## 6. Regras de construção e validação
 
 A modelagem considera as seguintes regras:
 
 | Identificador | Regra | Componente responsável |
 |---|---|---|
-| RN01 | Uma publicação deve ter título não vazio. | `Publicacao` |
-| RN02 | Um comentário deve referenciar a publicação a que pertence. | `Comentario` |
-| RN03 | Texto e autor são obrigatórios para todo conteúdo. | `Conteudo` |
-| RN04 | Tipos de conteúdo desconhecidos não devem gerar criador. | `obterCreator()` |
-| RN05 | O clone de um modelo sempre é criado com status `rascunho`. | `ModeloPublicacao` |
-| RN06 | Listas do modelo (tags) são copiadas, não compartilhadas, na clonagem. | `ModeloPublicacao` |
-| RN07 | A classe `RegistroAtividade` só pode ser instanciada por `getInstance()`. | `RegistroAtividade` |
-| RN08 | Eventos sem ação não podem ser registrados. | `RegistroAtividade` |
+| RN01 | O título deve ser informado e não pode estar vazio. | `Publicacao` |
+| RN02 | O conteúdo deve ser informado e não pode estar vazio. | `Publicacao` |
+| RN03 | O autor deve ser informado e não pode estar vazio. | `Publicacao` |
+| RN04 | As tags devem ser fornecidas como um array. | `PublicacaoBuilder` |
+| RN05 | Espaços externos dos campos textuais devem ser removidos. | `Publicacao` |
+| RN06 | Tags repetidas ou vazias devem ser eliminadas. | `Publicacao` |
+| RN07 | Cada chamada de `build()` produz um objeto novo, independente dos anteriores. | `PublicacaoBuilder` |
 
-Essas regras correspondem ao código da demonstração. Elas não substituem regras de negócio, controles de segurança ou validações exigidas por uma aplicação real.
+Essas regras correspondem ao código da demonstração. Elas não substituem regras de negócio, controles de segurança ou validações que possam ser exigidos por uma aplicação real.
 
-## 6. Correspondência entre modelagem e implementação
+## 7. Correspondência entre modelagem e implementação
+
+A tabela relaciona os elementos apresentados nos diagramas aos arquivos que compõem a solução.
 
 | Elemento da modelagem | Arquivo | Implementação |
 |---|---|---|
-| Conteúdo, Publicação, Comentário, criadores e `obterCreator()` | `src/factoryMethod.js` | Factory Method com validações de cada produto. |
-| `ModeloPublicacao` | `src/prototype.js` | Clonagem com cópia independente das tags e status `rascunho`. |
-| `RegistroAtividade` | `src/singleton.js` | Instância única protegida por chave privada. |
-| Cliente | `src/index.js` | Demonstração dos três padrões. |
-| Testes automatizados | `test/padroes.test.js` | Verifica criação, validação, clonagem e unicidade da instância (14 testes). |
+| Cliente | `src/index.js` | Configura o Builder e apresenta o resultado. |
+| Builder concreto | `src/PublicacaoBuilder.js` | Implementa os métodos de configuração e `build()`. |
+| Produto | `src/Publicacao.js` | Armazena os atributos e valida os campos obrigatórios. |
+| Testes automatizados | `test/PublicacaoBuilder.test.js` | Verifica construção válida, normalização e erros esperados. |
 
-Caso sejam adicionados novos tipos de conteúdo, métodos ou classes, os diagramas e as regras deverão ser revisados.
+Essa correspondência permite verificar se a modelagem representa os componentes realmente implementados.
 
-## 7. Justificativa das decisões de modelagem
+Caso sejam adicionados novos atributos, métodos ou classes, os diagramas e as descrições deverão ser revisados.
 
-A hierarquia `Conteudo` foi adotada para concentrar os atributos comuns (texto e autor), deixando em `Publicacao` e `Comentario` apenas as regras próprias de cada tipo.
+## 8. Justificativa das decisões de modelagem
 
-O `ConteudoCreator` mantém a lógica comum de criação em `criar()` e delega a escolha do produto a `fabricar()`. Isso permite incluir novos tipos de conteúdo criando um novo criador concreto, sem alterar o cliente.
+A separação entre `PublicacaoBuilder` e `Publicacao` foi adotada para distinguir a configuração gradual dos atributos da representação final da publicação.
 
-O `ModeloPublicacao` foi representado com `clonar()` retornando um novo objeto, e não com uma hierarquia de protótipos, porque o exemplo possui um único tipo de modelo.
+O encadeamento dos métodos facilita a leitura do código cliente e evidencia as etapas de construção. O método `build()` funciona como ponto de conclusão do processo.
 
-O `RegistroAtividade` usa construtor protegido por chave privada, de modo que a unicidade da instância não depende apenas de convenção. A classe foi mantida mesmo com o sistema de módulos do Node.js, por tornar explícita a intenção do padrão.
+A validação foi mantida na classe `Publicacao` para que a criação do objeto final verifique os campos obrigatórios independentemente de quais chamadas de configuração tenham sido realizadas anteriormente.
 
-## 8. Manutenibilidade, extensibilidade e limitações
+Não foi criada uma classe *Director*, porque o exemplo possui apenas uma sequência simples de construção. Sua inclusão seria justificável se diferentes processos predefinidos de construção precisassem ser reutilizados.
 
-A separação entre criadores e produtos facilita a inclusão de novos tipos de conteúdo, como enquetes ou anexos, que exigiriam apenas um novo produto e um novo criador concreto.
+A modelagem foi mantida proporcional ao objetivo acadêmico: demonstrar um padrão criacional com código executável, sem introduzir componentes que não sejam necessários para o cenário proposto.
 
-Algumas limitações devem ser consideradas:
 
-- Para apenas dois tipos de conteúdo, uma função com `switch` seria suficiente. A hierarquia se justifica quando novos tipos forem previstos.
-- `clonar()` faz cópia rasa de objetos aninhados. Para estruturas mais profundas, seria necessária uma cópia profunda específica.
-- O Singleton mantém estado global, o que dificulta testes isolados. Os testes deste complemento limpam o registro antes de cada verificação.
-- O clone cria um novo rascunho e não copia avaliações nem histórico. Ele não deve ser usado para republicar conteúdo mal avaliado, conforme os Termos de Uso do TabNews.
+## 9. Comparação entre a construção tradicional e o padrão Builder
 
-## 9. Considerações finais
+A construção de objetos pode ser realizada diretamente por meio de seus construtores. Entretanto, quando existem vários atributos, essa abordagem pode dificultar a leitura e a organização do código responsável pela criação do objeto.
 
-A modelagem apresentada demonstra como três padrões criacionais complementares ao Builder podem organizar a criação de conteúdos, a clonagem de modelos e o acesso a um recurso compartilhado.
+No contexto da implementação demonstrativa, uma publicação possui título, conteúdo, autor e tags. Sem o padrão Builder, o cliente precisaria fornecer os dados diretamente durante a criação do objeto, concentrando mais detalhes da construção em uma única operação.
 
-Os diagramas são coerentes com a implementação e com os testes automatizados. Eventuais integrações ao Projeto Fórum deverão ser avaliadas e realizadas separadamente.
+Com a utilização da classe `PublicacaoBuilder`, esse processo é dividido em etapas. Os métodos `comTitulo()`, `comConteudo()`, `comAutor()` e `comTags()` permitem configurar os atributos individualmente, enquanto o método `build()` conclui a construção e retorna o objeto `Publicacao`.
 
-## 10. Referências
+Essa abordagem favorece a legibilidade do código cliente e separa a configuração dos dados da criação do objeto final. Entretanto, o Builder também adiciona uma classe à implementação e pode representar complexidade desnecessária em objetos simples, com poucos atributos.
+
+## 10. Aplicabilidade do padrão Builder no contexto do Fórum
+
+O padrão Builder pode ser aplicado ao contexto do Fórum quando a criação de publicações exige a configuração de diferentes atributos antes da obtenção do objeto final.
+
+Na implementação demonstrativa, a classe `PublicacaoBuilder` permite definir progressivamente o título, o conteúdo, o autor e as tags de uma publicação. Essa organização evidencia como o padrão pode facilitar a construção de objetos com múltiplas informações associadas.
+
+Em uma possível evolução do sistema, o mesmo princípio poderia ser utilizado para organizar a configuração de publicações com atributos adicionais, como categorias ou anexos, desde que essas funcionalidades fossem especificadas e implementadas.
+
+A utilização do padrão, entretanto, não implica a existência de integração com banco de dados, serviços de autenticação ou outras funcionalidades da aplicação principal. O exemplo apresentado tem finalidade demonstrativa e evidencia a aplicação do padrão criacional na construção de objetos.
+
+## 11. Manutenibilidade, extensibilidade e limitações da solução
+
+A separação entre `PublicacaoBuilder` e `Publicacao` contribui para a organização da implementação ao distinguir a configuração gradual dos atributos da representação final da publicação. Essa divisão facilita a identificação das responsabilidades de cada classe e permite compreender melhor o fluxo de construção.
+
+A possibilidade de encadear os métodos de configuração também favorece a leitura do código cliente, tornando explícita a sequência utilizada para preparar os dados antes da chamada de `build()`.
+
+Em futuras evoluções, novos atributos poderiam ser incorporados à publicação, exigindo ajustes no Builder, na classe `Publicacao` e nos testes correspondentes. Essa evolução deve ser acompanhada da atualização da documentação e da modelagem para manter a consistência entre os artefatos.
+
+Apesar dessas vantagens, o padrão Builder não substitui a necessidade de regras de negócio, mecanismos de persistência, controles de segurança ou integração com os demais componentes de uma aplicação real. Sua utilização deve ser avaliada conforme a complexidade do objeto e as necessidades do sistema.
+
+## 12. Considerações finais
+
+A modelagem apresentada demonstra como o padrão criacional Builder pode organizar a construção de publicações por meio da separação entre a configuração dos atributos e a criação do objeto final.
+
+A documentação dos participantes, das interações, das regras de validação e da correspondência com a implementação permite compreender o funcionamento da solução e suas principais decisões de projeto.
+
+Conclui-se que o padrão pode favorecer a legibilidade, a organização e a extensibilidade do processo de construção, desde que sua utilização seja adequada à complexidade do cenário. Como a solução apresentada é demonstrativa, possíveis integrações e funcionalidades adicionais dependem de implementação e validação futuras.
+
+
+## 13 Referências
 
 GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. *Design Patterns: Elements of Reusable Object-Oriented Software*. Reading, MA: Addison-Wesley, 1994.
 
 OBJECT MANAGEMENT GROUP (OMG). *OMG Unified Modeling Language (OMG UML)*. Disponível em: https://www.omg.org/spec/UML/. Acesso em: preencher após consultar a documentação.
 
-REFACTORING.GURU. *Factory Method*, *Prototype* e *Singleton*. Disponíveis em: https://refactoring.guru/design-patterns. Acesso em: preencher após consultar as páginas.
-
+REFACTORING.GURU. *Builder*. Disponível em: https://refactoring.guru/design-patterns/builder. Acesso em: preencher após consultar a página.
 
 ## Histórico de Versões
 
@@ -147,5 +277,4 @@ REFACTORING.GURU. *Factory Method*, *Prototype* e *Singleton*. Disponíveis em: 
 | 1.0 | 08/10/2026 | Criação inicial da modelagem do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Versão inicial com diagrama de classes, participantes e fluxo de construção. |
 | 1.1 | 08/10/2026 | Ampliação da modelagem e alinhamento com a implementação demonstrativa. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Inclusão dos diagramas de sequência e atividades, regras de validação, correspondência com os arquivos de código e referências. |
 | 1.2 | 10 /10/2026 | Adição de considerações sobre a aplicabilidade do padrão Builder | [Giovana Fontes](https://github.com/GiovanaFontesS) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Comparação com a construção tradicional e análise de manutenibilidade, extensibilidade e limitações da solução. |
-| 1.3 | 14/10/2026 | Criação inicial da modelagem do complemento GoF criacional (Factory Method, Prototype e Singleton). | [João Pedro S. Maciel](https://github.com/jopesmp) | preencher | Diagramas de classes e de sequência, participantes, regras de validação, correspondência com a implementação e análise de limitações. |
-
+| 1.3 | 14/10/2026 | Adição de exemplos e modificação nas regras de negócio | [João Pedro S. Maciel](https://github.com/jopesmp) | preencher | Novo exemplo com Director: montarTutorial() e montarNoticia(); Modificações na RN07. |
