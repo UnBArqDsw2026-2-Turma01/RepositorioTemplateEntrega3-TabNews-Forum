@@ -1,295 +1,152 @@
+# Padrões GoF Criacionais — Complemento
 
-# Padrões GoF Criacionais
-
-> **SubEquipe 01 — Projeto Fórum — Entrega 03**  
-> **Padrão escolhido:** Builder (Construtor).  
+> **SubEquipe 01 — Projeto Fórum — Entrega 03**
+> **Padrões complementares:** Factory Method, Prototype e Singleton.
 > **Tecnologia da demonstração:** JavaScript com Node.js.
 
 ## 1. Introdução
 
-Os padrões de projeto são soluções recorrentes para problemas comuns de projeto de software. O catálogo *Design Patterns: Elements of Reusable Object-Oriented Software*, conhecido como GoF (*Gang of Four*), organiza os padrões em três categorias: criacionais, estruturais e comportamentais.
+Este complemento amplia a seção de padrões criacionais da SubEquipe 01, que apresenta o padrão Builder. O catálogo GoF organiza os padrões criacionais em cinco: Abstract Factory, Builder, Factory Method, Prototype e Singleton. Como o Builder já foi tratado, este documento aborda os três restantes que têm aplicação plausível no contexto do fórum: **Factory Method**, **Prototype** e **Singleton**.
 
-Os padrões criacionais tratam de aspectos relacionados à criação de objetos e ajudam a organizar decisões de instanciação. Este trabalho demonstra o padrão criacional Builder em cenários didáticos relacionados ao Projeto Fórum.
-
-A implementação principal aborda a construção de uma publicação composta por título, conteúdo, autor e tags. Como aplicação complementar, também é apresentado um exemplo de construção de um objeto de usuário, contendo informações utilizadas em um cadastro.
-
-As duas implementações têm caráter demonstrativo e são independentes do sistema principal do fórum. Seu objetivo é permitir a modelagem, a execução e a validação do padrão sem pressupor que ele já esteja integrado à aplicação real.
+Assim como a implementação principal, os exemplos são demonstrativos e independentes do sistema real do fórum. Cada padrão é ilustrado com código executável e testes automatizados.
 
 ## 2. Objetivos
 
 ### 2.1 Objetivo geral
 
-Compreender e demonstrar a aplicação do padrão GoF Builder por meio da modelagem, implementação e execução de soluções para construir objetos de maneira organizada.
+Compreender e demonstrar a aplicação de três padrões criacionais complementares ao Builder, por meio de implementações executáveis no domínio do fórum.
 
 ### 2.2 Objetivos específicos
 
-- Explicar a finalidade do Builder e sua classificação como padrão criacional.
-- Descrever problemas de construção de objetos que possam ser tratados pelo padrão.
-- Representar a solução principal por meio de um diagrama UML.
-- Implementar o padrão em JavaScript.
-- Demonstrar sua aplicação na construção de publicações e de objetos de usuário.
-- Validar o comportamento das implementações.
-- Analisar benefícios, limitações e adequação do padrão aos cenários propostos.
-- Registrar de maneira transparente o uso de IA Generativa.
+- Explicar a finalidade de cada padrão e sua classificação como criacional.
+- Descrever, para cada padrão, o problema de criação de objetos que ele resolve.
+- Implementar um exemplo funcional de cada padrão em JavaScript.
+- Validar o comportamento dos exemplos por meio de testes automatizados.
+- Comparar os quatro padrões criacionais demonstrados e analisar seus limites.
+- Registrar de forma transparente o uso de IA Generativa.
 
-## 3. Identificação do Padrão de Projeto
+## 3. Identificação dos Padrões
 
-**Nome:** Builder (Construtor).  
-**Categoria:** Criacional.
+| Padrão | Categoria | Problema que resolve | Exemplo no complemento |
+|:---|:---|:---|:---|
+| Factory Method | Criacional | Delegar a uma subclasse a decisão de qual tipo concreto criar. | `Publicacao` ou `Comentario` conforme o tipo solicitado |
+| Prototype | Criacional | Criar um objeto a partir de uma cópia de um modelo existente. | `ModeloPublicacao` clonado em um novo rascunho |
+| Singleton | Criacional | Garantir uma única instância compartilhada de um recurso. | `RegistroAtividade` (registro de eventos) |
 
-O Builder separa o processo de construção de um objeto de sua representação final. A construção ocorre por etapas, por meio de operações que configuram os dados antes da criação do objeto definitivo.
+## 4. Factory Method
 
-Na implementação principal, `PublicacaoBuilder` reúne os valores fornecidos e o método `build()` cria uma instância de `Publicacao`. Na aplicação complementar, `CadastroUsuarioBuilder` configura os dados necessários para criar uma instância de `Usuario`.
+### 4.1 Problema
 
-As duas implementações utilizam métodos específicos para definir os atributos e permitem encadear chamadas, tornando a construção mais explícita e legível.
+O fórum possui dois tipos de conteúdo que compartilham autor e texto, mas têm regras diferentes: a publicação exige título, e o comentário exige a publicação à qual pertence. Se o código cliente instanciar diretamente cada classe, ele passa a conhecer todas as regras de criação e precisa ser alterado sempre que um novo tipo for incluído.
 
-Trata-se de uma versão simplificada do padrão, sem uma classe *Director*, porque os cenários não exigem uma sequência de construção predefinida reutilizada por diferentes clientes.
+### 4.2 Solução
 
-## 4. Problema Abordado
-
-A construção de objetos pode se tornar menos legível quando envolve diversos atributos, principalmente quando são utilizados muitos argumentos posicionais ou quando a configuração está espalhada por diferentes trechos de código.
-
-No contexto de um fórum, uma publicação pode reunir título, conteúdo, autor e tags. Já um objeto de usuário pode conter informações como nome, e-mail, nome de usuário e senha.
-
-O cenário proposto é organizar a montagem desses objetos por meio de métodos nomeados, permitindo configurar os atributos individualmente e solicitar a criação do objeto final por meio de `build()`.
-
-Esses problemas são apresentados como exemplos acadêmicos. Não se afirma que tenham sido identificados no código existente do Projeto Fórum.
-
-## 5. Justificativa da Escolha
-
-O Builder foi escolhido por oferecer uma demonstração clara de um padrão criacional em um domínio relacionado ao Projeto Fórum. A construção gradual é fácil de acompanhar no diagrama, no código e durante a apresentação.
-
-A implementação principal demonstra a construção de publicações, enquanto o exemplo complementar explora a aplicação do mesmo padrão na configuração dos dados de um usuário.
-
-Os exemplos também permitem demonstrar validação de campos obrigatórios e a separação entre a configuração dos atributos e a criação do objeto final. O Node.js possibilita a execução das demonstrações sem dependências externas específicas do padrão.
-
-O Builder não é necessário para todos os objetos. Quando há poucos atributos eAplicação Complementar do Builder no Cadastro de Usuários nenhuma complexidade relevante na construção, uma abordagem mais simples pode ser suficiente. A escolha deve ser justificada pelo problema que se pretende resolver.
-
-## 6. Fundamentação Teórica
-
-Os padrões criacionais organizam decisões relativas à criação de objetos. No catálogo GoF, essa categoria inclui Abstract Factory, Builder, Factory Method, Prototype e Singleton.
-
-O Builder concentra-se na construção gradual de um objeto. A configuração ocorre por meio de métodos que definem seus atributos, enquanto a operação `build()` solicita a criação do produto final.
-
-Neste trabalho, o padrão é demonstrado em dois cenários:
-
-- **Construção de publicações:** utiliza `PublicacaoBuilder` para configurar título, conteúdo, autor e tags antes de criar uma instância de `Publicacao`.
-- **Construção de usuários:** utiliza `CadastroUsuarioBuilder` para configurar nome, e-mail, nome de usuário e senha antes de criar uma instância de `Usuario`.
-
-Nas duas implementações, os métodos de configuração retornam o próprio Builder, permitindo o encadeamento de chamadas.
-
-### 6.1 Benefícios
-
-- Métodos nomeados tornam a construção mais legível.
-- A configuração é separada da criação final.
-- Os campos obrigatórios podem ser validados no objeto produzido.
-- Novos atributos podem ser adicionados sem ampliar uma lista de argumentos posicionais.
-- O mesmo padrão pode ser aplicado a diferentes tipos de objetos quando a construção gradual for útil.
-
-### 6.2 Limitações
-
-- Adiciona classes e código de suporte.
-- Pode ser excessivo para objetos simples.
-- Não substitui validações completas de negócio, segurança ou validação no servidor.
-- Não implementa, por si só, persistência, autenticação ou integração com a aplicação real.
-- A existência de dois exemplos demonstrativos não significa que seja necessário utilizar Builder em todos os objetos do sistema.
-
-## 7. 
-
-### 7.1 Introdução
-
-Além da construção de publicações, o padrão Builder pode ser aplicado à construção de objetos utilizados no cadastro de usuários. Em um fórum, esse processo pode envolver informações como nome, e-mail, nome de usuário e senha.
-
-A utilização do Builder permite configurar esses dados de maneira gradual, separando a definição dos atributos da criação do objeto final. Essa aplicação complementar demonstra outra possibilidade de utilização do padrão no contexto do fórum, sem substituir a implementação principal de construção de publicações.
-
-### 7.2 Objetivo da implementação
-
-O exemplo utiliza a classe `CadastroUsuarioBuilder` para configurar os dados e a classe `Usuario` para representar o objeto construído.
-
-A implementação permite:
-
-- Configurar os dados do usuário de maneira gradual.
-- Encadear métodos para facilitar a leitura do código.
-- Verificar os campos obrigatórios antes de criar o objeto.
-- Retornar os dados públicos do usuário sem incluir a senha na representação JSON.
-
-O exemplo é independente do sistema de autenticação e do banco de dados do fórum.
-
-### 7.3 Classe `Usuario`
-
-A classe `Usuario` representa o objeto final construído pelo Builder. Ela recebe os dados configurados e verifica se as informações obrigatórias foram fornecidas.
-
-Arquivo: `src/Usuario.js`
+O criador abstrato `ConteudoCreator` define o método `fabricar()`, que as subclasses implementam. `PublicacaoCreator` e `ComentarioCreator` decidem qual produto concreto criar. O cliente trabalha apenas com o criador e com a interface comum `criar()`.
 
 ```javascript
-class Usuario {
-    constructor({ nome, email, nomeUsuario, senha }) {
-        if (
-            !nome?.trim() ||
-            !email?.trim() ||
-            !nomeUsuario?.trim() ||
-            !senha?.trim()
-        ) {
-            throw new Error(
-                "Todos os campos obrigatórios devem ser preenchidos."
-            );
-        }
-
-        this.nome = nome.trim();
-        this.email = email.trim();
-        this.nomeUsuario = nomeUsuario.trim();
-        this.senha = senha;
-    }
-
-    toJSON() {
-        return {
-            nome: this.nome,
-            email: this.email,
-            nomeUsuario: this.nomeUsuario
-        };
-    }
-}
-
-module.exports = Usuario;
+const publicacao = obterCreator("publicacao").criar({
+    titulo: "Padrões GoF criacionais",
+    texto: "Resumo dos padrões.",
+    autor: "Autor demonstrativo",
+});
 ```
 
-A classe verifica a presença dos campos obrigatórios e armazena as informações. O método `toJSON()` retorna apenas os dados públicos do usuário, sem incluir a senha.
+O método `obterCreator(tipo)` funciona como um ponto de seleção. Tipos desconhecidos geram erro explícito.
 
-Essa implementação realiza validações básicas de preenchimento. Ela não substitui a validação completa dos dados nem os mecanismos de segurança necessários em um cadastro real.
+### 4.3 Validação
 
-### 7.4 Classe `CadastroUsuarioBuilder`
+Os testes verificam que cada criador produz o tipo correto, que as regras de cada produto são aplicadas (título obrigatório em `Publicacao`, vínculo obrigatório em `Comentario`) e que o método abstrato não pode ser usado diretamente.
 
-A classe `CadastroUsuarioBuilder` configura os dados necessários para a construção do usuário. Cada método define uma informação e retorna a própria instância, permitindo o encadeamento de chamadas.
+## 5. Prototype
 
-Arquivo: `src/CadastroUsuarioBuilder.js`
+### 5.1 Problema
+
+Um autor pode querer reaproveitar a estrutura de um tutorial ou de uma publicação-modelo, com seções, tags e formatação já definidas. Criar cada novo texto do zero repete trabalho, e copiar manualmente os campos é propenso a erro, principalmente quando há listas (como tags) que não podem ser compartilhadas por referência.
+
+### 5.2 Solução
+
+`ModeloPublicacao` implementa o método `clonar(sobrescritas)`, que cria um novo objeto com cópia independente dos dados. As tags são copiadas, de modo que alterar o clone não altera o original. O clone sempre nasce com status `rascunho`, e campos de estado não são herdados do modelo.
 
 ```javascript
-const Usuario = require("./Usuario");
-
-class CadastroUsuarioBuilder {
-    constructor() {
-        this.dados = {
-            nome: "",
-            email: "",
-            nomeUsuario: "",
-            senha: ""
-        };
-    }
-
-    comNome(nome) {
-        this.dados.nome = nome;
-        return this;
-    }
-
-    comEmail(email) {
-        this.dados.email = email;
-        return this;
-    }
-
-    comNomeUsuario(nomeUsuario) {
-        this.dados.nomeUsuario = nomeUsuario;
-        return this;
-    }
-
-    comSenha(senha) {
-        this.dados.senha = senha;
-        return this;
-    }
-
-    build() {
-        return new Usuario(this.dados);
-    }
-}
-
-module.exports = CadastroUsuarioBuilder;
+const modelo = new ModeloPublicacao({ titulo: "Modelo", tags: ["tutorial"], status: "publicado" });
+const rascunho = modelo.clonar({ titulo: "Tutorial de Builder" });
+rascunho.tags.push("builder"); // o modelo original permanece com ["tutorial"]
 ```
 
-O método `build()` finaliza o processo de construção e cria uma instância de `Usuario` com os dados configurados. Caso algum campo obrigatório esteja ausente ou vazio, a validação da classe `Usuario` impede a criação do objeto.
+### 5.3 Validação
 
-### 7.5 Código cliente
+Os testes verificam que o clone é um objeto diferente com os mesmos dados, que a alteração do clone não afeta o original, que o clone sempre nasce como rascunho e que as sobrescritas substituem apenas os campos informados.
 
-O código cliente utiliza o Builder para configurar os dados e construir o usuário.
+### 5.4 Observação sobre o uso
 
-Arquivo: `src/index.js`
+O clone cria um **novo conteúdo em rascunho**. Ele não copia avaliações, TabCoins, comentários nem histórico. Não é recomendável usar o padrão para republicar conteúdo que tenha sido mal avaliado, pois isso configuraria a manipulação de qualificações prevista nos Termos de Uso e na FAQ do TabNews. A aplicação, portanto, está restrita a modelos e rascunhos.
+
+## 6. Singleton
+
+### 6.1 Problema
+
+Alguns recursos devem existir em uma única instância, como o registro de atividades usado para auditoria e monitoramento. Se cada parte do sistema criar seu próprio registro, os eventos ficam espalhados em vários lugares e nenhum deles representa o histórico completo.
+
+### 6.2 Solução
+
+`RegistroAtividade` guarda sua única instância em um atributo estático e a expõe por `getInstance()`. O construtor recebe uma chave privada (um `Symbol` não exportado), o que impede a criação direta de outra instância.
 
 ```javascript
-const CadastroUsuarioBuilder =
-    require("./CadastroUsuarioBuilder");
+const registro = RegistroAtividade.getInstance();
+registro.registrar({ acao: "conteudo_criado", tipo: "publicacao" });
 
-try {
-    const usuario = new CadastroUsuarioBuilder()
-        .comNome("Nome exemplo")
-        .comEmail("Nome@example.com")
-        .comNomeUsuario("Usuario exemplo")
-        .comSenha("senha-de-exemplo")
-        .build();
-
-    console.log("Usuário construído com sucesso:");
-    console.log(usuario.toJSON());
-} catch (erro) {
-    console.error(
-        "Erro ao construir usuário:",
-        erro.message
-    );
-}
+// Em qualquer outro ponto do código:
+RegistroAtividade.getInstance().listar(); // inclui o evento acima
 ```
 
-Nesse exemplo, o cliente configura os atributos por meio dos métodos do Builder e chama `build()` para obter o objeto final. O bloco `try/catch` permite tratar erros que possam ocorrer durante a construção.
+Em Node.js, o sistema de módulos já devolve a mesma instância de um módulo exportado, o que dispensa a classe para esse fim. A implementação com `getInstance()` foi mantida porque torna a intenção explícita e ilustra o padrão clássico.
 
-O endereço de e-mail e a senha utilizados são dados fictícios para demonstração.
+### 6.3 Validação
 
-### 7.6 Exemplo de validação
+Os testes verificam que `getInstance()` devolve sempre a mesma instância, que a construção direta é bloqueada, que registros feitos em um ponto aparecem em outro e que eventos sem ação são rejeitados.
 
-O comportamento da implementação pode ser observado quando um campo obrigatório não é informado.
+## 7. Comparação entre os padrões criacionais demonstrados
 
-```javascript
-const CadastroUsuarioBuilder =
-    require("./CadastroUsuarioBuilder");
+| Aspecto | Builder | Factory Method | Prototype | Singleton |
+|:---|:---|:---|:---|:---|
+| Pergunta que responde | Como montar um objeto complexo passo a passo? | Qual classe concreta deve ser criada? | Como criar um objeto copiando outro? | Como garantir uma única instância? |
+| Quem decide o tipo | O cliente, por meio de métodos de configuração | Uma subclasse do criador | O próprio objeto modelo | A própria classe |
+| Relação com o cliente | Encadeamento de métodos e `build()` | Chamada única a `criar()` | Chamada a `clonar()` | Chamada a `getInstance()` |
+| Principal ganho | Legibilidade na configuração | Desacoplamento da classe concreta | Reaproveitamento sem recriar campos | Ponto único de acesso ao recurso |
+| Principal risco | Classes extras para objetos simples | Hierarquia de criadores que cresce | Cópia rasa de estruturas aninhadas | Estado global difícil de testar |
 
-try {
-    const usuario = new CadastroUsuarioBuilder()
-        .comNome("Nome Exemplo")
-        .comEmail("nome@example.com")
-        .comNomeUsuario("usuarioexemplo")
-        .build();
+## 8. Limitações
 
-    console.log(usuario.toJSON());
-} catch (erro) {
-    console.error(erro.message);
-}
-```
+- **Factory Method:** para dois tipos de conteúdo, uma função com `switch` seria suficiente. A hierarquia de criadores se justifica quando novos tipos e regras de criação forem previstos.
+- **Prototype:** `clonar()` faz cópia rasa de objetos aninhados. Para estruturas profundas, seria necessária uma cópia profunda específica.
+- **Singleton:** o estado global dificulta testes isolados, pois os registros persistem entre os casos de teste. Os testes deste complemento limpam o registro para contornar isso. Em uma aplicação real, a instância costuma ser injetada como dependência.
+- Os três exemplos são demonstrativos. Não implementam persistência, autenticação, controle de acesso nem integração com o banco de dados do fórum.
+- A existência destes exemplos não significa que os padrões devam ser usados em todo o sistema. A escolha deve considerar a complexidade real de cada criação.
 
-Nesse caso, a senha não foi informada. Como ela é um campo obrigatório, a construção do objeto resulta em um erro.
+## 9. Considerações finais
 
-O exemplo demonstra como a validação pode impedir a criação de instâncias incompletas. Essa validação, entretanto, não abrange requisitos adicionais, como formato de e-mail, unicidade do nome de usuário, armazenamento seguro de senhas ou autenticação.
+Os três padrões demonstram soluções distintas para problemas de criação de objetos. O Factory Method desacopla o cliente das classes concretas, o Prototype reaproveita modelos sem recriar seus campos e o Singleton garante um ponto único de acesso a um recurso compartilhado.
 
-### 7.7 Relação com o padrão Builder
-
-A implementação complementar apresenta os seguintes participantes:
-
-- **Builder concreto:** `CadastroUsuarioBuilder`, responsável por configurar os dados.
-- **Produto:** `Usuario`, objeto criado ao final do processo.
-- **Cliente:** código que utiliza os métodos do Builder e solicita a construção por meio de `build()`.
-
-Não é necessária uma classe *Director*, pois o cliente define diretamente a sequência de configuração dos dados.
-
-## 8. Considerações Finais
-
-Os cenários apresentados demonstram como o Builder pode organizar a construção de diferentes objetos relacionados ao contexto de um fórum. A implementação principal aborda a construção de publicações, enquanto o exemplo complementar explora a configuração dos dados de um usuário.
-
-As demonstrações permitem relacionar fundamentação teórica e implementação executável, evidenciando a construção gradual, o encadeamento de métodos e a validação de campos obrigatórios.
-
-Entretanto, a escolha do padrão deve considerar a complexidade real da construção e não ser feita apenas para inserir um padrão no código. A construção de um objeto de usuário não equivale à implementação completa de um cadastro: funcionalidades como validação avançada, criptografia de senhas, armazenamento no banco de dados, verificação de duplicidade e autenticação precisam ser tratadas por componentes específicos.
-
-A eventual integração dessas implementações ao Projeto Fórum deverá ser avaliada e realizada separadamente. Este trabalho não afirma que tal integração já ocorreu.
+Assim como o Builder, cada padrão deve ser adotado quando o problema justificar. O complemento não afirma que os padrões tenham sido integrados ao Projeto Fórum, e eventuais integrações deverão ser avaliadas separadamente.
 
 ## Referências
 
 GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. *Design Patterns: Elements of Reusable Object-Oriented Software*. Reading, MA: Addison-Wesley, 1994.
 
-REFACTORING.GURU. *Builder*. Disponível em: https://refactoring.guru/design-patterns/builder. Acesso em: preencher após consultar a página.
+REFACTORING.GURU. *Factory Method*. Disponível em: https://refactoring.guru/design-patterns/factory-method. Acesso em: preencher após consultar a página.
 
-NODE.JS. *Node.js Documentation*. Disponível em: https://nodejs.org/docs/latest/api/. Acesso em: preencher após consultar a documentação.
+REFACTORING.GURU. *Prototype*. Disponível em: https://refactoring.guru/design-patterns/prototype. Acesso em: preencher após consultar a página.
+
+REFACTORING.GURU. *Singleton*. Disponível em: https://refactoring.guru/design-patterns/singleton. Acesso em: preencher após consultar a página.
+
+NODE.JS. *Node.js Documentation — Test runner*. Disponível em: https://nodejs.org/api/test.html. Acesso em: preencher após consultar a documentação.
+
+TABNEWS. *FAQ — Perguntas frequentes*. Disponível em: https://www.tabnews.com.br/faq. Acesso em: preencher após consultar a página.
+
+## Uso de Inteligência Artificial Generativa
+
+O código, os testes e a redação deste complemento foram elaborados com apoio do Claude (Anthropic). Os exemplos foram executados e validados com `node --test` antes da inclusão no documento. Registro da conversa: preencher.
+
 
 ## Histórico de Versões
 
@@ -298,3 +155,4 @@ NODE.JS. *Node.js Documentation*. Disponível em: https://nodejs.org/docs/latest
 | 1.0 | 08/10/2026 | Criação da documentação inicial sobre o padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj)| [Giovana Fontes](https://github.com/GiovanaFontesS) | Versão inicial, a revisar após a execução e a validação do exemplo. |
 | 1.1 | 10/10/2026 | Inclusão de exemplo complementar de construção de usuário com Builder. | [Giovana Fontes](https://github.com/GiovanaFonteS) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Versão inicial de exemplo complementar |
 | 1.2 | 13/10/2026 | Inclusão e correção de Exemplos | [Giovana Fontes](https://github.com/GiovanaFonteS) |  [Arthur Fernandes](https://github.com/arthurfernandesj) | Correção de exemplos citados na "Aplicação Complementar do Builder no Cadastro de Usuários" |
+| 1.3 | 14/10/2026 | Criação do complemento sobre os padrões criacionais Factory Method, Prototype e Singleton. | [João Pedro S. Maciel](https://github.com/jopesmp) | preencher | Implementação dos três padrões com testes automatizados, comparação com o Builder e análise de limitações. |
