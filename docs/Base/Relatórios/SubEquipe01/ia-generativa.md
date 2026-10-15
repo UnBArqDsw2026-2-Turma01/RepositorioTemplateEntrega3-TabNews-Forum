@@ -47,6 +47,27 @@ As respostas foram utilizadas como apoio para organizar as explicações sobre a
 
 A experiência reforçou que a IA Generativa pode facilitar a organização das atividades e a compreensão dos conceitos, mas suas respostas precisam ser analisadas antes de serem incorporadas à documentação. A responsabilidade pelas decisões técnicas e pela verificação da implementação permanece com o integrante.
 
+### João Pedro S. Maciel
+
+**Lições aprendidas**
+
+Durante a Entrega 03, utilizei o Claude para apoiar a elaboração de conteúdos complementares sobre padrões criacionais: um complemento com os padrões Factory Method, Prototype e Singleton, uma contribuição de revisão para a modelagem do Builder e a redação.
+
+A principal lição foi perceber que os diagramas são parte da evidência, isto é, uma modelagem escrita sem vê-los pode descrever componentes que não correspondem ao que a equipe produziu.
+
+Outra lição foi que um exemplo executável vale mais do que uma descrição. Os exemplos que escrevi foram acompanhados de testes com `node --test`, o que permitiu confirmar o comportamento das classes e encontrar um defeito visual nos diagramas de atividades, que foi corrigido antes da entrega.
+
+**Uso da IA Generativa e senso crítico**
+
+O Claude foi utilizado para sugerir a estrutura dos complementos, escrever os exemplos em JavaScript e revisar a redação dos documentos.
+
+As respostas foram verificadas antes de serem incorporadas. Os exemplos foram executados e testados, e os diagramas foram renderizados e conferidos visualmente. Também foram verificadas as inconsistências dos textos da equipe, como um título em branco na seção de padrões criacionais e numeração repetida na modelagem, que foram apontadas para revisão e não alteradas sem autorização.
+
+Houve também um cuidado específico com o conteúdo. Ao propor um exemplo de Prototype, a ferramenta observou que o clone não deveria ser usado para republicar conteúdo mal avaliado, porque isso configuraria manipulação de qualificações segundo a FAQ do TabNews. A observação foi incorporada à documentação como uma limitação do uso do padrão.
+
+Por fim, a experiência mostrou que a IA acelera o levantamento, a estruturação e a revisão, mas as decisões de modelagem, a escolha dos padrões e a validação técnica permanecem sob responsabilidade do integrante.
+
+
 ## Análise Crítica do Uso de IA Generativa
 
 A utilização do ChatGPT contribuiu para organizar a documentação da aplicação do padrão Builder e estruturar a explicação dos componentes envolvidos na construção de publicações de fórum.
@@ -62,12 +83,14 @@ A IA Generativa foi utilizada como ferramenta de apoio à documentação e à co
 | Integrante | Atividade/Contribuição | Evidência |
 |---|---|---|
 | [Arthur Fernandes](https://github.com/arthurfernandesj) | Organização e elaboração da documentação sobre a aplicação do padrão Builder e o uso de IA Generativa. | [2. Modelagem](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/modelagem), [3. Código](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/c%C3%B3digo), [4. Execução](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/execu%C3%A7%C3%A3o) |
+| [João Pedro](https://github.com/jopesmp) | Organização e elaboração da documentação sobre a aplicação do padrão Builder e o uso de IA Generativa. | [2. Modelagem](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/modelagem), [3. Código](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/c%C3%B3digo), [4. Execução](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/execu%C3%A7%C3%A3o) |
 
 ## Evidências do Uso de IA Generativa 
 
 | Integrante | Ferramenta | Finalidade | Evidência |
 |---|---|---|---|
 | Arthur Fernandes | ChatGPT | Apoio à compreensão do padrão Builder, à organização da documentação e à estruturação da análise crítica da implementação. | [2. Modelagem](http://localhost:3000/#/Base/Relatórios/SubEquipe01/modelagem), [3. Código](http://localhost:3000/#/Base/Relatórios/SubEquipe01/código), [4. Execução](http://localhost:3000/#/Base/Relatórios/SubEquipe01/execução) |
+| [João Pedro](https://github.com/jopesmp) | Claude | Sugestão de estrutura, apoio à organização da documentação e a análise crítica da implementação. | [2. Modelagem](http://localhost:3000/#/Base/Relatórios/SubEquipe01/modelagem), [3. Código](http://localhost:3000/#/Base/Relatórios/SubEquipe01/código), [4. Execução](http://localhost:3000/#/Base/Relatórios/SubEquipe01/execução) |
 
 ## Nível de Contribuição dos Integrantes
 
@@ -94,5 +117,8 @@ NODE.JS. Test runner. Disponível em: https://nodejs.org/api/test.html.
 | Versão | Data       | Descrição                                                                 | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:------:|:----------:|---------------------------------------------------------------------------|-----------|:-----------:|--------------------|
 | 1.0    | 14/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | — | Organização do objetivo, metodologia, ponto de vista individual, análise crítica, evidências e nível de contribuição dos integrantes. |
+| 1.1    | 14/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [João Pedro](https://github.com/jopesmp) | — |  Ponto de vista individual e análise crítica. |
+
+
 
 <p align="center">Tabela 2: Histórico de Versões.</p>
