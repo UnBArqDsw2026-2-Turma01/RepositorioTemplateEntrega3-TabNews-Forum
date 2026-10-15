@@ -187,4 +187,4 @@ GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Softw
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
-| 1.0 | 13/10/2026 | Documentação da implementação didática do padrão Facade para consolidação dos dados da tela inicial. | [Isaac Menezes](https://github.com/pratamz250) | — | Organização da documentação técnica, descrição dos subsistemas e da fachada, procedimentos de execução e registro de participação e contribuição. |
+| 1.0 | 15/10/2026 | Documentação da implementação didática do padrão Facade para consolidação dos dados da tela inicial. | [Isaac Menezes](https://github.com/pratamz250) | — | Organização da documentação técnica, descrição dos subsistemas e da fachada, procedimentos de execução e registro de participação e contribuição. |
