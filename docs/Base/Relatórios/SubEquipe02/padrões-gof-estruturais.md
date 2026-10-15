@@ -10,7 +10,7 @@ Os padrões de projeto são soluções recorrentes para problemas comuns de proj
 
 Os padrões estruturais tratam de como classes e objetos são compostos para formar estruturas maiores e mais complexas. Eles ajudam a garantir que, quando um sistema cresce, essas estruturas permaneçam flexíveis e eficientes. Este trabalho demonstra o padrão estrutural Facade (Fachada) em cenários didáticos relacionados ao Projeto TabNews.
 
-A implementação principal (teórica) aborda a orquestração do processo de criação de uma nova publicação, que envolve validação de conteúdo, persistência no banco de dados, atualização de "TabCoins" e notificação de usuários. Como aplicação complementar, é apresentado um exemplo prático de um fluxo de registro de um novo usuário.
+A implementação principal (teórica) aborda a orquestração do processo de renderização da tela inicial, que envolve autorização de conteúdo e propagandas, atualização de postagens e validação de paramentros.
 
 As duas implementações têm caráter demonstrativo e são independentes do sistema principal do TabNews. Seu objetivo é permitir a modelagem, a execução e a validação do padrão sem pressupor que ele já esteja integrado à aplicação real.
 
@@ -46,9 +46,9 @@ A Fachada não "esconde" as classes complexas de forma obrigatória (se o client
 
 A execução de tarefas de negócio frequentemente requer a interação com múltiplas classes e serviços distintos. Isso obriga o código cliente (como um controlador de API ou interface de usuário) a conhecer detalhes íntimos de implementação, gerando alto acoplamento.
 
-No contexto do TabNews, publicar um conteúdo não é apenas inserir um texto no banco. É preciso validar se há spam, calcular as métricas de TabCoins do usuário, salvar no banco de dados e disparar alertas. Da mesma forma, registrar um usuário exige checar e-mails, salvar dados de forma segura e iniciar a sessão.
+No contexto do TabNews, carregar conteúdo não é apenas renderizar qualquer coisa na tela. É preciso validar se há spam ou conteúdo impróprio, salvar no banco de dados e disparar alertas. Da mesma forma, carregar um postagem patrocinada envolve validação da mesma.
 
-O cenário proposto é organizar esse fluxo criando uma classe intermediária (Facade) que possui métodos simples (ex: `registrar_usuario()`), enquanto, por baixo dos panos, ela instancia e coordena todos os microsserviços necessários. 
+O cenário proposto é organizar esse fluxo criando uma classe intermediária (Facade) que possui métodos simples (ex: `carregar_dados()`), enquanto, por baixo dos panos, ela instancia e coordena todos os microsserviços necessários. 
 
 Esses problemas são apresentados como exemplos acadêmicos para demonstrar a utilidade do padrão.
 
@@ -56,7 +56,7 @@ Esses problemas são apresentados como exemplos acadêmicos para demonstrar a ut
 
 O Facade foi escolhido por ser um dos padrões estruturais mais intuitivos e aplicáveis em arquiteturas baseadas em serviços e rotas de API, muito comuns no ecossistema do TabNews.
 
-A implementação complementar explora a aplicação do padrão no fluxo de cadastro, o que permite visualizar claramente a redução de linhas de código no lado do cliente e o isolamento da lógica de orquestração.
+Assim como o Facade, a tela incial serve como uma porta de acesso a diversas funções do programa. Por esse paralelo o facade se enquadra como o mais adepto a representar o foco da demonstração.
 
 Python possibilita a execução dessas demonstrações de forma limpa, sem a necessidade de configurações complexas, destacando o papel arquitetural da Fachada.
 
@@ -68,10 +68,7 @@ Os padrões estruturais lidam com a composição de classes e objetos. No catál
 
 O Facade concentra-se em fornecer uma interface limpa para um subsistema complexo. 
 
-Neste trabalho, o padrão é discutido em dois cenários:
-
-- **Publicação de conteúdo:** Uma Fachada lida com spam, banco de dados e notificações.
-- **Registro de usuários:** Uma Fachada lida com validação de credenciais, persistência e e-mails transacionais.
+Neste trabalho, o padrão é discutido no cenário de renderização da tela inicial e tudo que o acompanha, como diferentes categorias de publicações, propaganda, validação de parametros e filtragem de conteúdo
 
 ### 6.1 Benefícios
 
@@ -86,17 +83,17 @@ Neste trabalho, o padrão é discutido em dois cenários:
 - Adiciona uma camada extra de abstração que pode ser desnecessária para fluxos muito simples.
 - Não substitui uma arquitetura em camadas bem definida; atua como um facilitador estrutural.
 
-## 7. Aplicação Complementar do Facade no Cadastro de Usuários
+## 7. Aplicação Complementar do Facade na tela inicial
 
 ### 7.1 Introdução
 
-No contexto do TabNews, o cadastro de um usuário é um ponto crítico que envolve diversos componentes do sistema. Em vez de deixar o controlador da rota lidar com a validação de segurança, banco de dados e serviço de mensageria, utilizamos o padrão Facade para orquestrar essa sequência.
+No contexto do TabNews, a tela inicial é o ponto principal e que envolve diversos componentes do sistema. Em vez de deixar o controlador da rota lidar com a validação de segurança, filtragem de conteúdo e organização das postagens, utilizamos o padrão Facade para orquestrar essa sequência.
 
-Essa aplicação demonstra como o código cliente se torna limpo e legível ao delegar as complexidades para a `RegistroUsuarioFacade`.
+Essa aplicação demonstra como o código cliente se torna limpo e legível ao delegar as complexidades para a `carregar_dados()`.
 
 ### 7.2 Objetivo da implementação
 
-O exemplo utiliza classes independentes que representam subsistemas (`ValidadorDados`, `RepositorioUsuario`, `ServicoEmail`) e a `RegistroUsuarioFacade` para coordenar essas ações de forma estruturada.
+O exemplo utiliza classes independentes que representam subsistemas (`Conteudo`, `validador`, `Publicidade`) e a `RegistroUsuarioFacade` para coordenar essas ações de forma estruturada.
 
 A implementação permite:
 - Executar múltiplas etapas de uma regra de negócio através de uma única chamada de método.
@@ -142,4 +139,5 @@ REFACTORING.GURU. *Facade*. Disponível em: https://refactoring.guru/pt-br/desig
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |---|---|---|---|---|---|
 | 1.0 | 13/10/2026 | Criação da documentação inicial sobre o padrão Facade. | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Conteúdo fala sobre padrão criacional e não estrutural |
-| 1.1 | 15/10/2026 | Correção e adição de novas informações. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher |
+| 1.1 | 15/10/2026 | Correção e adição de novas informações. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição de novos conteúdos referente ao padrão Facade do tópico 1 ao 7 |
+| 1.2 | 15/10/2026 | Correções referentes ao foco do projeto e código | [Pablo Rodrigues](https://github.com/Pablo-R-L) |  |  |
