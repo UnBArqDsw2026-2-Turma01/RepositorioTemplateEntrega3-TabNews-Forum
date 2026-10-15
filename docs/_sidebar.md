@@ -1,7 +1,5 @@
 - [Home](/)
 
-- [Projetos](/Projeto/Projeto.md)
-
 - **Padrões de Projeto**
 
   - [1. Desenho de Software (Padrões de Projeto)](/Base/1.PadroesDeProjeto.md)
