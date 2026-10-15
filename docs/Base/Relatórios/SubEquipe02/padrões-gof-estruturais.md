@@ -1,4 +1,4 @@
-# Padrões GoF Criacionais
+# Padrões GoF Estruturais
 
 > **SubEquipe 02 — Projeto Fórum — Entrega 03**  
 > **Padrão escolhido:** Facade.
