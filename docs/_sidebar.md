@@ -30,3 +30,6 @@
   - [Participações - Padrões de Projeto](/Base/1.2.ParticipacoesPadroesDeProjeto.md)
 
   - [Iniciativas Extras - Padrões de Projeto](/Base/1.3.IniciativasExtras.md)
+
+  - [Atas](/Projeto/atas/ReunioesGerais.md)
+  
