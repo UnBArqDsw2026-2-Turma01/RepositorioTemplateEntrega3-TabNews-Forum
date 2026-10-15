@@ -98,9 +98,36 @@ Ele define os atributos por meio de chamadas encadeadas, executa o método `buil
 
 O cliente não precisa construir manualmente o objeto final nem executar diretamente suas validações. Essas responsabilidades ficam concentradas nas classes correspondentes.
 
-## 4. Diagrama de Sequência UML
+## 4. Director
 
-O diagrama de sequência representa a ordem das interações realizadas durante a construção de uma publicação.
+O Director encapsula uma sequência de construção predefinida. No Fórum, tutoriais e notícias seguem estruturas que se repetem, e o Director concentra essas estruturas em um único lugar.
+
+O Director não conhece `Publicacao` diretamente: ele apenas chama os métodos do Builder. Por isso, o mesmo Builder pode ser reutilizado com ou sem Director.
+
+```javascript
+const diretor = new DiretorPublicacao();
+const tutorial = diretor.montarTutorial({
+    titulo: "Como usar o Builder em JavaScript",
+    autor: "Autor demonstrativo",
+    contexto: "Objetos com muitos atributos ficam difíceis de ler com construtores longos.",
+    passos: ["Crie o builder", "Configure os campos", "Chame build()"],
+    conclusao: "O Builder separa configuração e criação.",
+    tags: ["javascript"],
+});
+// tags resultantes: ["tutorial", "javascript"]
+```
+
+O método `montarTutorial()` gera a seção "Contexto", a lista numerada de passos e a seção "Conclusão", além da tag `tutorial`. O método `montarNoticia()` acrescenta a fonte ao texto e a tag `noticia`.
+
+### 4.1 Quando usar o Director
+
+O Director se justifica quando:
+
+- a mesma sequência de configuração aparece em mais de um ponto do sistema;
+- a estrutura do objeto precisa ser padronizada entre autores;
+- a sequência muda com frequência e deve ser alterada em um único lugar.
+
+Quando cada chamada de construção é diferente, o Director acrescenta uma classe sem benefício. Esse é o caso dos exemplos da modelagem original, que por isso não o utilizam.
 
 ## 3. Diagrama de Sequência UML
 
@@ -164,7 +191,7 @@ A modelagem considera as seguintes regras:
 | RN04 | As tags devem ser fornecidas como um array. | `PublicacaoBuilder` |
 | RN05 | Espaços externos dos campos textuais devem ser removidos. | `Publicacao` |
 | RN06 | Tags repetidas ou vazias devem ser eliminadas. | `Publicacao` |
-| RN07 | A publicação somente deve ser produzida quando os campos obrigatórios forem válidos. | `Publicacao` e `PublicacaoBuilder` |
+| RN07 | Cada chamada de `build()` produz um objeto novo, independente dos anteriores. | `PublicacaoBuilder` |
 
 Essas regras correspondem ao código da demonstração. Elas não substituem regras de negócio, controles de segurança ou validações que possam ser exigidos por uma aplicação real.
 
@@ -250,3 +277,4 @@ REFACTORING.GURU. *Builder*. Disponível em: https://refactoring.guru/design-pat
 | 1.0 | 08/10/2026 | Criação inicial da modelagem do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Versão inicial com diagrama de classes, participantes e fluxo de construção. |
 | 1.1 | 08/10/2026 | Ampliação da modelagem e alinhamento com a implementação demonstrativa. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Inclusão dos diagramas de sequência e atividades, regras de validação, correspondência com os arquivos de código e referências. |
 | 1.2 | 10 /10/2026 | Adição de considerações sobre a aplicabilidade do padrão Builder | [Giovana Fontes](https://github.com/GiovanaFontesS) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Comparação com a construção tradicional e análise de manutenibilidade, extensibilidade e limitações da solução. |
+| 1.3 | 14/10/2026 | Adição de exemplos e modificação nas regras de negócio | [João Pedro S. Maciel](https://github.com/jopesmp) | preencher | Novo exemplo com Director: montarTutorial() e montarNoticia(); Modificações na RN07. |
