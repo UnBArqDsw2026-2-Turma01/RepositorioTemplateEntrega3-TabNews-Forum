@@ -21,20 +21,72 @@ A documentação também contempla as justificativas das decisões tomadas, as r
 
 ## Equipe
 
-O projeto foi desenvolvido colaborativamente pelos integrantes do Grupo 2.
-
-| Integrante | GitHub |
-|---|---|
-| Arthur Fernandes Silva de Jesus | [@arthurfernandesj](https://github.com/arthurfernandesj) |
-| Giovana de Souza Fontes | [@GiovanaFontesS](https://github.com/GiovanaFontesS) |
-| João Pedro Sampaio Maciel | [@jopesmp](https://github.com/jopesmp) |
-| Isaac Menezes Pereira | [@pratamz250](https://github.com/pratamz250) |
-| Pablo Rodrigues Lima | [@Pablo-R-L](https://github.com/Pablo-R-L) |
-| Pedro Ramos Sousa Reis | [@PedroRSR](https://github.com/PedroRSR) |
-| Caio Alexandre Ornelas Silva | [@bitterteriyaki](https://github.com/bitterteriyaki) |
-| Guilherme Moura da Silva Neto | [@Guilherme-Moura](https://github.com/Guilherme-Moura) |
-| Leonardo Fachinello Bonetti | [@LeoFacB](https://github.com/LeoFacB) |
-| Luciano Alves do Brasil Schindel Machado | INSERIR LINK |
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/arthurfernandesj">
+        <img src="https://github.com/arthurfernandesj.png" width="100px;" alt="Arthur Fernandes Silva de Jesus"/><br />
+        <sub><b>Arthur Fernandes Silva de Jesus</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/GiovanaFontesS">
+        <img src="https://github.com/GiovanaFontesS.png" width="100px;" alt="Giovana de Souza Fontes"/><br />
+        <sub><b>Giovana de Souza Fontes</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/jopesmp">
+        <img src="https://github.com/jopesmp.png" width="100px;" alt="João Pedro Sampaio Maciel"/><br />
+        <sub><b>João Pedro Sampaio Maciel</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/pratamz250">
+        <img src="https://github.com/pratamz250.png" width="100px;" alt="Isaac Menezes Pereira"/><br />
+        <sub><b>Isaac Menezes Pereira</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Pablo-R-L">
+        <img src="https://github.com/Pablo-R-L.png" width="100px;" alt="Pablo Rodrigues Lima"/><br />
+        <sub><b>Pablo Rodrigues Lima</b></sub>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/PedroRSR">
+        <img src="https://github.com/PedroRSR.png" width="100px;" alt="Pedro Ramos Sousa Reis"/><br />
+        <sub><b>Pedro Ramos Sousa Reis</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/bitterteriyaki">
+        <img src="https://github.com/bitterteriyaki.png" width="100px;" alt="Caio Alexandre Ornelas Silva"/><br />
+        <sub><b>Caio Alexandre Ornelas Silva</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Guilherme-Moura">
+        <img src="https://github.com/Guilherme-Moura.png" width="100px;" alt="Guilherme Moura da Silva Neto"/><br />
+        <sub><b>Guilherme Moura da Silva Neto</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/LeoFacB">
+        <img src="https://github.com/LeoFacB.png" width="100px;" alt="Leonardo Fachinello Bonetti"/><br />
+        <sub><b>Leonardo Fachinello Bonetti</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/identificador-do-github.png" width="100px;" alt="Luciano Alves do Brasil Schindel Machado"/><br />
+        <sub><b>Luciano Alves do Brasil Schindel Machado</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
 **Repositório da equipe:**  
 https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum
