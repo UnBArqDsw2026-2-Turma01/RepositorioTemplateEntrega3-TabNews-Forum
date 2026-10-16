@@ -17,7 +17,7 @@ Esta modelagem corresponde à implementação demonstrativa em JavaScript. Ela n
 O diagrama de classes apresenta os componentes da solução, seus atributos, métodos e relacionamentos.
 
 <p align="center">
-  <img src="../../../images/preencher.jpeg" alt="Diagrama de Classes UML" width="300">
+  <img src="../../../images/diagrama_classes.png" alt="Diagrama de Classes UML" width="300">
 </p>
 
 <p align="center">
