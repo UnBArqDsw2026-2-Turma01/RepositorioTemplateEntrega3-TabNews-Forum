@@ -1,10 +1,8 @@
 const TipoDeEvento = Object.freeze({
   COMENTARIO_PUBLICADO: "COMENTARIO_PUBLICADO",
-  CONTEUDO_REMOVIDO: "CONTEUDO_REMOVIDO",
+  CONTEUDO_REMOVIDO: "CONTEUDO_REMOVIDO"
 });
 
-// Modelo push: o evento carrega os dados de que os observadores precisam.
-// É congelado para que um observador não altere o evento recebido pelos seguintes.
 class EventoDeConteudo {
   constructor({ tipo, conteudo, conteudoPai = null, ocorridoEm = new Date() }) {
     if (!Object.values(TipoDeEvento).includes(tipo)) {

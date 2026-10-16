@@ -38,7 +38,7 @@ function eventoDeExemplo() {
   return new EventoDeConteudo({
     tipo: TipoDeEvento.COMENTARIO_PUBLICADO,
     conteudo: new Conteudo({ id: "c2", autor: "maria", idPai: "c1", corpo: "Resposta" }),
-    conteudoPai: new Conteudo({ id: "c1", autor: "joao", corpo: "Postagem" }),
+    conteudoPai: new Conteudo({ id: "c1", autor: "joao", corpo: "Postagem" })
   });
 }
 
@@ -146,7 +146,7 @@ describe("Observador (Observer)", () => {
     class ObservadorIncompleto extends Observador {}
     assert.throws(
       () => new ObservadorIncompleto().atualizar(eventoDeExemplo()),
-      /ObservadorIncompleto deve sobrescrever o método atualizar/,
+      /ObservadorIncompleto deve sobrescrever o método atualizar/
     );
   });
 });
@@ -160,14 +160,14 @@ describe("EventoDeConteudo e TipoDeEvento", () => {
   test("rejeita tipos de evento desconhecidos", () => {
     assert.throws(
       () => new EventoDeConteudo({ tipo: "CURTIDA", conteudo: new Conteudo({ autor: "a", corpo: "b" }) }),
-      TypeError,
+      TypeError
     );
   });
 
   test("o evento é imutável e conteudoPai é opcional", () => {
     const evento = new EventoDeConteudo({
       tipo: TipoDeEvento.CONTEUDO_REMOVIDO,
-      conteudo: new Conteudo({ id: "c1", autor: "joao", corpo: "Postagem" }),
+      conteudo: new Conteudo({ id: "c1", autor: "joao", corpo: "Postagem" })
     });
 
     assert.ok(Object.isFrozen(evento));
@@ -303,8 +303,8 @@ describe("NotificadorDeResposta (ConcreteObserver)", () => {
     notificador.atualizar(
       new EventoDeConteudo({
         tipo: TipoDeEvento.CONTEUDO_REMOVIDO,
-        conteudo: new Conteudo({ id: "c1", autor: "joao", corpo: "Postagem" }),
-      }),
+        conteudo: new Conteudo({ id: "c1", autor: "joao", corpo: "Postagem" })
+      })
     );
 
     assert.equal(notificador.listarNotificacoes("joao").length, 0);

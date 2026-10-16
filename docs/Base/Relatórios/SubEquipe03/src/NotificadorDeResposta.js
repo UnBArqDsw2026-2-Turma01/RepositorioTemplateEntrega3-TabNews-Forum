@@ -9,7 +9,6 @@ class Notificacao {
 }
 
 // Participante GoF: ConcreteObserver.
-// RN03: notifica o autor do conteúdo respondido. RN04: não notifica quem responde a si mesmo.
 class NotificadorDeResposta extends Observador {
   #notificacoes = [];
 
@@ -28,8 +27,8 @@ class NotificadorDeResposta extends Observador {
     this.#registrar(
       new Notificacao({
         destinatario: conteudoPai.autor,
-        mensagem: `${comentario.autor} respondeu ao seu conteúdo ${conteudoPai.id}: "${comentario.corpo}"`,
-      }),
+        mensagem: `${comentario.autor} respondeu ao seu conteúdo ${conteudoPai.id}: "${comentario.corpo}"`
+      })
     );
   }
 

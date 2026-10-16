@@ -1,5 +1,4 @@
-// Cliente: único ponto que conhece todas as classes concretas e compõe os objetos.
-// Reproduz as etapas do Diagrama de Sequência de modelagem.md e uma etapa extra para a RN06.
+// Cliente: compõe os objetos e reproduz as etapas do Diagrama de Sequência.
 const Observador = require("./Observador");
 const ServicoDeConteudo = require("./ServicoDeConteudo");
 const ServicoDeTabCoins = require("./ServicoDeTabCoins");

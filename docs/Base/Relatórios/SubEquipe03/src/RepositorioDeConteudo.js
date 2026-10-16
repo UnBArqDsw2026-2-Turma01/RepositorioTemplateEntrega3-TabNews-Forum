@@ -7,7 +7,6 @@ class Conteudo {
   }
 }
 
-// Colaborador do sujeito, fora da estrutura do padrão: armazenamento em memória.
 class RepositorioDeConteudo {
   #conteudos = new Map();
   #proximoId = 1;

@@ -3,7 +3,6 @@ const { EventoDeConteudo, TipoDeEvento } = require("./EventoDeConteudo");
 const { Conteudo } = require("./RepositorioDeConteudo");
 
 // Participante GoF: ConcreteSubject.
-// Não importa nenhum observador concreto: apenas anuncia os eventos (RN05).
 class ServicoDeConteudo extends Sujeito {
   #repositorio;
 
@@ -21,13 +20,12 @@ class ServicoDeConteudo extends Sujeito {
     const comentario = this.#repositorio.salvar(new Conteudo({ autor, idPai, corpo }));
     console.log(`[Conteudo] ${autor} publicou ${comentario.id} em resposta a ${idPai}`);
 
-    // A notificação ocorre somente depois que o comentário foi persistido.
     this.notificar(
       new EventoDeConteudo({
         tipo: TipoDeEvento.COMENTARIO_PUBLICADO,
         conteudo: comentario,
-        conteudoPai,
-      }),
+        conteudoPai
+      })
     );
     return comentario;
   }

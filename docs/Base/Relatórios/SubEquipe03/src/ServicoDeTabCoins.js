@@ -4,7 +4,6 @@ const { TipoDeEvento } = require("./EventoDeConteudo");
 const VALOR_POR_CONTEUDO = 1;
 
 // Participante GoF: ConcreteObserver.
-// RN01: credita o autor de um comentário publicado. RN02: debita o autor de um conteúdo removido.
 class ServicoDeTabCoins extends Observador {
   #saldos = new Map();
 
