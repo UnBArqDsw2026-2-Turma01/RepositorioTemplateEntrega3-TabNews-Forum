@@ -1,45 +1,110 @@
 # 5. IA Generativa
 
-## 1. Objetivo do uso
+## Descrição
 
-Preencher kk
+Este documento registra o uso de IA Generativa como recurso de apoio às atividades da SubEquipe 02 na Entrega 03, com foco na aplicação do padrão GoF Facade para organizar o carregamento dos dados da tela inicial do fórum.
 
-## 2. Prompts sugeridos
+O registro aborda a compreensão do padrão, a elaboração e revisão da documentação e a análise crítica das sugestões geradas. A implementação considerada é didática: a classe `TelaInicialFacade` coordena os serviços de publicações relevantes, publicações recentes e estatísticas, consolidando os resultados para o cliente.
 
-### 2.1 Compreensão do padrão
+## Objetivo
 
-> Explique o padrão GoF Builder, seus participantes e a diferença entre Builder e a criação direta de um objeto. Use como exemplo uma publicação de fórum com título, conteúdo, autor e tags.
+Registrar como a IA Generativa apoiou a documentação e a compreensão da aplicação do padrão Facade, considerando:
 
-### 2.2 Revisão do código
+- a classificação do Facade como padrão estrutural;
+- a relação entre a fachada, os subsistemas e o cliente;
+- a simplificação do acesso aos serviços e a redução do acoplamento;
+- a documentação do fluxo de carregamento e do tratamento de falhas;
+- a análise crítica das sugestões produzidas pela ferramenta.
 
-> Revise esta implementação JavaScript do padrão Builder. Identifique problemas de validação, legibilidade e aderência ao padrão. Explique cada sugestão antes de propor mudanças.
+A IA é utilizada como apoio, sem substituir a compreensão do código, as decisões técnicas ou a responsabilidade dos integrantes pela verificação dos resultados.
 
-### 2.3 Testes automatizados
+## Metodologia
 
-> Proponha testes automatizados para verificar a construção válida de uma publicação e o tratamento de título, conteúdo e autor ausentes, além de tags inválidas ou repetidas.
+As sugestões da IA Generativa foram utilizadas como apoio à organização e à redação do conteúdo sobre o Facade. A análise foi relacionada à implementação existente: `TelaInicialFacade` coordena três serviços e devolve os dados em uma estrutura consolidada, enquanto `main.py` interage com a fachada, sem importar diretamente os subsistemas.
 
-## 3. Avaliação crítica
+As explicações foram confrontadas com os arquivos de código, com os testes automatizados e com a execução da demonstração. Essa verificação é necessária para distinguir as características gerais do padrão do comportamento que está efetivamente implementado. Sugestões que não correspondam ao código ou que apresentem como real uma funcionalidade apenas hipotética não devem ser incorporadas como fatos.
 
-As sugestões da IA devem ser comparadas com a definição do padrão, com o código efetivamente implementado e com os requisitos da atividade. A equipe deve verificar se a solução funciona, se adiciona complexidade desnecessária e se os testes cobrem os comportamentos relevantes.
+## Pontos de Vista dos Integrantes
 
-Não basta copiar uma resposta: é necessário compreender, executar, revisar e assumir responsabilidade pelas decisões técnicas.
+### Isaac Menezes Pereira
 
-## 4. Registro das interações reais
+**Lições aprendidas**
 
-Preencha a tabela após realizar as interações:
+Preencher
 
-| Data | Ferramenta | Objetivo | Prompt real utilizado | Resposta avaliada | Alterações feitas pela equipe |
-|---|---|---|---|---|---|
-| A preencher | A preencher | A preencher | Colar o prompt real | A preencher | A preencher |
+**Uso da IA Generativa e senso crítico**
 
-Não registre prompts hipotéticos como se tivessem sido utilizados. Caso alguma etapa não tenha utilizado IA, informe isso de maneira explícita.
+Preencher
 
-## 5. Contribuição humana
+### Pablo Rodrigues Lima
 
-Descreva quais decisões foram tomadas pelos integrantes, quais sugestões foram aceitas ou rejeitadas e quais modificações foram feitas após a revisão e a execução. Esta seção só deve ser finalizada com base no histórico real de trabalho.
+**Lições aprendidas**
 
-## 6. Histórico de Versões
+Preencher
 
-| Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
-|:---:|:---:|:---|:---|:---|:---|
-| 1.0 | 13/10/2026 | Criação do documento inicial. | [Isaac Menezes](https://github.com/pratamz250) | — | Organização geral do documento e seus campos. |
+**Uso da IA Generativa e senso crítico**
+
+Preencher
+
+### Pedro Ramos Sousa Reis
+
+**Lições aprendidas**
+
+O trabalho com o padrão Facade ajudou a compreender como uma interface de alto nível pode coordenar subsistemas e entregar seus resultados ao cliente sem exigir que ele conheça os detalhes de cada serviço.
+
+Também aprendi a diferença entre o Facade e outros tipos de padrões GoF. Por ser estrutural, organiza a relação entre o cliente e os subsistemas e não tem como objetivo principal criar ou configurar objetos, como acontece em padrões criacionais.
+
+**Uso da IA Generativa e senso crítico**
+
+Utilizei a IA Generativa como apoio para organizar e revisar a documentação sobre o padrão Facade, incluindo a explicação das responsabilidades da fachada, dos subsistemas e do cliente. As sugestões foram comparadas com os arquivos da implementação e com os resultados da demonstração e dos testes, para evitar descrever comportamentos que não estão presentes no código.
+
+A ferramenta pode produzir explicações genéricas ou confundir o objetivo de padrões diferentes. Por isso, as respostas foram tratadas como sugestões, e não como fonte definitiva. A escolha do padrão, a interpretação do código e a validação da solução permanecem sob responsabilidade do integrante.
+
+## Análise Crítica do Uso de IA Generativa
+
+A IA Generativa pode facilitar a organização da documentação e oferecer explicações iniciais sobre conceitos de projeto. No caso do Facade, esse apoio é útil para estruturar a descrição dos papéis da fachada, dos subsistemas e do cliente, mas não garante que o texto corresponda à implementação desenvolvida.
+
+Uma resposta pode, por exemplo, atribuir à fachada funcionalidades não implementadas, como chamadas reais a banco de dados ou serviços externos. A implementação deste trabalho utiliza dados simulados; portanto, afirmações sobre integrações reais não seriam corretas. Também é necessário verificar se as descrições dos testes correspondem aos cenários efetivamente cobertos.
+
+Assim, a IA foi considerada uma ferramenta auxiliar de redação e compreensão. A conferência do código e dos testes, a avaliação da adequação do padrão e a responsabilidade pelas decisões técnicas continuam sendo humanas.
+
+## Evidências de Participação
+
+| Integrante | Atividade/Contribuição | Evidência |
+|---|---|---|
+| [Isaac Menezes](https://github.com/pratamz250) | Elaboração inicial da documentação e da demonstração didática do padrão Facade. | [Padrões GoF estruturais](./padrões-gof-estruturais.md), [subsistemas](./src/subsistemas.py) e [fachada da tela inicial](./src/tela_inicial_facade.py). |
+| [Pablo Rodrigues](https://github.com/Pablo-R-L) | Revisão e correção de informações da documentação do Facade, incluindo o alinhamento ao contexto do projeto e ao código. | [Padrões GoF estruturais](./padrões-gof-estruturais.md), especialmente o histórico de versões. |
+| [Pedro Ramos](https://github.com/PedroRSR) | Organização da documentação técnica, descrição dos procedimentos de execução e criação dos testes automatizados. | [Código](./código.md), [execução](./execução.md) e [testes automatizados](./src/test_facade.py). |
+
+## Evidências do Uso de IA Generativa
+
+| Integrante | Ferramenta | Finalidade | Evidência |
+|---|---|---|---|
+| [Pedro Ramos](https://github.com/PedroRSR) | Assistente de IA no VS Code (Copilot) e Gemini | Apoio à organização, redação, revisão crítica da documentação e aprendizado sobre o padrão Facade. | Preencher |
+
+## Nível de Contribuição dos Integrantes
+
+| Nome | % de Contribuição |
+|:---|:---:|
+| [Isaac Menezes](https://github.com/pratamz250) | 33,33% |
+| [Pablo Rodrigues](https://github.com/Pablo-R-L) | 33,33% |
+| [Pedro Ramos](https://github.com/PedroRSR) | 33,33% |
+
+<p align="center">Tabela 1: Contribuição dos integrantes.</p>
+
+## Referências
+
+GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. *Design Patterns: Elements of Reusable Object-Oriented Software*. Reading: Addison-Wesley, 1994.
+
+REFACTORING.GURU. *Facade*. Disponível em: <https://refactoring.guru/pt-br/design-patterns/facade>. Acesso em: 16 out. 2026.
+
+PYTHON SOFTWARE FOUNDATION. *unittest — Unit testing framework*. Disponível em: <https://docs.python.org/3/library/unittest.html>. Acesso em: 16 out. 2026.
+
+## Histórico de Versões
+
+| Versão | Data       | Descrição                                                                 | Autor(es) | Revisor(es) | Detalhe da Revisão |
+|:------:|:----------:|---------------------------------------------------------------------------|-----------|:-----------:|--------------------|
+| 1.0 | 16/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Facade. | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
+| 1.1 | 16/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
+
+<p align="center">Tabela 2: Histórico de Versões.</p>
