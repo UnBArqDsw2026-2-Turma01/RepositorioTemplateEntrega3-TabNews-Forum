@@ -6,10 +6,14 @@ def renderizar_tela_inicial():
     print("Iniciando o carregamento da Tela Inicial (TabNews)...\n")
     
     resposta = facade.carregar_dados()
-    
+
     if resposta.get("sucesso"):
         dados = resposta["dados"]
-        print("=== CONTEÚDO RELEVANTE ===")
+        print("=== PUBLICIDADE ===")
+        publicidade = dados["publicidade"]
+        print(f"- {publicidade["empresa"]}:\n    {publicidade["conteudo"]}")
+        
+        print("\n=== CONTEÚDO RELEVANTE ===")
         for post in dados["feed_relevante"]:
             print(f"- {post['titulo']} ({post['tabcoins']} tabcoins)")
             
