@@ -28,6 +28,7 @@ O padrão Observer resolve esse problema ao definir uma dependência um-para-mui
 | `TabCoinsService` | `ServicoDeTabCoins` | Observador concreto |
 | `ContentRepository` | `RepositorioDeConteudo` | Colaborador do sujeito (fora do padrão) |
 | — (nova funcionalidade) | `NotificadorDeResposta` | Observador concreto |
+| — (nova funcionalidade) | `RegistroDeAtividades` | Observador concreto |
 | Chamada direta `creditarPorPublicacao` | `notificar(evento)` → `atualizar(evento)` | Protocolo de notificação |
 
 <p align="center">Tabela 1: Correspondência entre os artefatos da Entrega 02 e esta modelagem.</p>
@@ -58,6 +59,8 @@ class ServicoDeConteudo <<ConcreteSubject>> {
   - repositorio : RepositorioDeConteudo
   + publicarComentario(autor : String, idPai : String, corpo : String) : Conteudo
   + removerConteudo(id : String) : void
+  + enviarParaRevisao(id : String) : void
+  + restaurarConteudo(id : String) : void
 }
 
 class ServicoDeTabCoins <<ConcreteObserver>> {
@@ -72,6 +75,13 @@ class NotificadorDeResposta <<ConcreteObserver>> {
   + listarNotificacoes(usuario : String) : Notificacao[0..*]
 }
 
+class RegistroDeAtividades <<ConcreteObserver>> {
+- registros : String[0..*]
+
+  + atualizar(evento : EventoDeConteudo) : void
+  + listarRegistros() : String[0..*]
+}
+
 class EventoDeConteudo {
   + tipo : TipoDeEvento
   + conteudo : Conteudo
@@ -82,6 +92,8 @@ class EventoDeConteudo {
 enum TipoDeEvento {
   COMENTARIO_PUBLICADO
   CONTEUDO_REMOVIDO
+  CONTEUDO_EM_REVISAO
+  CONTEUDO_RESTAURADO
 }
 
 class Conteudo {
@@ -106,6 +118,7 @@ Sujeito o--> "0..*" Observador : observadores
 ServicoDeConteudo --|> Sujeito
 ServicoDeTabCoins --|> Observador
 NotificadorDeResposta --|> Observador
+RegistroDeAtividades --|> Observador
 
 ServicoDeConteudo --> "1" RepositorioDeConteudo : repositorio
 RepositorioDeConteudo o--> "0..*" Conteudo
@@ -144,9 +157,10 @@ Os estereótipos `<<Subject>>`, `<<Observer>>`, `<<ConcreteSubject>>` e `<<Concr
 
 - **`Sujeito`**: classe abstrata que mantém a coleção de observadores e implementa as operações `inscrever`, `desinscrever` e `notificar`. A operação `notificar` é protegida (`#`), pois somente o próprio sujeito decide quando um evento ocorreu. O relacionamento com `Observador` é uma **agregação** com multiplicidade `0..*`: o sujeito referencia os observadores, mas não controla o ciclo de vida deles.
 - **`Observador`**: classe abstrata com a única operação abstrata `atualizar(evento)`, representada em itálico no diagrama. É a abstração da qual o sujeito depende, e é isso que o desacopla dos observadores concretos. Como o JavaScript não possui interfaces, a classe base garante o contrato em tempo de execução: sua implementação padrão de `atualizar` lança um erro, de modo que uma subclasse que esqueça de sobrescrevê-la falha de forma explícita.
-- **`ServicoDeConteudo`**: sujeito concreto. Herda o mecanismo de inscrição de `Sujeito` e, após publicar um comentário ou remover um conteúdo, cria um `EventoDeConteudo` e o repassa a `notificar`. Ele depende de `RepositorioDeConteudo` para persistência, mas não possui nenhuma referência a `ServicoDeTabCoins` ou `NotificadorDeResposta`.
+- **`ServicoDeConteudo`**: sujeito concreto. Herda o mecanismo de inscrição de `Sujeito` e, após publicar, remover, enviar para revisão ou restaurar um conteúdo, cria um `EventoDeConteudo` e o repassa a `notificar`. Ele depende de `RepositorioDeConteudo` para persistência, mas não possui nenhuma referência a `ServicoDeTabCoins` ou `NotificadorDeResposta`.
 - **`ServicoDeTabCoins`**: observador concreto, subclasse de `Observador`, que credita TabCoins ao autor quando um comentário é publicado e os debita quando um conteúdo é removido, reproduzindo as regras modeladas na Entrega 02.
 - **`NotificadorDeResposta`**: observador concreto, subclasse de `Observador`, que gera uma `Notificacao` para o autor do conteúdo pai quando este recebe uma resposta de outro usuário. A relação com `Notificacao` é uma **composição**, pois as notificações existem apenas no contexto do notificador.
+- **`RegistroDeAtividades`** : observador concreto, subclasse de Observador, que atua como um mecanismo de auditoria. Diferente dos demais, ele reage a todos os tipos de eventos, gravando um histórico sequencial das operações do sistema.
 - **`EventoDeConteudo`** e **`TipoDeEvento`**: objeto de dados que trafega do sujeito para os observadores. O campo `conteudoPai` é opcional (`[0..1]`), já que só se aplica a comentários. Por isso, a associação com `Conteudo` tem multiplicidade `1..2`.
 
 ## 4. Diagrama de Sequência UML
@@ -160,11 +174,13 @@ participant "conteudos :\nServicoDeConteudo" as SC
 participant "repositorio :\nRepositorioDeConteudo" as REPO
 participant "tabcoins :\nServicoDeTabCoins" as TC
 participant "notificador :\nNotificadorDeResposta" as NR
+participant "auditoria :\nRegistroDeAtividades" as RA
 
 == Configuracao (composicao dos objetos) ==
 
 C -> SC : inscrever(tabcoins)
 C -> SC : inscrever(notificador)
+C -> SC : inscrever(auditoria)
 
 == Publicacao de comentario ==
 
@@ -178,6 +194,11 @@ SC -> REPO : salvar(comentario)
 activate REPO
 REPO --> SC : comentario
 deactivate REPO
+SC -> RA : atualizar(evento)
+activate RA
+RA -> RA : registrarAtividade(evento)
+RA --> SC
+deactivate RA
 
 SC -> SC : notificar(evento)\n[tipo = COMENTARIO_PUBLICADO]
 activate SC
@@ -204,6 +225,40 @@ deactivate SC
 SC --> C : comentario
 deactivate SC
 
+== Moderacao: Envio para Revisao e Restauracao ==
+
+C -> SC : enviarParaRevisao(id)
+activate SC
+SC -> REPO : buscarPorId(id)
+activate REPO
+REPO --> SC : conteudo
+deactivate REPO
+SC -> SC : notificar(evento)\n[tipo = CONTEUDO_EM_REVISAO]
+activate SC
+loop para cada observador inscrito
+  SC -> TC : atualizar(evento) [suspende creditos]
+  SC -> RA : atualizar(evento) [registra auditoria]
+end
+deactivate SC
+SC --> C
+deactivate SC
+
+C -> SC : restaurarConteudo(id)
+activate SC
+SC -> REPO : buscarPorId(id)
+activate REPO
+REPO --> SC : conteudo
+deactivate REPO
+SC -> SC : notificar(evento)\n[tipo = CONTEUDO_RESTAURADO]
+activate SC
+loop para cada observador inscrito
+  SC -> TC : atualizar(evento) [restaura creditos]
+  SC -> RA : atualizar(evento) [registra auditoria]
+end
+deactivate SC
+SC --> C
+deactivate SC
+
 == Remocao de conteudo ==
 
 C -> SC : removerConteudo(id)
@@ -217,17 +272,8 @@ SC -> REPO : remover(id)
 SC -> SC : notificar(evento)\n[tipo = CONTEUDO_REMOVIDO]
 activate SC
 loop para cada observador inscrito, na ordem de inscricao
-  SC -> TC : atualizar(evento)
-  activate TC
-  TC -> TC : debitar(conteudo.autor)
-  TC --> SC
-  deactivate TC
-
-  SC -> NR : atualizar(evento)
-  activate NR
-  NR -> NR : ignorar evento\n(tipo nao tratado)
-  NR --> SC
-  deactivate NR
+  SC -> TC : atualizar(evento) [debitar creditos]
+  SC -> RA : atualizar(evento) [registrar auditoria]
 end
 deactivate SC
 SC --> C
@@ -266,12 +312,13 @@ deactivate SC
 
 ### 4.1 Descrição da sequência
 
-O diagrama é dividido em quatro etapas.
+O diagrama é dividido em cinco etapas.
 
 1. **Configuração.** O cliente, que na demonstração é o arquivo `index.js`, cria os objetos e inscreve os observadores no sujeito. É o único ponto da solução que conhece todas as classes concretas. Adicionar um novo observador exige alterar apenas essa etapa.
-2. **Publicação de comentário.** O `ServicoDeConteudo` busca o conteúdo pai, persiste o comentário e chama `notificar` com um evento do tipo `COMENTARIO_PUBLICADO`. O fragmento `loop` representa a iteração sobre a lista de observadores. O `ServicoDeTabCoins` credita o autor, e o `NotificadorDeResposta` usa o fragmento `alt` para decidir se gera a notificação: um usuário que responde ao próprio conteúdo não é notificado.
-3. **Remoção de conteúdo.** O mesmo protocolo é reutilizado para o evento `CONTEUDO_REMOVIDO`. O `ServicoDeTabCoins` debita o autor, enquanto o `NotificadorDeResposta` ignora o evento por não tratar esse tipo. Essa etapa evidencia que **cada observador decide a quais eventos reage**, sem que o sujeito precise filtrar os destinatários.
-4. **Desinscrição de observador.** O cliente remove o `NotificadorDeResposta` da lista de observadores, como aconteceria, por exemplo, se o serviço de notificações fosse desativado para manutenção. Na publicação seguinte, apenas o `ServicoDeTabCoins` é notificado, e o `ServicoDeConteudo` permanece inalterado. Essa etapa evidencia que **as relações entre sujeito e observadores são estabelecidas em tempo de execução**, o que caracteriza o escopo de objeto do padrão. A desinscrição atua sobre o observador como um todo; preferências individuais de cada usuário, como silenciar as notificações de uma publicação específica, seriam responsabilidade do próprio `NotificadorDeResposta` e estão fora do escopo da demonstração.
+2. **Publicação de comentário.** O `ServicoDeConteudo` busca o conteúdo pai, persiste o comentário e chama `notificar` com um evento do tipo `COMENTARIO_PUBLICADO`. O fragmento `loop` representa a iteração sobre a lista de observadores. O `ServicoDeTabCoins` credita o autor, e o `NotificadorDeResposta` usa o fragmento `alt` para decidir se gera a notificação (um usuário que responde ao próprio conteúdo não é notificado) e o `RegistroDeAtividades` grava a operação no log.
+3. **Moderação (Revisão e Restauração).** O cliente simula o envio do conteúdo para revisão e sua posterior restauração. O `ServicoDeConteudo` emite os eventos `CONTEUDO_EM_REVISAO` e `CONTEUDO_RESTAURADO`. O diagrama evidencia que os observadores reagem a essas transições de estado: o `ServicoDeTabCoins` suspende e depois devolve os créditos, enquanto o log de auditoria registra ambos os movimentos.
+4. **Remoção de conteúdo.** O mesmo protocolo é reutilizado para o evento `CONTEUDO_REMOVIDO`. O `ServicoDeTabCoins` debita o autor, enquanto o `NotificadorDeResposta` ignora o evento por não tratar esse tipo. Essa etapa evidencia que **cada observador decide a quais eventos reage**, sem que o sujeito precise filtrar os destinatários.
+5. **Desinscrição de observador.** O cliente remove o `NotificadorDeResposta` da lista de observadores, como aconteceria, por exemplo, se o serviço de notificações fosse desativado para manutenção. Na publicação seguinte, apenas o `ServicoDeTabCoins` é notificado, e o `ServicoDeConteudo` permanece inalterado. Essa etapa evidencia que **as relações entre sujeito e observadores são estabelecidas em tempo de execução**, o que caracteriza o escopo de objeto do padrão. A desinscrição atua sobre o observador como um todo; preferências individuais de cada usuário, como silenciar as notificações de uma publicação específica, seriam responsabilidade do próprio `NotificadorDeResposta` e estão fora do escopo da demonstração.
 
 A comparação com o Diagrama de Sequência da Entrega 02 mostra a mudança estrutural: a mensagem direta `creditarPorPublicacao` do serviço de conteúdo para o serviço de TabCoins foi substituída pela mensagem genérica `atualizar(evento)`, enviada a um destinatário que o sujeito conhece apenas pela abstração `Observador`.
 
@@ -285,6 +332,7 @@ A comparação com o Diagrama de Sequência da Entrega 02 mostra a mudança estr
 | RN04 | Um usuário que responde ao próprio conteúdo não é notificado. | `NotificadorDeResposta` | Decisão da SubEquipe_03 |
 | RN05 | O sujeito não conhece as classes concretas dos observadores. | `Sujeito` / `ServicoDeConteudo` | Estrutura do padrão Observer |
 | RN06 | A falha de um observador não impede a notificação dos demais. | `Sujeito` | Decisão da SubEquipe_03 |
+| RN07 | Todas as mudanças de estado do conteúdo (publicação, remoção, revisão e restauração) são gravadas em um histórico sequencial. | `RegistroDeAtividades` | Decisão da SubEquipe_03 (Log de Auditoria) |
 
 <p align="center">Tabela 2: Regras representadas na modelagem.</p>
 
@@ -333,6 +381,7 @@ As **divergências** decorrem de objetivos diferentes:
 | `ServicoDeConteudo` | `src/ServicoDeConteudo.js` | Publicação e remoção de conteúdos; emissão dos eventos. |
 | `ServicoDeTabCoins` | `src/ServicoDeTabCoins.js` | Crédito e débito de TabCoins. |
 | `NotificadorDeResposta` | `src/NotificadorDeResposta.js` | Notificação do autor do conteúdo respondido. |
+|`RegistroDeAtividades`| `src/RegistroDeAtividades.js`| Auditoria e log sequencial de todos os eventos do sistema. |
 | `EventoDeConteudo`, `TipoDeEvento` | `src/EventoDeConteudo.js` | Dados transportados na notificação. |
 | `RepositorioDeConteudo`, `Conteudo` | `src/RepositorioDeConteudo.js` | Armazenamento em memória dos conteúdos. |
 | Cliente | `src/index.js` | Composição dos objetos e demonstração do fluxo. |
@@ -367,5 +416,6 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.1 | 14/10/2026 | Adoção de classe base para o `Observador`, cenário de desinscrição e comparação com a implementação de referência. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Conversão de `Observador` de interface para classe abstrata, com a justificativa da escolha em JavaScript; inclusão da etapa de desinscrição no Diagrama de Sequência; criação da subseção de comparação com o código da série Primeiro Jogo Multiplayer, de Filipe Deschamps. |
 | 1.2 | 14/10/2026 | Relação das limitações da solução com ferramentas de mensageria. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Inclusão, nas limitações reconhecidas, da evolução da notificação síncrona para um intermediário de mensagens, como o RabbitMQ ou o Pub/Sub do Redis, com referência à distinção entre Observer e publish/subscribe. |
 | 1.3 | 14/10/2026 | Inclusão da documentação do PlantUML nas referências. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Inclusão das páginas de referência dos diagramas de classes e de sequência do PlantUML, ferramenta utilizada na elaboração dos diagramas. |
+| 1.4 | 16/10/2026 |  Inclusão do observador `RegistroDeAtividades` e alinhamento com a moderação. | [Guilherme Moura](https://github.com/Guilherme-Moura) | | Atualização do Diagrama de Classes e do Diagrama de Sequência para incluir o log de auditoria e os eventos de revisão/restauração, fechando o ciclo com o Diagrama de Estados da Entrega 02. | 
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
