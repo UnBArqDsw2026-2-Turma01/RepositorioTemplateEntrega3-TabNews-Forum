@@ -40,11 +40,11 @@ Preencher
 
 **Lições aprendidas**
 
-Preencher
+Com o padrão Facade, eu entendi como a centralização do acesso a diferentes serviços pode simplificar a relação entre os componentes e tornar o código mais organizado e facil de fazer a manutenção. Também pude analisar o codigo  mais uma vez e praticar como identificar corretamente as responsabilidades de cada classe, evitando adicionar complexidade desnecessária ao sistema.
 
 **Uso da IA Generativa e senso crítico**
 
-Preencher
+O uso da inteligência artificial se mostro ser útil mais uma vez. Tanto para auxiliar no desenvolvimento do projeto quanto para tirar dúvidas, mas também é importante avaliar as respostas geradas, normalmente prefiro entrar diretamente no site que a IA usou para gerar a resposta. Não apenas para verificar a veracidade da resposta mas também para compreender as soluções propostas, aprendendo muito mais sobre o assunto e evitando sugestões automaticamente, garantindo que o uso da IA não vai atrasar o meu aprendizado.
 
 ### Pedro Ramos Sousa Reis
 
