@@ -28,8 +28,6 @@ As explicações foram confrontadas com os arquivos de código, com os testes au
 
 ### Isaac Menezes Pereira
 
-### Isaac Menezes Pereira
-
 **Lições aprendidas**
 
 Com o padrão Facade, consegui compreender melhor como uma única classe pode centralizar o acesso a diferentes serviços, simplificando o código que utiliza esses componentes. Também percebi como a separação de responsabilidades facilita a organização e a manutenção do sistema. Apesar de ser um exemplo simples, a implementação em Python ajudou a entender como o padrão pode ser aplicado na prática e como poderia ser adaptado para um sistema real.
