@@ -232,3 +232,4 @@ PYTHON SOFTWARE FOUNDATION. *Python 3 Documentation*. Disponível em: [https://d
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 | --- | --- | --- | --- | --- | --- |
 | 1.0 | 15/10/2026 | Elaboração da documentação de execução do padrão Facade em Python. | [Pedro Ramos](https://github.com/PedroRSR) | A Preencher | A Preencher |
+| 1.1 | 16/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher | 
