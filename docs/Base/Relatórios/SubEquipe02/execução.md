@@ -72,7 +72,25 @@ Os dados exibidos provêm de simulações internas nas classes de serviço (`Ser
 
 ## 3. Executar os testes automatizados
 
-Preencher kk
+1. Execute:
+
+```bash
+python -m unittest test_facade.py
+
+```
+
+*(Dica: Para uma saída mais detalhada, use a flag `-v`: `python -m unittest test_facade.py -v`)*
+
+**Resultado Esperado no Terminal:**
+
+```text
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.003s
+
+OK
+
+```
 
 ### 3.1. Cenários de teste
 
@@ -151,7 +169,11 @@ Preencher kk
 
 ### Pedro Ramos Sousa Reis
 
-Preencher kk
+A etapa de execução permite relacionar a implementação do padrão Facade aos dados apresentados pelo programa. A verificação da saída no terminal ajuda a compreender como a fachada coordena os subsistemas de publicações relevantes, publicações recentes e estatísticas, reunindo as respostas em uma estrutura única para o cliente.
+
+Por ser um padrão estrutural, o Facade se concentra em organizar a interação entre classes e simplificar o acesso a um subsistema. A execução e os testes permitem verificar se o cliente utiliza a interface simplificada da fachada e se o fluxo de carregamento e o tratamento de falhas correspondem ao comportamento documentado.
+
+Na execução realizada, o programa concluiu sem erros e exibiu os feeds de publicações relevantes e recentes, além da quantidade de usuários online. Os quatro testes automatizados foram aprovados: além do carregamento bem-sucedido e do retorno consolidado, eles verificaram o tratamento de uma falha simulada em um subsistema, o desacoplamento do cliente e a formatação da saída no terminal. Não foi necessária nenhuma correção durante essa verificação.
 
 ## 8. Participação e Evidências
 

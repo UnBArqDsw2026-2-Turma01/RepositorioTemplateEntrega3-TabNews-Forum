@@ -174,7 +174,7 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 | `tela_inicial_facade.py` | Implementação da fachada responsável por coordenar os subsistemas e consolidar os resultados. |
 | `main.py` | Programa de demonstração do carregamento e da exibição das informações da tela inicial. |
 | Capturas de tela do terminal | Evidências da execução do programa e, se aplicável, dos testes automatizados. |
-| Histórico de commits | [Histórico de commit](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main/?author=pratamz250). |
+| Histórico de commits | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main/?author=pratamz250). |
 
 As evidências devem ser anexadas ou referenciadas no repositório conforme a organização definida pela equipe. A existência dos arquivos, a execução dos testes e os registros de contribuição devem ser verificados antes da entrega.
 
@@ -192,11 +192,16 @@ Preencher kk
 
 **Atividades desenvolvidas:**
 
-Preencher kk
+- Organização do documento `código.md`.
+- Criação do arquivo de testes automatizados.
 
 **Evidências relacionadas:**
 
-Preencher kk
+| Evidência | Descrição |
+|---|---|
+| `test_facade.py` | Implementação dos testes automatizados. |
+| `código.md` | Organização da documentação. |
+| Histórico de commits | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main/?author=PedroRSR). |
 
 ## 11. Nível de Contribuição dos Integrantes
 
@@ -217,5 +222,6 @@ GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Softw
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
-| 1.0 | 15/10/2026 | Documentação da implementação didática do padrão Facade para consolidação dos dados da tela inicial. | [Isaac Menezes](https://github.com/pratamz250) | A preencher | Organização da documentação técnica, descrição dos subsistemas e da fachada, procedimentos de execução e registro de participação e contribuição. |
+| 1.0 | 15/10/2026 | Documentação da implementação didática do padrão Facade para consolidação dos dados da tela inicial. | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Organização da documentação técnica, descrição dos subsistemas e da fachada, procedimentos de execução e registro de participação e contribuição. |
 | 1.1 | 15/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher | 
+| 1.2 | 16/10/2026 | Criação dos testes automatizados e adição de informações na documentação. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher | 
