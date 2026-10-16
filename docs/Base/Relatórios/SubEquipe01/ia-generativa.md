@@ -47,6 +47,22 @@ As respostas foram utilizadas como apoio para organizar as explicações sobre a
 
 A experiência reforçou que a IA Generativa pode facilitar a organização das atividades e a compreensão dos conceitos, mas suas respostas precisam ser analisadas antes de serem incorporadas à documentação. A responsabilidade pelas decisões técnicas e pela verificação da implementação permanece com o integrante.
 
+## Lições aprendidas
+
+Durante a elaboração da Entrega 03, utilizei o ChatGPT como apoio ao desenvolvimento do código complementar do padrão GoF Builder, relacionado ao cadastro de usuários. A ferramenta auxiliou na organização das classes `Usuario` e `CadastroUsuarioBuilder`, na implementação dos métodos de construção e na validação dos campos obrigatórios.
+
+Uma das principais lições aprendidas foi compreender melhor como o padrão Builder permite construir objetos de forma gradual e organizada, separando as responsabilidades entre o objeto final e seu processo de construção.
+
+### Giovana Fontes 
+
+## Uso da IA Generativa e senso crítico
+
+Utilizei o ChatGPT como apoio à implementação do código, à compreensão dos conceitos do padrão Builder e à revisão da documentação. As sugestões fornecidas foram analisadas para verificar sua adequação à proposta da atividade e à implementação realizada.
+
+A experiência reforçou que a IA Generativa pode facilitar o desenvolvimento e o aprendizado, mas suas respostas precisam ser avaliadas criticamente. É importante conferir o código, compreender as soluções propostas e garantir que a documentação corresponda ao que foi efetivamente implementado.
+
+**Link do chat com IA:** [ChatGPT — apoio ao desenvolvimento da Entrega 03](https://chatgpt.com/share/6ad265c4-4bb8-83ea-9326-b3c0554cd62c)
+
 ### João Pedro S. Maciel
 
 **Lições aprendidas**
@@ -83,6 +99,7 @@ A IA Generativa foi utilizada como ferramenta de apoio à documentação e à co
 | Integrante | Atividade/Contribuição | Evidência |
 |---|---|---|
 | [Arthur Fernandes](https://github.com/arthurfernandesj) | Organização e elaboração da documentação sobre a aplicação do padrão Builder e o uso de IA Generativa. | [2. Modelagem](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/modelagem), [3. Código](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/c%C3%B3digo), [4. Execução](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/execu%C3%A7%C3%A3o) |
+| [Giovana Fontes](https://github.com/GiovanaFontesS) | Organização e elaboração da documentação sobre a aplicação do padrão Builder e o uso de IA Generativa. | [3. Código](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/6f64f4c8e143e030d85d3e8368cdb0dd18be01c8), [2. Modelagem](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/aba395e772011b68e7d4478dc24dcda69e2ca674), [Commit 3](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/7e70047c994ccf7f04c338a0045d634e0f0ba183), [4. Execução](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/ac8b0f99ea31eaf4c21173ad4bcfefcdecaeda43) |
 | [João Pedro](https://github.com/jopesmp) | Organização e elaboração da documentação sobre a aplicação do padrão Builder e o uso de IA Generativa. | [2. Modelagem](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/modelagem), [3. Código](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/c%C3%B3digo), [4. Execução](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/execu%C3%A7%C3%A3o) |
 
 ## Evidências do Uso de IA Generativa 
@@ -90,6 +107,7 @@ A IA Generativa foi utilizada como ferramenta de apoio à documentação e à co
 | Integrante | Ferramenta | Finalidade | Evidência |
 |---|---|---|---|
 | Arthur Fernandes | ChatGPT | Apoio à compreensão do padrão Builder, à organização da documentação e à estruturação da análise crítica da implementação. | [2. Modelagem](http://localhost:3000/#/Base/Relatórios/SubEquipe01/modelagem), [3. Código](http://localhost:3000/#/Base/Relatórios/SubEquipe01/código), [4. Execução](http://localhost:3000/#/Base/Relatórios/SubEquipe01/execução) |
+| [Giovana Fontes](https://github.com/GiovanaFontesS) | ChatGPT e Gemini | Apoio à compreensão do padrão Builder, à organização da documentação e à estruturação da análise crítica da implementação. | [2. Modelagem](https://chatgpt.com/share/6ad265ba-d844-83e8-8df6-7e04c3a4e1a4), [3. Código](https://chatgpt.com/share/6ad265ba-d844-83e8-8df6-7e04c3a4e1a4), [4. Execução](https://share.gemini.google/ynihgf4f7Qt7), [Análise crítica](https://share.gemini.google/ynihgf4f7Qt7) |
 | [João Pedro](https://github.com/jopesmp) | Claude | Sugestão de estrutura, apoio à organização da documentação e a análise crítica da implementação. | [2. Modelagem](http://localhost:3000/#/Base/Relatórios/SubEquipe01/modelagem), [3. Código](http://localhost:3000/#/Base/Relatórios/SubEquipe01/código), [4. Execução](http://localhost:3000/#/Base/Relatórios/SubEquipe01/execução) |
 
 ## Nível de Contribuição dos Integrantes
@@ -110,15 +128,14 @@ OPENAI. ChatGPT: visão geral. Disponível em: https://openai.com/chatgpt/overvi
 
 NODE.JS. Test runner. Disponível em: https://nodejs.org/api/test.html.
 
-## Histórico de Versões
 
 ## Histórico de Versões
 
 | Versão | Data       | Descrição                                                                 | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:------:|:----------:|---------------------------------------------------------------------------|-----------|:-----------:|--------------------|
-| 1.0    | 14/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | — | Organização do objetivo, metodologia, ponto de vista individual, análise crítica, evidências e nível de contribuição dos integrantes. |
-| 1.1    | 14/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [João Pedro](https://github.com/jopesmp) | — |  Ponto de vista individual e análise crítica. |
-
+| 1.0    | 14/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Organização do objetivo, metodologia, ponto de vista individual, análise crítica, evidências e nível de contribuição dos integrantes. |
+| 1.1    | 14/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [João Pedro](https://github.com/jopesmp) |  [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS)  |  Ponto de vista individual e análise crítica. |
+| 1.2 | 16/10/2026 | Adição de texto sobre uso de IA generativa | [Giovana Fontes](https://github.com/GiovanaFontesS) |  [João Pedro](https://github.com/jopesmp) | Ponto de vista e analise critica sobre a IA nos documentos realizados, e adição de contribuição da equipe | 
 
 
 <p align="center">Tabela 2: Histórico de Versões.</p>
