@@ -161,7 +161,7 @@ Esta seção regista as perceções dos integrantes sobre a execução da demons
 
 ### Isaac Menezes Pereira
 
-Preencher kk
+O exemplo foi importante para compreender como o padrão Facade simplifica a interação entre diferentes subsistemas. A classe `TelaInicialFacade` centraliza a chamada dos serviços de publicações relevantes, publicações recentes e estatísticase permite que o programa principal obtenha todas as informações necessárias por meio de uma única interface. Essa organização facilita a manutenção do código e reduz o acoplamento entre o cliente e os componentes internos. Embora o exemplo utilize dados simulados e seja relativamente simples, ele demonstra bem a proposta do padrão e permite visualizar como essa abordagem poderia ser aplicada em um sistema real.
 
 ### Pablo Rodrigues Lima
 
@@ -182,12 +182,10 @@ Esta seção regista as atividades relacionadas à documentação dos procedimen
 ### Isaac Menezes Pereira
 
 **Atividades desenvolvidas:**
-
-Preencher kk
-
-**Evidências relacionadas:**
-
-Preencher kk
+| Descrição | Comprobatórios |
+| --- | --- |
+| Elaboração dos códigos para implementação do padrão Builder | [Commits no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/docs/Sub02/?author=pratamz250&since=2026-10-15&until=2026-10-16) | 
+| Estrutura básica para o GitHub Actions | [Commits no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/docs/Sub02?author=pratamz250&since=2026-10-13&until=2026-10-13) |
 
 ### Pablo Rodrigues Lima
 
@@ -233,3 +231,5 @@ PYTHON SOFTWARE FOUNDATION. *Python 3 Documentation*. Disponível em: [https://d
 | --- | --- | --- | --- | --- | --- |
 | 1.0 | 15/10/2026 | Elaboração da documentação de execução do padrão Facade em Python. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização da documentação sobre pre-requisitos, execução da demonstração, execução dos testes, criterios, evidencias, ponto de vista, participações e nivel de contribuição. |
 | 1.1 | 16/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher | 
+| 1.2 | 16/10/2026 | Adição de ponto de vista e contribuições | [Isaac Menezes](https://github.com/pratamz250) | — | — |
+
