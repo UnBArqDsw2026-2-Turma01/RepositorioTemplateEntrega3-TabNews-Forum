@@ -10,9 +10,11 @@ class ServicoDeTabCoins extends Observador {
   atualizar(evento) {
     switch (evento.tipo) {
       case TipoDeEvento.COMENTARIO_PUBLICADO:
+      case TipoDeEvento.CONTEUDO_RESTAURADO:
         this.#creditar(evento.conteudo.autor);
         break;
       case TipoDeEvento.CONTEUDO_REMOVIDO:
+      case TipoDeEvento.CONTEUDO_EM_REVISAO:
         this.#debitar(evento.conteudo.autor);
         break;
     }
