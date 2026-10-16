@@ -139,14 +139,23 @@ Em uma aplicação real, os serviços poderiam ser integrados a fontes de dados 
 
 ## 9. Pontos de Vista dos Integrantes
 
-### Isaac Menezes
+### Isaac Menezes Pereira
+
 O padrão Facade oferece uma ótima solução que visa aumentar a organização e diminuir a complexidade do sistema e seus subsistemas. Com o padrão, cada subfuncionalidade sabe onde encontrar suas funções de forma a padronizar suas fontes. Apesar de correr o risco de tornar o Fachada um God Object, é possível manter o sistema organizado com suas devidas funções usando o Fachada. Além disso, a manutenção do código fica simplificada porque as demais alterações afetam apenas o Fachada e não os usuários.
+
+### Pablo Rodrigues Lima
+
+A preencher
+
+### Pedro Ramos Sousa Reis
+
+Escolhemos o padrão Facade por ele simplificar a comunicação do cliente com os subsistemas, abstraindo a complexidade interna. No contexto da tela inicial do fórum, o Facade garante que o código principal solicite os dados e já receba o payload consolidado. Isso melhora a leitura do código e reduz o acoplamento da interface com os serviços da página. Além disso, a gente consegue padronizar o carregamento num lugar só. O único problema é deixar essa fachada acumulando responsabilidade demais e complicando a manutenção.
 
 ## 10. Participação e Evidências
 
 Esta seção registra as atividades relacionadas à implementação e à documentação do padrão Facade. As evidências devem corresponder aos arquivos desenvolvidos e aos resultados efetivamente obtidos.
 
-### Isaac Menezes
+### Isaac Menezes Pereira
 
 **Atividades desenvolvidas:**
 
@@ -169,6 +178,26 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 
 As evidências devem ser anexadas ou referenciadas no repositório conforme a organização definida pela equipe. A existência dos arquivos, a execução dos testes e os registros de contribuição devem ser verificados antes da entrega.
 
+### Pablo Rodrigues Lima
+
+**Atividades desenvolvidas:**
+
+Preencher kk
+
+**Evidências relacionadas:**
+
+Preencher kk
+
+### Pedro Ramos Sousa Reis
+
+**Atividades desenvolvidas:**
+
+Preencher kk
+
+**Evidências relacionadas:**
+
+Preencher kk
+
 ## 11. Nível de Contribuição dos Integrantes
 
 O nível de contribuição deve considerar as atividades efetivamente realizadas, a complexidade do trabalho desenvolvido e as evidências disponíveis. A classificação deve ser coerente com os critérios adotados pela equipe.
@@ -176,6 +205,7 @@ O nível de contribuição deve considerar as atividades efetivamente realizadas
 | Integrante | Atividades desenvolvidas | Nível de contribuição | Justificativa |
 |---|---|---|---|
 | [Isaac Menezes](https://github.com/pratamz250) | Organização e documentação técnica da implementação do padrão Facade. | 33,33% (proposto) | O percentual deve ser confirmado pela equipe com base na participação comprovada na implementação, na documentação e nas demais atividades relacionadas à entrega. |
+| [Pedro Ramos](https://github.com/PedroRSR) | Revisão da implementação e documentação do padrão Facade, além da descrição do fluxo de carregamento da tela inicial. | 33,33% | Participação relevante na organização e na explicação da solução, com foco na clareza da implementação e na documentação técnica. |
 
 **Observação:** o nível de contribuição deve ser definido de acordo com os critérios acordados pela equipe e com as atividades efetivamente realizadas. A tabela não substitui o registro de evidências.
 
@@ -187,4 +217,5 @@ GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Softw
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
-| 1.0 | 15/10/2026 | Documentação da implementação didática do padrão Facade para consolidação dos dados da tela inicial. | [Isaac Menezes](https://github.com/pratamz250) | — | Organização da documentação técnica, descrição dos subsistemas e da fachada, procedimentos de execução e registro de participação e contribuição. |
+| 1.0 | 15/10/2026 | Documentação da implementação didática do padrão Facade para consolidação dos dados da tela inicial. | [Isaac Menezes](https://github.com/pratamz250) | A preencher | Organização da documentação técnica, descrição dos subsistemas e da fachada, procedimentos de execução e registro de participação e contribuição. |
+| 1.1 | 15/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher | 

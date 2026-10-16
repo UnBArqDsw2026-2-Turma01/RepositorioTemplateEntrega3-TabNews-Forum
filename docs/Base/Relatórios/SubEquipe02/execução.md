@@ -10,10 +10,10 @@ A implementação possui caráter didático e é independente do sistema real do
 
 Para executar a demonstração, são necessários:
 
-* Python versão 3.8 ou superior;
-* Terminal aberto na raiz do projeto;
-* Ficheiros da implementação organizados conforme a estrutura definida;
-* Nenhuma dependência externa para a execução do programa principal.
+- Python versão 3.8 ou superior;
+- Terminal aberto na raiz do projeto;
+- Ficheiros da implementação organizados conforme a estrutura definida;
+- Nenhuma dependência externa para a execução do programa principal.
 
 A estrutura esperada do projeto é:
 
@@ -130,16 +130,16 @@ A demonstração tem como finalidade apresentar o funcionamento do padrão de pr
 
 A implementação não contempla:
 
-* Integração com a API real ou a base de dados do TabNews;
-* Funcionalidades assíncronas para carregamento de publicações (`async`/`await`);
-* Interface gráfica web (Frontend);
-* Comunicação de rede (HTTP requests).
+- Integração com a API real ou a base de dados do TabNews;
+- Funcionalidades assíncronas para carregamento de publicações (`async`/`await`);
+- Interface gráfica web (Frontend);
+- Comunicação de rede (HTTP requests).
 
 Desta forma, os resultados demonstram a orquestração do padrão didático, mas não substituem a arquitetura de rede da aplicação real.
 
 ## 7. Pontos de Vista dos Integrantes
 
-Esta secção regista as perceções dos integrantes sobre a execução da demonstração, os procedimentos de verificação e os resultados observados.
+Esta seção regista as perceções dos integrantes sobre a execução da demonstração, os procedimentos de verificação e os resultados observados.
 
 ### Isaac Menezes Pereira
 
@@ -155,11 +155,11 @@ Preencher kk
 
 ## 8. Participação e Evidências
 
-Esta secção regista as atividades relacionadas à documentação dos procedimentos de execução e à organização das evidências de verificação.
+Esta seção regista as atividades relacionadas à documentação dos procedimentos de execução e à organização das evidências de verificação.
 
 ### Isaac Menezes Pereira
 
-**Atividades relacionadas:**
+**Atividades desenvolvidas:**
 
 Preencher kk
 
@@ -169,7 +169,7 @@ Preencher kk
 
 ### Pablo Rodrigues Lima
 
-**Atividades relacionadas:**
+**Atividades desenvolvidas:**
 
 Preencher kk
 
@@ -179,15 +179,15 @@ Preencher kk
 
 ### Pedro Ramos Sousa Reis
 
-**Atividades relacionadas:**
+**Atividades desenvolvidas:**
 
-* Organização dos procedimentos necessários para executar a demonstração em Python.
-* Documentação dos comandos utilizados para iniciar a Tela Inicial.
-* Definição dos critérios de validação do Facade.
+- Organização dos procedimentos necessários para executar a demonstração em Python.
+- Documentação dos comandos utilizados para iniciar a Tela Inicial.
+- Definição dos critérios de validação do Facade.
 
 **Evidências relacionadas:**
 
-* Ficheiro `execução.md` 
+- Ficheiro `execução.md` 
 
 ## 9. Nível de Contribuição dos Integrantes
 
