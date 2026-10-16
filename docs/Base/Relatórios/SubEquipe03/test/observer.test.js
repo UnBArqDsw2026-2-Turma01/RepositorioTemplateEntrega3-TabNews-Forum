@@ -10,6 +10,7 @@ const ServicoDeTabCoins = require("../src/ServicoDeTabCoins");
 const { NotificadorDeResposta, Notificacao } = require("../src/NotificadorDeResposta");
 const { EventoDeConteudo, TipoDeEvento } = require("../src/EventoDeConteudo");
 const { RepositorioDeConteudo, Conteudo } = require("../src/RepositorioDeConteudo");
+const RegistroDeAtividades = require("../src/RegistroDeAtividades");
 
 class SujeitoDeTeste extends Sujeito {
   disparar(evento) {
@@ -47,10 +48,12 @@ function criarCenario() {
   const conteudos = new ServicoDeConteudo(repositorio);
   const tabcoins = new ServicoDeTabCoins();
   const notificador = new NotificadorDeResposta();
+  const auditoria = new RegistroDeAtividades();
   conteudos.inscrever(tabcoins);
   conteudos.inscrever(notificador);
+  conteudos.inscrever(auditoria);
   const postagem = repositorio.salvar(new Conteudo({ autor: "joao", corpo: "Postagem" }));
-  return { repositorio, conteudos, tabcoins, notificador, postagem };
+  return { repositorio, conteudos, tabcoins, notificador, auditoria, postagem };
 }
 
 beforeEach(() => {
@@ -154,7 +157,12 @@ describe("Observador (Observer)", () => {
 describe("EventoDeConteudo e TipoDeEvento", () => {
   test("TipoDeEvento é um enum congelado", () => {
     assert.ok(Object.isFrozen(TipoDeEvento));
-    assert.deepEqual(Object.keys(TipoDeEvento), ["COMENTARIO_PUBLICADO", "CONTEUDO_REMOVIDO"]);
+    assert.deepEqual(Object.keys(TipoDeEvento), [
+      "COMENTARIO_PUBLICADO",
+      "CONTEUDO_REMOVIDO",
+      "CONTEUDO_EM_REVISAO",
+      "CONTEUDO_RESTAURADO"
+    ]);
   });
 
   test("rejeita tipos de evento desconhecidos", () => {
@@ -250,6 +258,22 @@ describe("ServicoDeConteudo (ConcreteSubject)", () => {
     assert.doesNotMatch(codigo, /ServicoDeTabCoins/);
     assert.doesNotMatch(codigo, /NotificadorDeResposta/);
   });
+
+  test("enviarParaRevisao notifica o evento CONTEUDO_EM_REVISAO", () => {
+    const { conteudos, auditoria, postagem } = criarCenario();
+    conteudos.enviarParaRevisao(postagem.id);
+
+    const logs = auditoria.listarRegistros();
+    assert.match(logs[0], /CONTEUDO_EM_REVISAO/);
+  });
+
+  test("restaurarConteudo notifica o evento CONTEUDO_RESTAURADO", () => {
+    const { conteudos, auditoria, postagem } = criarCenario();
+    conteudos.restaurarConteudo(postagem.id);
+
+    const logs = auditoria.listarRegistros();
+    assert.match(logs[0], /CONTEUDO_RESTAURADO/);
+  });
 });
 
 describe("ServicoDeTabCoins (ConcreteObserver)", () => {
@@ -272,6 +296,19 @@ describe("ServicoDeTabCoins (ConcreteObserver)", () => {
 
   test("consultarSaldo de usuário sem movimentação retorna 0", () => {
     assert.equal(new ServicoDeTabCoins().consultarSaldo("ninguem"), 0);
+  });
+
+  test("Suspende os créditos ao entrar em revisão e restaura ao aprovar", () => {
+    const { conteudos, tabcoins, postagem } = criarCenario();
+    const comentario = conteudos.publicarComentario("maria", postagem.id, "Resposta");
+    
+    assert.equal(tabcoins.consultarSaldo("maria"), 1);
+    
+    conteudos.enviarParaRevisao(comentario.id);
+    assert.equal(tabcoins.consultarSaldo("maria"), 0);
+    
+    conteudos.restaurarConteudo(comentario.id);
+    assert.equal(tabcoins.consultarSaldo("maria"), 1);
   });
 });
 
@@ -318,5 +355,24 @@ describe("NotificadorDeResposta (ConcreteObserver)", () => {
 
     assert.equal(notificador.listarNotificacoes("joao").length, 0);
     assert.equal(tabcoins.consultarSaldo("carlos"), 1);
+  });
+});
+
+describe("RegistroDeAtividades (ConcreteObserver - Auditoria)", () => {
+  test("RN07: grava um histórico sequencial de todos os eventos", () => {
+    const { conteudos, auditoria, postagem } = criarCenario();
+    
+    const comentario = conteudos.publicarComentario("maria", postagem.id, "Resposta polêmica");
+    conteudos.enviarParaRevisao(comentario.id);
+    conteudos.restaurarConteudo(comentario.id);
+    conteudos.removerConteudo(comentario.id);
+
+    const logs = auditoria.listarRegistros();
+    
+    assert.equal(logs.length, 4);
+    assert.match(logs[0], /COMENTARIO_PUBLICADO/);
+    assert.match(logs[1], /CONTEUDO_EM_REVISAO/);
+    assert.match(logs[2], /CONTEUDO_RESTAURADO/);
+    assert.match(logs[3], /CONTEUDO_REMOVIDO/);
   });
 });
