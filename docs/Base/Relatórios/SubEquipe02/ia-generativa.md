@@ -28,13 +28,15 @@ As explicações foram confrontadas com os arquivos de código, com os testes au
 
 ### Isaac Menezes Pereira
 
+### Isaac Menezes Pereira
+
 **Lições aprendidas**
 
-Preencher
+Com o padrão Facade, consegui compreender melhor como uma única classe pode centralizar o acesso a diferentes serviços, simplificando o código que utiliza esses componentes. Também percebi como a separação de responsabilidades facilita a organização e a manutenção do sistema. Apesar de ser um exemplo simples, a implementação em Python ajudou a entender como o padrão pode ser aplicado na prática e como poderia ser adaptado para um sistema real.
 
 **Uso da IA Generativa e senso crítico**
 
-Preencher
+A inteligência artificial foi útil para esclarecer dúvidas sobre o funcionamento do padrão Facade e auxiliar na organização da documentação. Entretanto, percebi a importância de conferir se as respostas realmente correspondem ao código desenvolvido, pois sugestões geradas podem misturar conceitos ou apresentar informações que não se aplicam à implementação. Por isso, considero importante analisar as soluções propostas, compará-las com os arquivos do projeto e compreender o que está sendo feito, em vez de aceitar as respostas automaticamente. Dessa forma, a IA serve como uma ferramenta de apoio ao aprendizado, sem substituir o estudo e a análise crítica.
 
 ### Pablo Rodrigues Lima
 
@@ -107,5 +109,6 @@ PYTHON SOFTWARE FOUNDATION. *unittest — Unit testing framework*. Disponível e
 | 1.0 | 16/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Facade. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização do objetivo, da metodologia, do ponto de vista individual, da análise crítica e das evidências. |
 | 1.1 | 16/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
 | 1.2 | 16/10/2026 | Adição do meu ponto de vista e senso crítico. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Preencher | Preencher |
+| 1.3 | 16/10/2026 | Minhas impressões sobre IA Generativa | [Isaac Menezes](https://github.com/pratamz250) | — | — |
 
 <p align="center">Tabela 2: Histórico de Versões.</p>
