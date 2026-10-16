@@ -104,7 +104,8 @@ PYTHON SOFTWARE FOUNDATION. *unittest — Unit testing framework*. Disponível e
 
 | Versão | Data       | Descrição                                                                 | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:------:|:----------:|---------------------------------------------------------------------------|-----------|:-----------:|--------------------|
-| 1.0 | 16/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Facade. | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
+| 1.0 | 16/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Facade. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização do objetivo, da metodologia, do ponto de vista individual, da análise crítica e das evidências. |
 | 1.1 | 16/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
+| 1.2 | 16/10/2026 | Adição do meu ponto de vista e senso crítico. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Preencher | Preencher |
 
 <p align="center">Tabela 2: Histórico de Versões.</p>
