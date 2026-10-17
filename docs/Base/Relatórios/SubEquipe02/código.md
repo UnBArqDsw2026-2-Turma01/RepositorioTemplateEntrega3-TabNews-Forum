@@ -145,7 +145,7 @@ O padrão Facade oferece uma ótima solução que visa aumentar a organização 
 
 ### Pablo Rodrigues Lima
 
-A preencher
+O padrão Facade foi escolhido por considerarmos que ele se encaixa bem na estrutura de uma tela inicial, permitindo centralizar o acesso às funcionalidades dos subsistemas. Ao implementar, tentamos manter o código fiel ao original mas ao mesmo tempo simples e objetivo, evitando adicionar complexidade desnecessária para não desviar o foco do projeto. Durante o projeto percebos o quão prático e eficiente é utilizar este padrão. 
 
 ### Pedro Ramos Sousa Reis
 
@@ -170,9 +170,9 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 
 | Evidência | Descrição |
 |---|---|
-| `subsistemas.py` | Implementação dos serviços de publicações relevantes, publicações recentes e estatísticas do sistema. |
-| `tela_inicial_facade.py` | Implementação da fachada responsável por coordenar os subsistemas e consolidar os resultados. |
-| `main.py` | Programa de demonstração do carregamento e da exibição das informações da tela inicial. |
+| `src/subsistemas.py` | Implementação dos serviços de publicações relevantes, publicações recentes e estatísticas do sistema. |
+| `src/tela_inicial_facade.py` | Implementação da fachada responsável por coordenar os subsistemas e consolidar os resultados. |
+| `src/main.py` | Programa de demonstração do carregamento e da exibição das informações da tela inicial. |
 | Capturas de tela do terminal | Evidências da execução do programa e, se aplicável, dos testes automatizados. |
 | Histórico de commits | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main/?author=pratamz250). |
 
@@ -182,11 +182,18 @@ As evidências devem ser anexadas ou referenciadas no repositório conforme a or
 
 **Atividades desenvolvidas:**
 
-Preencher kk
+- Criação das classes ServicoPublicidade, ServicoUsuarios e ServicoAutorizacao em [subsistemas.py](src\subsistemas.py)
+- Implementação das novas classes na classe de fachada [tela_inicial_facade.py](src\tela_inicial_facade.py)
+- Adição de alguns detalhes em [main.py](src\main.py) para incorporar as novas classes
 
 **Evidências relacionadas:**
 
-Preencher kk
+| Evidência | Descrição |
+|---|---|
+| `src/subsistemas.py` | Implementação dos serviços de autorização, publicações ususarios e publicidades. |
+| `src/tela_inicial_facade.py` | Implementação dos novos serviços previamente mencionados. |
+| `src/main.py` | Informações complementares referentes às novas. |
+| Histórico de commits | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main/?author=Pablo-R-L). |
 
 ### Pedro Ramos Sousa Reis
 
@@ -223,5 +230,6 @@ GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Softw
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 15/10/2026 | Documentação da implementação didática do padrão Facade para consolidação dos dados da tela inicial. | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Organização da documentação técnica, descrição dos subsistemas e da fachada, procedimentos de execução e registro de participação e contribuição. |
-| 1.1 | 15/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher | 
-| 1.2 | 16/10/2026 | Criação dos testes automatizados e adição de informações na documentação. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher | 
+| 1.1 | 15/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição de sua parte sobre a o codigo e pontos de vista referenete ao mesmo | 
+| 1.2 | 16/10/2026 | Criação dos testes automatizados e adição de informações na documentação. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização do tópico de teste da implementação da fachada e criação do arquivo [test_facade.py](src/test_facade.py) |
+| 1.3 | 17/10/2026 | Adição do meu ponto de vista e participação. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | A preencher | A preencher |  
