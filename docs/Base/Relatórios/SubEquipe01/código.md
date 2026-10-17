@@ -12,6 +12,7 @@ A estrutura do projeto está organizada da seguinte forma:
 src/
 ├── Publicacao.js
 ├── PublicacaoBuilder.js
+├── DiretorPublicacao.js   (complemento: Director opcional)
 └── index.js
 
 test/
@@ -159,6 +160,82 @@ Ao final, o método `build()` retorna uma instância de `Publicacao`, e o result
 O exemplo também inclui uma tag duplicada, permitindo observar o comportamento de remoção de duplicatas implementado na classe `Publicacao`.
 
 O autor informado é apenas demonstrativo. A implementação não realiza autenticação, persistência em banco de dados ou integração com usuários reais.
+
+### 4.1 Complemento: Director opcional
+
+**Arquivo:** `src/DiretorPublicacao.js`
+
+**Contribuição:** João Pedro S. Maciel.
+
+O padrão Builder pode ser complementado por um **Director**, que encapsula sequências de construção predefinidas. Na seção 4 e no código acima, o cliente define a sequência de chamadas diretamente. Quando a mesma sequência se repete em vários pontos do sistema, como em tutoriais e notícias, o Director concentra essa estrutura em um único lugar.
+
+```javascript
+class DiretorPublicacao {
+  constructor(builder) {
+    if (!builder) {
+      throw new Error("O Director precisa de um Builder.");
+    }
+    this.builder = builder;
+  }
+
+  montarTutorial({ titulo, autor, contexto, passos, conclusao, tags = [] }) {
+    const conteudo = [
+      "## Contexto",
+      contexto,
+      "## Passo a passo",
+      ...passos.map((p, i) => `${i + 1}. ${p}`),
+      "## Conclusão",
+      conclusao,
+    ].join("\n\n");
+
+    return this.builder
+      .comTitulo(titulo)
+      .comAutor(autor)
+      .comConteudo(conteudo)
+      .comTags(["tutorial", ...tags])
+      .build();
+  }
+
+  montarNoticia({ titulo, autor, texto, fonte }) {
+    const conteudo = `${texto}\n\nFonte: ${fonte}`;
+    return this.builder
+      .comTitulo(titulo)
+      .comAutor(autor)
+      .comConteudo(conteudo)
+      .comTags(["noticia"])
+      .build();
+  }
+}
+
+module.exports = DiretorPublicacao;
+```
+
+**Uso:**
+
+```javascript
+const PublicacaoBuilder = require("./PublicacaoBuilder");
+const DiretorPublicacao = require("./DiretorPublicacao");
+
+const tutorial = new DiretorPublicacao(new PublicacaoBuilder()).montarTutorial({
+  titulo: "Como usar o Builder em JavaScript",
+  autor: "Autor demonstrativo",
+  contexto: "Objetos com muitos atributos ficam difíceis de ler com construtores longos.",
+  passos: ["Crie o builder", "Configure os campos", "Chame build()"],
+  conclusao: "O Builder separa configuração e criação.",
+  tags: ["javascript"],
+});
+// tags resultantes: ["tutorial", "javascript"]
+```
+
+**Decisões de projeto:**
+
+- O Builder é **injetado** no construtor do Director. Assim, o Director não depende da forma como o módulo do Builder é exportado, e o mesmo Director pode ser usado com diferentes Builders.
+- O Director usa apenas os métodos públicos do Builder (`comTitulo`, `comAutor`, `comConteudo`, `comTags` e `build`). Por isso, ele funciona com a implementação de `PublicacaoBuilder` apresentada na seção 3 sem qualquer alteração nela.
+- O Director não conhece a classe `Publicacao`. Quem valida os campos obrigatórios continua sendo a própria `Publicacao`, o que mantém a regra de validação centralizada.
+
+**Verificação:** o `DiretorPublicacao` foi executado com o código de `Publicacao.js` e `PublicacaoBuilder.js` apresentado neste documento. Os testes do complemento (`node --test`, 15 testes) cobrem a estrutura do tutorial, a estrutura da notícia, a remoção de tags repetidas e vazias, a independência entre montagens sucessivas e o erro quando nenhum Builder é informado.
+
+A utilização do Director não é obrigatória. Para dois casos de uso, o ganho é pequeno; ele se justifica quando o número de estruturas repetidas aumentar.
 
 ## 5. Testes automatizados
 
@@ -424,7 +501,6 @@ A implementação complementar apresenta os seguintes participantes:
 
 Não é necessária uma classe *Director*, pois o cliente define diretamente a sequência de configuração dos dados.
 
-
 ## 9. Considerações sobre a implementação
 
 A implementação demonstra a aplicação do padrão GoF Builder na construção de objetos relacionados ao contexto de um fórum, contemplando tanto a criação de publicações quanto o cadastro de usuários.
@@ -437,7 +513,6 @@ O exemplo de validação permite observar que a ausência de um campo obrigatór
 
 Dessa forma, as duas implementações contribuem para a compreensão prática do padrão Builder, demonstrando sua utilização em diferentes contextos e a importância da organização do código, da validação dos dados e da separação de responsabilidades. As soluções possuem finalidade didática e não representam uma integração funcional com o sistema real do Projeto Fórum.
 
-
 ## 10. Pontos de Vista dos Integrantes
 
 Esta seção apresenta as percepções dos integrantes sobre a implementação do padrão de projeto GoF Builder, considerando sua aplicação na construção de publicações, a organização das responsabilidades e os conhecimentos relacionados à atividade.
@@ -447,6 +522,12 @@ Esta seção apresenta as percepções dos integrantes sobre a implementação d
 A elaboração da implementação permite compreender, na prática, como o padrão Builder organiza a criação de objetos com diferentes atributos. A separação entre `Publicacao` e `PublicacaoBuilder` evidencia a distinção entre o objeto final e o processo utilizado para construí-lo.
 
 Outro aspecto relevante é a utilização de métodos encadeados, que tornam a configuração dos atributos mais legível, além da centralização das validações na classe `Publicacao`. A atividade também permite relacionar os conceitos teóricos dos padrões GoF à implementação em JavaScript, considerando a organização do código, a validação de dados e a possibilidade de testar os comportamentos definidos.
+
+### João Pedro S. Maciel
+
+A contribuição de João Pedro concentrou-se na revisão da implementação e no complemento com o Director. Sua principal percepção é que o Director só se justifica quando a mesma sequência de construção se repete. Para o exemplo de publicações, o cliente já expressa a sequência de forma clara, de modo que o Director acrescenta uma classe sem ganho imediato. Ele passa a ser útil quando tutoriais, notícias ou outros tipos de conteúdo com estrutura fixa precisarem ser criados em vários pontos do sistema.
+
+Outro aprendizado foi a importância de testar a compatibilidade entre componentes desenvolvidos separadamente. Ao executar o Director com o código da implementação principal, foi identificado que a forma como o Builder era importado não correspondia à forma como ele era exportado. A solução foi injetar o Builder no construtor do Director, o que tornou a dependência explícita e eliminou o acoplamento com a forma de exportação do módulo.
 
 ## 11. Participação e Evidências
 
@@ -505,6 +586,28 @@ As evidências devem ser anexadas ou referenciadas no repositório conforme a or
 
 As evidências registram as atividades desenvolvidas na implementação complementar e na documentação. O histórico do Pull Request pode ser consultado para verificar as alterações e os registros de contribuição relacionados à entrega.
 
+### João Pedro S. Maciel
+
+**Atividades desenvolvidas:**
+
+- Revisão da implementação do Builder em relação à documentação, com identificação de lacunas na seção de testes e na numeração dos tópicos.
+- Implementação do complemento `DiretorPublicacao` (Director opcional), com os métodos `montarTutorial()` e `montarNoticia()`.
+- Escrita dos testes automatizados do complemento, com 15 casos executados por `node --test`.
+- Verificação de compatibilidade do Director com o código da implementação principal, com correção da forma de injeção do Builder.
+- Documentação do complemento na seção 4.1 e registro das decisões de projeto.
+
+**Evidências relacionadas:**
+
+| Evidência | Descrição |
+|---|---|
+| `src/DiretorPublicacao.js` | Implementação do Director opcional, com o Builder injetado no construtor. |
+| Testes do complemento | Arquivo de testes com 15 casos, executados com `node --test`, cobrindo estrutura do tutorial e da notícia, tags, independência entre montagens e erro sem Builder. |
+| Verificação de compatibilidade | Execução do Director com o código de `Publicacao.js` e `PublicacaoBuilder.js` apresentado nesta seção, sem alteração desse código. |
+| Seção 4.1 deste documento | Descrição do complemento, uso, decisões de projeto e verificação. |
+| Pull Request | preencher (link do PR com as alterações de João Pedro S. Maciel). |
+
+As evidências devem ser conferidas no repositório antes da entrega, incluindo a execução dos testes com o arquivo `test/PublicacaoBuilder.test.js` da equipe.
+
 ## 12. Nível de Contribuição dos Integrantes
 
 O nível de contribuição considera as atividades realizadas pelos integrantes, incluindo implementação, pesquisa, documentação e revisão dos materiais, conforme as evidências disponíveis.
@@ -513,6 +616,7 @@ O nível de contribuição considera as atividades realizadas pelos integrantes,
 |---|---|---|---|
 | [Arthur Fernandes](https://github.com/arthurfernandesj) | Organização e documentação técnica da implementação do padrão Builder para construção de publicações. | 33,33% | Participação na implementação e na documentação técnica da construção de publicações, conforme as atividades realizadas. |
 | [Giovana Fontes](https://github.com/GiovanaFontesS) | Implementação complementar do Builder para cadastro de usuários, pesquisa sobre padrões criacionais, documentação da seção 8 e revisão e correção dos documentos. | 33,33% | Desenvolvimento das classes `Usuario` e `CadastroUsuarioBuilder`, elaboração do código cliente e do exemplo de validação, além da pesquisa teórica e da documentação da aplicação complementar. |
+| [João Pedro S. Maciel](https://github.com/jopesmp) | Revisão da implementação, complemento com Director opcional, testes automatizados do complemento e verificação de compatibilidade. | 33,33% | Implementação e testes do complemento `DiretorPublicacao`, revisão da documentação e verificação da integração com o código principal. |
 
 **Observação:** os percentuais devem ser compatíveis com os critérios de avaliação e a distribuição de atividades acordada pela equipe. As evidências e o histórico de alterações devem corresponder às contribuições efetivamente realizadas.
 
@@ -529,4 +633,5 @@ MERMAID. *Mermaid Documentation*. Disponível em: <https://mermaid.js.org/>. Ace
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 08/10/2026 | Documentação da implementação didática do padrão Builder para construção de publicações. | [Arthur Fernandes](https://github.com/arthurfernandesj) |  [Giovana Fontes](https://github.com/GiovanaFontesS)  | Organização da documentação técnica, descrição das classes, procedimentos de execução, testes, participação e contribuição. |
-| 1.1 | 16/10/2026 | Documentação da implementação didática do padrão Builder para construção de cadastro. | [Giovana Fontes](https://github.com/GiovanaFontesS) | [Arthur Fernandes](https://github.com/arthurfernandesj) |  Padrão Biulder para construção de cadastro, participação e contribuição. |
+| 1.1 | 16/10/2026 | Documentação da implementação didática do padrão Builder para construção de cadastro. | [Giovana Fontes](https://github.com/GiovanaFontesS) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Padrão Builder para construção de cadastro, participação e contribuição. |
+| 1.2 | 17/10/2026 | Inclusão do complemento com Director opcional (seção 4.1), dos testes do complemento e da contribuição de João Pedro S. Maciel. | [João Pedro S. Maciel](https://github.com/jopesmp) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Descrição do DiretorPublicacao, decisões de projeto, verificação de compatibilidade com a implementação principal e atualização das seções de pontos de vista, participação, nível de contribuição e evidências. |
