@@ -298,15 +298,15 @@ describe("ServicoDeTabCoins (ConcreteObserver)", () => {
     assert.equal(new ServicoDeTabCoins().consultarSaldo("ninguem"), 0);
   });
 
-  test("Suspende os créditos ao entrar em revisão e restaura ao aprovar", () => {
+  test("suspende os créditos ao entrar em revisão e restaura ao aprovar", () => {
     const { conteudos, tabcoins, postagem } = criarCenario();
     const comentario = conteudos.publicarComentario("maria", postagem.id, "Resposta");
-    
+
     assert.equal(tabcoins.consultarSaldo("maria"), 1);
-    
+
     conteudos.enviarParaRevisao(comentario.id);
     assert.equal(tabcoins.consultarSaldo("maria"), 0);
-    
+
     conteudos.restaurarConteudo(comentario.id);
     assert.equal(tabcoins.consultarSaldo("maria"), 1);
   });
@@ -361,14 +361,14 @@ describe("NotificadorDeResposta (ConcreteObserver)", () => {
 describe("RegistroDeAtividades (ConcreteObserver - Auditoria)", () => {
   test("RN07: grava um histórico sequencial de todos os eventos", () => {
     const { conteudos, auditoria, postagem } = criarCenario();
-    
+
     const comentario = conteudos.publicarComentario("maria", postagem.id, "Resposta polêmica");
     conteudos.enviarParaRevisao(comentario.id);
     conteudos.restaurarConteudo(comentario.id);
     conteudos.removerConteudo(comentario.id);
 
     const logs = auditoria.listarRegistros();
-    
+
     assert.equal(logs.length, 4);
     assert.match(logs[0], /COMENTARIO_PUBLICADO/);
     assert.match(logs[1], /CONTEUDO_EM_REVISAO/);

@@ -44,17 +44,21 @@ class ServicoDeConteudo extends Sujeito {
 
   enviarParaRevisao(id) {
     const conteudo = this.#repositorio.buscarPorId(id);
-    if (!conteudo) throw new Error(`Conteúdo ${id} não encontrado.`);
+    if (!conteudo) {
+      throw new Error(`Conteúdo ${id} não encontrado.`);
+    }
 
-    console.log(`\n[Conteudo] ${id} de ${conteudo.autor} foi enviado para revisão (Oculto)`);
+    console.log(`[Conteudo] ${id} de ${conteudo.autor} foi enviado para revisão (Oculto)`);
     this.notificar(new EventoDeConteudo({ tipo: TipoDeEvento.CONTEUDO_EM_REVISAO, conteudo }));
   }
 
   restaurarConteudo(id) {
     const conteudo = this.#repositorio.buscarPorId(id);
-    if (!conteudo) throw new Error(`Conteúdo ${id} não encontrado.`);
+    if (!conteudo) {
+      throw new Error(`Conteúdo ${id} não encontrado.`);
+    }
 
-    console.log(`\n[Conteudo] ${id} de ${conteudo.autor} foi restaurado pela moderação`);
+    console.log(`[Conteudo] ${id} de ${conteudo.autor} foi restaurado pela moderação`);
     this.notificar(new EventoDeConteudo({ tipo: TipoDeEvento.CONTEUDO_RESTAURADO, conteudo }));
   }
 }
