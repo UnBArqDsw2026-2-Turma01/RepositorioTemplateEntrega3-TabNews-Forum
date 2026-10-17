@@ -69,17 +69,19 @@ class ServicoDeTabCoins <<ConcreteObserver>> {
   - saldos : Map<String, Integer>
   + atualizar(evento : EventoDeConteudo) : void
   + consultarSaldo(usuario : String) : Integer
+  - creditar(usuario : String) : void
+  - debitar(usuario : String) : void
 }
 
 class NotificadorDeResposta <<ConcreteObserver>> {
   - notificacoes : Notificacao[0..*]
   + atualizar(evento : EventoDeConteudo) : void
   + listarNotificacoes(usuario : String) : Notificacao[0..*]
+  - registrar(notificacao : Notificacao) : void
 }
 
 class RegistroDeAtividades <<ConcreteObserver>> {
-- registros : String[0..*]
-
+  - registros : String[0..*]
   + atualizar(evento : EventoDeConteudo) : void
   + listarRegistros() : String[0..*]
 }
@@ -103,6 +105,12 @@ class Conteudo {
   + autor : String
   + idPai : String [0..1]
   + corpo : String
+  + estado : EstadoDoConteudo
+}
+
+enum EstadoDoConteudo {
+  PUBLICADO
+  EM_REVISAO
 }
 
 class RepositorioDeConteudo {
@@ -128,6 +136,7 @@ ServicoDeConteudo ..> EventoDeConteudo : <<create>>
 Observador ..> EventoDeConteudo : recebe >
 EventoDeConteudo --> "1" TipoDeEvento : classifica-se como >
 EventoDeConteudo --> "1..2" Conteudo : refere-se a >
+Conteudo --> "1" EstadoDoConteudo : encontra-se em >
 NotificadorDeResposta *--> "0..*" Notificacao : registra >
 
 note right of Sujeito
@@ -159,10 +168,11 @@ Os estereótipos `<<Subject>>`, `<<Observer>>`, `<<ConcreteSubject>>` e `<<Concr
 
 - **`Sujeito`**: classe abstrata que mantém a coleção de observadores e implementa as operações `inscrever`, `desinscrever` e `notificar`. A operação `notificar` é protegida (`#`), pois somente o próprio sujeito decide quando um evento ocorreu. O relacionamento com `Observador` é uma **agregação** com multiplicidade `0..*`: o sujeito referencia os observadores, mas não controla o ciclo de vida deles.
 - **`Observador`**: classe abstrata com a única operação abstrata `atualizar(evento)`, representada em itálico no diagrama. É a abstração da qual o sujeito depende, e é isso que o desacopla dos observadores concretos. Como o JavaScript não possui interfaces, a classe base garante o contrato em tempo de execução: sua implementação padrão de `atualizar` lança um erro, de modo que uma subclasse que esqueça de sobrescrevê-la falha de forma explícita.
-- **`ServicoDeConteudo`**: sujeito concreto. Herda o mecanismo de inscrição de `Sujeito` e, após publicar, remover, enviar para revisão ou restaurar um conteúdo, cria um `EventoDeConteudo` e o repassa a `notificar`. Ele depende de `RepositorioDeConteudo` para persistência, mas não possui nenhuma referência a `ServicoDeTabCoins` ou `NotificadorDeResposta`.
-- **`ServicoDeTabCoins`**: observador concreto, subclasse de `Observador`, que credita TabCoins ao autor quando um comentário é publicado e os debita quando um conteúdo é removido, reproduzindo as regras modeladas na Entrega 02.
-- **`NotificadorDeResposta`**: observador concreto, subclasse de `Observador`, que gera uma `Notificacao` para o autor do conteúdo pai quando este recebe uma resposta de outro usuário. A relação com `Notificacao` é uma **composição**, pois as notificações existem apenas no contexto do notificador.
+- **`ServicoDeConteudo`**: sujeito concreto. Herda o mecanismo de inscrição de `Sujeito` e, após publicar, remover, enviar para revisão ou restaurar um conteúdo, cria um `EventoDeConteudo` e o repassa a `notificar`. Ele depende de `RepositorioDeConteudo` para persistência, mas não possui nenhuma referência a `ServicoDeTabCoins`, `NotificadorDeResposta` ou `RegistroDeAtividades`. Antes de notificar a revisão ou a restauração, verifica e atualiza o `estado` do conteúdo, de modo que só um conteúdo publicado vai para revisão e só um conteúdo em revisão é restaurado.
+- **`ServicoDeTabCoins`**: observador concreto, subclasse de `Observador`, que credita TabCoins ao autor quando um comentário é publicado ou restaurado e os debita quando um conteúdo é enviado para revisão ou removido, reproduzindo as regras modeladas na Entrega 02. Um conteúdo removido enquanto está em revisão não é debitado de novo, porque os créditos já foram suspensos na entrada em revisão. As operações privadas `creditar` e `debitar` aparecem como automensagens no Diagrama de Sequência.
+- **`NotificadorDeResposta`**: observador concreto, subclasse de `Observador`, que gera uma `Notificacao` para o autor do conteúdo pai quando este recebe uma resposta de outro usuário. A relação com `Notificacao` é uma **composição**, pois as notificações existem apenas no contexto do notificador. A operação privada `registrar` corresponde à automensagem de mesmo nome no Diagrama de Sequência.
 - **`RegistroDeAtividades`** : observador concreto, subclasse de Observador, que atua como um mecanismo de auditoria. Diferente dos demais, ele reage a todos os tipos de eventos, gravando um histórico sequencial das operações do sistema.
+- **`Conteudo`** e **`EstadoDoConteudo`**: o conteúdo guarda o estado em que se encontra, com os valores `PUBLICADO` e `EM_REVISAO`, que correspondem aos estados Publicado e Em revisão do Diagrama de Estados da Entrega 02. O estado Removido não é representado como valor, pois o conteúdo removido deixa de existir no repositório.
 - **`EventoDeConteudo`** e **`TipoDeEvento`**: objeto de dados que trafega do sujeito para os observadores. O campo `conteudoPai` é opcional (`[0..1]`), já que só se aplica a comentários. Por isso, a associação com `Conteudo` tem multiplicidade `1..2`.
 
 As associações são rotuladas com **verbos**, e o símbolo `>` indica o sentido de leitura: o `Sujeito` *notifica* os observadores, o `ServicoDeConteudo` *persiste em* um `RepositorioDeConteudo`, que *armazena* os conteúdos, e o `EventoDeConteudo` *refere-se a* um ou dois conteúdos e *classifica-se como* um `TipoDeEvento`. Assim, cada relação pode ser lida como uma frase do domínio, e o nome do papel continua visível no atributo correspondente da classe de origem (por exemplo, `- observadores` em `Sujeito`).
@@ -427,5 +437,6 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.5 | 17/10/2026 | Rótulos das associações do Diagrama de Classes reescritos como verbos com sentido de leitura. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | No Diagrama de Classes (seção 3), os rótulos de papel ou ausentes foram trocados por verbos com `>`, mantendo as multiplicidades: `notifica` (Sujeito→Observador), `persiste em` (ServicoDeConteudo→RepositorioDeConteudo), `armazena` (RepositorioDeConteudo→Conteudo), `recebe` (Observador→EventoDeConteudo), `refere-se a` e `classifica-se como` (EventoDeConteudo→Conteudo/TipoDeEvento) e `registra` (NotificadorDeResposta→Notificacao). Inclusão de um parágrafo na seção 3.1 explicando a leitura. Motivo: o parecer da Entrega 02 cobrou associações com semântica clara, expressa por verbos; os nomes de papel continuam nos atributos das classes. |
 | 1.6 | 17/10/2026 | Rastreabilidade do `NotificadorDeResposta` com o Diagrama de Implantação da Entrega 02. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Na seção 2, inclusão de um parágrafo sobre o nó externo Serviço de e-mail do Diagrama de Implantação da Entrega 02, previsto para notificar o autor de uma resposta, e de como o `NotificadorDeResposta` assume a decisão de acioná-lo. Na Tabela 1, a linha do `NotificadorDeResposta` deixou de ser "nova funcionalidade" e passou a apontar para esse nó; na Tabela 2, a origem da RN03 cita o mesmo diagrama; a página de Modelagem Estática foi incluída nas referências. Motivo: reforçar a rastreabilidade com a Entrega 02, já que a responsabilidade não era nova, apenas não tinha um componente responsável. |
 | 1.7 | 17/10/2026 | Tabela 4 passa a apontar para os arquivos reais da implementação. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Na seção 7, a coluna "Arquivo previsto" virou "Arquivo", com links para cada arquivo no GitHub, e a legenda deixou de dizer "prevista", já que o código foi implementado. A linha do `NotificadorDeResposta` passou a incluir `Notificacao`, que está no Diagrama de Classes e fica no mesmo arquivo; a responsabilidade do `ServicoDeConteudo` passou a citar revisão e restauração; foi incluída uma linha para o arquivo de testes (RN01–RN07). Motivo: a tabela descrevia a previsão anterior ao código e omitia `Notificacao`. |
+| 1.8 | 17/10/2026 | Estado do conteúdo e operações privadas no Diagrama de Classes. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão do atributo `estado` em `Conteudo` e do enum `EstadoDoConteudo` (PUBLICADO, EM_REVISAO), associados por `encontra-se em`, para que a moderação siga o Diagrama de Estados da Entrega 02 (só conteúdo publicado vai para revisão, só conteúdo em revisão é restaurado e a remoção em revisão não debita de novo); antes, a falta de estado permitia créditos e débitos duplicados. Inclusão das operações privadas `creditar`, `debitar` e `registrar`, que já apareciam como automensagens no Diagrama de Sequência mas não no de Classes. Ajuste da indentação de `RegistroDeAtividades`. Na seção 3.1, atualização dos textos de `ServicoDeConteudo`, `ServicoDeTabCoins` e `NotificadorDeResposta` e novo item sobre `Conteudo`/`EstadoDoConteudo`. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
