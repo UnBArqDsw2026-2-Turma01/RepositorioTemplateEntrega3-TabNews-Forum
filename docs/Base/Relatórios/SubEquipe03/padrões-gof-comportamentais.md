@@ -166,6 +166,16 @@ A solução desta entrega implementa o Observer em sua forma original, em um ún
 - **Tratamento de falhas:** em uma notificação síncrona, uma exceção lançada por um observador pode interromper a notificação dos seguintes, o que exige uma decisão explícita de projeto.
 - **Referências pendentes:** observadores que não são desinscritos continuam referenciados pelo sujeito, o que pode provocar notificações indevidas ou retenção de memória.
 
+## 7. Considerações Finais
+
+O cenário apresentado mostra como o Observer desacopla o serviço de conteúdos das reações aos seus eventos. O `ServicoDeConteudo` apenas anuncia que um comentário foi publicado, que um conteúdo foi removido ou que passou pela moderação, e cada observador decide como reagir: o `ServicoDeTabCoins` atualiza os saldos, o `NotificadorDeResposta` avisa o autor respondido e o `RegistroDeAtividades` grava a auditoria. Novas reações passam a ser acrescentadas por meio de novos observadores, sem alterar o sujeito.
+
+A solução parte de um problema identificado nos artefatos da própria equipe na Entrega 02, o que permite comparar o fluxo com chamadas diretas ao fluxo com notificação e evidenciar o efeito do padrão. A [Modelagem](/Base/Relatórios/SubEquipe03/modelagem.md) detalha a estrutura e a colaboração entre os participantes, e as páginas de [Código](/Base/Relatórios/SubEquipe03/código.md) e de [Execução](/Base/Relatórios/SubEquipe03/execução.md) demonstram o comportamento descrito.
+
+Entretanto, a escolha do padrão deve considerar a quantidade e a variabilidade das reações a cada evento, e não ser feita apenas para inserir um padrão no código. Com um único interessado estável, a chamada direta continua sendo a opção mais simples. Em um sistema real, operações lentas, como o envio de e-mails, poderiam exigir a evolução da notificação síncrona para um intermediário de mensagens, mantendo a mesma separação de responsabilidades.
+
+A eventual integração dessa implementação ao Projeto Fórum deverá ser avaliada e realizada separadamente.
+
 ## Referências
 
 DESCHAMPS, Filipe. **Como foi programar meu Primeiro Jogo Multiplayer (playlist sobre Desenvolvimento de Jogos)**. YouTube. Disponível em: [https://youtu.be/0sTfIZvjYJk](https://youtu.be/0sTfIZvjYJk). Acesso em: 14 out. 2026.
@@ -207,5 +217,6 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.2 | 14/10/2026 | Inclusão da adoção do padrão no desenvolvimento de software. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Menção à ampla adoção do padrão na introdução e na justificativa da escolha; criação da subseção 6.1, com exemplos de adoção (DOM, Node.js, Redis Pub/Sub e RabbitMQ) e a distinção entre o Observer e o modelo publish/subscribe com intermediário. |
 | 1.3 | 16/10/2026 | Expansão do escopo do padrão para englobar Moderação e Auditoria. | [Guilherme Moura](https://github.com/Guilherme-Moura) | | Inclusão do `RegistroDeAtividades` como novo ConcreteObserver; alinhamento do `ServicoDeConteudo` com o ciclo completo do Diagrama de Estados da Entrega 02 (fluxos *Em Revisão* e *Restaurado*). |
 | 1.4 | 17/10/2026 | Relação do problema abordado com o Diagrama de Implantação da Entrega 02. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Na seção 4 (Problema Abordado), inclusão de um parágrafo sobre o nó externo Serviço de e-mail do Diagrama de Implantação da Entrega 02, que já previa a notificação do autor de uma resposta sem definir o componente responsável, e de como essa responsabilidade passa ao `NotificadorDeResposta`. Inclusão da página de Modelagem Estática da Entrega 02 nas referências. Motivo: mostrar que a notificação de respostas não é uma reação inventada para a demonstração, mas uma responsabilidade já prevista pela equipe. |
+| 1.5 | 17/10/2026 | Inclusão das considerações finais. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Criação da seção 7 (Considerações Finais), presente nas páginas de padrões das SubEquipes 01 e 02 e ausente nesta, com a síntese de como o Observer desacopla o `ServicoDeConteudo` dos três observadores, a ligação com a Entrega 02 e com as páginas de Modelagem, Código e Execução, os limites de adoção do padrão e a ressalva de que a solução não está integrada ao Projeto Fórum. Motivo: alinhar a estrutura da página à das demais subequipes, que fecham o documento com essa seção. |
 
 <p align="center">Tabela 4: Histórico de Versões.</p>
