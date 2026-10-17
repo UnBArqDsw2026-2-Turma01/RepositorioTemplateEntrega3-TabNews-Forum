@@ -20,6 +20,8 @@ No Diagrama de Estados da mesma entrega, a transição de remoção de um conte�
 
 Esses dois artefatos revelam o problema que motiva a escolha do padrão: **o serviço responsável pelo conteúdo precisa conhecer cada um dos interessados nos seus eventos.** A cada nova reação a um evento, como notificar o autor de uma publicação que recebeu uma resposta, registrar uma atividade ou atualizar um contador, seria necessário alterar o serviço de conteúdo e acrescentar uma nova dependência a ele. Com isso, o acoplamento cresce e o princípio Aberto/Fechado deixa de ser respeitado.
 
+A mesma entrega antecipa uma dessas novas reações. O [Diagrama de Implantação](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemEstatica) da SubEquipe_03 já previa o nó externo **Serviço de e-mail**, acionado apenas para notificar o autor de um conteúdo quando ele recebe uma resposta. Aquele diagrama situa o nó no ambiente de execução, mas não define qual componente decide quando acioná-lo. Nesta modelagem, essa decisão cabe ao `NotificadorDeResposta`, que reage ao evento de publicação sem que o serviço de conteúdo precise conhecê-lo. Na demonstração, a notificação é apenas registrada em memória; em um sistema real, seria esse observador que acionaria o serviço de e-mail.
+
 O padrão Observer resolve esse problema ao definir uma dependência um-para-muitos entre objetos, de modo que, quando um objeto muda de estado, todos os seus dependentes são notificados e atualizados automaticamente (GAMMA et al., 2000). O serviço de conteúdo passa a apenas **anunciar** que um evento ocorreu, sem saber quem reage a ele.
 
 | Elemento da Entrega 02 | Elemento desta modelagem | Papel no Observer |
@@ -27,7 +29,7 @@ O padrão Observer resolve esse problema ao definir uma dependência um-para-mui
 | `ContentService` | `ServicoDeConteudo` | Sujeito concreto |
 | `TabCoinsService` | `ServicoDeTabCoins` | Observador concreto |
 | `ContentRepository` | `RepositorioDeConteudo` | Colaborador do sujeito (fora do padrão) |
-| — (nova funcionalidade) | `NotificadorDeResposta` | Observador concreto |
+| Nó externo `Serviço de e-mail` do [Diagrama de Implantação](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemEstatica), acionado para notificar o autor de uma resposta | `NotificadorDeResposta` | Observador concreto |
 | — (nova funcionalidade) | `RegistroDeAtividades` | Observador concreto |
 | Chamada direta `creditarPorPublicacao` | `notificar(evento)` → `atualizar(evento)` | Protocolo de notificação |
 
@@ -330,7 +332,7 @@ A comparação com o Diagrama de Sequência da Entrega 02 mostra a mudança estr
 |---|---|---|---|
 | RN01 | A publicação de um comentário credita TabCoins ao seu autor. | `ServicoDeTabCoins` | Diagrama de Sequência da Entrega 02 |
 | RN02 | A remoção de um conteúdo debita TabCoins do seu autor. | `ServicoDeTabCoins` | Diagrama de Estados da Entrega 02 |
-| RN03 | O autor de um conteúdo é notificado quando outro usuário o responde. | `NotificadorDeResposta` | Nova funcionalidade, inspirada nas notificações do TabNews |
+| RN03 | O autor de um conteúdo é notificado quando outro usuário o responde. | `NotificadorDeResposta` | Diagrama de Implantação da Entrega 02 (nó Serviço de e-mail), inspirado nas notificações do TabNews |
 | RN04 | Um usuário que responde ao próprio conteúdo não é notificado. | `NotificadorDeResposta` | Decisão da SubEquipe_03 |
 | RN05 | O sujeito não conhece as classes concretas dos observadores. | `Sujeito` / `ServicoDeConteudo` | Estrutura do padrão Observer |
 | RN06 | A falha de um observador não impede a notificação dos demais. | `Sujeito` | Decisão da SubEquipe_03 |
@@ -408,6 +410,8 @@ PLANTUML. **Sequence Diagram**. Disponível em: [https://plantuml.com/sequence-d
 
 REFACTORING.GURU. **Observer**. Disponível em: [https://refactoring.guru/pt-br/design-patterns/observer](https://refactoring.guru/pt-br/design-patterns/observer). Acesso em: 14 out. 2026.
 
+SUBEQUIPE_03. **Modelagem Estática na Notação UML**. Entrega 02 — Projeto Fórum. Disponível em: [https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemEstatica](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemEstatica). Acesso em: 17 out. 2026.
+
 SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto Fórum. Disponível em: [https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemDinamica](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemDinamica). Acesso em: 14 out. 2026.
 
 ## Histórico de Versões
@@ -420,5 +424,6 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.3 | 14/10/2026 | Inclusão da documentação do PlantUML nas referências. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Inclusão das páginas de referência dos diagramas de classes e de sequência do PlantUML, ferramenta utilizada na elaboração dos diagramas. |
 | 1.4 | 16/10/2026 |  Inclusão do observador `RegistroDeAtividades` e alinhamento com a moderação. | [Guilherme Moura](https://github.com/Guilherme-Moura) | | Atualização do Diagrama de Classes e do Diagrama de Sequência para incluir o log de auditoria e os eventos de revisão/restauração, fechando o ciclo com o Diagrama de Estados da Entrega 02. |
 | 1.5 | 17/10/2026 | Rótulos das associações do Diagrama de Classes reescritos como verbos com sentido de leitura. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | No Diagrama de Classes (seção 3), os rótulos de papel ou ausentes foram trocados por verbos com `>`, mantendo as multiplicidades: `notifica` (Sujeito→Observador), `persiste em` (ServicoDeConteudo→RepositorioDeConteudo), `armazena` (RepositorioDeConteudo→Conteudo), `recebe` (Observador→EventoDeConteudo), `refere-se a` e `classifica-se como` (EventoDeConteudo→Conteudo/TipoDeEvento) e `registra` (NotificadorDeResposta→Notificacao). Inclusão de um parágrafo na seção 3.1 explicando a leitura. Motivo: o parecer da Entrega 02 cobrou associações com semântica clara, expressa por verbos; os nomes de papel continuam nos atributos das classes. |
+| 1.6 | 17/10/2026 | Rastreabilidade do `NotificadorDeResposta` com o Diagrama de Implantação da Entrega 02. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Na seção 2, inclusão de um parágrafo sobre o nó externo Serviço de e-mail do Diagrama de Implantação da Entrega 02, previsto para notificar o autor de uma resposta, e de como o `NotificadorDeResposta` assume a decisão de acioná-lo. Na Tabela 1, a linha do `NotificadorDeResposta` deixou de ser "nova funcionalidade" e passou a apontar para esse nó; na Tabela 2, a origem da RN03 cita o mesmo diagrama; a página de Modelagem Estática foi incluída nas referências. Motivo: reforçar a rastreabilidade com a Entrega 02, já que a responsabilidade não era nova, apenas não tinha um componente responsável. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
