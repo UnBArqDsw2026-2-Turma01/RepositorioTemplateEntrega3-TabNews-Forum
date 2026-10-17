@@ -378,19 +378,20 @@ As **divergências** decorrem de objetivos diferentes:
 
 ## 7. Correspondência entre modelagem e implementação
 
-| Elemento da modelagem | Arquivo previsto | Responsabilidade |
+| Elemento da modelagem | Arquivo | Responsabilidade |
 |---|---|---|
-| `Sujeito` | `src/Sujeito.js` | Inscrição, desinscrição e notificação dos observadores. |
-| `Observador` | `src/Observador.js` | Classe base cuja implementação padrão de `atualizar` lança um erro, obrigando as subclasses a sobrescrevê-la. |
-| `ServicoDeConteudo` | `src/ServicoDeConteudo.js` | Publicação e remoção de conteúdos; emissão dos eventos. |
-| `ServicoDeTabCoins` | `src/ServicoDeTabCoins.js` | Crédito e débito de TabCoins. |
-| `NotificadorDeResposta` | `src/NotificadorDeResposta.js` | Notificação do autor do conteúdo respondido. |
-|`RegistroDeAtividades`| `src/RegistroDeAtividades.js`| Auditoria e log sequencial de todos os eventos do sistema. |
-| `EventoDeConteudo`, `TipoDeEvento` | `src/EventoDeConteudo.js` | Dados transportados na notificação. |
-| `RepositorioDeConteudo`, `Conteudo` | `src/RepositorioDeConteudo.js` | Armazenamento em memória dos conteúdos. |
-| Cliente | `src/index.js` | Composição dos objetos e demonstração do fluxo. |
+| `Sujeito` | [`src/Sujeito.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/src/Sujeito.js) | Inscrição, desinscrição e notificação dos observadores, com isolamento de falhas (RN06). |
+| `Observador` | [`src/Observador.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/src/Observador.js) | Classe base cuja implementação padrão de `atualizar` lança um erro, obrigando as subclasses a sobrescrevê-la. |
+| `ServicoDeConteudo` | [`src/ServicoDeConteudo.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/src/ServicoDeConteudo.js) | Publicação, remoção, envio para revisão e restauração de conteúdos; emissão dos eventos. |
+| `ServicoDeTabCoins` | [`src/ServicoDeTabCoins.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/src/ServicoDeTabCoins.js) | Crédito e débito de TabCoins. |
+| `NotificadorDeResposta`, `Notificacao` | [`src/NotificadorDeResposta.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/src/NotificadorDeResposta.js) | Notificação do autor do conteúdo respondido; `Notificacao` fica no mesmo arquivo por existir apenas no contexto do notificador. |
+| `RegistroDeAtividades` | [`src/RegistroDeAtividades.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/src/RegistroDeAtividades.js) | Auditoria e log sequencial de todos os eventos do sistema. |
+| `EventoDeConteudo`, `TipoDeEvento` | [`src/EventoDeConteudo.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/src/EventoDeConteudo.js) | Dados transportados na notificação. |
+| `RepositorioDeConteudo`, `Conteudo` | [`src/RepositorioDeConteudo.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/src/RepositorioDeConteudo.js) | Armazenamento em memória dos conteúdos. |
+| Cliente | [`src/index.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/src/index.js) | Composição dos objetos e demonstração do fluxo. |
+| Regras RN01–RN07 | [`test/observer.test.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/test/observer.test.js) | Testes automatizados de cada participante e regra. |
 
-<p align="center">Tabela 4: Correspondência prevista entre os elementos da modelagem e os arquivos de código.</p>
+<p align="center">Tabela 4: Correspondência entre os elementos da modelagem e os arquivos de código.</p>
 
 Os arquivos listados são a referência para a etapa de [Código](/Base/Relatórios/SubEquipe03/código.md). Qualquer divergência introduzida na implementação deve ser refletida nos diagramas desta página.
 
@@ -425,5 +426,6 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.4 | 16/10/2026 |  Inclusão do observador `RegistroDeAtividades` e alinhamento com a moderação. | [Guilherme Moura](https://github.com/Guilherme-Moura) | | Atualização do Diagrama de Classes e do Diagrama de Sequência para incluir o log de auditoria e os eventos de revisão/restauração, fechando o ciclo com o Diagrama de Estados da Entrega 02. |
 | 1.5 | 17/10/2026 | Rótulos das associações do Diagrama de Classes reescritos como verbos com sentido de leitura. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | No Diagrama de Classes (seção 3), os rótulos de papel ou ausentes foram trocados por verbos com `>`, mantendo as multiplicidades: `notifica` (Sujeito→Observador), `persiste em` (ServicoDeConteudo→RepositorioDeConteudo), `armazena` (RepositorioDeConteudo→Conteudo), `recebe` (Observador→EventoDeConteudo), `refere-se a` e `classifica-se como` (EventoDeConteudo→Conteudo/TipoDeEvento) e `registra` (NotificadorDeResposta→Notificacao). Inclusão de um parágrafo na seção 3.1 explicando a leitura. Motivo: o parecer da Entrega 02 cobrou associações com semântica clara, expressa por verbos; os nomes de papel continuam nos atributos das classes. |
 | 1.6 | 17/10/2026 | Rastreabilidade do `NotificadorDeResposta` com o Diagrama de Implantação da Entrega 02. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Na seção 2, inclusão de um parágrafo sobre o nó externo Serviço de e-mail do Diagrama de Implantação da Entrega 02, previsto para notificar o autor de uma resposta, e de como o `NotificadorDeResposta` assume a decisão de acioná-lo. Na Tabela 1, a linha do `NotificadorDeResposta` deixou de ser "nova funcionalidade" e passou a apontar para esse nó; na Tabela 2, a origem da RN03 cita o mesmo diagrama; a página de Modelagem Estática foi incluída nas referências. Motivo: reforçar a rastreabilidade com a Entrega 02, já que a responsabilidade não era nova, apenas não tinha um componente responsável. |
+| 1.7 | 17/10/2026 | Tabela 4 passa a apontar para os arquivos reais da implementação. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Na seção 7, a coluna "Arquivo previsto" virou "Arquivo", com links para cada arquivo no GitHub, e a legenda deixou de dizer "prevista", já que o código foi implementado. A linha do `NotificadorDeResposta` passou a incluir `Notificacao`, que está no Diagrama de Classes e fica no mesmo arquivo; a responsabilidade do `ServicoDeConteudo` passou a citar revisão e restauração; foi incluída uma linha para o arquivo de testes (RN01–RN07). Motivo: a tabela descrevia a previsão anterior ao código e omitia `Notificacao`. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
