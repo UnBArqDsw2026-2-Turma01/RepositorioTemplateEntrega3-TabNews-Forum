@@ -1,0 +1,13 @@
+{
+  "name": "subequipe03-gof-comportamentais-observer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Exemplo didático do padrão GoF Observer aplicado aos eventos de conteúdo do fórum",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
