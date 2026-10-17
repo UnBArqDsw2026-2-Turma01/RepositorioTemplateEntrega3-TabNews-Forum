@@ -29,10 +29,10 @@ A documentação também apresenta as justificativas das decisões tomadas, as r
 
 A organização dos artefatos pode ser consultada nos seguintes tópicos:
 
-- [Relatório da SubEquipe 01 — Padrões GoF Criacionais](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relatórios/1.1.1.SubEquipe_01)
-- [Relatório da SubEquipe 02 — Padrões GoF Estruturais](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relatórios/1.1.2.SubEquipe_02)
+- [Relatório da SubEquipe 01 — Padrões GoF Criacionais](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe01/padr%C3%B5es-gof-criacionais)
+- [Relatório da SubEquipe 02 — Padrões GoF Estruturais](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe02/padr%C3%B5es-gof-estruturais)
 - [Relatório da SubEquipe 03 — Padrões GoF Comportamentais](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relatórios/1.1.3.SubEquipe_03)
-- [Participações](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/1.2.ParticipacoesPadroesDeProjeto)
+- [Participações](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relat%C3%B3rios/SubEquipe03/padr%C3%B5es-gof-comportamentais)
 - [Iniciativas Extras](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/1.3.IniciativasExtras)
 
 

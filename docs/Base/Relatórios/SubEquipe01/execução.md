@@ -232,26 +232,14 @@ Esta seção registra as atividades relacionadas à documentação dos procedime
 - Capturas de tela do terminal, após a execução dos comandos.
 - Histórico de commits do repositório, quando disponível.
 
-A documentação dos procedimentos não substitui a execução real. As capturas de tela e os resultados devem ser incluídos após a realização das verificações.
-
-## 9. Nível de Contribuição dos Integrantes
-
-O nível de contribuição deve refletir as atividades efetivamente realizadas na elaboração e na verificação da implementação.
-
-| Integrante | Atividades relacionadas | Nível de contribuição | Justificativa |
-|---|---|---|---|
-| [Arthur Fernandes](https://github.com/arthurfernandesj) | Organização e documentação dos procedimentos de execução, critérios de validação e estrutura das evidências. | 33,33% | A classificação deve considerar as atividades efetivamente realizadas e as evidências disponíveis. |
-
-A classificação deverá ser definida conforme os critérios adotados pela equipe e a participação comprovada nas atividades.
-
-## 10. Referências
+## 9. Referências
 
 GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Software*. Boston: Addison-Wesley, 1994.
 
 NODE.JS. *Node.js Documentation*. Disponível em: <https://nodejs.org/docs/latest/api/>. Acesso em: 08 out. 2026.
 
-## 11. Histórico de Versões
+## 10. Histórico de Versões
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
-| 1.0 | 08/10/2026 | Elaboração da documentação de execução do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | — | Organização dos pré-requisitos, procedimentos de execução, cenários de teste, critérios de validação, evidências, participação e referências. |
+| 1.0 | 08/10/2026 | Elaboração da documentação de execução do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Organização dos pré-requisitos, procedimentos de execução, cenários de teste, critérios de validação, evidências, participação e referências. |
