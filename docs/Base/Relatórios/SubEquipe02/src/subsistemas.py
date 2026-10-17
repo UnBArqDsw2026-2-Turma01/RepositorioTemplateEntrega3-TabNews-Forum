@@ -33,7 +33,6 @@ class ServicoAutorizacao:
     # Filtra postagens e bloqueia conteudos improprios
     def filtragem(self, data):
         for postagem in data:
-            print(postagem)
             if "improprio" in postagem['titulo']:
                 postagem['titulo'] = "AVISO: Conteudo Filtrado"
                 postagem["tabcoins"] = 0

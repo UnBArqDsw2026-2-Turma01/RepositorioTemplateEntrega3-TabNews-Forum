@@ -6,8 +6,15 @@ def renderizar_tela_inicial():
     print("Iniciando o carregamento da Tela Inicial (TabNews)...\n")
     
     resposta = facade.carregar_dados()
+    usuario = facade.criar_usuario_anonimo()
+
+    if usuario.get("sucesso") == False:
+        print(usuario.get("erro"))
+        return
 
     if resposta.get("sucesso"):
+        print(f"-Logado como usuário {usuario.get("usuario")}-\n")
+
         dados = resposta["dados"]
         print("=== PUBLICIDADE ===")
         publicidade = dados["publicidade"]

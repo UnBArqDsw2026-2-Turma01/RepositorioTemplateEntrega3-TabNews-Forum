@@ -39,3 +39,17 @@ class TelaInicialFacade:
                 "sucesso": False,
                 "erro": f"Falha ao carregar a tela inicial: {str(erro)}"
             }
+
+    def criar_usuario_anonimo(self):
+        #assumindo que o usuario não está logado
+        try:
+            usuario = self._servico_Usuario.criar_anonimo()
+            return {
+                "sucesso": True,
+                "usuario": usuario
+            }
+        except Exception as erro:
+                    return {
+                        "sucesso": False,
+                        "erro": f"Falha ao criar usuario anonimo: {str(erro)}"
+                    }
