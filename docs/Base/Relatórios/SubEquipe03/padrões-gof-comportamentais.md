@@ -67,12 +67,13 @@ Na solução proposta, os participantes do padrão correspondem às seguintes cl
 | *ConcreteSubject* | `ServicoDeConteudo` | Publica e remove conteúdos e notifica os observadores quando esses eventos ocorrem. |
 | *ConcreteObserver* | `ServicoDeTabCoins` | Credita e debita TabCoins em reação aos eventos de conteúdo. |
 | *ConcreteObserver* | `NotificadorDeResposta` | Notifica o autor de um conteúdo quando ele recebe uma resposta. |
+| *ConcreteObserver* | `RegistroDeAtividades` | Grava um log de auditoria sequencial de todos os eventos do sistema, independentemente do tipo. |
 
 <p align="center">Tabela 1: Participantes do padrão Observer na solução proposta.</p>
 
 ## 4. Problema Abordado
 
-Na Entrega 02, a SubEquipe_03 modelou o fluxo de [publicação de um comentário](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemDinamica) na Página da postagem. No Diagrama de Sequência daquela entrega, o serviço de conteúdos, após persistir o comentário, chama diretamente o serviço de TabCoins para creditar o autor. No Diagrama de Estados da mesma entrega, a remoção de um conteúdo também dispara o débito dos créditos do autor.
+Na Entrega 02, a SubEquipe_03 modelou o fluxo de [publicação de um comentário](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemDinamica) na Página da postagem. No Diagrama de Sequência daquela entrega, o serviço de conteúdos, após persistir o comentário, chama diretamente o serviço de TabCoins para creditar o autor. No Diagrama de Estados da mesma entrega, o ciclo de vida do conteúdo exige ações secundárias em múltiplas transições: a remoção debita os créditos, a entrada no estado *Em Revisão* suspende os créditos, e a aprovação pela moderação os restaura.
 
 Em ambos os casos, o serviço de conteúdos **conhece e invoca diretamente** cada componente interessado nos seus eventos. Com uma única reação, esse acoplamento é tolerável. O problema surge com a evolução do sistema: um fórum acumula naturalmente novas reações aos mesmos eventos, como notificar o autor de uma publicação respondida, registrar a atividade do usuário, atualizar contadores ou alimentar um ranking. Mantida a estrutura original, cada nova reação exigiria:
 
@@ -153,6 +154,7 @@ A solução desta entrega implementa o Observer em sua forma original, em um ún
 - **Comunicação por difusão (*broadcast*):** a notificação é enviada a todos os observadores inscritos, sem que o sujeito precise saber quantos são.
 - **Extensibilidade:** novos observadores podem ser adicionados ou removidos em tempo de execução, sem modificar o sujeito nem os demais observadores.
 - **Testabilidade:** o sujeito pode ser testado com observadores simulados, e cada observador pode ser testado isoladamente, apenas com eventos construídos para o teste.
+- **Efetivação do Princípio Aberto/Fechado:** a presença do `RegistroDeAtividades` ilustra como requisitos secundários (como auditoria) são isolados em observadores dedicados, mantendo o `ServicoDeConteudo` focado e inalterado
 
 ### 6.3 Limitações
 
@@ -199,5 +201,6 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.0 | 14/10/2026 | Criação do documento e da introdução sobre padrões comportamentais e o padrão Observer. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Contextualização dos padrões comportamentais segundo o GoF, e relação com o uso prévio do Observer por Filipe Deschamps na série Primeiro Jogo Multiplayer, com trecho do código-fonte do jogo. |
 | 1.1 | 14/10/2026 | Adição dos objetivos, identificação do padrão, problema abordado, justificativa da escolha e fundamentação teórica. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Definição dos objetivos geral e específicos, mapeamento dos participantes do GoF para as classes da solução, descrição do problema de acoplamento a partir dos artefatos da Entrega 02, comparação com os padrões Mediator, Chain of Responsibility e Strategy, e fundamentação teórica com benefícios e limitações do padrão. |
 | 1.2 | 14/10/2026 | Inclusão da adoção do padrão no desenvolvimento de software. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Menção à ampla adoção do padrão na introdução e na justificativa da escolha; criação da subseção 6.1, com exemplos de adoção (DOM, Node.js, Redis Pub/Sub e RabbitMQ) e a distinção entre o Observer e o modelo publish/subscribe com intermediário. |
+| 1.3 | 16/10/2026 | Expansão do escopo do padrão para englobar Moderação e Auditoria. | [Guilherme Moura](https://github.com/Guilherme-Moura) | | Inclusão do `RegistroDeAtividades` como novo ConcreteObserver; alinhamento do `ServicoDeConteudo` com o ciclo completo do Diagrama de Estados da Entrega 02 (fluxos *Em Revisão* e *Restaurado*). |
 
 <p align="center">Tabela 4: Histórico de Versões.</p>
