@@ -10,15 +10,15 @@ A implementação possui caráter didático e independente do sistema real do Pr
 
 Para executar a demonstração, são necessários:
 
-- Node.js versão 18 ou superior;
-- terminal aberto na raiz do projeto;
+- Node.js versão 18 ou superior, instalado diretamente ou por meio do `mise` (ver abaixo);
+- terminal aberto na pasta `docs/Base/Relatórios/SubEquipe03/`, onde fica o `package.json`;
 - arquivos da implementação organizados conforme a estrutura definida;
 - nenhuma dependência externa para a execução do programa e dos testes.
 
 A estrutura esperada do projeto é:
 
 ```text
-projeto/
+docs/Base/Relatórios/SubEquipe03/
 ├── src/
 │   ├── EventoDeConteudo.js
 │   ├── NotificadorDeResposta.js
@@ -31,7 +31,8 @@ projeto/
 │   └── index.js
 ├── test/
 │   └── observer.test.js
-└── package.json
+├── package.json
+└── README.md
 ```
 
 Para verificar se o Node.js e o npm estão instalados, execute:
@@ -45,23 +46,38 @@ O comando `node --version` apresenta a versão instalada do Node.js. O comando `
 
 Caso os comandos não sejam reconhecidos, será necessário instalar ou configurar o Node.js antes de continuar.
 
-## 2. Executar a demonstração
-
-Com o terminal aberto na raiz do projeto, execute:
+Como alternativa, o repositório possui um arquivo `mise.toml` na raiz, que fixa a versão do Node.js utilizada pela equipe (ver [Iniciativas Extras](/Base/1.3.IniciativasExtras.md)). Com o [`mise`](https://mise.jdx.dev/) instalado, basta executar, na raiz do repositório:
 
 ```bash
-node start
+mise install
 ```
+
+O comando instala a versão definida, que passa a ser usada automaticamente dentro do repositório.
+
+## 2. Executar a demonstração
+
+Com o terminal aberto na pasta `docs/Base/Relatórios/SubEquipe03/`, execute:
+
+```bash
+npm start
+```
+
+O comando equivale a `node src/index.js`.
 
 O programa instancia o serviço de conteúdos, configura a inscrição dos observadores e simula o fluxo completo do sistema, incluindo publicações, transições de moderação (revisão e restauração), remoção e falha de observadores.
 
-Após a construção, o resultado é convertido para JSON e apresentado no terminal.
+Cada mensagem apresentada no terminal é prefixada pelo componente que a produziu (`[Cliente]`, `[Conteudo]`, `[TabCoins]`, `[Notificador]`, `[Auditoria]` e `[Sujeito]`), o que permite acompanhar a ordem em que os observadores são notificados.
 
-### 2.1. Resultado esperado
+### 2.1. Resultado obtido
 
-Considerando a implementação apresentada na seção de código, a saída esperada é:
+A saída abaixo foi copiada do terminal após a execução real do comando em 17/10/2026, com o Node.js v24.20.0 e o npm 11.19.0:
 
 ```text
+$ npm start
+
+> subequipe03-gof-comportamentais-observer@1.0.0 start
+> node src/index.js
+
 [Cliente] Postagem c1 de joao criada como ponto de partida
 
 === 1. Configuração: inscrição dos observadores ===
@@ -80,12 +96,10 @@ Considerando a implementação apresentada na seção de código, a saída esper
 [Auditoria] Log gravado: COMENTARIO_PUBLICADO -> c3
 
 === 3. Moderação: Envio para Revisão e Restauração ===
-
 [Conteudo] c2 de maria foi enviado para revisão (Oculto)
 [TabCoins] -1 para maria (saldo: 0)
 [Notificador] Evento CONTEUDO_EM_REVISAO ignorado (tipo não tratado)
 [Auditoria] Log gravado: CONTEUDO_EM_REVISAO -> c2
-
 [Conteudo] c2 de maria foi restaurado pela moderação
 [TabCoins] +1 para maria (saldo: 1)
 [Notificador] Evento CONTEUDO_RESTAURADO ignorado (tipo não tratado)
@@ -121,37 +135,117 @@ Considerando a implementação apresentada na seção de código, a saída esper
 [Auditoria] Total de eventos registrados no log: 7
 ```
 
-**Importante:** essa saída representa o resultado esperado com base no código apresentado. Ela não comprova que a execução já foi realizada. A comprovação deverá ser registrada por meio de uma captura real do terminal.
+A saída permite verificar cada regra na prática:
+
+- **Publicação (RN01, RN03, RN04):** `maria` recebe crédito e `joao` é notificado; quando `joao` responde à própria postagem, recebe crédito, mas não é notificado.
+- **Moderação (RN08):** o envio para revisão suspende o crédito de `maria` e a restauração o devolve; o `NotificadorDeResposta` ignora os dois eventos.
+- **Remoção (RN02):** o comentário de `maria`, publicado novamente após a restauração, é removido e o crédito é debitado.
+- **Desinscrição:** depois de desinscrito, o `NotificadorDeResposta` não recebe a publicação de `carlos`, enquanto os demais observadores continuam funcionando.
+- **Isolamento de falhas (RN06):** a mensagem `[Sujeito] Falha em ObservadorComFalha` aparece e, em seguida, o `NotificadorDeResposta`, inscrito depois do observador com falha, notifica `joao`.
+- **Auditoria (RN07):** os 7 eventos emitidos durante a demonstração foram registrados pelo `RegistroDeAtividades`.
 
 ## 3. Executar os testes automatizados
 
-Os testes automatizados verificam se a implementação apresenta os comportamentos definidos pelas regras de negócio (RN01 a RN07).
+Os testes automatizados verificam se a implementação apresenta os comportamentos definidos pelas regras de negócio (RN01 a RN08).
 
-Na raiz do projeto, execute:
+Na pasta `docs/Base/Relatórios/SubEquipe03/`, execute:
 
 ```bash
 npm test
 ```
 
+O comando equivale a `node --test`.
+
 O comando utiliza o módulo nativo `node:test` do Node.js para localizar e executar os testes compatíveis com o padrão de descoberta do projeto.
 
 ### 3.1. Cenários de teste
 
-Os testes devem verificar os seguintes comportamentos:
+Os cenários abaixo resumem os 32 testes de `test/observer.test.js`. A relação completa de testes está na [página de Código](/Base/Relatórios/SubEquipe03/código.md?id=_11-testes-automatizados).
 
 | Identificador | Cenário | Resultado esperado |
 |---|---|---|
 | CT01 | Instanciação de classes abstratas (`Sujeito` e `Observador`). | A operação lança um erro do tipo `TypeError` ou genérico pedindo a sobrescrita. |
 | CT02 | Tolerância a falhas (RN06). | O erro intencional de um observador no ciclo de notificação não impede a execução dos observadores subsequentes. |
 | CT03 | Crédito e débito de TabCoins (RN01, RN02). | Publicações creditam saldo ao autor; remoções debitam. |
-| CT04 | Fluxo de Moderação em TabCoins. | O saldo é suspenso ao enviar para revisão e restaurado mediante a aprovação do conteúdo. |
+| CT04 | Fluxo de Moderação em TabCoins (RN08). | O saldo é suspenso ao enviar para revisão e restaurado mediante a aprovação do conteúdo. |
 | CT05 | Notificação de respostas (RN03). | Autores recebem notificação apenas quando terceiros respondem às suas publicações. |
 | CT06 | Omissão de auto-notificação (RN04). | Um usuário que responde ao próprio post não gera disparo de notificação. |
-| CT07 | Log de Auditoria (RN07). | O `RegistroDeAtividades` grava cronologicamente todas as transições de estado (publicação, revisão, restauração, remoção) do sistema.
+| CT07 | Log de Auditoria (RN07). | O `RegistroDeAtividades` grava cronologicamente todas as transições de estado (publicação, revisão, restauração, remoção) do sistema. |
+| CT08 | Desacoplamento do sujeito (RN05). | O `ServicoDeConteudo` não importa nenhum observador concreto. |
+| CT09 | Inscrição e desinscrição. | Inscrições repetidas não duplicam a notificação, objetos que não estendem `Observador` são rejeitados e um observador desinscrito deixa de receber eventos. |
+| CT10 | Transições de moderação inválidas (RN08). | Enviar para revisão um conteúdo que não está publicado, ou restaurar um conteúdo que não está em revisão, lança um erro e não notifica. |
+| CT11 | Remoção de conteúdo em revisão (RN08). | O autor não é debitado de novo, pois os créditos já foram suspensos. |
+| CT12 | Conteúdo inexistente. | Publicar em resposta a um pai inexistente ou remover um id inexistente lança um erro e não notifica. |
 
-### 3.2. Resultado esperado dos testes
+### 3.2. Resultado obtido dos testes
 
-Quando todos os testes estiverem implementados corretamente e forem executados com sucesso, o Node.js deverá indicar que os testes foram aprovados.
+A saída abaixo foi copiada do terminal após a execução real de `npm test` em 17/10/2026, com o Node.js v24.20.0. Cada suíte aparece com os testes que a compõem, seguida do resumo final.
+
+```text
+$ npm test
+
+> subequipe03-gof-comportamentais-observer@1.0.0 test
+> node --test
+
+▶ Sujeito (Subject)
+  ✔ não pode ser instanciado diretamente (1.295291ms)
+  ✔ inscrever faz o observador receber os eventos notificados (0.67948ms)
+  ✔ inscrever o mesmo observador duas vezes não duplica a notificação (0.175291ms)
+  ✔ inscrever rejeita objetos que não estendem Observador (0.337807ms)
+  ✔ desinscrever impede que o observador receba novos eventos (0.346074ms)
+  ✔ notificar respeita a ordem de inscrição (0.953076ms)
+  ✔ RN06: a falha de um observador não impede a notificação dos demais (0.502655ms)
+✔ Sujeito (Subject) (5.184126ms)
+▶ Observador (Observer)
+  ✔ não pode ser instanciado diretamente (0.14165ms)
+  ✔ atualizar lança erro quando a subclasse não o sobrescreve (0.186817ms)
+✔ Observador (Observer) (0.499452ms)
+▶ EventoDeConteudo e TipoDeEvento
+  ✔ TipoDeEvento é um enum congelado (0.172593ms)
+  ✔ rejeita tipos de evento desconhecidos (0.138369ms)
+  ✔ o evento é imutável e conteudoPai é opcional (0.094596ms)
+✔ EventoDeConteudo e TipoDeEvento (0.489631ms)
+▶ RepositorioDeConteudo
+  ✔ salvar gera id, buscarPorId encontra e remover apaga (0.123644ms)
+✔ RepositorioDeConteudo (0.157578ms)
+▶ ServicoDeConteudo (ConcreteSubject)
+  ✔ publicarComentario salva o comentário antes de notificar COMENTARIO_PUBLICADO (0.270161ms)
+  ✔ publicarComentario com pai inexistente lança erro e não notifica (0.11451ms)
+  ✔ removerConteudo remove do repositório e notifica CONTEUDO_REMOVIDO (0.170717ms)
+  ✔ removerConteudo de id inexistente lança erro e não notifica (0.095424ms)
+  ✔ RN05: não importa os observadores concretos (0.199253ms)
+  ✔ enviarParaRevisao notifica o evento CONTEUDO_EM_REVISAO (0.473186ms)
+  ✔ restaurarConteudo notifica o evento CONTEUDO_RESTAURADO (0.240866ms)
+  ✔ enviarParaRevisao só aceita conteúdo publicado (0.208235ms)
+  ✔ restaurarConteudo só aceita conteúdo em revisão (0.192619ms)
+✔ ServicoDeConteudo (ConcreteSubject) (2.242777ms)
+▶ ServicoDeTabCoins (ConcreteObserver)
+  ✔ RN01: credita o autor quando um comentário é publicado (0.400991ms)
+  ✔ RN02: debita o autor quando um conteúdo é removido (0.243973ms)
+  ✔ consultarSaldo de usuário sem movimentação retorna 0 (0.117719ms)
+  ✔ suspende os créditos ao entrar em revisão e restaura ao aprovar (0.240932ms)
+  ✔ não debita de novo ao remover um conteúdo que está em revisão (0.186753ms)
+✔ ServicoDeTabCoins (ConcreteObserver) (1.39354ms)
+▶ NotificadorDeResposta (ConcreteObserver)
+  ✔ RN03: notifica o autor do conteúdo pai quando outro usuário responde (0.308514ms)
+  ✔ RN04: não notifica quem responde ao próprio conteúdo (0.135792ms)
+  ✔ ignora o evento CONTEUDO_REMOVIDO (0.10537ms)
+  ✔ depois de desinscrito, deixa de notificar enquanto o TabCoins continua (0.110318ms)
+✔ NotificadorDeResposta (ConcreteObserver) (0.747149ms)
+▶ RegistroDeAtividades (ConcreteObserver - Auditoria)
+  ✔ RN07: grava um histórico sequencial de todos os eventos (0.248311ms)
+✔ RegistroDeAtividades (ConcreteObserver - Auditoria) (0.289685ms)
+ℹ tests 32
+ℹ suites 8
+ℹ pass 32
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 71.197565
+```
+
+Os 32 testes, organizados em 8 suítes, foram aprovados, sem falhas.
 
 ## 4. Critérios de validação
 
@@ -165,6 +259,7 @@ A implementação será considerada validada quando os seguintes critérios fore
 | CV04 | Integridade da Auditoria. | Todo evento disparado consta integralmente no log do `RegistroDeAtividades`. |
 | CV05 | Resiliência e Desinscrição. | É possível remover observadores dinamicamente e lidar com falhas internas sem travar o programa. |
 | CV06 | Suíte de Testes. | Todos os testes automatizados da arquitetura encerram sem falhas. |
+| CV07 | Moderação coerente com o estado. | Só conteúdos publicados vão para revisão, só conteúdos em revisão são restaurados e nenhum autor é debitado duas vezes pelo mesmo conteúdo. |
 
 
 ## 5. Evidências de execução
@@ -224,6 +319,10 @@ evidencias/
 
 Os arquivos são apenas uma sugestão de organização. As capturas devem ser criadas e incluídas efetivamente antes de serem referenciadas como evidências existentes.
 
+### 5.4. Vídeo da execução
+
+O vídeo que demonstra a execução do programa e dos testes está disponível em: INSERIR LINK DO VÍDEO.
+
 ## 6. Limitações da demonstração
 
 A demonstração tem como finalidade apresentar o funcionamento do padrão de projeto Observer em um cenário contido. A implementação não contempla:
@@ -237,7 +336,34 @@ A demonstração tem como finalidade apresentar o funcionamento do padrão de pr
 Dessa forma, os resultados obtidos demonstram o comportamento da implementação didática, mas não comprovam a integração do padrão com a aplicação real do fórum.
 
 
-## 7. Nível de Contribuição dos Integrantes
+## 7. Pontos de Vista dos Integrantes
+
+Esta seção apresenta as percepções dos integrantes sobre a execução e a verificação da implementação. Cada integrante escreve o próprio ponto de vista.
+
+### Leonardo Fachinello Bonetti
+
+PREENCHER
+
+## 8. Participação e Evidências
+
+Esta seção registra as atividades relacionadas à execução e à verificação da implementação.
+
+### Leonardo Fachinello Bonetti
+
+**Atividades desenvolvidas:**
+
+- Execução real da demonstração e dos testes e registro das saídas obtidas nas seções 2.1 e 3.2.
+- Correção dos comandos e da pasta de execução e inclusão da alternativa com o `mise`.
+- Ampliação dos cenários de teste e dos critérios de validação para as regras RN05 e RN08.
+
+**Evidências relacionadas:**
+
+| Evidência | Descrição |
+|---|---|
+| [Controle de estado na moderação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/825ed4de6c221413c44d41f99563e443ddb9e0f0) | Correção que originou os cenários CT10 e CT11 e o critério CV07. |
+| Pull Request da documentação | INSERIR LINK |
+
+## 9. Nível de Contribuição dos Integrantes
 
 O nível de contribuição deve refletir as atividades efetivamente realizadas na elaboração e na verificação da implementação.
 
@@ -245,18 +371,23 @@ O nível de contribuição deve refletir as atividades efetivamente realizadas n
 |---|---|---|---|
 | [Caio Alexandre] | | | |
 | [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, validação via testes e documentação de execução. | 33,33% | A classificação deve considerar a participação comprovada na implementação, na documentação e nas atividades relacionadas à entrega. |
-| [Leonardo Fachinello Bonetti] | | | |
+| [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Implementação base do padrão, execução real da demonstração e dos testes e revisão da documentação de execução. | INSERIR | INSERIR |
 
 A classificação deverá ser definida conforme os critérios adotados pela equipe e a participação comprovada nas atividades.
 
-## 8. Referências
+## 10. Referências
 
-GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Software*. Boston: Addison-Wesley, 1994.
+GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. **Padrões de Projeto: soluções reutilizáveis de software orientado a objetos**. Porto Alegre: Bookman, 2000.
+
+MISE. **mise-en-place**. Disponível em: [https://mise.jdx.dev/](https://mise.jdx.dev/). Acesso em: 17 out. 2026.
 
 NODE.JS. *Node.js Documentation*. Disponível em: <https://nodejs.org/docs/latest/api/>. Acesso em: 08 out. 2026.
 
-## 9. Histórico de Versões
+NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [https://nodejs.org/api/test.html](https://nodejs.org/api/test.html). Acesso em: 17 out. 2026.
+
+## 11. Histórico de Versões
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 16/10/2026 | Elaboração da documentação de execução do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | — | Organização dos pré-requisitos, procedimentos de execução (Terminal), cenários de testes, critérios de validação e referências. |
+| 1.1 | 17/10/2026 | Saídas reais da execução, correção dos comandos e ampliação dos cenários. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Correção do comando `node start`, que não existe, para `npm start`, e da pasta de execução (a pasta da SubEquipe03, onde fica o `package.json`, e não a raiz do repositório); remoção da frase sobre conversão para JSON, que vinha do exemplo do Builder. Inclusão da alternativa com o `mise` nos pré-requisitos. As seções 2.1 e 3.2 passaram de resultado esperado para resultado obtido, com a saída real de `npm start` e de `npm test` (32 testes aprovados) em 17/10/2026, e a 2.1 ganhou a leitura de cada regra na saída. Inclusão dos cenários CT08 a CT12 (RN05, inscrição, RN08 e conteúdo inexistente), do critério CV07, do espaço para o vídeo (5.4), dos pontos de vista, da participação e das referências do `mise` e do `node:test`; a referência GAMMA passou para a edição da Bookman (2000). As figuras e o registro de evidências da seção 5 não foram alterados. |
