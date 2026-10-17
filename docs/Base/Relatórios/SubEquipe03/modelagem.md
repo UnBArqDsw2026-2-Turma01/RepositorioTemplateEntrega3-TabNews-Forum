@@ -114,19 +114,19 @@ class Notificacao {
   + mensagem : String
 }
 
-Sujeito o--> "0..*" Observador : observadores
+Sujeito o--> "0..*" Observador : notifica >
 ServicoDeConteudo --|> Sujeito
 ServicoDeTabCoins --|> Observador
 NotificadorDeResposta --|> Observador
 RegistroDeAtividades --|> Observador
 
-ServicoDeConteudo --> "1" RepositorioDeConteudo : repositorio
-RepositorioDeConteudo o--> "0..*" Conteudo
+ServicoDeConteudo --> "1" RepositorioDeConteudo : persiste em >
+RepositorioDeConteudo o--> "0..*" Conteudo : armazena >
 ServicoDeConteudo ..> EventoDeConteudo : <<create>>
-Observador ..> EventoDeConteudo : recebe
-EventoDeConteudo --> "1" TipoDeEvento
-EventoDeConteudo --> "1..2" Conteudo
-NotificadorDeResposta *--> "0..*" Notificacao
+Observador ..> EventoDeConteudo : recebe >
+EventoDeConteudo --> "1" TipoDeEvento : classifica-se como >
+EventoDeConteudo --> "1..2" Conteudo : refere-se a >
+NotificadorDeResposta *--> "0..*" Notificacao : registra >
 
 note right of Sujeito
   Mantem a lista de observadores e os
@@ -162,6 +162,8 @@ Os estereótipos `<<Subject>>`, `<<Observer>>`, `<<ConcreteSubject>>` e `<<Concr
 - **`NotificadorDeResposta`**: observador concreto, subclasse de `Observador`, que gera uma `Notificacao` para o autor do conteúdo pai quando este recebe uma resposta de outro usuário. A relação com `Notificacao` é uma **composição**, pois as notificações existem apenas no contexto do notificador.
 - **`RegistroDeAtividades`** : observador concreto, subclasse de Observador, que atua como um mecanismo de auditoria. Diferente dos demais, ele reage a todos os tipos de eventos, gravando um histórico sequencial das operações do sistema.
 - **`EventoDeConteudo`** e **`TipoDeEvento`**: objeto de dados que trafega do sujeito para os observadores. O campo `conteudoPai` é opcional (`[0..1]`), já que só se aplica a comentários. Por isso, a associação com `Conteudo` tem multiplicidade `1..2`.
+
+As associações são rotuladas com **verbos**, e o símbolo `>` indica o sentido de leitura: o `Sujeito` *notifica* os observadores, o `ServicoDeConteudo` *persiste em* um `RepositorioDeConteudo`, que *armazena* os conteúdos, e o `EventoDeConteudo` *refere-se a* um ou dois conteúdos e *classifica-se como* um `TipoDeEvento`. Assim, cada relação pode ser lida como uma frase do domínio, e o nome do papel continua visível no atributo correspondente da classe de origem (por exemplo, `- observadores` em `Sujeito`).
 
 ## 4. Diagrama de Sequência UML
 
@@ -416,6 +418,7 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.1 | 14/10/2026 | Adoção de classe base para o `Observador`, cenário de desinscrição e comparação com a implementação de referência. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Conversão de `Observador` de interface para classe abstrata, com a justificativa da escolha em JavaScript; inclusão da etapa de desinscrição no Diagrama de Sequência; criação da subseção de comparação com o código da série Primeiro Jogo Multiplayer, de Filipe Deschamps. |
 | 1.2 | 14/10/2026 | Relação das limitações da solução com ferramentas de mensageria. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Inclusão, nas limitações reconhecidas, da evolução da notificação síncrona para um intermediário de mensagens, como o RabbitMQ ou o Pub/Sub do Redis, com referência à distinção entre Observer e publish/subscribe. |
 | 1.3 | 14/10/2026 | Inclusão da documentação do PlantUML nas referências. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Inclusão das páginas de referência dos diagramas de classes e de sequência do PlantUML, ferramenta utilizada na elaboração dos diagramas. |
-| 1.4 | 16/10/2026 |  Inclusão do observador `RegistroDeAtividades` e alinhamento com a moderação. | [Guilherme Moura](https://github.com/Guilherme-Moura) | | Atualização do Diagrama de Classes e do Diagrama de Sequência para incluir o log de auditoria e os eventos de revisão/restauração, fechando o ciclo com o Diagrama de Estados da Entrega 02. | 
+| 1.4 | 16/10/2026 |  Inclusão do observador `RegistroDeAtividades` e alinhamento com a moderação. | [Guilherme Moura](https://github.com/Guilherme-Moura) | | Atualização do Diagrama de Classes e do Diagrama de Sequência para incluir o log de auditoria e os eventos de revisão/restauração, fechando o ciclo com o Diagrama de Estados da Entrega 02. |
+| 1.5 | 17/10/2026 | Rótulos das associações do Diagrama de Classes reescritos como verbos com sentido de leitura. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | No Diagrama de Classes (seção 3), os rótulos de papel ou ausentes foram trocados por verbos com `>`, mantendo as multiplicidades: `notifica` (Sujeito→Observador), `persiste em` (ServicoDeConteudo→RepositorioDeConteudo), `armazena` (RepositorioDeConteudo→Conteudo), `recebe` (Observador→EventoDeConteudo), `refere-se a` e `classifica-se como` (EventoDeConteudo→Conteudo/TipoDeEvento) e `registra` (NotificadorDeResposta→Notificacao). Inclusão de um parágrafo na seção 3.1 explicando a leitura. Motivo: o parecer da Entrega 02 cobrou associações com semântica clara, expressa por verbos; os nomes de papel continuam nos atributos das classes. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
