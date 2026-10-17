@@ -208,11 +208,6 @@ SC -> REPO : salvar(comentario)
 activate REPO
 REPO --> SC : comentario
 deactivate REPO
-SC -> RA : atualizar(evento)
-activate RA
-RA -> RA : registrarAtividade(evento)
-RA --> SC
-deactivate RA
 
 SC -> SC : notificar(evento)\n[tipo = COMENTARIO_PUBLICADO]
 activate SC
@@ -233,13 +228,19 @@ loop para cada observador inscrito, na ordem de inscricao
   end
   NR --> SC
   deactivate NR
+
+  SC -> RA : atualizar(evento)
+  activate RA
+  RA -> RA : gravar registro do evento
+  RA --> SC
+  deactivate RA
 end
 
 deactivate SC
 SC --> C : comentario
 deactivate SC
 
-== Moderacao: Envio para Revisao e Restauracao ==
+== Moderacao: envio para revisao e restauracao ==
 
 C -> SC : enviarParaRevisao(id)
 activate SC
@@ -247,11 +248,30 @@ SC -> REPO : buscarPorId(id)
 activate REPO
 REPO --> SC : conteudo
 deactivate REPO
+note right of SC
+  Exige conteudo.estado = PUBLICADO;
+  caso contrario, lanca um erro
+  e nao notifica.
+end note
+SC -> REPO : salvar(conteudo)\n[estado = EM_REVISAO]
 SC -> SC : notificar(evento)\n[tipo = CONTEUDO_EM_REVISAO]
 activate SC
-loop para cada observador inscrito
-  SC -> TC : atualizar(evento) [suspende creditos]
-  SC -> RA : atualizar(evento) [registra auditoria]
+loop para cada observador inscrito, na ordem de inscricao
+  SC -> TC : atualizar(evento)
+  activate TC
+  TC -> TC : debitar(conteudo.autor)
+  TC --> SC
+  deactivate TC
+  SC -> NR : atualizar(evento)
+  activate NR
+  NR -> NR : ignorar evento\n(tipo nao tratado)
+  NR --> SC
+  deactivate NR
+  SC -> RA : atualizar(evento)
+  activate RA
+  RA -> RA : gravar registro do evento
+  RA --> SC
+  deactivate RA
 end
 deactivate SC
 SC --> C
@@ -259,15 +279,29 @@ deactivate SC
 
 C -> SC : restaurarConteudo(id)
 activate SC
-SC -> REPO : buscarPorId(id)
-activate REPO
-REPO --> SC : conteudo
-deactivate REPO
+note right of SC
+  Exige conteudo.estado = EM_REVISAO;
+  busca identica a do envio para revisao.
+end note
+SC -> REPO : salvar(conteudo)\n[estado = PUBLICADO]
 SC -> SC : notificar(evento)\n[tipo = CONTEUDO_RESTAURADO]
 activate SC
-loop para cada observador inscrito
-  SC -> TC : atualizar(evento) [restaura creditos]
-  SC -> RA : atualizar(evento) [registra auditoria]
+loop para cada observador inscrito, na ordem de inscricao
+  SC -> TC : atualizar(evento)
+  activate TC
+  TC -> TC : creditar(conteudo.autor)
+  TC --> SC
+  deactivate TC
+  SC -> NR : atualizar(evento)
+  activate NR
+  NR -> NR : ignorar evento\n(tipo nao tratado)
+  NR --> SC
+  deactivate NR
+  SC -> RA : atualizar(evento)
+  activate RA
+  RA -> RA : gravar registro do evento
+  RA --> SC
+  deactivate RA
 end
 deactivate SC
 SC --> C
@@ -286,8 +320,27 @@ SC -> REPO : remover(id)
 SC -> SC : notificar(evento)\n[tipo = CONTEUDO_REMOVIDO]
 activate SC
 loop para cada observador inscrito, na ordem de inscricao
-  SC -> TC : atualizar(evento) [debitar creditos]
-  SC -> RA : atualizar(evento) [registrar auditoria]
+  SC -> TC : atualizar(evento)
+  activate TC
+  alt conteudo.estado = PUBLICADO
+    TC -> TC : debitar(conteudo.autor)
+  else conteudo em revisao
+    TC -> TC : ignorar evento\n(creditos ja suspensos)
+  end
+  TC --> SC
+  deactivate TC
+
+  SC -> NR : atualizar(evento)
+  activate NR
+  NR -> NR : ignorar evento\n(tipo nao tratado)
+  NR --> SC
+  deactivate NR
+
+  SC -> RA : atualizar(evento)
+  activate RA
+  RA -> RA : gravar registro do evento
+  RA --> SC
+  deactivate RA
 end
 deactivate SC
 SC --> C
@@ -309,12 +362,17 @@ note right of SC
 end note
 SC -> SC : notificar(evento)\n[tipo = COMENTARIO_PUBLICADO]
 activate SC
-loop para cada observador inscrito (apenas tabcoins)
+loop para cada observador inscrito (tabcoins e auditoria)
   SC -> TC : atualizar(evento)
   activate TC
   TC -> TC : creditar(comentario.autor)
   TC --> SC
   deactivate TC
+  SC -> RA : atualizar(evento)
+  activate RA
+  RA -> RA : gravar registro do evento
+  RA --> SC
+  deactivate RA
 end
 deactivate SC
 SC --> C : comentario
@@ -329,10 +387,10 @@ deactivate SC
 O diagrama é dividido em cinco etapas.
 
 1. **Configuração.** O cliente, que na demonstração é o arquivo `index.js`, cria os objetos e inscreve os observadores no sujeito. É o único ponto da solução que conhece todas as classes concretas. Adicionar um novo observador exige alterar apenas essa etapa.
-2. **Publicação de comentário.** O `ServicoDeConteudo` busca o conteúdo pai, persiste o comentário e chama `notificar` com um evento do tipo `COMENTARIO_PUBLICADO`. O fragmento `loop` representa a iteração sobre a lista de observadores. O `ServicoDeTabCoins` credita o autor, e o `NotificadorDeResposta` usa o fragmento `alt` para decidir se gera a notificação (um usuário que responde ao próprio conteúdo não é notificado) e o `RegistroDeAtividades` grava a operação no log.
-3. **Moderação (Revisão e Restauração).** O cliente simula o envio do conteúdo para revisão e sua posterior restauração. O `ServicoDeConteudo` emite os eventos `CONTEUDO_EM_REVISAO` e `CONTEUDO_RESTAURADO`. O diagrama evidencia que os observadores reagem a essas transições de estado: o `ServicoDeTabCoins` suspende e depois devolve os créditos, enquanto o log de auditoria registra ambos os movimentos.
-4. **Remoção de conteúdo.** O mesmo protocolo é reutilizado para o evento `CONTEUDO_REMOVIDO`. O `ServicoDeTabCoins` debita o autor, enquanto o `NotificadorDeResposta` ignora o evento por não tratar esse tipo. Essa etapa evidencia que **cada observador decide a quais eventos reage**, sem que o sujeito precise filtrar os destinatários.
-5. **Desinscrição de observador.** O cliente remove o `NotificadorDeResposta` da lista de observadores, como aconteceria, por exemplo, se o serviço de notificações fosse desativado para manutenção. Na publicação seguinte, apenas o `ServicoDeTabCoins` é notificado, e o `ServicoDeConteudo` permanece inalterado. Essa etapa evidencia que **as relações entre sujeito e observadores são estabelecidas em tempo de execução**, o que caracteriza o escopo de objeto do padrão. A desinscrição atua sobre o observador como um todo; preferências individuais de cada usuário, como silenciar as notificações de uma publicação específica, seriam responsabilidade do próprio `NotificadorDeResposta` e estão fora do escopo da demonstração.
+2. **Publicação de comentário.** O `ServicoDeConteudo` busca o conteúdo pai, persiste o comentário e chama `notificar` com um evento do tipo `COMENTARIO_PUBLICADO`. O fragmento `loop` representa a iteração sobre a lista de observadores. O `ServicoDeTabCoins` credita o autor, o `NotificadorDeResposta` usa o fragmento `alt` para decidir se gera a notificação (um usuário que responde ao próprio conteúdo não é notificado) e o `RegistroDeAtividades` grava a operação no log. Os três são chamados dentro do mesmo laço, na ordem de inscrição: o sujeito não chama nenhum deles diretamente.
+3. **Moderação (Revisão e Restauração).** O cliente simula o envio do conteúdo para revisão e sua posterior restauração. Antes de notificar, o `ServicoDeConteudo` verifica e atualiza o `estado` do conteúdo: só um conteúdo publicado vai para revisão e só um conteúdo em revisão é restaurado, como no Diagrama de Estados da Entrega 02. Em seguida, emite os eventos `CONTEUDO_EM_REVISAO` e `CONTEUDO_RESTAURADO`. O `ServicoDeTabCoins` suspende e depois devolve os créditos, o `NotificadorDeResposta` ignora os dois eventos e o log de auditoria registra ambos os movimentos.
+4. **Remoção de conteúdo.** O mesmo protocolo é reutilizado para o evento `CONTEUDO_REMOVIDO`. O `ServicoDeTabCoins` debita o autor, exceto quando o conteúdo estava em revisão, caso em que os créditos já foram suspensos; o `NotificadorDeResposta` ignora o evento por não tratar esse tipo; e o `RegistroDeAtividades` grava a remoção. Essa etapa evidencia que **cada observador decide a quais eventos reage**, sem que o sujeito precise filtrar os destinatários.
+5. **Desinscrição de observador.** O cliente remove o `NotificadorDeResposta` da lista de observadores, como aconteceria, por exemplo, se o serviço de notificações fosse desativado para manutenção. Na publicação seguinte, apenas o `ServicoDeTabCoins` e o `RegistroDeAtividades` são notificados, e o `ServicoDeConteudo` permanece inalterado. Essa etapa evidencia que **as relações entre sujeito e observadores são estabelecidas em tempo de execução**, o que caracteriza o escopo de objeto do padrão. A desinscrição atua sobre o observador como um todo; preferências individuais de cada usuário, como silenciar as notificações de uma publicação específica, seriam responsabilidade do próprio `NotificadorDeResposta` e estão fora do escopo da demonstração.
 
 A comparação com o Diagrama de Sequência da Entrega 02 mostra a mudança estrutural: a mensagem direta `creditarPorPublicacao` do serviço de conteúdo para o serviço de TabCoins foi substituída pela mensagem genérica `atualizar(evento)`, enviada a um destinatário que o sujeito conhece apenas pela abstração `Observador`.
 
@@ -347,6 +405,7 @@ A comparação com o Diagrama de Sequência da Entrega 02 mostra a mudança estr
 | RN05 | O sujeito não conhece as classes concretas dos observadores. | `Sujeito` / `ServicoDeConteudo` | Estrutura do padrão Observer |
 | RN06 | A falha de um observador não impede a notificação dos demais. | `Sujeito` | Decisão da SubEquipe_03 |
 | RN07 | Todas as mudanças de estado do conteúdo (publicação, remoção, revisão e restauração) são gravadas em um histórico sequencial. | `RegistroDeAtividades` | Decisão da SubEquipe_03 (Log de Auditoria) |
+| RN08 | Só um conteúdo publicado pode ser enviado para revisão, o que suspende os créditos do autor; só um conteúdo em revisão pode ser restaurado, o que os devolve; e a remoção de um conteúdo em revisão não debita os créditos de novo. | `ServicoDeConteudo` / `ServicoDeTabCoins` | Diagrama de Estados da Entrega 02 |
 
 <p align="center">Tabela 2: Regras representadas na modelagem.</p>
 
@@ -438,5 +497,6 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.6 | 17/10/2026 | Rastreabilidade do `NotificadorDeResposta` com o Diagrama de Implantação da Entrega 02. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Na seção 2, inclusão de um parágrafo sobre o nó externo Serviço de e-mail do Diagrama de Implantação da Entrega 02, previsto para notificar o autor de uma resposta, e de como o `NotificadorDeResposta` assume a decisão de acioná-lo. Na Tabela 1, a linha do `NotificadorDeResposta` deixou de ser "nova funcionalidade" e passou a apontar para esse nó; na Tabela 2, a origem da RN03 cita o mesmo diagrama; a página de Modelagem Estática foi incluída nas referências. Motivo: reforçar a rastreabilidade com a Entrega 02, já que a responsabilidade não era nova, apenas não tinha um componente responsável. |
 | 1.7 | 17/10/2026 | Tabela 4 passa a apontar para os arquivos reais da implementação. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Na seção 7, a coluna "Arquivo previsto" virou "Arquivo", com links para cada arquivo no GitHub, e a legenda deixou de dizer "prevista", já que o código foi implementado. A linha do `NotificadorDeResposta` passou a incluir `Notificacao`, que está no Diagrama de Classes e fica no mesmo arquivo; a responsabilidade do `ServicoDeConteudo` passou a citar revisão e restauração; foi incluída uma linha para o arquivo de testes (RN01–RN07). Motivo: a tabela descrevia a previsão anterior ao código e omitia `Notificacao`. |
 | 1.8 | 17/10/2026 | Estado do conteúdo e operações privadas no Diagrama de Classes. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão do atributo `estado` em `Conteudo` e do enum `EstadoDoConteudo` (PUBLICADO, EM_REVISAO), associados por `encontra-se em`, para que a moderação siga o Diagrama de Estados da Entrega 02 (só conteúdo publicado vai para revisão, só conteúdo em revisão é restaurado e a remoção em revisão não debita de novo); antes, a falta de estado permitia créditos e débitos duplicados. Inclusão das operações privadas `creditar`, `debitar` e `registrar`, que já apareciam como automensagens no Diagrama de Sequência mas não no de Classes. Ajuste da indentação de `RegistroDeAtividades`. Na seção 3.1, atualização dos textos de `ServicoDeConteudo`, `ServicoDeTabCoins` e `NotificadorDeResposta` e novo item sobre `Conteudo`/`EstadoDoConteudo`. |
+| 1.9 | 17/10/2026 | Correção do Diagrama de Sequência e inclusão da regra de moderação. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | No Diagrama de Sequência, a chamada ao `RegistroDeAtividades` na publicação estava antes de `notificar`, como chamada direta do sujeito ao observador concreto, o que contradiz a RN05; ela passou para dentro do laço, junto com os demais observadores. O `NotificadorDeResposta` voltou ao laço da moderação e da remoção, em que ignora o evento, como já dizia o texto 4.1; o laço da desinscrição passou de "apenas tabcoins" para "tabcoins e auditoria", que continua inscrita. A moderação ganhou a verificação e a atualização do estado do conteúdo, e a remoção, um fragmento `alt` para o débito apenas de conteúdo publicado. Atualização do texto 4.1 e inclusão da RN08 na Tabela 2, com origem no Diagrama de Estados da Entrega 02. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
