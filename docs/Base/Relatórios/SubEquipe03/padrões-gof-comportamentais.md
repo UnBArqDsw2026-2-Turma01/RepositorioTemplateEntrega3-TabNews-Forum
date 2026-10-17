@@ -58,13 +58,15 @@ Compreender e demonstrar a aplicação do padrão GoF Observer por meio da model
 
 O escopo é de **objeto** porque as relações entre o sujeito e seus observadores são estabelecidas em tempo de execução, por meio da inscrição, e não fixadas por herança em tempo de compilação.
 
+Gamma et al. (2000) classificam os padrões por escopo conforme o mecanismo que define as relações entre os participantes. Nos padrões de **classe**, essas relações são estabelecidas por herança e ficam fixas em tempo de compilação, como no *Template Method*. Nos padrões de **objeto**, elas são estabelecidas por composição e podem mudar em tempo de execução. Na solução, existe herança (`ServicoDeConteudo` estende `Sujeito`, e cada observador concreto estende `Observador`), mas ela apenas reaproveita o mecanismo de inscrição e define o contrato de atualização. A relação que caracteriza o padrão, isto é, quais observadores são notificados por qual sujeito, é montada pelo cliente com `inscrever` e pode ser desfeita com `desinscrever` durante a execução, como mostra a etapa de desinscrição do [Diagrama de Sequência](/Base/Relatórios/SubEquipe03/modelagem.md?id=_4-diagrama-de-sequência-uml). Por isso, o uso de herança não muda o escopo do padrão.
+
 Na solução proposta, os participantes do padrão correspondem às seguintes classes:
 
 | Participante (GoF) | Classe na solução | Responsabilidade |
 |---|---|---|
 | *Subject* | `Sujeito` | Mantém a coleção de observadores e oferece as operações de inscrição, desinscrição e notificação. |
 | *Observer* | `Observador` | Define a operação `atualizar`, pela qual os observadores recebem as notificações. |
-| *ConcreteSubject* | `ServicoDeConteudo` | Publica e remove conteúdos e notifica os observadores quando esses eventos ocorrem. |
+| *ConcreteSubject* | `ServicoDeConteudo` | Publica, remove, envia para revisão e restaura conteúdos e notifica os observadores quando esses eventos ocorrem. |
 | *ConcreteObserver* | `ServicoDeTabCoins` | Credita e debita TabCoins em reação aos eventos de conteúdo. |
 | *ConcreteObserver* | `NotificadorDeResposta` | Notifica o autor de um conteúdo quando ele recebe uma resposta. |
 | *ConcreteObserver* | `RegistroDeAtividades` | Grava um log de auditoria sequencial de todos os eventos do sistema, independentemente do tipo. |
@@ -156,7 +158,7 @@ A solução desta entrega implementa o Observer em sua forma original, em um ún
 - **Comunicação por difusão (*broadcast*):** a notificação é enviada a todos os observadores inscritos, sem que o sujeito precise saber quantos são.
 - **Extensibilidade:** novos observadores podem ser adicionados ou removidos em tempo de execução, sem modificar o sujeito nem os demais observadores.
 - **Testabilidade:** o sujeito pode ser testado com observadores simulados, e cada observador pode ser testado isoladamente, apenas com eventos construídos para o teste.
-- **Efetivação do Princípio Aberto/Fechado:** a presença do `RegistroDeAtividades` ilustra como requisitos secundários (como auditoria) são isolados em observadores dedicados, mantendo o `ServicoDeConteudo` focado e inalterado
+- **Efetivação do Princípio Aberto/Fechado:** a presença do `RegistroDeAtividades` ilustra como requisitos secundários (como auditoria) são isolados em observadores dedicados, mantendo o `ServicoDeConteudo` focado e inalterado.
 
 ### 6.3 Limitações
 
@@ -218,5 +220,6 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.3 | 16/10/2026 | Expansão do escopo do padrão para englobar Moderação e Auditoria. | [Guilherme Moura](https://github.com/Guilherme-Moura) | | Inclusão do `RegistroDeAtividades` como novo ConcreteObserver; alinhamento do `ServicoDeConteudo` com o ciclo completo do Diagrama de Estados da Entrega 02 (fluxos *Em Revisão* e *Restaurado*). |
 | 1.4 | 17/10/2026 | Relação do problema abordado com o Diagrama de Implantação da Entrega 02. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Na seção 4 (Problema Abordado), inclusão de um parágrafo sobre o nó externo Serviço de e-mail do Diagrama de Implantação da Entrega 02, que já previa a notificação do autor de uma resposta sem definir o componente responsável, e de como essa responsabilidade passa ao `NotificadorDeResposta`. Inclusão da página de Modelagem Estática da Entrega 02 nas referências. Motivo: mostrar que a notificação de respostas não é uma reação inventada para a demonstração, mas uma responsabilidade já prevista pela equipe. |
 | 1.5 | 17/10/2026 | Inclusão das considerações finais. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Criação da seção 7 (Considerações Finais), presente nas páginas de padrões das SubEquipes 01 e 02 e ausente nesta, com a síntese de como o Observer desacopla o `ServicoDeConteudo` dos três observadores, a ligação com a Entrega 02 e com as páginas de Modelagem, Código e Execução, os limites de adoção do padrão e a ressalva de que a solução não está integrada ao Projeto Fórum. Motivo: alinhar a estrutura da página à das demais subequipes, que fecham o documento com essa seção. |
+| 1.6 | 17/10/2026 | Aprofundamento do escopo de objeto e ajustes na identificação do padrão. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Na seção 3, inclusão de um parágrafo que explica a classificação por escopo de Gamma et al. (2000): padrões de classe fixam as relações por herança em tempo de compilação, e padrões de objeto as estabelecem por composição em tempo de execução. Como a solução usa herança (`Sujeito` e `Observador`), o parágrafo esclarece que ela só reaproveita o mecanismo de inscrição e o contrato de atualização, enquanto a relação que caracteriza o padrão é montada e desfeita em execução, o que evita a leitura equivocada de que o padrão seria de classe. Na Tabela 1, a responsabilidade do `ServicoDeConteudo` passou a incluir a revisão e a restauração. Na seção 6.2, inclusão do ponto final que faltava no item do Princípio Aberto/Fechado. |
 
 <p align="center">Tabela 4: Histórico de Versões.</p>
