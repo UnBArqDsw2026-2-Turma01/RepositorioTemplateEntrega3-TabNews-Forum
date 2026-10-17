@@ -134,7 +134,7 @@ NODE.JS. Test runner. Disponível em: https://nodejs.org/api/test.html.
 | Versão | Data       | Descrição                                                                 | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:------:|:----------:|---------------------------------------------------------------------------|-----------|:-----------:|--------------------|
 | 1.0    | 14/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Organização do objetivo, metodologia, ponto de vista individual, análise crítica, evidências e nível de contribuição dos integrantes. |
-| 1.1    | 14/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [João Pedro](https://github.com/jopesmp) |  [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS)  |  Ponto de vista individual e análise crítica. |
+| 1.1    | 14/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [João Pedro](https://github.com/jopesmp) |  [Arthur Fernandes](https://github.com/arthurfernandesj) |  Ponto de vista individual e análise crítica. |
 | 1.2 | 16/10/2026 | Adição de texto sobre uso de IA generativa | [Giovana Fontes](https://github.com/GiovanaFontesS) |  [João Pedro](https://github.com/jopesmp) | Ponto de vista e analise critica sobre a IA nos documentos realizados, e adição de contribuição da equipe | 
 
 

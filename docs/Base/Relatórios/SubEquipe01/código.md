@@ -229,6 +229,22 @@ npm test
 
 A execução deve ser registrada com evidências reais, como capturas de tela do terminal, mostrando o resultado do programa e a execução dos testes.
 
+## 8. Vídeo de apresentação da implementação
+
+O vídeo a seguir apresenta a implementação do padrão de projeto GoF Builder, demonstrando a organização dos arquivos, as responsabilidades das classes desenvolvidas, o funcionamento dos métodos e a execução do programa. Também permite acompanhar, na prática, o processo de construção dos objetos e compreender como os componentes da implementação se relacionam.
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/jCWn04HwIA0"
+  title="Apresentação da implementação e execução do padrão Builder"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+
+<p align="center"><strong>Fonte: Elaborado pelos autores (2026).</strong></p>
+
 ## 8. Aplicação Complementar do Builder no Cadastro de Usuários
 
 ### 8.1 Introdução
@@ -513,4 +529,4 @@ MERMAID. *Mermaid Documentation*. Disponível em: <https://mermaid.js.org/>. Ace
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 08/10/2026 | Documentação da implementação didática do padrão Builder para construção de publicações. | [Arthur Fernandes](https://github.com/arthurfernandesj) |  [Giovana Fontes](https://github.com/GiovanaFontesS)  | Organização da documentação técnica, descrição das classes, procedimentos de execução, testes, participação e contribuição. |
-| 1.1 | 16/10/2026 | Documentação da implementação didática do padrão Builder para construção de cadastro. | [Giovana Fontes](https://github.com/GiovanaFontesS) | — |  Padrão Biulder para construção de cadastro, participação e contribuição. |
+| 1.1 | 16/10/2026 | Documentação da implementação didática do padrão Builder para construção de cadastro. | [Giovana Fontes](https://github.com/GiovanaFontesS) | [Arthur Fernandes](https://github.com/arthurfernandesj) |  Padrão Biulder para construção de cadastro, participação e contribuição. |
