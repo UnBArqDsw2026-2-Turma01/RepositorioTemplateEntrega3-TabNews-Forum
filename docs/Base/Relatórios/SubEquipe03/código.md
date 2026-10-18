@@ -1051,7 +1051,7 @@ describe("RegistroDeAtividades (ConcreteObserver - Auditoria)", () => {
 }
 ```
 
-O `package.json` declara o Node.js 18 ou superior e os scripts `start` e `test`, no mesmo formato da SubEquipe01. O projeto não tem dependências. A versão do Node.js também pode ser gerenciada com o `mise`, conforme as [Iniciativas Extras](/Base/1.3.IniciativasExtras.md).
+O `package.json` declara o Node.js 18 ou superior e os scripts `start` e `test`. O projeto não tem dependências. A versão do Node.js também pode ser gerenciada com o `mise`, conforme as [Iniciativas Extras](/Base/1.3.IniciativasExtras.md).
 
 ## 13. Execução do programa
 
@@ -1134,7 +1134,7 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 - Implementação do sujeito concreto `ServicoDeConteudo` e dos observadores concretos `ServicoDeTabCoins` e `NotificadorDeResposta`.
 - Desenvolvimento do programa de demonstração com as etapas do Diagrama de Sequência e a etapa extra da RN06.
 - Elaboração dos testes automatizados com `node:test`, cobrindo as regras RN01 a RN06.
-- Configuração do `package.json` e do `README.md`, no formato da SubEquipe01.
+- Configuração do `package.json` e do `README.md`.
 - Correção da moderação com o controle do estado do conteúdo (RN08), com novos testes, e alinhamento do estilo do código de moderação e auditoria.
 - Revisão desta página: código de todas as classes extraído dos arquivos, participante GoF e regras de cada trecho, tabela de testes e correspondência entre o Diagrama de Classes e o código.
 
@@ -1153,24 +1153,14 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 | [`src/NotificadorDeResposta.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/9e583fbb5faf706d6c5496743a594f60b5b840b9) | Observador concreto das regras RN03 e RN04. |
 | [`src/index.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/6569ee2ac33810dc3544525bc9417f01af18e3c7) | Demonstração das etapas do Diagrama de Sequência. |
 | [`test/observer.test.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/d5fa8ad5e4124cdb0c5c6a5712c7c45073a729b6) | Testes automatizados com `node:test`. |
-| [`README.md`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/e8076001e5d94cd83ca75d97f0fe23c27b3ee910) | Instruções de execução no formato da SubEquipe01. |
+| [`README.md`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/e8076001e5d94cd83ca75d97f0fe23c27b3ee910) | Instruções de execução. |
 | [Controle de estado na moderação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/825ed4de6c221413c44d41f99563e443ddb9e0f0) | `EstadoDoConteudo`, verificações em `ServicoDeConteudo`, débito condicional em `ServicoDeTabCoins` e testes da RN08. |
 | [Estilo da moderação e auditoria](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/dffa00ff35cb9ad9afecce0706e5a6b34a703f32) | Alinhamento do código de `RegistroDeAtividades` e da moderação ao padrão do grupo. |
-| Pull Request da documentação | INSERIR LINK |
+| [PR #19](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/19) | Pull Request da documentação do código, da execução e da correção da moderação. |
 
 <p align="center">Tabela 3: Evidências de participação na implementação.</p>
 
-## 18. Nível de Contribuição dos Integrantes
-
-| Integrante | Atividades desenvolvidas | Nível de contribuição | Justificativa |
-|---|---|---|---|
-| [Caio Alexandre] | | | |
-| [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, evolução dos testes automatizados e documentação da implementação. | 33,33% | A classificação deve considerar a participação comprovada na implementação, na documentação e nas atividades relacionadas à entrega. |
-| [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Implementação base do padrão, testes automatizados, correção da moderação (RN08) e revisão da documentação do código. | INSERIR | INSERIR |
-
-<p align="center">Tabela 4: Nível de contribuição dos integrantes.</p>
-
-## 19. Referências
+## 18. Referências
 
 FREEMAN, Eric; ROBSON, Elisabeth. **Use a Cabeça! Padrões de Projetos**. 2. ed. Rio de Janeiro: Alta Books, 2021.
 
@@ -1182,11 +1172,12 @@ MOZILLA. **Object.freeze()**. MDN Web Docs. Disponível em: [https://developer.m
 
 NODE.JS. **Test runner Documentation**. Disponível em: [https://nodejs.org/api/test.html](https://nodejs.org/api/test.html). Acesso em: 16 out. 2026.
 
-## 20. Histórico de Versões
+## 19. Histórico de Versões
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 16/10/2026 | Criação da documentação e detalhamento da implementação do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | — | Inclusão dos componentes GoF, código-fonte, suíte de testes e orientações de execução. |
 | 1.1 | 17/10/2026 | Ampliação da documentação do código. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Padronização da página com as demais subequipes: cada classe com seu trecho de código, papel no padrão e regras atendidas, testes automatizados e correspondência entre o diagrama e o código. |
+| 1.2 | 18/10/2026 | Padronização da página. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Remoção da seção de nível de contribuição, que já é registrada em Participações, e inclusão do link do PR da documentação. |
 
-<p align="center">Tabela 5: Histórico de Versões.</p>
+<p align="center">Tabela 4: Histórico de Versões.</p>
