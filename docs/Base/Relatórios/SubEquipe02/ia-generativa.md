@@ -110,5 +110,6 @@ PYTHON SOFTWARE FOUNDATION. *unittest — Unit testing framework*. Disponível e
 | 1.1 | 16/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
 | 1.2 | 16/10/2026 | Adição do meu ponto de vista e senso crítico. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Preencher | Preencher |
 | 1.3 | 16/10/2026 | Minhas impressões sobre IA Generativa | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista de Isaac sobre IA Generativa. |
+| 1.4 | 18/10/2026 | Preenchimento da tabela sobre evidência de uso de IA Generativa | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
 
 <p align="center">Tabela 2: Histórico de Versões.</p>
