@@ -75,45 +75,7 @@ O cliente é a função `renderizar_tela_inicial()`, definida em `src/main.py`. 
 
 O cliente não instancia nem chama diretamente os subsistemas: essa coordenação fica concentrada na fachada. O código de apresentação permanece separado das tarefas de obtenção e filtragem dos dados.
 
-## 4. Diagrama de Sequência UML
-
-O diagrama de sequência representa a ordem das interações realizadas durante a construção de uma publicação.
-
-## 3. Diagrama de Sequência UML
-
-O diagrama de sequência representa a interação entre o usuário, o arquivo principal, o Facade e o objeto `Publicacao` durante o processo de construção de uma publicação.
-
-<p align="center">
-  <img src="../../../images/preencher.jpeg" alt="Diagrama de Sequência UML" width="550">
-</p>
-
-<p align="center">
-  <strong>Figura 2 — Diagrama de sequência do padrão Facade aplicado à construção de publicações.</strong><br>
-  Fonte: elaboração da SubEquipe 01.
-</p>
-
-### 4.1 Descrição da sequência
-
-Preencher kk
-
-## 5. Diagrama de Atividades UML
-
-O diagrama de atividades apresenta as etapas e decisões envolvidas na construção da publicação.
-
-<p align="center">
-  <img src="../../../images/preencher.jpeg" alt="Diagrama de Atividades UML" width="400">
-</p>
-
-<p align="center">
-  <strong>Figura 3 — Diagrama de atividades do processo de construção e validação de publicações utilizando o padrão Facade.</strong><br>
-  Fonte: elaboração da SubEquipe01.
-</p>
-
-### 5.1 Descrição das atividades
-
-Preencher kk
-
-## 6. Regras de construção e validação PREENCHER KKKKKKKKK
+## 4. Regras de construção e validação PREENCHER KKKKKKKKK
 
 A modelagem considera as seguintes regras:
 
@@ -129,7 +91,7 @@ A modelagem considera as seguintes regras:
 
 Essas regras correspondem ao código da demonstração. Elas não substituem regras de negócio, controles de segurança ou validações que possam ser exigidos por uma aplicação real.
 
-## 7. Correspondência entre modelagem e implementação PREENCHER KKKKKKKKKKKK
+## 5. Correspondência entre modelagem e implementação PREENCHER KKKKKKKKKKKK
 
 A tabela relaciona os elementos apresentados nos diagramas aos arquivos que compõem a solução.
 
@@ -144,7 +106,7 @@ Essa correspondência permite verificar se a modelagem representa os componentes
 
 Caso sejam adicionados novos atributos, métodos ou classes, os diagramas e as descrições deverão ser revisados.
 
-## 8. Justificativa das decisões de modelagem
+## 6. Justificativa das decisões de modelagem
 
 Os subsistemas foram separados de acordo com as responsabilidades necessárias para compor a tela inicial: obter postagens relevantes, obter postagens recentes, consultar estatísticas, fornecer publicidade, filtrar conteúdo e criar um usuário anônimo. Essa divisão permite demonstrar a colaboração entre serviços distintos sem atribuir à fachada a implementação de cada tarefa.
 
@@ -152,7 +114,7 @@ Os serviços de postagens relevantes e recentes foram modelados separadamente po
 
 O diagrama de classes foi escolhido para mostrar a estrutura dos componentes e suas dependências. As setas representam o uso dos serviços pela fachada e o uso da fachada pelo cliente, sem indicar herança.
 
-## 9. Comparação entre a construção tradicional e o padrão Facade
+## 7. Comparação entre a construção tradicional e o padrão Facade
 
 Sem uma fachada, a função cliente precisaria instanciar ou acessar cada serviço, conhecer os métodos disponíveis, chamar as consultas na ordem adequada, encaminhar as postagens para filtragem e combinar os resultados antes de exibi-los. Isso aumentaria o conhecimento do cliente sobre os detalhes internos e concentraria nele tanto a apresentação quanto a coordenação dos subsistemas.
 
@@ -160,13 +122,13 @@ Com o padrão Facade, `renderizar_tela_inicial()` solicita o conjunto de dados a
 
 Essa simplificação reduz o acoplamento do cliente com os serviços, mas não elimina as dependências internas da solução nem substitui a lógica específica de cada subsistema. A comparação descreve esta implementação demonstrativa, não uma medição de desempenho nem uma versão alternativa já implementada.
 
-## 10. Aplicabilidade do padrão Facade no contexto do Fórum
+## 8. Aplicabilidade do padrão Facade no contexto do Fórum
 
 No contexto do Fórum, a tela inicial precisa reunir informações de diferentes áreas, como feeds, publicidade, estatísticas e dados de usuário. Uma fachada é aplicável quando se deseja oferecer ao componente de apresentação uma entrada simples para coordenar essas operações, sem transferir a ele o conhecimento sobre cada serviço.
 
 Na demonstração, `TelaInicialFacade` cumpre esse papel ao consolidar feeds, estatísticas e publicidade e ao fornecer uma operação separada para criar o usuário anônimo. Em uma aplicação real, a mesma ideia poderia ser utilizada para coordenar serviços conectados a fontes de dados efetivas.
 
-## 11. Manutenibilidade, extensibilidade e limitações da solução
+## 9. Manutenibilidade, extensibilidade e limitações da solução
 
 **Manutenibilidade e extensibilidade:** a separação por responsabilidade permite alterar a obtenção de um tipo de dado no serviço correspondente sem transferir sua implementação ao cliente. Novas informações para a tela poderiam ser adicionadas por meio de novos subsistemas e incorporadas à fachada e à resposta consolidada. A interface do cliente tende a permanecer estável enquanto as operações oferecidas pela fachada e o formato de retorno não mudarem.
 
@@ -174,13 +136,13 @@ Na demonstração, `TelaInicialFacade` cumpre esse papel ao consolidar feeds, es
 
 Portanto, a fachada simplifica o acesso do cliente, mas sua evolução requer manter sincronizados a interface, a estrutura da resposta, os subsistemas e a documentação. A inclusão de novas responsabilidades deve preservar a coesão da fachada, evitando que ela acumule regras que pertencem aos próprios serviços.
 
-## 12. Considerações finais
+## 10. Considerações finais
 
 A implementação demonstra o padrão GoF Facade aplicado à composição dos dados de uma tela inicial. `TelaInicialFacade` oferece operações de alto nível ao cliente e coordena serviços especializados para obter e filtrar postagens, consultar estatísticas, fornecer publicidade e criar um usuário anônimo.
 
 A separação entre cliente, fachada e subsistemas torna explícitas as responsabilidades e reduz a necessidade do cliente conhecer os detalhes de cada serviço. Como os dados e as operações são simulados, a solução deve ser entendida como apenas um exemplo, e não como uma integração funcional ao sistema principal do Fórum. O diagrama e as descrições documentam essa implementação e devem ser atualizados caso sua estrutura ou seu comportamento sejam alterados.
 
-## 13 Referências
+## 11. Referências
 
 GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. *Design Patterns: Elements of Reusable Object-Oriented Software*. Reading, MA: Addison-Wesley, 1994.
 
