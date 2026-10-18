@@ -75,34 +75,34 @@ O cliente é a função `renderizar_tela_inicial()`, definida em `src/main.py`. 
 
 O cliente não instancia nem chama diretamente os subsistemas: essa coordenação fica concentrada na fachada. O código de apresentação permanece separado das tarefas de obtenção e filtragem dos dados.
 
-## 4. Regras de construção e validação PREENCHER KKKKKKKKK
+## 4. Regras de negócio e comportamento modelado
 
-A modelagem considera as seguintes regras:
+A implementação demonstra o fluxo de carregamento da tela inicial e a colaboração entre a fachada e seus subsistemas. As regras abaixo descrevem o comportamento existente no código da SubEquipe 2:
 
 | Identificador | Regra | Componente responsável |
 |---|---|---|
-| RN01 | Toda postagem deve ter um título e um autor. | `Publicacao` |
-| RN02 | O conteúdo do título não deve contar "improprio". | `Publicacao` |
-| RN03 | O autor deve ser informado e não pode estar vazio. | `Publicacao` |
-| RN04 | As tags devem ser fornecidas como um array. | `PublicacaoFacade` |
-| RN05 | Espaços externos dos campos textuais devem ser removidos. | `Publicacao` |
-| RN06 | Tags repetidas ou vazias devem ser eliminadas. | `Publicacao` |
-| RN07 | A publicação somente deve ser produzida quando os campos obrigatórios forem válidos. | `Publicacao` e `PublicacaoFacade` |
+| RN01 | O cliente solicita à fachada o carregamento dos dados, sem chamar diretamente os subsistemas. | `main.py` e `TelaInicialFacade` |
+| RN02 | O carregamento consulta os feeds relevante e recente, as estatísticas e a publicidade. | `TelaInicialFacade.carregar_dados()` |
+| RN03 | Antes de retornar os feeds, a fachada solicita a filtragem das postagens relevantes e recentes. | `TelaInicialFacade` e `ServicoAutorizacao.filtragem()` |
+| RN04 | Na demonstração, títulos que contêm a palavra `improprio` são substituídos por `AVISO: Conteudo Filtrado` e têm seus tabcoins zerados. | `ServicoAutorizacao` |
+| RN05 | Em caso de sucesso, os dados são retornados sob `dados`, com as chaves `feed_relevante`, `feed_recente`, `informacoes_rodape` e `publicidade`. | `TelaInicialFacade.carregar_dados()` |
+| RN06 | Se ocorrer uma exceção durante o carregamento, a fachada retorna `sucesso: False` e a mensagem em `erro`. | `TelaInicialFacade.carregar_dados()` |
+| RN07 | A criação do usuário anônimo é uma operação separada e retorna o usuário sob a chave `usuario`; em caso de exceção, retorna `sucesso: False` e `erro`. | `TelaInicialFacade.criar_usuario_anonimo()` |
 
-Essas regras correspondem ao código da demonstração. Elas não substituem regras de negócio, controles de segurança ou validações que possam ser exigidos por uma aplicação real.
+Os serviços fornecem dados simulados em memória. Portanto, essas regras descrevem a demonstração e não definem validações ou políticas completas para uma aplicação em produção.
 
-## 5. Correspondência entre modelagem e implementação PREENCHER KKKKKKKKKKKK
+## 5. Correspondência entre modelagem e implementação
 
-A tabela relaciona os elementos apresentados nos diagramas aos arquivos que compõem a solução.
+A tabela relaciona os elementos apresentados no diagrama e no fluxo descrito aos arquivos Python da demonstração:
 
 | Elemento da modelagem | Arquivo | Implementação |
 |---|---|---|
-| Cliente | `src/index.js` | Configura o Facade e apresenta o resultado. |
-| Facade concreto | `src/PublicacaoBuilder.js` | Implementa os métodos de configuração e `build()`. |
-| Produto | `src/Publicacao.js` | Armazena os atributos e valida os campos obrigatórios. |
-| Testes automatizados | `test/PublicacaoFacade.test.js` | Verifica construção válida, normalização e erros esperados. |
+| Cliente | `src/main.py` | A função `renderizar_tela_inicial()` instancia a fachada, solicita os dados e o usuário anônimo e apresenta os resultados no terminal. |
+| Fachada concreta | `src/tela_inicial_facade.py` | `TelaInicialFacade` coordena os serviços, filtra os feeds e consolida os dados; também expõe a operação de criação de usuário anônimo. |
+| Subsistemas | `src/subsistemas.py` | Define os serviços de postagens relevantes, postagens recentes, estatísticas, publicidade, autorização e usuários. |
+| Testes automatizados | `src/test_facade.py` | Verifica o carregamento e a consolidação dos dados, o tratamento de falha no carregamento, a criação do usuário anônimo, o desacoplamento do cliente e a saída no terminal. |
 
-Essa correspondência permite verificar se a modelagem representa os componentes realmente implementados.
+Essa correspondência mantém a modelagem alinhada aos componentes e às responsabilidades efetivamente presentes na implementação da SubEquipe 2.
 
 Caso sejam adicionados novos atributos, métodos ou classes, os diagramas e as descrições deverão ser revisados.
 
@@ -154,3 +154,5 @@ OBJECT MANAGEMENT GROUP (OMG). *OMG Unified Modeling Language (OMG UML)*. Dispon
 |:---:|:---:|---|---|---|---|
 | 1.0 | 13/10/2026 | Criação inicial da modelagem do padrão Facade. | [Isaac Menezes](https://github.com/pratamz250) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Versão inicial com diagrama de classes, participantes e fluxo de construção. |
 | 1.1 | 18/10/2026 | Preenchimento dos tópicos e fornecimento da print do modelo. | [Pablo Rodrigues](https://github.com/Pablo-R-L) |  |  |
+| 1.2 | 18/10/2026 | Remoção de tópicos desnecessários. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher |
+| 1.3 | 18/10/2026 | Adição de informações dos tópicos 4 e 5. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher |

@@ -80,7 +80,9 @@ Assim, a IA foi considerada uma ferramenta auxiliar de redação e compreensão.
 
 | Integrante | Ferramenta | Finalidade | Evidência |
 |---|---|---|---|
-| [Pedro Ramos](https://github.com/PedroRSR) | Assistente de IA no VS Code (Copilot) e Gemini | Apoio à organização, redação, revisão crítica da documentação e aprendizado sobre o padrão Facade. | Preencher |
+| [Isaac Menezes](https://github.com/pratamz250) | Preencher | Preencher | Preencher |
+| [Pablo Rodrigues](https://github.com/Pablo-R-L) | Preencher | Preencher | Preencher |
+| [Pedro Ramos](https://github.com/PedroRSR) | Assistente de IA no VS Code (Copilot) e Gemini | Apoio à organização, redação, revisão crítica da documentação e aprendizado sobre o padrão Facade. | 1. [test_facade.py](test_facade.py), 2. [execução.md](execução.md), 3. [ia-generativa.md](ia-generativa.md) e 4. [modelagem.md](modelagem.md) |
 
 ## Nível de Contribuição dos Integrantes
 
@@ -107,6 +109,6 @@ PYTHON SOFTWARE FOUNDATION. *unittest — Unit testing framework*. Disponível e
 | 1.0 | 16/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Facade. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização do objetivo, da metodologia, do ponto de vista individual, da análise crítica e das evidências. |
 | 1.1 | 16/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
 | 1.2 | 16/10/2026 | Adição do meu ponto de vista e senso crítico. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Preencher | Preencher |
-| 1.3 | 16/10/2026 | Minhas impressões sobre IA Generativa | [Isaac Menezes](https://github.com/pratamz250) | — | — |
+| 1.3 | 16/10/2026 | Minhas impressões sobre IA Generativa | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista de Isaac sobre IA Generativa. |
 
 <p align="center">Tabela 2: Histórico de Versões.</p>
