@@ -1,5 +1,6 @@
 const Observador = require("./Observador");
 const { TipoDeEvento } = require("./EventoDeConteudo");
+const { EstadoDoConteudo } = require("./RepositorioDeConteudo");
 
 const VALOR_POR_CONTEUDO = 1;
 
@@ -13,9 +14,14 @@ class ServicoDeTabCoins extends Observador {
       case TipoDeEvento.CONTEUDO_RESTAURADO:
         this.#creditar(evento.conteudo.autor);
         break;
-      case TipoDeEvento.CONTEUDO_REMOVIDO:
       case TipoDeEvento.CONTEUDO_EM_REVISAO:
         this.#debitar(evento.conteudo.autor);
+        break;
+      case TipoDeEvento.CONTEUDO_REMOVIDO:
+        // Conteúdo removido em revisão já teve os créditos suspensos.
+        if (evento.conteudo.estado === EstadoDoConteudo.PUBLICADO) {
+          this.#debitar(evento.conteudo.autor);
+        }
         break;
     }
   }

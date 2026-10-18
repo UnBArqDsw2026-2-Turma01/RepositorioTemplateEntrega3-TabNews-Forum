@@ -1,9 +1,15 @@
+const EstadoDoConteudo = Object.freeze({
+  PUBLICADO: "PUBLICADO",
+  EM_REVISAO: "EM_REVISAO"
+});
+
 class Conteudo {
-  constructor({ id = null, autor, idPai = null, corpo }) {
+  constructor({ id = null, autor, idPai = null, corpo, estado = EstadoDoConteudo.PUBLICADO }) {
     this.id = id;
     this.autor = autor;
     this.idPai = idPai;
     this.corpo = corpo;
+    this.estado = estado;
   }
 }
 
@@ -28,4 +34,4 @@ class RepositorioDeConteudo {
   }
 }
 
-module.exports = { RepositorioDeConteudo, Conteudo };
+module.exports = { RepositorioDeConteudo, Conteudo, EstadoDoConteudo };

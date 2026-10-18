@@ -1,6 +1,6 @@
 const Sujeito = require("./Sujeito");
 const { EventoDeConteudo, TipoDeEvento } = require("./EventoDeConteudo");
-const { Conteudo } = require("./RepositorioDeConteudo");
+const { Conteudo, EstadoDoConteudo } = require("./RepositorioDeConteudo");
 
 // Participante GoF: ConcreteSubject.
 class ServicoDeConteudo extends Sujeito {
@@ -44,17 +44,33 @@ class ServicoDeConteudo extends Sujeito {
 
   enviarParaRevisao(id) {
     const conteudo = this.#repositorio.buscarPorId(id);
-    if (!conteudo) throw new Error(`Conteúdo ${id} não encontrado.`);
+    if (!conteudo) {
+      throw new Error(`Conteúdo ${id} não encontrado.`);
+    }
+    if (conteudo.estado !== EstadoDoConteudo.PUBLICADO) {
+      throw new Error(`Conteúdo ${id} não está publicado.`);
+    }
 
-    console.log(`\n[Conteudo] ${id} de ${conteudo.autor} foi enviado para revisão (Oculto)`);
+    conteudo.estado = EstadoDoConteudo.EM_REVISAO;
+    this.#repositorio.salvar(conteudo);
+
+    console.log(`[Conteudo] ${id} de ${conteudo.autor} foi enviado para revisão (Oculto)`);
     this.notificar(new EventoDeConteudo({ tipo: TipoDeEvento.CONTEUDO_EM_REVISAO, conteudo }));
   }
 
   restaurarConteudo(id) {
     const conteudo = this.#repositorio.buscarPorId(id);
-    if (!conteudo) throw new Error(`Conteúdo ${id} não encontrado.`);
+    if (!conteudo) {
+      throw new Error(`Conteúdo ${id} não encontrado.`);
+    }
+    if (conteudo.estado !== EstadoDoConteudo.EM_REVISAO) {
+      throw new Error(`Conteúdo ${id} não está em revisão.`);
+    }
 
-    console.log(`\n[Conteudo] ${id} de ${conteudo.autor} foi restaurado pela moderação`);
+    conteudo.estado = EstadoDoConteudo.PUBLICADO;
+    this.#repositorio.salvar(conteudo);
+
+    console.log(`[Conteudo] ${id} de ${conteudo.autor} foi restaurado pela moderação`);
     this.notificar(new EventoDeConteudo({ tipo: TipoDeEvento.CONTEUDO_RESTAURADO, conteudo }));
   }
 }
