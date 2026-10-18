@@ -37,5 +37,5 @@
   - **Atas da Reunião**
   - [Reunião Geral](/Projeto/atas/ReuniaoGeral.md)
   - [SubGrupo01](/Projeto/atas/Reuniao2_sub01)
-  - [SubGrupo02](/docs/Projeto/atas/reuniões_subgrupo02.md)
+  - [SubGrupo02](/Projeto/atas/reuniões_subgrupo02.md)
 
