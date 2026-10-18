@@ -385,6 +385,6 @@ NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [ht
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
-| 1.0 | 16/10/2026 | Elaboração da documentação de execução do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | — | Organização dos pré-requisitos, procedimentos de execução (Terminal), cenários de testes, critérios de validação e referências. |
+| 1.0 | 16/10/2026 | Elaboração da documentação de execução do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Organização dos pré-requisitos, procedimentos de execução (Terminal), cenários de testes, critérios de validação e referências. |
 | 1.1 | 17/10/2026 | Saídas reais e correção dos comandos. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Comandos de execução corrigidos, saídas reais do programa e dos testes, novos cenários de teste e capturas do terminal. |
-| 1.2 | 18/10/2026 | Participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Ponto de vista e nível de contribuição do Leonardo, espaços para os demais integrantes e link do PR da documentação. |
+| 1.2 | 18/10/2026 | Participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Ponto de vista e nível de contribuição do Leonardo, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |

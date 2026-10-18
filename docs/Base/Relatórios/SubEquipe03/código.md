@@ -1196,8 +1196,8 @@ NODE.JS. **Test runner Documentation**. Disponível em: [https://nodejs.org/api/
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
-| 1.0 | 16/10/2026 | Criação da documentação e detalhamento da implementação do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | — | Inclusão dos componentes GoF, código-fonte, suíte de testes e orientações de execução. |
+| 1.0 | 16/10/2026 | Criação da documentação e detalhamento da implementação do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão dos componentes GoF, código-fonte, suíte de testes e orientações de execução. |
 | 1.1 | 17/10/2026 | Ampliação da documentação do código. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Padronização da página com as demais subequipes: cada classe com seu trecho de código, papel no padrão e regras atendidas, testes automatizados e correspondência entre o diagrama e o código. |
-| 1.2 | 18/10/2026 | Participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Ponto de vista e nível de contribuição do Leonardo, espaços para os demais integrantes e link do PR da documentação. |
+| 1.2 | 18/10/2026 | Participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Ponto de vista e nível de contribuição do Leonardo, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
