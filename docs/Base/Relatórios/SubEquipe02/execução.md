@@ -55,12 +55,19 @@ Considerando a implementação apresentada nos ficheiros de código, a saída es
 ```text
 Iniciando o carregamento da Tela Inicial (TabNews)...
 
+-Logado como usuário Anonimo-
+
+=== PUBLICIDADE ===
+- Amazono:
+    promocao do dia 10/10
+
 === CONTEÚDO RELEVANTE ===
 - O que são Padrões de Projeto? (45 tabcoins)
 - Dicas de Python para iniciantes (32 tabcoins)
 
 === CONTEÚDO RECENTE ===
 - Nova atualização do framework (por usuario_c)
+- AVISO: Conteudo Filtrado (por usuario_d)
 
 [Status: 142 usuários online agora]
 
@@ -131,9 +138,14 @@ Registe uma captura de ecrã que mostre o comando executado e a saída apresenta
 
 **Figura 1 — Execução da demonstração do padrão Facade.**
 
-*(Inserir aqui a captura real do terminal)*
+<p align="center">
+  <img src="../../../images/Captura_terminal_Facade_sub02.png" alt="Comprovação de execução" width="300">
+</p>
 
-*Fonte: elaboração própria.*
+<p align="center">
+  <strong>Figura 1 — Comprovação de execução da implementação Facade.</strong><br>
+  Fonte: elaboração da SubEquipe02.
+</p>
 
 ### 5.2. Registo das evidências
 
@@ -184,18 +196,21 @@ Esta seção regista as atividades relacionadas à documentação dos procedimen
 **Atividades desenvolvidas:**
 | Descrição | Comprobatórios |
 | --- | --- |
-| Elaboração dos códigos para implementação do padrão Builder | [Commits no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/docs/Sub02/?author=pratamz250&since=2026-10-15&until=2026-10-16) | 
+| Elaboração dos códigos para implementação do padrão Facade | [Commits no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/docs/Sub02/?author=pratamz250&since=2026-10-15&until=2026-10-16) | 
 | Estrutura básica para o GitHub Actions | [Commits no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/docs/Sub02?author=pratamz250&since=2026-10-13&until=2026-10-13) |
 
 ### Pablo Rodrigues Lima
 
 **Atividades desenvolvidas:**
 
-Preencher kk
+- Atualização do resultado esperado
+- Documentação da print do do terminal
 
 **Evidências relacionadas:**
 
-Preencher kk
+| Descrição | Comprobatórios |
+| --- | --- |
+| Fornecimento da print e atualização do resultado esperado | [Commits no repositório]() | 
 
 ### Pedro Ramos Sousa Reis
 
@@ -233,4 +248,5 @@ PYTHON SOFTWARE FOUNDATION. *Python 3 Documentation*. Disponível em: [https://d
 | 1.1 | 16/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher | 
 | 1.2 | 16/10/2026 | Adição de ponto de vista e contribuições | [Isaac Menezes](https://github.com/pratamz250) | — | — |
 | 1.3 | 16/10/2026 | Adição de ponto de vista | [Pablo Rodrigues](https://github.com/Pablo-R-L) | — | — |
+| 1.4 | 16/10/2026 | Adição da print de comprovação e atualização do resultado esperado | [Pablo Rodrigues](https://github.com/Pablo-R-L) | — | — |
 
