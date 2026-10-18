@@ -82,7 +82,7 @@ Assim, a IA foi considerada uma ferramenta auxiliar de redação e compreensão.
 |---|---|---|---|
 | [Isaac Menezes](https://github.com/pratamz250) | Preencher | Preencher | Preencher |
 | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Preencher | Preencher | Preencher |
-| [Pedro Ramos](https://github.com/PedroRSR) | Assistente de IA no VS Code (Copilot) e Gemini | Apoio à organização, redação, revisão crítica da documentação e aprendizado sobre o padrão Facade. | 1. [test_facade.py](test_facade.py), 2. [execução.md](execução.md), 3. [ia-generativa.md](ia-generativa.md) e 4. [modelagem.md](modelagem.md) |
+| [Pedro Ramos](https://github.com/PedroRSR) | Assistente de IA no VS Code (Copilot) e Gemini | Apoio à organização, redação, revisão crítica da documentação e aprendizado sobre o padrão Facade. | 1. [test_facade.py](src/test_facade.py), 2. [execução.md](execução.md), 3. [ia-generativa.md](ia-generativa.md) e 4. [modelagem.md](modelagem.md) |
 
 ## Nível de Contribuição dos Integrantes
 
