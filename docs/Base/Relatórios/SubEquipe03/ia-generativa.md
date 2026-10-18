@@ -65,11 +65,15 @@ A ferramenta frequentemente sugeria o uso de outras bibliotecas de teste ou alte
 
 **Lições aprendidas**
 
-PREENCHER
+Implementar o Observer a partir do Diagrama de Classes mostrou que um modelo bem definido facilita o código: com os nomes, as responsabilidades e as regras já descritos, a implementação passou a ser uma tradução do diagrama, e qualquer divergência ficava evidente. Também percebi que o padrão só cumpre o seu papel quando o sujeito realmente não conhece os observadores concretos, o que permitiu acrescentar a auditoria e a moderação sem alterar o serviço de conteúdos.
+
+Os testes automatizados foram a parte mais importante do aprendizado. Foi ao escrevê-los e executá-los que identifiquei que a moderação podia creditar ou debitar o mesmo autor mais de uma vez, o que levou ao controle de estado do conteúdo, de acordo com o Diagrama de Estados da Entrega 02. A execução da demonstração no terminal, com mensagens identificadas por componente, tornou visível a ordem das notificações e o isolamento de falhas entre observadores.
 
 **Uso da IA Generativa e senso crítico**
 
-PREENCHER
+Utilizei a IA Generativa como apoio, principalmente para entender como organizar e executar os testes com o `node:test` e como estruturar a demonstração para que a saída do terminal deixasse claro o comportamento do padrão. A ferramenta sugeriu formas de organizar os cenários e as mensagens, que serviram de ponto de partida para os testes e para a demonstração apresentados.
+
+As decisões e a validação ficaram comigo. Conferi cada sugestão com o Diagrama de Classes e com as regras da modelagem, rodei a demonstração e os testes para confirmar os resultados e descartei propostas que fugiam do que a equipe havia definido, como mudanças de nomes ou dependências externas. A IA ajudou a ganhar tempo e a melhorar a apresentação dos resultados, mas o entendimento do padrão e a responsabilidade pelo que foi entregue continuaram sendo meus.
 
 ## Análise Crítica do Uso de IA Generativa
 
@@ -80,7 +84,7 @@ PREENCHER
 | Integrante | Atividade/Contribuição | Evidência |
 |:---|:---|:---|
 | [Caio Alexandre](https://github.com/bitterteriyaki) | Modelagem UML do padrão Observer, documento de Padrões GoF Comportamentais, iniciativas extras de suporte a PlantUML e padronização do ambiente local, e registro do uso de IA Generativa. | [Modelagem](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/9358072fb7ae404b92850deefcd7204ae53b467a) · [Padrões Comportamentais](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fd46c42a4220ac56a7f2ec7f9aeaee8f0a670089) · [PlantUML](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/2db3b5efbe0a4b78c20dbf7f07a1128a36b97468) · [mise](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/f9884403eaf8943188a1f2afacc2e3925dcaddf9) |
-| [Leonardo Bonetti](https://github.com/LeoFacB) | Implementação do padrão Observer (classes, demonstração e testes automatizados), correção da moderação, revisão da modelagem e das páginas de Código e de Execução e registro do uso de IA Generativa. | [PR #14 — Implementação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/14) · [Sujeito](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/7ccde94c38a4efd24295aa3bb2d38cec6ae4aa36) · [Testes](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/d5fa8ad5e4124cdb0c5c6a5712c7c45073a729b6) · PR da documentação: INSERIR LINK |
+| [Leonardo Bonetti](https://github.com/LeoFacB) | Implementação do padrão Observer (classes, demonstração e testes automatizados), correção da moderação, revisão da modelagem e das páginas de Código e de Execução e registro do uso de IA Generativa. | [PR #14 — Implementação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/14) · [Sujeito](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/7ccde94c38a4efd24295aa3bb2d38cec6ae4aa36) · [Testes](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/d5fa8ad5e4124cdb0c5c6a5712c7c45073a729b6) · [PR #19 — Documentação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/19) |
 
 
 <p align="center">Tabela 1: Evidências de participação dos integrantes.</p>
@@ -91,7 +95,7 @@ PREENCHER
 |:---|:---|:---|:---|
 | Caio Alexandre Ornelas Silva | Claude (Claude Code) | Levantamento das pendências da entrega, elaboração dos diagramas UML em PlantUML, redação da documentação do padrão Observer e automação do versionamento (organização dos commits e redação das mensagens). | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main?author=bitterteriyaki) |
 | [Guilherme Moura](github.com/Guilherme-Moura) | Gemini | Apoio na formatação da documentação, realização de ajustes nos diagramas UML via PlantUML e geração de boilerplate para a suíte de testes automatizados. | |
-| [Leonardo Bonetti](https://github.com/LeoFacB) | Claude (Claude Code) | Apoio na implementação das classes e dos testes a partir do Diagrama de Classes, na conferência da consistência entre diagramas, código e documentação, na redação das páginas e na organização dos commits. | [PR #14 — Implementação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/14) · PR da documentação: INSERIR LINK |
+| [Leonardo Bonetti](https://github.com/LeoFacB) | Claude (Claude Code) | Apoio na organização e na execução dos testes automatizados, na estruturação da demonstração no terminal e na conferência da consistência entre diagramas, código e documentação. | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main?author=LeoFacB) |
 
 <p align="center">Tabela 2: Evidências do uso de IA Generativa.</p>
 
@@ -114,7 +118,8 @@ PLANTUML. **PlantUML**. Disponível em: [https://plantuml.com/](https://plantuml
 | 1.0 | 14/10/2026 | Criação do documento de IA Generativa da SubEquipe_03 e registro da experiência individual do integrante. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Estrutura baseada no documento de IA Generativa da Entrega 02, com seções individuais por integrante e tabelas de evidências. |
 | 1.1 | 14/10/2026 | Inclusão da seção de referências. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Criação da seção de referências, com a documentação do Claude Code, ferramenta de IA Generativa utilizada, e do PlantUML, ferramenta utilizada na elaboração dos diagramas. |
 | 1.2 | 16/10/2026 | Adição do ponto de vista | [Guilherme Moura](github.com/Guilherme-Moura) |  | |
-| 1.3 | 17/10/2026 | Seção e evidências do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Seção do Leonardo (a preencher por ele), linhas dele nas Tabelas 1 e 2 e inclusão do Gemini, do Node.js e do `node:test` nas referências. |
+| 1.3 | 17/10/2026 | Seção e evidências do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão da seção do Leonardo, das evidências dele nas Tabelas 1 e 2 e das ferramentas utilizadas nas referências. |
+| 1.4 | 18/10/2026 | Ponto de vista do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Registro das lições aprendidas e do uso da IA Generativa, e atualização das evidências com o PR da documentação e o histórico de commits. |
 
 <p align="center">Tabela 3: Histórico de Versões.</p>
 
