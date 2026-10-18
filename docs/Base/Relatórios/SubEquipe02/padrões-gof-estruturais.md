@@ -295,5 +295,5 @@ REFACTORING.GURU. *Facade*. Disponível em: https://refactoring.guru/pt-br/desig
 | 1.0 | 13/10/2026 | Criação da documentação inicial sobre o padrão Facade. | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Conteúdo fala sobre padrão criacional e não estrutural |
 | 1.1 | 15/10/2026 | Correção e adição de novas informações. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição de novos conteúdos referente ao padrão Facade do tópico 1 ao 7 |
 | 1.2 | 15/10/2026 | Correções referentes ao foco do projeto e código | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Correção e adição de novas informações relacionadas aos tópicos 1 ao 7 |
-| 1.3 | 15/10/2026 | Alterações no texto, adição dos códigos e das considerações finais | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher |
-| 1.4 | 18/10/2026 | Atualização dos códigos | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher |
+| 1.3 | 15/10/2026 | Alterações no texto, adição dos códigos e das considerações finais | [Pedro Ramos](https://github.com/PedroRSR) | [Isaac Menezes](https://github.com/pratamz250) | Considerações relevantes e corretas. |
+| 1.4 | 18/10/2026 | Atualização dos códigos | [Pedro Ramos](https://github.com/PedroRSR) | [Isaac Menezes](https://github.com/pratamz250) | Atualização necessária e correta. |
