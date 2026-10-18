@@ -127,11 +127,11 @@ A execução deve ser registrada com evidências reais, como capturas de tela do
 
 ## 8. Considerações sobre a implementação
 
-A implementação demonstra o propósito do padrão Facade ao fornecer uma interface unificada para operações distribuídas entre diferentes subsistemas.
+A implementação evidencia a finalidade do padrão Facade ao disponibilizar uma interface única para acessar funcionalidades distribuídas entre diferentes subsistemas.
 
-Sem a fachada, o código cliente precisaria instanciar os três serviços, chamar individualmente seus métodos e organizar os resultados. Com a classe `TelaInicialFacade`, essa coordenação fica centralizada no método `carregar_dados()`, simplificando o código cliente e reduzindo seu conhecimento sobre os detalhes internos dos serviços.
+Sem a utilização da fachada, o código cliente teria que criar instâncias dos três serviços, executar seus métodos separadamente e reunir os dados retornados. Ao utilizar a classe TelaInicialFacade, essas responsabilidades são concentradas no método carregar_dados(), tornando o código cliente mais simples e diminuindo sua dependência dos detalhes de funcionamento dos serviços internos.
 
-Entre os principais benefícios demonstrados estão a redução do acoplamento entre o cliente e os subsistemas, a centralização do fluxo de carregamento e a organização dos resultados em uma estrutura única.
+Dessa forma, a implementação destaca benefícios como a diminuição do acoplamento entre o cliente e os subsistemas, a centralização das operações de carregamento e a consolidação dos resultados em uma única estrutura de dados.
 
 A implementação também apresenta limitações didáticas. Os serviços retornam dados fixos, não há integração com sistemas externos e o tratamento de exceções não registra os detalhes técnicos do erro. Além disso, a estatística `publicacoes_hoje` é retornada pela fachada, mas não é exibida pelo programa de demonstração.
 
@@ -233,4 +233,5 @@ GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Softw
 | 1.1 | 15/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição de sua parte sobre a o codigo e pontos de vista referenete ao mesmo | 
 | 1.2 | 16/10/2026 | Criação dos testes automatizados e adição de informações na documentação. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização do tópico de teste da implementação da fachada e criação do arquivo [test_facade.py](src/test_facade.py) |
 | 1.3 | 17/10/2026 | Adição do meu ponto de vista e participação. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista e participação de Pablo |
-| 1.4 | 18/10/2026 | Atualização dos links dos meus commits. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos] |  |  
+| 1.4 | 18/10/2026 | Atualização dos links dos meus commits. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | |  | 
+| 1.5 | 18/10/2026 | Complementação do topico 8. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | |  |   
