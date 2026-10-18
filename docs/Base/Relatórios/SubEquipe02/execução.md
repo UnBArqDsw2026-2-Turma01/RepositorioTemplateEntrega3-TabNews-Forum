@@ -210,7 +210,7 @@ Esta seção regista as atividades relacionadas à documentação dos procedimen
 
 | Descrição | Comprobatórios |
 | --- | --- |
-| Fornecimento da print e atualização do resultado esperado | [Commits no repositório]() | 
+| Fornecimento da print e atualização do resultado esperado | [Commits no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/442ace0791bf889a0730976c305117ba96cb6436) | 
 
 ### Pedro Ramos Sousa Reis
 
@@ -231,7 +231,7 @@ O nível de contribuição deve refletir as atividades efetivamente realizadas n
 | Integrante | Atividades relacionadas | Nível de contribuição | Justificativa |
 | --- | --- | --- | --- |
 | Isaac Menezes Pereira | A Preencher | 33,33% | A classificação deve considerar as atividades efetivamente realizadas na subequipa 02. |
-| Pablo Rodrigues Lima | A Preencher | 33,33% | A classificação deve considerar as atividades efetivamente realizadas na subequipa 02. |
+| Pablo Rodrigues Lima | Adição da print de comprovação e atualização do resultado esperado | 33,33% | A classificação deve considerar as atividades efetivamente realizadas na subequipa 02. |
 | Pedro Ramos Sousa Reis | Organização da documentação de execução. | 33,33% | A classificação deve considerar as atividades efetivamente realizadas na subequipa 02. |
 
 ## 10. Referências

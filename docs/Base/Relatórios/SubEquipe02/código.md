@@ -190,10 +190,10 @@ As evidências devem ser anexadas ou referenciadas no repositório conforme a or
 
 | Evidência | Descrição |
 |---|---|
-| `src/subsistemas.py` | Implementação dos serviços de autorização, publicações ususarios e publicidades. |
-| `src/tela_inicial_facade.py` | Implementação dos novos serviços previamente mencionados. |
-| `src/main.py` | Informações complementares referentes às novas. |
-| Histórico de commits | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main/?author=Pablo-R-L). |
+| `src/subsistemas.py` | [Criação dos serviços de autorização, publicações e publicidades.](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/3eb6b9fa3a01a6b2206996c5c0550f84a34a819a) |
+| `src/tela_inicial_facade.py` | [Implementação dos serviços de autorização e publicidade.](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/3eb6b9fa3a01a6b2206996c5c0550f84a34a819a) / [Implementação do serviço de usuario anonimo](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/2bf0654c86dbdcce88941a2b2661f6cff465991a) |
+| `src/main.py` | [Inplementação de informações referente às classes de publicidade.](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/3eb6b9fa3a01a6b2206996c5c0550f84a34a819a) / [Implementação referente à classe de usuario](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/2bf0654c86dbdcce88941a2b2661f6cff465991a) |
+| Histórico de commits geral | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main/?author=Pablo-R-L). |
 
 ### Pedro Ramos Sousa Reis
 
@@ -232,4 +232,5 @@ GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Softw
 | 1.0 | 15/10/2026 | Documentação da implementação didática do padrão Facade para consolidação dos dados da tela inicial. | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Organização da documentação técnica, descrição dos subsistemas e da fachada, procedimentos de execução e registro de participação e contribuição. |
 | 1.1 | 15/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição de sua parte sobre a o codigo e pontos de vista referenete ao mesmo | 
 | 1.2 | 16/10/2026 | Criação dos testes automatizados e adição de informações na documentação. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização do tópico de teste da implementação da fachada e criação do arquivo [test_facade.py](src/test_facade.py) |
-| 1.3 | 17/10/2026 | Adição do meu ponto de vista e participação. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista e participação de Pablo |  
+| 1.3 | 17/10/2026 | Adição do meu ponto de vista e participação. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista e participação de Pablo |
+| 1.4 | 18/10/2026 | Atualização dos links dos meus commits. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos] |  |  
