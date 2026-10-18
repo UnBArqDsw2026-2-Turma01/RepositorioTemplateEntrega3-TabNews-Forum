@@ -74,7 +74,7 @@ Assim, a IA foi considerada uma ferramenta auxiliar de redação e compreensão.
 |---|---|---|
 | [Isaac Menezes](https://github.com/pratamz250) | Elaboração inicial da documentação e da demonstração didática do padrão Facade. | [Padrões GoF estruturais](./padrões-gof-estruturais.md), [subsistemas](./src/subsistemas.py) e [fachada da tela inicial](./src/tela_inicial_facade.py). |
 | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização, elaboração e correção da documentação sobre o padrão Facade, o uso de IA Generativa e planejamento da implementação. | [Padrões GoF estruturais](./padrões-gof-estruturais.md), [modelagem](./modelagem.md), [Código](./código.md), [ia-generativa](./ia-generativa.md), [Execução](./execução.md) . |
-| [Pedro Ramos](https://github.com/PedroRSR) | Organização da documentação técnica, descrição dos procedimentos de execução e criação dos testes automatizados. | [Código](./código.md), [execução](./execução.md) e [testes automatizados](./src/test_facade.py). |
+| [Pedro Ramos](https://github.com/PedroRSR) | Organização da documentação técnica, descrição dos procedimentos de execução e criação dos testes automatizados. | [Código](./código.md), [execução](./execução.md), [IA Generativa](./ia-generativa.md), [modelagem](./modelagem.md) e [testes automatizados](./src/test_facade.py). |
 
 ## Evidências do Uso de IA Generativa
 
@@ -82,7 +82,7 @@ Assim, a IA foi considerada uma ferramenta auxiliar de redação e compreensão.
 |---|---|---|---|
 | [Isaac Menezes](https://github.com/pratamz250) | Preencher | Preencher | Preencher |
 | [Pablo Rodrigues](https://github.com/Pablo-R-L) | GPT e Copilot | Copreender o padrão Facade, tirar dúvidas e ter uma noção geral do que fazer no projeto. Apoio à redação e correção dentro da documentação | [Padrões GoF estruturais](./padrões-gof-estruturais.md), [modelagem](https://chatgpt.com/share/6ad52525-66c0-83ea-8e5f-4ad405f44e5d), [Execução](https://chatgpt.com/share/6ad524e3-b104-83e8-90fe-efb6787dcfea) |
-| [Pedro Ramos](https://github.com/PedroRSR) | Assistente de IA no VS Code (Copilot) e Gemini | Apoio à organização, redação, revisão crítica da documentação e aprendizado sobre o padrão Facade. | 1. [test_facade.py](src/test_facade.py), 2. [execução.md](execução.md), 3. [ia-generativa.md](ia-generativa.md) e 4. [modelagem.md](modelagem.md) |
+| [Pedro Ramos](https://github.com/PedroRSR) | Assistente de IA no VS Code (Copilot) e Gemini | Apoio à organização, redação, revisão crítica da documentação e aprendizado sobre o padrão Facade. | 1. [test_facade.py](./src/test_facade.py), 2. [execução.md](./execução.md), 3. [ia-generativa.md](./ia-generativa.md) e 4. [modelagem.md](./modelagem.md) |
 
 ## Nível de Contribuição dos Integrantes
 
@@ -111,6 +111,7 @@ PYTHON SOFTWARE FOUNDATION. *unittest — Unit testing framework*. Disponível e
 | 1.2 | 16/10/2026 | Adição do meu ponto de vista e senso crítico. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Preencher | Preencher |
 | 1.3 | 16/10/2026 | Minhas impressões sobre IA Generativa | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista de Isaac sobre IA Generativa. |
 | 1.4 | 18/10/2026 | Preenchimento da tabela sobre evidência de uso de IA Generativa | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição das evidencias sobre onde IA generativa foi usada |
-| 1.5 | 18/10/2026 | Preenchimento da tabela sobre evidência de uso de IA Generativa | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Preencher | Preencher |
+| 1.5 | 18/10/2026 | Preenchimento da tabela sobre evidência de uso de IA Generativa | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição das evidencias sobre onde IA generativa foi usada |
+| 1.6 | 18/10/2026 | Preenchimento da tabela sobre participações | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
 
 <p align="center">Tabela 2: Histórico de Versões.</p>
