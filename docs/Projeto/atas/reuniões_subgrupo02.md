@@ -13,7 +13,7 @@
 
 ---
 
-## 1. Vídeo da reunião
+## 1. Vídeo da reunião — [link](https://youtu.be/iX9j0QapNTo)
 
 <iframe
   width="560"
@@ -41,7 +41,7 @@
 
 ---
 
-## 1. Vídeo da reunião
+## 1. Vídeo da reunião — [link](https://youtu.be/HiDmV_5vMlI)
 
 <iframe
   width="560"
@@ -69,7 +69,7 @@
 
 ---
 
-## 1. Vídeo da reunião
+## 1. Vídeo da reunião — [link](https://youtu.be/zLlgoQesqe8)
 
 <iframe
   width="560"
@@ -96,7 +96,7 @@
 
 ---
 
-## 1. Vídeo da reunião
+## 1. Vídeo da reunião — [link](https://youtu.be/fdXLLoB3lsg)
 
 <iframe
   width="560"
