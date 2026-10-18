@@ -276,11 +276,11 @@ Para executar a demonstração:
 npm start
 ```
 
-Registre uma captura de tela que mostre o comando executado e a saída apresentada no terminal.
+A Figura 1 mostra o comando executado e a saída completa no terminal, igual à apresentada na seção 2.1.
 
 **Figura 1 — Execução da demonstração do padrão Observer (Terminal).**
 
-Inserir aqui a captura real do terminal.
+![Saída do comando npm start no terminal](assets/execucao-programa.png)
 
 *Fonte: elaboração própria.*
 
@@ -292,11 +292,11 @@ Execute:
 npm test
 ```
 
-Registre uma captura de tela que mostre o comando executado e o resultado dos testes.
+A Figura 2 mostra o comando executado e o resultado dos testes, igual ao apresentado na seção 3.2.
 
-**Figura 2 — Execução dos testes automatizados da implementação Builder.**
+**Figura 2 — Execução dos testes automatizados da implementação Observer.**
 
-Inserir aqui a captura real do terminal.
+![Resultado do comando npm test no terminal](assets/execucao-testes.png)
 
 *Fonte: elaboração própria.*
 
@@ -304,20 +304,8 @@ Inserir aqui a captura real do terminal.
 
 | Evidência | Arquivo ou captura | Resultado observado |
 |---|---|---|
-| Execução do programa | A preencher após a execução | A preencher conforme a saída real. |
-| Testes automatizados | A preencher após a execução | A preencher conforme o resultado real. |
-| Validação dos campos obrigatórios | A preencher, caso registrada separadamente | A preencher conforme a verificação realizada. |
-
-As evidências devem ser atualizadas após a execução. Caso sejam armazenadas em uma pasta do repositório, recomenda-se utilizar uma organização semelhante a esta:
-
-```text
-evidencias/
-├── execucao-programa.png
-├── testes-automatizados.png
-└── validacao-campos.png
-```
-
-Os arquivos são apenas uma sugestão de organização. As capturas devem ser criadas e incluídas efetivamente antes de serem referenciadas como evidências existentes.
+| Execução do programa | [`assets/execucao-programa.png`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/assets/execucao-programa.png) | As seis etapas e o resumo foram exibidos; o observador com falha não impediu a notificação dos demais (RN06). |
+| Testes automatizados | [`assets/execucao-testes.png`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/assets/execucao-testes.png) | 32 testes em 8 suítes aprovados, sem falhas. |
 
 ### 5.4. Vídeo da execução
 
@@ -390,4 +378,4 @@ NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [ht
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 16/10/2026 | Elaboração da documentação de execução do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | — | Organização dos pré-requisitos, procedimentos de execução (Terminal), cenários de testes, critérios de validação e referências. |
-| 1.1 | 17/10/2026 | Saídas reais e correção dos comandos. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | `node start` corrigido para `npm start` e execução na pasta da SubEquipe03; trecho do Builder removido; alternativa com `mise`; saídas reais de `npm start` e `npm test`; cenários CT08 a CT12 e critério CV07; espaço para o vídeo, pontos de vista e participação. A seção 5 (figuras) não foi alterada. |
+| 1.1 | 17/10/2026 | Saídas reais e correção dos comandos. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | `node start` corrigido para `npm start` e execução na pasta da SubEquipe03; trecho do Builder removido; alternativa com `mise`; saídas reais de `npm start` e `npm test`; cenários CT08 a CT12 e critério CV07; capturas do terminal nas Figuras 1 e 2, com a tabela de evidências preenchida e os restos do Builder removidos; espaço para o vídeo, pontos de vista e participação. |
