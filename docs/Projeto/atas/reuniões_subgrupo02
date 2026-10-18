@@ -83,8 +83,36 @@
 
 ---
 
+# Reunião 
+
+| Horário | Data | Duração | Plataforma |
+|:---:|:---:|:---:|:---:|
+| 21:03 | 18/10/2026 | 05:06 minutos | Microsoft Teams |
+
+## Participantes
+
+- Pedro Ramos
+- Pablo Rodrigues Lima
+
+---
+
+## 1. Vídeo da reunião
+
+<iframe
+  width="560"
+  height="315"
+  src="https://youtu.be/fdXLLoB3lsg"
+  title="Reunião sobre a Entrega 03"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+
+---
+
 ## 4. Histórico de Versões
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|---|---|---|---|
 | 1.1 | 18/10/2026 | Registro de reuniões do subgrupo | [Isaac Menezes](https://github.com/pratamz250) | — | — | 
+| 1.2 | 18/10/2026 | Novo registro de reuniões do subgrupo | [Isaac Menezes](https://github.com/pratamz250) | — | — | 
