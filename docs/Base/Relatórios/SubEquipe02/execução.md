@@ -55,12 +55,19 @@ Considerando a implementação apresentada nos ficheiros de código, a saída es
 ```text
 Iniciando o carregamento da Tela Inicial (TabNews)...
 
+-Logado como usuário Anonimo-
+
+=== PUBLICIDADE ===
+- Amazono:
+    promocao do dia 10/10
+
 === CONTEÚDO RELEVANTE ===
 - O que são Padrões de Projeto? (45 tabcoins)
 - Dicas de Python para iniciantes (32 tabcoins)
 
 === CONTEÚDO RECENTE ===
 - Nova atualização do framework (por usuario_c)
+- AVISO: Conteudo Filtrado (por usuario_d)
 
 [Status: 142 usuários online agora]
 
@@ -131,9 +138,14 @@ Registe uma captura de ecrã que mostre o comando executado e a saída apresenta
 
 **Figura 1 — Execução da demonstração do padrão Facade.**
 
-*(Inserir aqui a captura real do terminal)*
+<p align="center">
+  <img src="../../../images/Captura_terminal_Facade_sub02.png" alt="Comprovação de execução" width="300">
+</p>
 
-*Fonte: elaboração própria.*
+<p align="center">
+  <strong>Figura 1 — Comprovação de execução da implementação Facade.</strong><br>
+  Fonte: elaboração da SubEquipe02.
+</p>
 
 ### 5.2. Registo das evidências
 
@@ -161,11 +173,11 @@ Esta seção regista as perceções dos integrantes sobre a execução da demons
 
 ### Isaac Menezes Pereira
 
-Preencher kk
+O exemplo foi importante para compreender como o padrão Facade simplifica a interação entre diferentes subsistemas. A classe `TelaInicialFacade` centraliza a chamada dos serviços de publicações relevantes, publicações recentes e estatísticase permite que o programa principal obtenha todas as informações necessárias por meio de uma única interface. Essa organização facilita a manutenção do código e reduz o acoplamento entre o cliente e os componentes internos. Embora o exemplo utilize dados simulados e seja relativamente simples, ele demonstra bem a proposta do padrão e permite visualizar como essa abordagem poderia ser aplicada em um sistema real.
 
 ### Pablo Rodrigues Lima
 
-Preencher kk
+Com a demonstração podemos verificar a aplicação do padrão Facade na tela inicial do TabNews, de acordo com o diagrama UML proposto. Os procedimentos contribuíram para avaliar a organização do código e a simplificação da interação entre as classes, assim podemos identificar se os objetivos foram devidamente alcançados.
 
 ### Pedro Ramos Sousa Reis
 
@@ -182,22 +194,23 @@ Esta seção regista as atividades relacionadas à documentação dos procedimen
 ### Isaac Menezes Pereira
 
 **Atividades desenvolvidas:**
-
-Preencher kk
-
-**Evidências relacionadas:**
-
-Preencher kk
+| Descrição | Comprobatórios |
+| --- | --- |
+| Elaboração dos códigos para implementação do padrão Facade | [Commits no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/docs/Sub02/?author=pratamz250&since=2026-10-15&until=2026-10-16) | 
+| Estrutura básica para o GitHub Actions | [Commits no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/docs/Sub02?author=pratamz250&since=2026-10-13&until=2026-10-13) |
 
 ### Pablo Rodrigues Lima
 
 **Atividades desenvolvidas:**
 
-Preencher kk
+- Atualização do resultado esperado
+- Documentação da print do do terminal
 
 **Evidências relacionadas:**
 
-Preencher kk
+| Descrição | Comprobatórios |
+| --- | --- |
+| Fornecimento da print e atualização do resultado esperado | [Commits no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/442ace0791bf889a0730976c305117ba96cb6436) | 
 
 ### Pedro Ramos Sousa Reis
 
@@ -218,7 +231,7 @@ O nível de contribuição deve refletir as atividades efetivamente realizadas n
 | Integrante | Atividades relacionadas | Nível de contribuição | Justificativa |
 | --- | --- | --- | --- |
 | Isaac Menezes Pereira | A Preencher | 33,33% | A classificação deve considerar as atividades efetivamente realizadas na subequipa 02. |
-| Pablo Rodrigues Lima | A Preencher | 33,33% | A classificação deve considerar as atividades efetivamente realizadas na subequipa 02. |
+| Pablo Rodrigues Lima | Adição da print de comprovação e atualização do resultado esperado | 33,33% | A classificação deve considerar as atividades efetivamente realizadas na subequipa 02. |
 | Pedro Ramos Sousa Reis | Organização da documentação de execução. | 33,33% | A classificação deve considerar as atividades efetivamente realizadas na subequipa 02. |
 
 ## 10. Referências
@@ -231,5 +244,8 @@ PYTHON SOFTWARE FOUNDATION. *Python 3 Documentation*. Disponível em: [https://d
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 | --- | --- | --- | --- | --- | --- |
-| 1.0 | 15/10/2026 | Elaboração da documentação de execução do padrão Facade em Python. | [Pedro Ramos](https://github.com/PedroRSR) | A Preencher | A Preencher |
-| 1.1 | 16/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher | 
+| 1.0 | 15/10/2026 | Elaboração da documentação de execução do padrão Facade em Python. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização da documentação sobre pre-requisitos, execução da demonstração, execução dos testes, criterios, evidencias, ponto de vista, participações e nivel de contribuição. |
+| 1.1 | 16/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | [Isaac Menezes](https://github.com/pratamz250) | O ponto de vista foi relevante e contribuiu pro projeto. | 
+| 1.2 | 16/10/2026 | Adição de ponto de vista e contribuições | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista de Isaac |
+| 1.3 | 16/10/2026 | Adição de ponto de vista | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição de ponto de vista de Pablo |
+| 1.4 | 16/10/2026 | Adição da print de comprovação e atualização do resultado esperado | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição de print do resultado da execução e atualização do resultado esperado |

@@ -127,11 +127,11 @@ A execução deve ser registrada com evidências reais, como capturas de tela do
 
 ## 8. Considerações sobre a implementação
 
-A implementação demonstra o propósito do padrão Facade ao fornecer uma interface unificada para operações distribuídas entre diferentes subsistemas.
+A implementação evidencia a finalidade do padrão Facade ao disponibilizar uma interface única para acessar funcionalidades distribuídas entre diferentes subsistemas.
 
-Sem a fachada, o código cliente precisaria instanciar os três serviços, chamar individualmente seus métodos e organizar os resultados. Com a classe `TelaInicialFacade`, essa coordenação fica centralizada no método `carregar_dados()`, simplificando o código cliente e reduzindo seu conhecimento sobre os detalhes internos dos serviços.
+Sem a utilização da fachada, o código cliente teria que criar instâncias dos três serviços, executar seus métodos separadamente e reunir os dados retornados. Ao utilizar a classe TelaInicialFacade, essas responsabilidades são concentradas no método carregar_dados(), tornando o código cliente mais simples e diminuindo sua dependência dos detalhes de funcionamento dos serviços internos.
 
-Entre os principais benefícios demonstrados estão a redução do acoplamento entre o cliente e os subsistemas, a centralização do fluxo de carregamento e a organização dos resultados em uma estrutura única.
+Dessa forma, a implementação destaca benefícios como a diminuição do acoplamento entre o cliente e os subsistemas, a centralização das operações de carregamento e a consolidação dos resultados em uma única estrutura de dados.
 
 A implementação também apresenta limitações didáticas. Os serviços retornam dados fixos, não há integração com sistemas externos e o tratamento de exceções não registra os detalhes técnicos do erro. Além disso, a estatística `publicacoes_hoje` é retornada pela fachada, mas não é exibida pelo programa de demonstração.
 
@@ -145,7 +145,7 @@ O padrão Facade oferece uma ótima solução que visa aumentar a organização 
 
 ### Pablo Rodrigues Lima
 
-A preencher
+O padrão Facade foi escolhido por considerarmos que ele se encaixa bem na estrutura de uma tela inicial, permitindo centralizar o acesso às funcionalidades dos subsistemas. Ao implementar, tentamos manter o código fiel ao original mas ao mesmo tempo simples e objetivo, evitando adicionar complexidade desnecessária para não desviar o foco do projeto. Durante o projeto percebos o quão prático e eficiente é utilizar este padrão. 
 
 ### Pedro Ramos Sousa Reis
 
@@ -170,9 +170,9 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 
 | Evidência | Descrição |
 |---|---|
-| `subsistemas.py` | Implementação dos serviços de publicações relevantes, publicações recentes e estatísticas do sistema. |
-| `tela_inicial_facade.py` | Implementação da fachada responsável por coordenar os subsistemas e consolidar os resultados. |
-| `main.py` | Programa de demonstração do carregamento e da exibição das informações da tela inicial. |
+| `src/subsistemas.py` | Implementação dos serviços de publicações relevantes, publicações recentes e estatísticas do sistema. |
+| `src/tela_inicial_facade.py` | Implementação da fachada responsável por coordenar os subsistemas e consolidar os resultados. |
+| `src/main.py` | Programa de demonstração do carregamento e da exibição das informações da tela inicial. |
 | Capturas de tela do terminal | Evidências da execução do programa e, se aplicável, dos testes automatizados. |
 | Histórico de commits | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main/?author=pratamz250). |
 
@@ -182,11 +182,18 @@ As evidências devem ser anexadas ou referenciadas no repositório conforme a or
 
 **Atividades desenvolvidas:**
 
-Preencher kk
+- Criação das classes ServicoPublicidade, ServicoUsuarios e ServicoAutorizacao em [subsistemas.py](src\subsistemas.py)
+- Implementação das novas classes na classe de fachada [tela_inicial_facade.py](src\tela_inicial_facade.py)
+- Adição de alguns detalhes em [main.py](src\main.py) para incorporar as novas classes
 
 **Evidências relacionadas:**
 
-Preencher kk
+| Evidência | Descrição |
+|---|---|
+| `src/subsistemas.py` | [Criação dos serviços de autorização, publicações e publicidades.](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/3eb6b9fa3a01a6b2206996c5c0550f84a34a819a) |
+| `src/tela_inicial_facade.py` | [Implementação dos serviços de autorização e publicidade.](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/3eb6b9fa3a01a6b2206996c5c0550f84a34a819a) / [Implementação do serviço de usuario anonimo](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/2bf0654c86dbdcce88941a2b2661f6cff465991a) |
+| `src/main.py` | [Inplementação de informações referente às classes de publicidade.](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/3eb6b9fa3a01a6b2206996c5c0550f84a34a819a) / [Implementação referente à classe de usuario](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/2bf0654c86dbdcce88941a2b2661f6cff465991a) |
+| Histórico de commits geral | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main/?author=Pablo-R-L). |
 
 ### Pedro Ramos Sousa Reis
 
@@ -223,5 +230,8 @@ GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Softw
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 15/10/2026 | Documentação da implementação didática do padrão Facade para consolidação dos dados da tela inicial. | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Organização da documentação técnica, descrição dos subsistemas e da fachada, procedimentos de execução e registro de participação e contribuição. |
-| 1.1 | 15/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher | 
-| 1.2 | 16/10/2026 | Criação dos testes automatizados e adição de informações na documentação. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher | 
+| 1.1 | 15/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição de sua parte sobre a o codigo e pontos de vista referenete ao mesmo | 
+| 1.2 | 16/10/2026 | Criação dos testes automatizados e adição de informações na documentação. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização do tópico de teste da implementação da fachada e criação do arquivo [test_facade.py](src/test_facade.py) |
+| 1.3 | 17/10/2026 | Adição do meu ponto de vista e participação. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista e participação de Pablo |
+| 1.4 | 18/10/2026 | Atualização dos links dos meus commits. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Atualização dos links dos commits do Pablo |
+| 1.5 | 18/10/2026 | Complementação do topico 8. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Conteúdo do tópico 8 foi atualizado |

@@ -30,21 +30,21 @@ As explicações foram confrontadas com os arquivos de código, com os testes au
 
 **Lições aprendidas**
 
-Preencher
+Com o padrão Facade, consegui compreender melhor como uma única classe pode centralizar o acesso a diferentes serviços, simplificando o código que utiliza esses componentes. Também percebi como a separação de responsabilidades facilita a organização e a manutenção do sistema. Apesar de ser um exemplo simples, a implementação em Python ajudou a entender como o padrão pode ser aplicado na prática e como poderia ser adaptado para um sistema real.
 
 **Uso da IA Generativa e senso crítico**
 
-Preencher
+A inteligência artificial foi útil para esclarecer dúvidas sobre o funcionamento do padrão Facade e auxiliar na organização da documentação. Entretanto, percebi a importância de conferir se as respostas realmente correspondem ao código desenvolvido, pois sugestões geradas podem misturar conceitos ou apresentar informações que não se aplicam à implementação. Por isso, considero importante analisar as soluções propostas, compará-las com os arquivos do projeto e compreender o que está sendo feito, em vez de aceitar as respostas automaticamente. Dessa forma, a IA serve como uma ferramenta de apoio ao aprendizado, sem substituir o estudo e a análise crítica.
 
 ### Pablo Rodrigues Lima
 
 **Lições aprendidas**
 
-Preencher
+Com o padrão Facade, eu entendi como a centralização do acesso a diferentes serviços pode simplificar a relação entre os componentes e tornar o código mais organizado e facil de fazer a manutenção. Também pude analisar o codigo  mais uma vez e praticar como identificar corretamente as responsabilidades de cada classe, evitando adicionar complexidade desnecessária ao sistema.
 
 **Uso da IA Generativa e senso crítico**
 
-Preencher
+O uso da inteligência artificial se mostro ser útil mais uma vez. Tanto para auxiliar no desenvolvimento do projeto quanto para tirar dúvidas, mas também é importante avaliar as respostas geradas, normalmente prefiro entrar diretamente no site que a IA usou para gerar a resposta. Não apenas para verificar a veracidade da resposta mas também para compreender as soluções propostas, aprendendo muito mais sobre o assunto e evitando sugestões automaticamente, garantindo que o uso da IA não vai atrasar o meu aprendizado.
 
 ### Pedro Ramos Sousa Reis
 
@@ -73,14 +73,16 @@ Assim, a IA foi considerada uma ferramenta auxiliar de redação e compreensão.
 | Integrante | Atividade/Contribuição | Evidência |
 |---|---|---|
 | [Isaac Menezes](https://github.com/pratamz250) | Elaboração inicial da documentação e da demonstração didática do padrão Facade. | [Padrões GoF estruturais](./padrões-gof-estruturais.md), [subsistemas](./src/subsistemas.py) e [fachada da tela inicial](./src/tela_inicial_facade.py). |
-| [Pablo Rodrigues](https://github.com/Pablo-R-L) | Revisão e correção de informações da documentação do Facade, incluindo o alinhamento ao contexto do projeto e ao código. | [Padrões GoF estruturais](./padrões-gof-estruturais.md), especialmente o histórico de versões. |
-| [Pedro Ramos](https://github.com/PedroRSR) | Organização da documentação técnica, descrição dos procedimentos de execução e criação dos testes automatizados. | [Código](./código.md), [execução](./execução.md) e [testes automatizados](./src/test_facade.py). |
+| [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização, elaboração e correção da documentação sobre o padrão Facade, o uso de IA Generativa e planejamento da implementação. | [Padrões GoF estruturais](./padrões-gof-estruturais.md), [modelagem](./modelagem.md), [Código](./código.md), [ia-generativa](./ia-generativa.md), [Execução](./execução.md) . |
+| [Pedro Ramos](https://github.com/PedroRSR) | Organização da documentação técnica, descrição dos procedimentos de execução e criação dos testes automatizados. | [Código](./código.md), [execução](./execução.md), [IA Generativa](./ia-generativa.md), [modelagem](./modelagem.md) e [testes automatizados](./src/test_facade.py). |
 
 ## Evidências do Uso de IA Generativa
 
 | Integrante | Ferramenta | Finalidade | Evidência |
 |---|---|---|---|
-| [Pedro Ramos](https://github.com/PedroRSR) | Assistente de IA no VS Code (Copilot) e Gemini | Apoio à organização, redação, revisão crítica da documentação e aprendizado sobre o padrão Facade. | Preencher |
+| [Isaac Menezes](https://github.com/pratamz250) | ChatGPT | Auxílio na compreensão do padrão Facade | [Contribuição no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/f5f6df47536e2cae4499061fd2696128958a9b0c) |
+| [Pablo Rodrigues](https://github.com/Pablo-R-L) | GPT e Copilot | Copreender o padrão Facade, tirar dúvidas e ter uma noção geral do que fazer no projeto. Apoio à redação e correção dentro da documentação | [Padrões GoF estruturais](./padrões-gof-estruturais.md), [modelagem](https://chatgpt.com/share/6ad52525-66c0-83ea-8e5f-4ad405f44e5d), [Execução](https://chatgpt.com/share/6ad524e3-b104-83e8-90fe-efb6787dcfea) |
+| [Pedro Ramos](https://github.com/PedroRSR) | Assistente de IA no VS Code (Copilot) e Gemini | Apoio à organização, redação, revisão crítica da documentação e aprendizado sobre o padrão Facade. | 1. [test_facade.py](./src/test_facade.py), 2. [execução.md](./execução.md), 3. [ia-generativa.md](./ia-generativa.md) e 4. [modelagem.md](./modelagem.md) |
 
 ## Nível de Contribuição dos Integrantes
 
@@ -104,7 +106,12 @@ PYTHON SOFTWARE FOUNDATION. *unittest — Unit testing framework*. Disponível e
 
 | Versão | Data       | Descrição                                                                 | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:------:|:----------:|---------------------------------------------------------------------------|-----------|:-----------:|--------------------|
-| 1.0 | 16/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Facade. | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
+| 1.0 | 16/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Facade. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização do objetivo, da metodologia, do ponto de vista individual, da análise crítica e das evidências. |
 | 1.1 | 16/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
+| 1.2 | 16/10/2026 | Adição do meu ponto de vista e senso crítico. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Preencher | Preencher |
+| 1.3 | 16/10/2026 | Minhas impressões sobre IA Generativa | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista de Isaac sobre IA Generativa. |
+| 1.4 | 18/10/2026 | Preenchimento da tabela sobre evidência de uso de IA Generativa | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição das evidencias sobre onde IA generativa foi usada |
+| 1.5 | 18/10/2026 | Preenchimento da tabela sobre evidência de uso de IA Generativa | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição das evidencias sobre onde IA generativa foi usada |
+| 1.6 | 18/10/2026 | Preenchimento da tabela sobre participações | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
 
 <p align="center">Tabela 2: Histórico de Versões.</p>

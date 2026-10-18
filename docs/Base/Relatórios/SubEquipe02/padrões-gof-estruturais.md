@@ -120,9 +120,10 @@ class ServicoPostagensRecentes:
     def buscar_recentes(self):
         # Simula uma busca ordenando estritamente pela data de criação
         return [
-            {"id": 3, "titulo": "Nova atualização do framework", "tabcoins": 1, "autor": "usuario_c"}
+            {"id": 3, "titulo": "Nova atualização do framework", "tabcoins": 1, "autor": "usuario_c"},
+           {"id": 3, "titulo": "imagina algo muito improprio aqui", "tabcoins": 100, "autor": "usuario_d"}
         ]
-
+    
 class ServicoEstatisticas:
     def obter_status_sistema(self):
         # Simula a leitura do cache ou monitoramento da aplicação
@@ -130,6 +131,27 @@ class ServicoEstatisticas:
             "usuarios_online": 142,
             "publicacoes_hoje": 87
         }
+
+class ServicoPublicidade:
+    def obter_publicidade_aleatoria(self):
+        # Simula a busca por uma quantia de propagandas
+        return {"id" : 1, "titulo" : "Promoção", "empresa" : "Amazono", "conteudo" : "promocao do dia 10/10"}
+            
+        
+
+class ServicoAutorizacao:
+    # Filtra postagens e bloqueia conteudos improprios
+    def filtragem(self, data):
+        for postagem in data:
+            if "improprio" in postagem['titulo']:
+                postagem['titulo'] = "AVISO: Conteudo Filtrado"
+                postagem["tabcoins"] = 0
+            
+
+class ServicoUsuarios:
+    # Simula criação de usuario anonimo assim que o site é acessado
+    def criar_anonimo(self):
+        return "Anonimo"
 
 ```
 
@@ -140,13 +162,14 @@ A Fachada instancia (ou recebe injetada) os subsistemas e disponibiliza um méto
 Arquivo: `src/tela_inicial_facade.py`
 
 ```python
-from subsistemas import ServicoPostagensRelevantes, ServicoPostagensRecentes, ServicoEstatisticas
-
 class TelaInicialFacade:
     def __init__(self):
         self._servico_relevantes = ServicoPostagensRelevantes()
         self._servico_recentes = ServicoPostagensRecentes()
         self._servico_estatisticas = ServicoEstatisticas()
+        self._servico_Autorizacao = ServicoAutorizacao()
+        self._servico_Publicidade = ServicoPublicidade()
+        self._servico_Usuario = ServicoUsuarios()
 
     def carregar_dados(self):
         """
@@ -157,13 +180,20 @@ class TelaInicialFacade:
             relevantes = self._servico_relevantes.buscar_relevantes()
             recentes = self._servico_recentes.buscar_recentes()
             estatisticas = self._servico_estatisticas.obter_status_sistema()
+            publicidade = self._servico_Publicidade.obter_publicidade_aleatoria()
+            
+            self._servico_Autorizacao.filtragem(relevantes)
+            self._servico_Autorizacao.filtragem(recentes)
+
+            
             
             return {
                 "sucesso": True,
                 "dados": {
                     "feed_relevante": relevantes,
                     "feed_recente": recentes,
-                    "informacoes_rodape": estatisticas
+                    "informacoes_rodape": estatisticas,
+                    "publicidade": publicidade
                 }
             }
         except Exception as erro:
@@ -171,6 +201,20 @@ class TelaInicialFacade:
                 "sucesso": False,
                 "erro": f"Falha ao carregar a tela inicial: {str(erro)}"
             }
+
+    def criar_usuario_anonimo(self):
+        #assumindo que o usuario não está logado
+        try:
+            usuario = self._servico_Usuario.criar_anonimo()
+            return {
+                "sucesso": True,
+                "usuario": usuario
+            }
+        except Exception as erro:
+                    return {
+                        "sucesso": False,
+                        "erro": f"Falha ao criar usuario anonimo: {str(erro)}"
+                    }
 
 ```
 
@@ -189,10 +233,21 @@ def renderizar_tela_inicial():
     print("Iniciando o carregamento da Tela Inicial (TabNews)...\n")
     
     resposta = facade.carregar_dados()
-    
+    usuario = facade.criar_usuario_anonimo()
+
+    if usuario.get("sucesso") == False:
+        print(usuario.get("erro"))
+        return
+
     if resposta.get("sucesso"):
+        print(f"-Logado como usuário {usuario.get("usuario")}-\n")
+
         dados = resposta["dados"]
-        print("=== CONTEÚDO RELEVANTE ===")
+        print("=== PUBLICIDADE ===")
+        publicidade = dados["publicidade"]
+        print(f"- {publicidade["empresa"]}:\n    {publicidade["conteudo"]}")
+        
+        print("\n=== CONTEÚDO RELEVANTE ===")
         for post in dados["feed_relevante"]:
             print(f"- {post['titulo']} ({post['tabcoins']} tabcoins)")
             
@@ -240,4 +295,5 @@ REFACTORING.GURU. *Facade*. Disponível em: https://refactoring.guru/pt-br/desig
 | 1.0 | 13/10/2026 | Criação da documentação inicial sobre o padrão Facade. | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Conteúdo fala sobre padrão criacional e não estrutural |
 | 1.1 | 15/10/2026 | Correção e adição de novas informações. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição de novos conteúdos referente ao padrão Facade do tópico 1 ao 7 |
 | 1.2 | 15/10/2026 | Correções referentes ao foco do projeto e código | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Correção e adição de novas informações relacionadas aos tópicos 1 ao 7 |
-| 1.3 | 15/10/2026 | Alterações no texto, adição dos códigos e das considerações finais | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher |
+| 1.3 | 15/10/2026 | Alterações no texto, adição dos códigos e das considerações finais | [Pedro Ramos](https://github.com/PedroRSR) | [Isaac Menezes](https://github.com/pratamz250) | Considerações relevantes e corretas. |
+| 1.4 | 18/10/2026 | Atualização dos códigos | [Pedro Ramos](https://github.com/PedroRSR) | [Isaac Menezes](https://github.com/pratamz250) | Atualização necessária e correta. |
