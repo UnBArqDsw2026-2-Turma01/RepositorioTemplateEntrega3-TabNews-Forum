@@ -10,7 +10,9 @@ class TestTelaInicial(unittest.TestCase):
     @patch('tela_inicial_facade.ServicoEstatisticas')
     @patch('tela_inicial_facade.ServicoPostagensRecentes')
     @patch('tela_inicial_facade.ServicoPostagensRelevantes')
-    def test_ct01_cv01_cv02_carregamento_com_sucesso(self, mock_relevantes, mock_recentes, mock_estatisticas):
+    @patch('tela_inicial_facade.ServicoPublicidade')
+    @patch('tela_inicial_facade.ServicoAutorizacao')
+    def test_ct01_cv01_cv02_carregamento_com_sucesso(self, mock_autorizacao, mock_publicidade, mock_relevantes, mock_recentes, mock_estatisticas):
         """
         Testa CT01 (Carregamento com sucesso), CV01 (Orquestração correta) e CV02 (Retorno consolidado).
         """
@@ -24,6 +26,9 @@ class TestTelaInicial(unittest.TestCase):
         mock_estatisticas_instance = mock_estatisticas.return_value
         mock_estatisticas_instance.obter_status_sistema.return_value = {"usuarios_online": 10}
 
+        mock_publicidade_instance = mock_publicidade.return_value
+        mock_publicidade_instance.obter_publicidade_aleatoria.return_value = {"id": 1, "titulo": "Promoção", "empresa": "Amazono", "conteudo": "promocao"}
+
         # Instanciando a Fachada e chamando o método
         facade = TelaInicialFacade()
         resultado = facade.carregar_dados()
@@ -35,12 +40,18 @@ class TestTelaInicial(unittest.TestCase):
         mock_relevantes_instance.buscar_relevantes.assert_called_once()
         mock_recentes_instance.buscar_recentes.assert_called_once()
         mock_estatisticas_instance.obter_status_sistema.assert_called_once()
+        mock_publicidade_instance.obter_publicidade_aleatoria.assert_called_once()
+        
+        # O serviço de autorização (filtragem) deve ser chamado duas vezes (para relevantes e recentes)
+        mock_autorizacao_instance = mock_autorizacao.return_value
+        self.assertEqual(mock_autorizacao_instance.filtragem.call_count, 2)
 
         # Verifica CV02: Retorno consolidado com as chaves corretas
         dados = resultado.get("dados", {})
         self.assertIn("feed_relevante", dados)
         self.assertIn("feed_recente", dados)
         self.assertIn("informacoes_rodape", dados)
+        self.assertIn("publicidade", dados)
 
     @patch('tela_inicial_facade.ServicoPostagensRelevantes')
     def test_ct02_cv03_falha_em_subsistema(self, mock_relevantes):
@@ -58,6 +69,22 @@ class TestTelaInicial(unittest.TestCase):
         self.assertFalse(resultado.get("sucesso"))
         self.assertIn("Falha ao carregar a tela inicial", resultado.get("erro"))
         self.assertIn("Erro de conexão ao Banco de Dados", resultado.get("erro"))
+
+    @patch('tela_inicial_facade.ServicoUsuarios')
+    def test_ct04_criacao_usuario_anonimo(self, mock_usuarios):
+        """
+        Testa a orquestração da criação de um usuário anônimo.
+        """
+        mock_usuarios_instance = mock_usuarios.return_value
+        mock_usuarios_instance.criar_anonimo.return_value = "Anonimo"
+
+        facade = TelaInicialFacade()
+        resultado = facade.criar_usuario_anonimo()
+
+        # Verifica se o retorno de sucesso e o valor estão corretos
+        self.assertTrue(resultado.get("sucesso"))
+        self.assertEqual(resultado.get("usuario"), "Anonimo")
+        mock_usuarios_instance.criar_anonimo.assert_called_once()
 
     def test_ct03_cv04_desacoplamento_e_independencia(self):
         """
@@ -98,11 +125,12 @@ class TestTelaInicial(unittest.TestCase):
 
         # Verifica CV05: Checa se os cabeçalhos esperados e as formatações foram impressos no terminal
         self.assertIn("Iniciando o carregamento da Tela Inicial", saida_terminal)
+        self.assertIn("-Logado como usuário Anonimo-", saida_terminal)
+        self.assertIn("=== PUBLICIDADE ===", saida_terminal)
         self.assertIn("=== CONTEÚDO RELEVANTE ===", saida_terminal)
         self.assertIn("=== CONTEÚDO RECENTE ===", saida_terminal)
         self.assertIn("[Status:", saida_terminal)
         self.assertIn("usuários online agora]", saida_terminal)
-
 
 if __name__ == '__main__':
     unittest.main()
