@@ -233,5 +233,5 @@ GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Softw
 | 1.1 | 15/10/2026 | Adição do meu ponto de vista. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição de sua parte sobre a o codigo e pontos de vista referenete ao mesmo | 
 | 1.2 | 16/10/2026 | Criação dos testes automatizados e adição de informações na documentação. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização do tópico de teste da implementação da fachada e criação do arquivo [test_facade.py](src/test_facade.py) |
 | 1.3 | 17/10/2026 | Adição do meu ponto de vista e participação. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista e participação de Pablo |
-| 1.4 | 18/10/2026 | Atualização dos links dos meus commits. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | |  | 
-| 1.5 | 18/10/2026 | Complementação do topico 8. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | |  |   
+| 1.4 | 18/10/2026 | Atualização dos links dos meus commits. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Atualização dos links dos commits do Pablo |
+| 1.5 | 18/10/2026 | Complementação do topico 8. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Conteúdo do tópico 8 foi atualizado |

@@ -249,4 +249,3 @@ PYTHON SOFTWARE FOUNDATION. *Python 3 Documentation*. Disponível em: [https://d
 | 1.2 | 16/10/2026 | Adição de ponto de vista e contribuições | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista de Isaac |
 | 1.3 | 16/10/2026 | Adição de ponto de vista | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição de ponto de vista de Pablo |
 | 1.4 | 16/10/2026 | Adição da print de comprovação e atualização do resultado esperado | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição de print do resultado da execução e atualização do resultado esperado |
-
