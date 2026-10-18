@@ -61,6 +61,16 @@ Utilizei a IA Generativa como apoio para formatar a documentação em Markdown, 
 
 A ferramenta frequentemente sugeria o uso de outras bibliotecas de teste ou alterava regras de negócio. Foi necessário intervir, corrigir as lógicas para o framework correto e garantir a coerência com a modelagem do Fórum. Isso reforçou que a IA é excelente para organizar e acelerar o desenvolvimento, mas a validação e as decisões técnicas devem permanecer inteiramente com o desenvolvedor. 
 
+### Leonardo Fachinello Bonetti
+
+**Lições aprendidas**
+
+PREENCHER
+
+**Uso da IA Generativa e senso crítico**
+
+PREENCHER
+
 ## Análise Crítica do Uso de IA Generativa
 
 *Seção a ser consolidada pela SubEquipe_03 a partir dos pontos de vista individuais, reunindo as contribuições e as limitações observadas no uso de IA Generativa durante a entrega.*
@@ -70,6 +80,7 @@ A ferramenta frequentemente sugeria o uso de outras bibliotecas de teste ou alte
 | Integrante | Atividade/Contribuição | Evidência |
 |:---|:---|:---|
 | [Caio Alexandre](https://github.com/bitterteriyaki) | Modelagem UML do padrão Observer, documento de Padrões GoF Comportamentais, iniciativas extras de suporte a PlantUML e padronização do ambiente local, e registro do uso de IA Generativa. | [Modelagem](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/9358072fb7ae404b92850deefcd7204ae53b467a) · [Padrões Comportamentais](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fd46c42a4220ac56a7f2ec7f9aeaee8f0a670089) · [PlantUML](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/2db3b5efbe0a4b78c20dbf7f07a1128a36b97468) · [mise](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/f9884403eaf8943188a1f2afacc2e3925dcaddf9) |
+| [Leonardo Bonetti](https://github.com/LeoFacB) | Implementação do padrão Observer (classes, demonstração e testes automatizados), correção da moderação, revisão da modelagem e das páginas de Código e de Execução e registro do uso de IA Generativa. | [PR #14 — Implementação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/14) · [Sujeito](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/7ccde94c38a4efd24295aa3bb2d38cec6ae4aa36) · [Testes](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/d5fa8ad5e4124cdb0c5c6a5712c7c45073a729b6) · PR da documentação: INSERIR LINK |
 
 
 <p align="center">Tabela 1: Evidências de participação dos integrantes.</p>
@@ -80,12 +91,19 @@ A ferramenta frequentemente sugeria o uso de outras bibliotecas de teste ou alte
 |:---|:---|:---|:---|
 | Caio Alexandre Ornelas Silva | Claude (Claude Code) | Levantamento das pendências da entrega, elaboração dos diagramas UML em PlantUML, redação da documentação do padrão Observer e automação do versionamento (organização dos commits e redação das mensagens). | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main?author=bitterteriyaki) |
 | [Guilherme Moura](github.com/Guilherme-Moura) | Gemini | Apoio na formatação da documentação, realização de ajustes nos diagramas UML via PlantUML e geração de boilerplate para a suíte de testes automatizados. | |
+| [Leonardo Bonetti](https://github.com/LeoFacB) | Claude (Claude Code) | Apoio na implementação das classes e dos testes a partir do Diagrama de Classes, na conferência da consistência entre diagramas, código e documentação, na redação das páginas e na organização dos commits. | [PR #14 — Implementação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/14) · PR da documentação: INSERIR LINK |
 
 <p align="center">Tabela 2: Evidências do uso de IA Generativa.</p>
 
 ## Referências
 
 ANTHROPIC. **Claude Code overview**. Claude Code Docs. Disponível em: [https://code.claude.com/docs/en/overview](https://code.claude.com/docs/en/overview). Acesso em: 14 out. 2026.
+
+GOOGLE. **Gemini**. Disponível em: [https://gemini.google.com/](https://gemini.google.com/). Acesso em: 17 out. 2026.
+
+NODE.JS. **Node.js Documentation**. Disponível em: [https://nodejs.org/docs/latest/api/](https://nodejs.org/docs/latest/api/). Acesso em: 17 out. 2026.
+
+NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [https://nodejs.org/api/test.html](https://nodejs.org/api/test.html). Acesso em: 17 out. 2026.
 
 PLANTUML. **PlantUML**. Disponível em: [https://plantuml.com/](https://plantuml.com/). Acesso em: 14 out. 2026.
 
@@ -96,6 +114,7 @@ PLANTUML. **PlantUML**. Disponível em: [https://plantuml.com/](https://plantuml
 | 1.0 | 14/10/2026 | Criação do documento de IA Generativa da SubEquipe_03 e registro da experiência individual do integrante. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Estrutura baseada no documento de IA Generativa da Entrega 02, com seções individuais por integrante e tabelas de evidências. |
 | 1.1 | 14/10/2026 | Inclusão da seção de referências. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Criação da seção de referências, com a documentação do Claude Code, ferramenta de IA Generativa utilizada, e do PlantUML, ferramenta utilizada na elaboração dos diagramas. |
 | 1.2 | 16/10/2026 | Adição do ponto de vista | [Guilherme Moura](github.com/Guilherme-Moura) |  | |
+| 1.3 | 17/10/2026 | Seção e evidências do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Seção do Leonardo (a preencher por ele), linhas dele nas Tabelas 1 e 2 e inclusão do Gemini, do Node.js e do `node:test` nas referências. |
 
 <p align="center">Tabela 3: Histórico de Versões.</p>
 

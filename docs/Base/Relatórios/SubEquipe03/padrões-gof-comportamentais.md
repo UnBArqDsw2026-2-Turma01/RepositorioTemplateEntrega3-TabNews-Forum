@@ -58,13 +58,15 @@ Compreender e demonstrar a aplicação do padrão GoF Observer por meio da model
 
 O escopo é de **objeto** porque as relações entre o sujeito e seus observadores são estabelecidas em tempo de execução, por meio da inscrição, e não fixadas por herança em tempo de compilação.
 
+Gamma et al. (2000) classificam os padrões por escopo conforme o mecanismo que define as relações entre os participantes. Nos padrões de **classe**, essas relações são estabelecidas por herança e ficam fixas em tempo de compilação, como no *Template Method*. Nos padrões de **objeto**, elas são estabelecidas por composição e podem mudar em tempo de execução. Na solução, existe herança (`ServicoDeConteudo` estende `Sujeito`, e cada observador concreto estende `Observador`), mas ela apenas reaproveita o mecanismo de inscrição e define o contrato de atualização. A relação que caracteriza o padrão, isto é, quais observadores são notificados por qual sujeito, é montada pelo cliente com `inscrever` e pode ser desfeita com `desinscrever` durante a execução, como mostra a etapa de desinscrição do [Diagrama de Sequência](/Base/Relatórios/SubEquipe03/modelagem.md?id=_4-diagrama-de-sequência-uml). Por isso, o uso de herança não muda o escopo do padrão.
+
 Na solução proposta, os participantes do padrão correspondem às seguintes classes:
 
 | Participante (GoF) | Classe na solução | Responsabilidade |
 |---|---|---|
 | *Subject* | `Sujeito` | Mantém a coleção de observadores e oferece as operações de inscrição, desinscrição e notificação. |
 | *Observer* | `Observador` | Define a operação `atualizar`, pela qual os observadores recebem as notificações. |
-| *ConcreteSubject* | `ServicoDeConteudo` | Publica e remove conteúdos e notifica os observadores quando esses eventos ocorrem. |
+| *ConcreteSubject* | `ServicoDeConteudo` | Publica, remove, envia para revisão e restaura conteúdos e notifica os observadores quando esses eventos ocorrem. |
 | *ConcreteObserver* | `ServicoDeTabCoins` | Credita e debita TabCoins em reação aos eventos de conteúdo. |
 | *ConcreteObserver* | `NotificadorDeResposta` | Notifica o autor de um conteúdo quando ele recebe uma resposta. |
 | *ConcreteObserver* | `RegistroDeAtividades` | Grava um log de auditoria sequencial de todos os eventos do sistema, independentemente do tipo. |
@@ -74,6 +76,8 @@ Na solução proposta, os participantes do padrão correspondem às seguintes cl
 ## 4. Problema Abordado
 
 Na Entrega 02, a SubEquipe_03 modelou o fluxo de [publicação de um comentário](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemDinamica) na Página da postagem. No Diagrama de Sequência daquela entrega, o serviço de conteúdos, após persistir o comentário, chama diretamente o serviço de TabCoins para creditar o autor. No Diagrama de Estados da mesma entrega, o ciclo de vida do conteúdo exige ações secundárias em múltiplas transições: a remoção debita os créditos, a entrada no estado *Em Revisão* suspende os créditos, e a aprovação pela moderação os restaura.
+
+O [Diagrama de Implantação](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemEstatica) da mesma entrega, por sua vez, já previa o nó externo **Serviço de e-mail**, acionado para notificar o autor de um conteúdo quando ele recebe uma resposta, mas sem indicar qual componente decide acioná-lo. Mantida a estrutura da Entrega 02, essa decisão também caberia ao serviço de conteúdos, que passaria a depender do envio de e-mails. Nesta solução, ela é assumida pelo `NotificadorDeResposta`, um observador concreto.
 
 Em ambos os casos, o serviço de conteúdos **conhece e invoca diretamente** cada componente interessado nos seus eventos. Com uma única reação, esse acoplamento é tolerável. O problema surge com a evolução do sistema: um fórum acumula naturalmente novas reações aos mesmos eventos, como notificar o autor de uma publicação respondida, registrar a atividade do usuário, atualizar contadores ou alimentar um ranking. Mantida a estrutura original, cada nova reação exigiria:
 
@@ -154,7 +158,7 @@ A solução desta entrega implementa o Observer em sua forma original, em um ún
 - **Comunicação por difusão (*broadcast*):** a notificação é enviada a todos os observadores inscritos, sem que o sujeito precise saber quantos são.
 - **Extensibilidade:** novos observadores podem ser adicionados ou removidos em tempo de execução, sem modificar o sujeito nem os demais observadores.
 - **Testabilidade:** o sujeito pode ser testado com observadores simulados, e cada observador pode ser testado isoladamente, apenas com eventos construídos para o teste.
-- **Efetivação do Princípio Aberto/Fechado:** a presença do `RegistroDeAtividades` ilustra como requisitos secundários (como auditoria) são isolados em observadores dedicados, mantendo o `ServicoDeConteudo` focado e inalterado
+- **Efetivação do Princípio Aberto/Fechado:** a presença do `RegistroDeAtividades` ilustra como requisitos secundários (como auditoria) são isolados em observadores dedicados, mantendo o `ServicoDeConteudo` focado e inalterado.
 
 ### 6.3 Limitações
 
@@ -163,6 +167,16 @@ A solução desta entrega implementa o Observer em sua forma original, em um ún
 - **Ordem de notificação:** o padrão não garante a ordem em que os observadores são notificados, e a solução não deve depender dela.
 - **Tratamento de falhas:** em uma notificação síncrona, uma exceção lançada por um observador pode interromper a notificação dos seguintes, o que exige uma decisão explícita de projeto.
 - **Referências pendentes:** observadores que não são desinscritos continuam referenciados pelo sujeito, o que pode provocar notificações indevidas ou retenção de memória.
+
+## 7. Considerações Finais
+
+O cenário apresentado mostra como o Observer desacopla o serviço de conteúdos das reações aos seus eventos. O `ServicoDeConteudo` apenas anuncia que um comentário foi publicado, que um conteúdo foi removido ou que passou pela moderação, e cada observador decide como reagir: o `ServicoDeTabCoins` atualiza os saldos, o `NotificadorDeResposta` avisa o autor respondido e o `RegistroDeAtividades` grava a auditoria. Novas reações passam a ser acrescentadas por meio de novos observadores, sem alterar o sujeito.
+
+A solução parte de um problema identificado nos artefatos da própria equipe na Entrega 02, o que permite comparar o fluxo com chamadas diretas ao fluxo com notificação e evidenciar o efeito do padrão. A [Modelagem](/Base/Relatórios/SubEquipe03/modelagem.md) detalha a estrutura e a colaboração entre os participantes, e as páginas de [Código](/Base/Relatórios/SubEquipe03/código.md) e de [Execução](/Base/Relatórios/SubEquipe03/execução.md) demonstram o comportamento descrito.
+
+Entretanto, a escolha do padrão deve considerar a quantidade e a variabilidade das reações a cada evento, e não ser feita apenas para inserir um padrão no código. Com um único interessado estável, a chamada direta continua sendo a opção mais simples. Em um sistema real, operações lentas, como o envio de e-mails, poderiam exigir a evolução da notificação síncrona para um intermediário de mensagens, mantendo a mesma separação de responsabilidades.
+
+A eventual integração dessa implementação ao Projeto Fórum deverá ser avaliada e realizada separadamente.
 
 ## Referências
 
@@ -192,6 +206,8 @@ REDIS. **Redis Pub/Sub**. Redis Documentation. Disponível em: [https://redis.io
 
 REFACTORING.GURU. **Observer**. Disponível em: [https://refactoring.guru/pt-br/design-patterns/observer](https://refactoring.guru/pt-br/design-patterns/observer). Acesso em: 14 out. 2026.
 
+SUBEQUIPE_03. **Modelagem Estática na Notação UML**. Entrega 02 — Projeto Fórum. Disponível em: [https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemEstatica](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemEstatica). Acesso em: 17 out. 2026.
+
 SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto Fórum. Disponível em: [https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemDinamica](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_03/ModelagemDinamica). Acesso em: 14 out. 2026.
 
 ## Histórico de Versões
@@ -202,5 +218,6 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.1 | 14/10/2026 | Adição dos objetivos, identificação do padrão, problema abordado, justificativa da escolha e fundamentação teórica. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Definição dos objetivos geral e específicos, mapeamento dos participantes do GoF para as classes da solução, descrição do problema de acoplamento a partir dos artefatos da Entrega 02, comparação com os padrões Mediator, Chain of Responsibility e Strategy, e fundamentação teórica com benefícios e limitações do padrão. |
 | 1.2 | 14/10/2026 | Inclusão da adoção do padrão no desenvolvimento de software. | [Caio Alexandre](https://github.com/bitterteriyaki) |  | Menção à ampla adoção do padrão na introdução e na justificativa da escolha; criação da subseção 6.1, com exemplos de adoção (DOM, Node.js, Redis Pub/Sub e RabbitMQ) e a distinção entre o Observer e o modelo publish/subscribe com intermediário. |
 | 1.3 | 16/10/2026 | Expansão do escopo do padrão para englobar Moderação e Auditoria. | [Guilherme Moura](https://github.com/Guilherme-Moura) | | Inclusão do `RegistroDeAtividades` como novo ConcreteObserver; alinhamento do `ServicoDeConteudo` com o ciclo completo do Diagrama de Estados da Entrega 02 (fluxos *Em Revisão* e *Restaurado*). |
+| 1.4 | 17/10/2026 | Rastreabilidade, escopo de objeto e considerações finais. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Parágrafo sobre o Serviço de e-mail da Entrega 02 na seção 4; explicação de por que a herança usada na solução não muda o escopo de objeto do padrão (seção 3); Tabela 1 com a moderação; seção 7 de Considerações Finais, como nas SubEquipes 01 e 02. |
 
 <p align="center">Tabela 4: Histórico de Versões.</p>

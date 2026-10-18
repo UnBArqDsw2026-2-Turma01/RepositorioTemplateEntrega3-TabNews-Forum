@@ -9,7 +9,7 @@ const ServicoDeConteudo = require("../src/ServicoDeConteudo");
 const ServicoDeTabCoins = require("../src/ServicoDeTabCoins");
 const { NotificadorDeResposta, Notificacao } = require("../src/NotificadorDeResposta");
 const { EventoDeConteudo, TipoDeEvento } = require("../src/EventoDeConteudo");
-const { RepositorioDeConteudo, Conteudo } = require("../src/RepositorioDeConteudo");
+const { RepositorioDeConteudo, Conteudo, EstadoDoConteudo } = require("../src/RepositorioDeConteudo");
 const RegistroDeAtividades = require("../src/RegistroDeAtividades");
 
 class SujeitoDeTeste extends Sujeito {
@@ -190,6 +190,7 @@ describe("RepositorioDeConteudo", () => {
     const conteudo = repositorio.salvar(new Conteudo({ autor: "joao", corpo: "Postagem" }));
 
     assert.equal(conteudo.id, "c1");
+    assert.equal(conteudo.estado, EstadoDoConteudo.PUBLICADO);
     assert.equal(repositorio.buscarPorId("c1"), conteudo);
 
     repositorio.remover("c1");
@@ -269,10 +270,28 @@ describe("ServicoDeConteudo (ConcreteSubject)", () => {
 
   test("restaurarConteudo notifica o evento CONTEUDO_RESTAURADO", () => {
     const { conteudos, auditoria, postagem } = criarCenario();
+    conteudos.enviarParaRevisao(postagem.id);
     conteudos.restaurarConteudo(postagem.id);
 
     const logs = auditoria.listarRegistros();
-    assert.match(logs[0], /CONTEUDO_RESTAURADO/);
+    assert.match(logs[1], /CONTEUDO_RESTAURADO/);
+    assert.equal(postagem.estado, EstadoDoConteudo.PUBLICADO);
+  });
+
+  test("enviarParaRevisao só aceita conteúdo publicado", () => {
+    const { conteudos, auditoria, postagem } = criarCenario();
+    conteudos.enviarParaRevisao(postagem.id);
+
+    assert.equal(postagem.estado, EstadoDoConteudo.EM_REVISAO);
+    assert.throws(() => conteudos.enviarParaRevisao(postagem.id), /não está publicado/);
+    assert.equal(auditoria.listarRegistros().length, 1);
+  });
+
+  test("restaurarConteudo só aceita conteúdo em revisão", () => {
+    const { conteudos, auditoria, postagem } = criarCenario();
+
+    assert.throws(() => conteudos.restaurarConteudo(postagem.id), /não está em revisão/);
+    assert.equal(auditoria.listarRegistros().length, 0);
   });
 });
 
@@ -298,17 +317,27 @@ describe("ServicoDeTabCoins (ConcreteObserver)", () => {
     assert.equal(new ServicoDeTabCoins().consultarSaldo("ninguem"), 0);
   });
 
-  test("Suspende os créditos ao entrar em revisão e restaura ao aprovar", () => {
+  test("suspende os créditos ao entrar em revisão e restaura ao aprovar", () => {
     const { conteudos, tabcoins, postagem } = criarCenario();
     const comentario = conteudos.publicarComentario("maria", postagem.id, "Resposta");
-    
+
     assert.equal(tabcoins.consultarSaldo("maria"), 1);
-    
+
     conteudos.enviarParaRevisao(comentario.id);
     assert.equal(tabcoins.consultarSaldo("maria"), 0);
-    
+
     conteudos.restaurarConteudo(comentario.id);
     assert.equal(tabcoins.consultarSaldo("maria"), 1);
+  });
+
+  test("não debita de novo ao remover um conteúdo que está em revisão", () => {
+    const { conteudos, tabcoins, postagem } = criarCenario();
+    const comentario = conteudos.publicarComentario("maria", postagem.id, "Resposta");
+
+    conteudos.enviarParaRevisao(comentario.id);
+    conteudos.removerConteudo(comentario.id);
+
+    assert.equal(tabcoins.consultarSaldo("maria"), 0);
   });
 });
 
@@ -361,14 +390,14 @@ describe("NotificadorDeResposta (ConcreteObserver)", () => {
 describe("RegistroDeAtividades (ConcreteObserver - Auditoria)", () => {
   test("RN07: grava um histórico sequencial de todos os eventos", () => {
     const { conteudos, auditoria, postagem } = criarCenario();
-    
+
     const comentario = conteudos.publicarComentario("maria", postagem.id, "Resposta polêmica");
     conteudos.enviarParaRevisao(comentario.id);
     conteudos.restaurarConteudo(comentario.id);
     conteudos.removerConteudo(comentario.id);
 
     const logs = auditoria.listarRegistros();
-    
+
     assert.equal(logs.length, 4);
     assert.match(logs[0], /COMENTARIO_PUBLICADO/);
     assert.match(logs[1], /CONTEUDO_EM_REVISAO/);
