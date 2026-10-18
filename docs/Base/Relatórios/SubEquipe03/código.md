@@ -1187,6 +1187,6 @@ NODE.JS. **Test runner Documentation**. Disponível em: [https://nodejs.org/api/
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 16/10/2026 | Criação da documentação e detalhamento da implementação do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | — | Inclusão dos componentes GoF, código-fonte, suíte de testes e orientações de execução. |
-| 1.1 | 17/10/2026 | Ampliação da documentação do código. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Estrutura igual à da SubEquipe01: uma seção por classe com o código real, participante GoF, regras e link; tabela dos 32 testes; correspondência entre diagrama e código; considerações, pontos de vista e participação. Caminho de execução corrigido e referência GAMMA na edição em português. |
+| 1.1 | 17/10/2026 | Ampliação da documentação do código. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Padronização da página com as demais subequipes: cada classe com seu trecho de código, papel no padrão e regras atendidas, testes automatizados e correspondência entre o diagrama e o código. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
