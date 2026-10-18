@@ -1115,15 +1115,25 @@ As limitações reconhecidas na modelagem também se aplicam: a notificação é
 
 ## 16. Pontos de Vista dos Integrantes
 
-Esta seção apresenta as percepções dos integrantes sobre a implementação do padrão Observer. Cada integrante escreve o próprio ponto de vista.
+Esta seção apresenta as percepções dos integrantes sobre a implementação do padrão Observer.
+
+### Caio Alexandre Ornelas Silva
+
+### Guilherme Moura da Silva Neto
 
 ### Leonardo Fachinello Bonetti
 
-PREENCHER
+Implementar o Observer a partir do Diagrama de Classes mostrou o valor de uma modelagem bem definida: com os nomes, as responsabilidades e as regras já descritos, o código passou a ser uma tradução do diagrama, e qualquer divergência ficava evidente. Como o JavaScript não tem interfaces, a classe base `Observador`, que lança erro quando `atualizar` não é sobrescrito, foi a forma encontrada para garantir o contrato.
+
+O principal ganho percebido foi o desacoplamento. O `ServicoDeConteudo` não importa nenhum observador concreto, o que permitiu acrescentar o `RegistroDeAtividades` e os fluxos de moderação sem alterar a lógica de notificação. Por outro lado, a notificação síncrona exige cuidado: sem o isolamento de falhas do `Sujeito` (RN06), um erro em um observador interromperia os demais.
 
 ## 17. Participação e Evidências
 
 Esta seção registra as atividades relacionadas à implementação e à documentação do padrão Observer. As evidências correspondem aos arquivos desenvolvidos e aos commits do repositório.
+
+### Caio Alexandre Ornelas Silva
+
+### Guilherme Moura da Silva Neto
 
 ### Leonardo Fachinello Bonetti
 
@@ -1160,7 +1170,17 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 
 <p align="center">Tabela 3: Evidências de participação na implementação.</p>
 
-## 18. Referências
+## 18. Nível de Contribuição dos Integrantes
+
+| Integrante | Atividades desenvolvidas | Nível de contribuição | Justificativa |
+|---|---|---|---|
+| [Caio Alexandre](https://github.com/bitterteriyaki) | | | |
+| [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, evolução dos testes automatizados e documentação da implementação. | 33,33% | A classificação deve considerar a participação comprovada na implementação, na documentação e nas atividades relacionadas à entrega. |
+| [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Implementação base do padrão, demonstração, testes automatizados, correção da moderação (RN08) e revisão da documentação do código. | 33,33% | Participação comprovada pelos commits e pelos PRs #14 e #19. |
+
+<p align="center">Tabela 4: Nível de contribuição dos integrantes.</p>
+
+## 19. Referências
 
 FREEMAN, Eric; ROBSON, Elisabeth. **Use a Cabeça! Padrões de Projetos**. 2. ed. Rio de Janeiro: Alta Books, 2021.
 
@@ -1172,12 +1192,12 @@ MOZILLA. **Object.freeze()**. MDN Web Docs. Disponível em: [https://developer.m
 
 NODE.JS. **Test runner Documentation**. Disponível em: [https://nodejs.org/api/test.html](https://nodejs.org/api/test.html). Acesso em: 16 out. 2026.
 
-## 19. Histórico de Versões
+## 20. Histórico de Versões
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 16/10/2026 | Criação da documentação e detalhamento da implementação do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | — | Inclusão dos componentes GoF, código-fonte, suíte de testes e orientações de execução. |
 | 1.1 | 17/10/2026 | Ampliação da documentação do código. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Padronização da página com as demais subequipes: cada classe com seu trecho de código, papel no padrão e regras atendidas, testes automatizados e correspondência entre o diagrama e o código. |
-| 1.2 | 18/10/2026 | Padronização da página. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Remoção da seção de nível de contribuição, que já é registrada em Participações, e inclusão do link do PR da documentação. |
+| 1.2 | 18/10/2026 | Participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Ponto de vista e nível de contribuição do Leonardo, espaços para os demais integrantes e link do PR da documentação. |
 
-<p align="center">Tabela 4: Histórico de Versões.</p>
+<p align="center">Tabela 5: Histórico de Versões.</p>
