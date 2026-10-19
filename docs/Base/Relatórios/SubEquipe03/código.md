@@ -611,7 +611,7 @@ O arquivo define três auxiliares: `SujeitoDeTeste`, que expõe `notificar` por 
 | | Depois de desinscrito, deixa de notificar enquanto o TabCoins continua. | — |
 | `RegistroDeAtividades (ConcreteObserver - Auditoria)` | Grava um histórico sequencial de todos os eventos. | RN07 |
 
-<p align="center">Tabela 1: Testes automatizados e regras cobertas.<br>Autoria: [Leonardo Bonetti](https://github.com/LeoFacB) ([dc7606d](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/dc7606d)), a partir dos testes do Leonardo ([d5fa8ad](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/d5fa8ad), [825ed4d](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/825ed4d)) e do Guilherme ([fdd9ed1](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fdd9ed1)).</p>
+<p align="center">Tabela 1: Testes automatizados e regras cobertas.<br>Autoria: Leonardo Bonetti, a partir dos testes de Leonardo Bonetti e Guilherme Moura.</p>
 
 Três testes merecem observação:
 
@@ -1097,7 +1097,7 @@ A tabela a seguir confirma que cada elemento do [Diagrama de Classes](/Base/Rela
 | `NotificadorDeResposta` registra `Notificacao` (`0..*`) | Composição | As notificações são criadas e guardadas apenas pelo notificador | `src/NotificadorDeResposta.js` |
 | `Conteudo` encontra-se em `EstadoDoConteudo` (`1`) | Associação | Atributo `estado` | `src/RepositorioDeConteudo.js` |
 
-<p align="center">Tabela 2: Correspondência entre os elementos do Diagrama de Classes e o código.<br>Autoria: [Leonardo Bonetti](https://github.com/LeoFacB) ([dc7606d](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/dc7606d)).</p>
+<p align="center">Tabela 2: Correspondência entre os elementos do Diagrama de Classes e o código.<br>Autoria: Leonardo Bonetti.</p>
 
 ## 15. Considerações sobre a implementação
 
@@ -1246,6 +1246,6 @@ NODE.JS. **Test runner Documentation**. Disponível em: [https://nodejs.org/api/
 | 1.3 | 18/10/2026 | Participação do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Ponto de vista sobre a correspondência entre a modelagem e a implementação e nível de contribuição do Caio. |
 | 1.4 | 18/10/2026 | Participação e evidências do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão das atividades desenvolvidas e das evidências do Caio na seção de Participação e Evidências. |
 | 1.5 | 18/10/2026 | Participação do Guilherme. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Registro das lições aprendidas (Ponto de Vista), descrição das atividades desenvolvidas na moderação/auditoria e inclusão da tabela de commits de evidências. |
-| 1.6 | 19/10/2026 | Autoria das tabelas e participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão de quem elaborou as Tabelas 1 e 2 e detalhamento das atividades e evidências do Leonardo, com os commits, para identificar a contribuição individual. |
+| 1.6 | 19/10/2026 | Autoria das tabelas e participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão do nome de quem elaborou as Tabelas 1 e 2 e detalhamento das atividades e evidências do Leonardo, para identificar a contribuição individual. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>

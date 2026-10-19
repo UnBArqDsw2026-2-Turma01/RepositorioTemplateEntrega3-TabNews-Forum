@@ -83,7 +83,7 @@ Os relatos também convergem nas limitações. A ferramenta produziu erros que e
 
 A principal lição é que o uso da IA só foi seguro porque havia formas objetivas de verificação: a renderização dos diagramas, a comparação com a modelagem e, principalmente, a execução da demonstração e dos testes automatizados. Assim, a IA Generativa contribuiu para ganhar tempo e melhorar a apresentação dos resultados, mas o entendimento do padrão Observer, as decisões técnicas e a responsabilidade pelo que foi entregue continuaram sendo dos integrantes.
 
-*Autoria: [Leonardo Bonetti](https://github.com/LeoFacB), a partir dos relatos dos três integrantes ([137da78](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/137da78)).*
+*Autoria: Leonardo Bonetti, a partir dos relatos dos três integrantes.*
 
 ## Evidências de Participação
 
@@ -94,7 +94,7 @@ A principal lição é que o uso da IA só foi seguro porque havia formas objeti
 | [Leonardo Bonetti](https://github.com/LeoFacB) | Implementação base do padrão Observer (classes, demonstração e testes); revisão da modelagem (associações com verbos, estado do conteúdo, correção do Diagrama de Sequência e rastreabilidade com a Entrega 02); correção da moderação (RN08); ampliação das páginas de Código e de Execução, com as saídas reais e as capturas do terminal; seção individual e análise crítica desta página; ata da reunião de alinhamento. | [PR #14 — Implementação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/14) · [Diagrama de Classes](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/8f9b735) · [Diagrama de Sequência](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/b3785f9) · [Moderação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/825ed4d) · [Doc Código](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/dc7606d) · [Doc Execução](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/4e6c94b) · [Análise crítica](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/137da78) · [PR #19 — Documentação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/19) · [PR #25 — Ajustes finais](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/25) · [Ata da reunião](/Projeto/atas/Reuniao1_sub03.md) |
 
 
-<p align="center">Tabela 1: Evidências de participação dos integrantes.<br>Autoria: cada integrante registrou a própria linha.</p>
+<p align="center">Tabela 1: Evidências de participação dos integrantes.</p>
 
 ## Evidências do Uso de IA Generativa
 
@@ -105,7 +105,7 @@ A principal lição é que o uso da IA só foi seguro porque havia formas objeti
 | [Leonardo Bonetti](https://github.com/LeoFacB) | Claude (Claude Code) | Apoio na organização e na execução dos testes automatizados, na estruturação da demonstração no terminal e na conferência da consistência entre diagramas, código e documentação. | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main?author=LeoFacB) |
 | [Leonardo Bonetti](https://github.com/LeoFacB) | Gemini | Resumo da transcrição da reunião de alinhamento da SubEquipe 03, revisado antes de compor a [ata](/Projeto/atas/Reuniao1_sub03.md). | [Conversa no Gemini](https://share.gemini.google/EVf68uiES3rP) |
 
-<p align="center">Tabela 2: Evidências do uso de IA Generativa.<br>Autoria: cada integrante registrou a própria linha.</p>
+<p align="center">Tabela 2: Evidências do uso de IA Generativa.</p>
 
 ## Referências
 
@@ -130,7 +130,7 @@ PLANTUML. **PlantUML**. Disponível em: [https://plantuml.com/](https://plantuml
 | 1.4 | 18/10/2026 | Ponto de vista individual. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Registro das lições aprendidas e do uso da IA Generativa, e atualização das evidências com o PR da documentação e o histórico de commits, registro dos revisores das versões anteriores e consolidação da análise crítica a partir dos três pontos de vista. |
 | 1.5 | 18/10/2026 | Uso do Gemini no resumo da reunião. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Guilherme Moura](github.com/Guilherme-Moura) | Registro do uso do Gemini no resumo da reunião de alinhamento, com o link da conversa como evidência, e inclusão do PR de ajustes finais e da ata nas evidências de participação. |
 | 1.6 | 19/10/2026 | Adição das evidências de participação e de uso de IA. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão dos links dos commits na tabela de participação e adição do link da conversa no Gemini evidenciando o apoio na formatação e geração do boilerplate de testes. |
-| 1.7 | 19/10/2026 | Autoria e evidências do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Identificação da autoria das Tabelas 1 e 2 e da análise crítica e detalhamento da linha do Leonardo na Tabela 1, com os commits de cada contribuição. |
+| 1.7 | 19/10/2026 | Autoria e evidências do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Identificação da autoria da análise crítica e detalhamento da linha do Leonardo na Tabela 1, com os commits de cada contribuição. |
 
 <p align="center">Tabela 3: Histórico de Versões.</p>
 

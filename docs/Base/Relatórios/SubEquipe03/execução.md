@@ -177,7 +177,7 @@ Os cenários abaixo resumem os 32 testes de `test/observer.test.js`. A relação
 | CT11 | Remoção de conteúdo em revisão (RN08). | O autor não é debitado de novo, pois os créditos já foram suspensos. |
 | CT12 | Conteúdo inexistente. | Publicar em resposta a um pai inexistente ou remover um id inexistente lança um erro e não notifica. |
 
-*Autoria: CT01 a CT07, [Guilherme Moura](https://github.com/Guilherme-Moura) ([fa6f5d6](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fa6f5d6)); CT08 a CT12, [Leonardo Bonetti](https://github.com/LeoFacB) ([4e6c94b](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/4e6c94b)).*
+*Autoria: CT01 a CT07, Guilherme Moura; CT08 a CT12, Leonardo Bonetti.*
 
 ### 3.2. Resultado obtido dos testes
 
@@ -263,7 +263,7 @@ A implementação será considerada validada quando os seguintes critérios fore
 | CV06 | Suíte de Testes. | Todos os testes automatizados da arquitetura encerram sem falhas. |
 | CV07 | Moderação coerente com o estado. | Só conteúdos publicados vão para revisão, só conteúdos em revisão são restaurados e nenhum autor é debitado duas vezes pelo mesmo conteúdo. |
 
-*Autoria: CV01 a CV06, [Guilherme Moura](https://github.com/Guilherme-Moura) ([fa6f5d6](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fa6f5d6)); CV07, [Leonardo Bonetti](https://github.com/LeoFacB) ([4e6c94b](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/4e6c94b)).*
+*Autoria: CV01 a CV06, Guilherme Moura; CV07, Leonardo Bonetti.*
 
 
 ## 5. Evidências de execução
@@ -286,7 +286,7 @@ A Figura 1 mostra o comando executado e a saída completa no terminal, igual à 
 
 ![Saída do comando npm start no terminal](assets/execucao-programa.png)
 
-*Fonte: elaboração própria. Captura: [Leonardo Bonetti](https://github.com/LeoFacB) ([78f1645](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/78f1645)).*
+*Fonte: elaboração própria. Captura: Leonardo Bonetti.*
 
 ### 5.2. Execução dos testes automatizados
 
@@ -302,7 +302,7 @@ A Figura 2 mostra o comando executado e o resultado dos testes, igual ao apresen
 
 ![Resultado do comando npm test no terminal](assets/execucao-testes.png)
 
-*Fonte: elaboração própria. Captura: [Leonardo Bonetti](https://github.com/LeoFacB) ([78f1645](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/78f1645)).*
+*Fonte: elaboração própria. Captura: Leonardo Bonetti.*
 
 ### 5.3. Registro das evidências
 
@@ -311,7 +311,7 @@ A Figura 2 mostra o comando executado e o resultado dos testes, igual ao apresen
 | Execução do programa | [`assets/execucao-programa.png`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/assets/execucao-programa.png) | As seis etapas e o resumo foram exibidos; o observador com falha não impediu a notificação dos demais (RN06). |
 | Testes automatizados | [`assets/execucao-testes.png`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/assets/execucao-testes.png) | 32 testes em 8 suítes aprovados, sem falhas. |
 
-*Autoria: estrutura da tabela, [Guilherme Moura](https://github.com/Guilherme-Moura) ([fa6f5d6](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fa6f5d6)); capturas e resultados observados, [Leonardo Bonetti](https://github.com/LeoFacB) ([78f1645](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/78f1645)).*
+*Autoria: estrutura da tabela, Guilherme Moura; capturas e resultados observados, Leonardo Bonetti.*
 
 ### 5.4. Vídeo da execução
 
@@ -329,7 +329,7 @@ O vídeo a seguir demonstra a execução do programa e dos testes automatizados 
 
 Caso o vídeo não carregue, ele também está disponível em: [https://youtu.be/7dkUuQoRiaI](https://youtu.be/7dkUuQoRiaI).
 
-<p align="center"><strong>Fonte: Elaborado pelos autores (2026).</strong><br>Vídeo incluído e atualizado por [Caio Alexandre](https://github.com/bitterteriyaki) ([6aaae41](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/6aaae41), [c720971](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/c720971)).</p>
+<p align="center"><strong>Fonte: Elaborado pelos autores (2026).</strong><br>Gravação: Caio Alexandre.</p>
 
 ## 6. Limitações da demonstração
 
@@ -456,4 +456,4 @@ NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [ht
 | 1.6 | 18/10/2026 | Participação e evidências do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão das atividades desenvolvidas e das evidências do Caio na seção de Participação e Evidências. |
 | 1.7 | 18/10/2026 | Participação do Guilherme. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Registro das lições aprendidas (Ponto de Vista) sobre a execução, descrição das atividades de estruturação da página e inclusão de evidências. |
 | 1.8 | 19/10/2026 | Atualização do vídeo da execução. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Substituição do vídeo da seção 5.4 pela nova gravação da execução do programa e dos testes. |
-| 1.9 | 19/10/2026 | Autoria das evidências e participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão de quem elaborou cada figura, tabela e o vídeo, e detalhamento das atividades e evidências do Leonardo, com os commits, para identificar a contribuição individual. |
+| 1.9 | 19/10/2026 | Autoria das evidências e participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão do nome de quem elaborou cada figura, tabela e o vídeo e detalhamento das atividades e evidências do Leonardo, para identificar a contribuição individual. |
