@@ -1,27 +1,44 @@
 # 3. Código
 
-Esta seção apresenta a implementação do padrão de projeto GoF Builder, utilizado para construir objetos `Publicacao` de maneira gradual e organizada. O exemplo foi desenvolvido em JavaScript com Node.js, sem dependências externas, com o objetivo de demonstrar a aplicação do padrão no contexto de publicações de um fórum.
+Esta seção documenta a implementação demonstrativa do padrão criacional GoF **Builder** para construir uma publicação em JavaScript. A documentação foi conferida com os arquivos presentes nesta pasta: `src/Publicacao.js`, `src/PublicacaoBuilder.js`, `src/index.js`, `test/PublicacaoBuilder.test.js` e `package.json`.
 
-A implementação é didática e independente do sistema real do Projeto Fórum. Ela não realiza persistência em banco de dados nem integração com usuários reais.
+O exemplo pertence ao contexto acadêmico do Projeto Fórum TabNews, mas funciona isoladamente e mantém os dados em memória. Ele constrói um objeto `Publicacao` e imprime sua representação JSON. Não autentica usuários, persiste publicações, comunica-se com o TabNews ou publica conteúdo no sistema real.
 
-## 1. Organização dos arquivos
-
-A estrutura do projeto está organizada da seguinte forma:
+## 1. Estrutura do projeto
 
 ```text
-src/
-├── Publicacao.js
-├── PublicacaoBuilder.js
-├── DiretorPublicacao.js   (complemento: Director opcional)
-└── index.js
-
-test/
-└── PublicacaoBuilder.test.js
-
-package.json
+SubEquipe01/
+├── src/
+│   ├── Publicacao.js
+│   ├── PublicacaoBuilder.js
+│   └── index.js
+├── test/
+│   └── PublicacaoBuilder.test.js
+├── package.json
+└── README.md
 ```
 
-## 2. Classe `Publicacao`
+| Arquivo | Responsabilidade |
+|---|---|
+| `src/Publicacao.js` | Produto final: valida os dados obrigatórios, normaliza os campos e define a representação JSON. |
+| `src/PublicacaoBuilder.js` | Builder concreto: mantém os valores temporários, configura os campos e instancia `Publicacao` em `build()`. |
+| `src/index.js` | Cliente da demonstração: usa o Builder e exibe o resultado. |
+| `test/PublicacaoBuilder.test.js` | Testes unitários com o módulo nativo `node:test`. |
+| `package.json` | Metadados do pacote e scripts `start` e `test`. |
+
+Esta estrutura não contém `DiretorPublicacao.js`, `Usuario.js` ou `CadastroUsuarioBuilder.js`. Esses componentes foram mencionados em versões anteriores da documentação ou em registros de contribuição, mas não fazem parte dos arquivos de código disponíveis nesta pasta; portanto, não são apresentados aqui como código executável desta versão.
+
+## 2. Participantes do Builder
+
+| Papel | Implementação | Responsabilidade |
+|---|---|---|
+| Cliente | `src/index.js` | Configura os dados e solicita o produto com `build()`. |
+| Builder concreto | `PublicacaoBuilder` | Oferece métodos nomeados e encadeáveis e transfere os dados para o produto. |
+| Produto | `Publicacao` | Verifica as invariantes e guarda os dados já normalizados. |
+
+Não há uma classe Builder abstrata ou Director na implementação atualmente disponível. O cliente chama diretamente o Builder concreto; não há uma receita de montagem reutilizada que exija um Director.
+
+## 3. Produto `Publicacao`
 
 **Arquivo:** `src/Publicacao.js`
 
@@ -31,11 +48,9 @@ class Publicacao {
     if (!titulo || !titulo.trim()) {
       throw new Error("O título da publicação é obrigatório.");
     }
-
     if (!conteudo || !conteudo.trim()) {
       throw new Error("O conteúdo da publicação é obrigatório.");
     }
-
     if (!autor || !autor.trim()) {
       throw new Error("O autor da publicação é obrigatório.");
     }
@@ -43,12 +58,7 @@ class Publicacao {
     this.titulo = titulo.trim();
     this.conteudo = conteudo.trim();
     this.autor = autor.trim();
-
-    this.tags = [
-      ...new Set(
-        tags.map((tag) => String(tag).trim()).filter(Boolean)
-      )
-    ];
+    this.tags = [...new Set(tags.map((tag) => String(tag).trim()).filter(Boolean))];
   }
 
   toJSON() {
@@ -64,19 +74,13 @@ class Publicacao {
 module.exports = Publicacao;
 ```
 
-A classe `Publicacao` representa o produto final construído pelo Builder. Sua responsabilidade é armazenar os dados da publicação e garantir que os campos obrigatórios sejam válidos.
+O construtor é o limite de validade do produto: mesmo que `Publicacao` seja instanciada sem o Builder, título, conteúdo e autor precisam estar presentes e não podem conter somente espaços. Os três campos são armazenados sem espaços externos.
 
-A implementação realiza as seguintes operações:
+As tags são convertidas para string, aparadas, filtradas para remover valores vazios e deduplicadas com `Set`. O array final é novo. `toJSON()` determina quais propriedades são serializadas quando o objeto é passado para `JSON.stringify()`.
 
-- Verifica se o título, o conteúdo e o autor foram informados.
-- Impede a criação de uma publicação quando algum campo obrigatório está vazio.
-- Remove espaços em branco no início e no final dos textos.
-- Remove tags vazias e duplicadas.
-- Implementa o método `toJSON()`, que define a representação dos dados da publicação em formato JSON.
+As regras são limitadas ao exemplo: não há validação explícita de tipo, comprimento, formato, autorização ou conteúdo, nem persistência. O produto também não é congelado e suas propriedades permanecem mutáveis após a construção.
 
-Dessa forma, as regras de validação ficam centralizadas na classe que representa o objeto final.
-
-## 3. Classe `PublicacaoBuilder`
+## 4. Builder concreto `PublicacaoBuilder`
 
 **Arquivo:** `src/PublicacaoBuilder.js`
 
@@ -85,12 +89,7 @@ const Publicacao = require("./Publicacao");
 
 class PublicacaoBuilder {
   constructor() {
-    this.dados = {
-      titulo: "",
-      conteudo: "",
-      autor: "",
-      tags: []
-    };
+    this.dados = { titulo: "", conteudo: "", autor: "", tags: [] };
   }
 
   comTitulo(titulo) {
@@ -112,7 +111,6 @@ class PublicacaoBuilder {
     if (!Array.isArray(tags)) {
       throw new TypeError("As tags devem ser informadas em um array.");
     }
-
     this.dados.tags = [...tags];
     return this;
   }
@@ -125,15 +123,11 @@ class PublicacaoBuilder {
 module.exports = PublicacaoBuilder;
 ```
 
-A classe `PublicacaoBuilder` implementa o padrão GoF Builder. Sua responsabilidade é permitir a configuração gradual dos atributos necessários para a criação de uma publicação.
+O Builder mantém em `dados` o estado temporário da montagem. `comTitulo()`, `comConteudo()` e `comAutor()` guardam os respectivos valores; `comTags()` primeiro exige um array e então copia superficialmente a lista fornecida. Cada método de configuração retorna `this`, permitindo encadeamento.
 
-Cada método de configuração recebe um valor, armazena-o no objeto interno `dados` e retorna `this`. Esse retorno permite encadear chamadas de métodos, tornando a construção mais legível.
+`build()` cria uma instância nova de `Publicacao` com os dados configurados. Ele não replica as validações textuais: essas invariantes pertencem ao produto e são aplicadas pelo seu construtor. O Builder não é reiniciado depois de `build()`, então um Builder reutilizado mantém valores anteriores até que sejam sobrescritos; o cliente de demonstração cria uma instância para cada montagem.
 
-O método `comTags()` verifica se as tags foram fornecidas em um array. Já o método `build()` instancia a classe `Publicacao`, transferindo a ela a responsabilidade de validar os campos obrigatórios e construir o objeto final.
-
-A separação entre Builder e produto permite organizar o processo de construção sem concentrar toda a lógica em uma única chamada de construtor.
-
-## 4. Programa de demonstração
+## 5. Cliente e execução demonstrativa
 
 **Arquivo:** `src/index.js`
 
@@ -142,9 +136,7 @@ const PublicacaoBuilder = require("./PublicacaoBuilder");
 
 const publicacao = new PublicacaoBuilder()
   .comTitulo("Padrões de Projeto GoF")
-  .comConteudo(
-    "Exemplo didático do padrão Builder aplicado ao Projeto Fórum."
-  )
+  .comConteudo("Exemplo didático do padrão Builder aplicado ao Projeto Fórum.")
   .comAutor("Autor demonstrativo")
   .comTags(["GoF", "Arquitetura", "JavaScript", "GoF"])
   .build();
@@ -153,122 +145,81 @@ console.log("Publicação construída com sucesso:");
 console.log(JSON.stringify(publicacao, null, 2));
 ```
 
-O arquivo `index.js` demonstra a utilização do Builder na construção de uma publicação. Os métodos são encadeados para definir o título, o conteúdo, o autor e as tags.
+O cliente informa os quatro campos, chama `build()` e imprime o produto. A lista repete a tag `GoF` intencionalmente; a normalização de `Publicacao` remove essa repetição. O autor é um texto fixo demonstrativo, não uma identidade autenticada.
 
-Ao final, o método `build()` retorna uma instância de `Publicacao`, e o resultado é exibido no terminal em formato JSON.
+O fluxo de criação é: cliente instancia o Builder; os métodos `com...()` atualizam `dados` e retornam o mesmo Builder; `build()` chama o construtor do produto; o produto valida e normaliza; por fim, `JSON.stringify()` usa `toJSON()` e o cliente imprime o resultado. Uma exceção durante a configuração de tags ou no construtor interrompe o fluxo normal e impede a mensagem de sucesso.
 
-O exemplo também inclui uma tag duplicada, permitindo observar o comportamento de remoção de duplicatas implementado na classe `Publicacao`.
-
-O autor informado é apenas demonstrativo. A implementação não realiza autenticação, persistência em banco de dados ou integração com usuários reais.
-
-### 4.1 Complemento: Director opcional
-
-**Arquivo:** `src/DiretorPublicacao.js`
-
-**Contribuição:** João Pedro S. Maciel.
-
-O padrão Builder pode ser complementado por um **Director**, que encapsula sequências de construção predefinidas. Na seção 4 e no código acima, o cliente define a sequência de chamadas diretamente. Quando a mesma sequência se repete em vários pontos do sistema, como em tutoriais e notícias, o Director concentra essa estrutura em um único lugar.
-
-```javascript
-class DiretorPublicacao {
-  constructor(builder) {
-    if (!builder) {
-      throw new Error("O Director precisa de um Builder.");
-    }
-    this.builder = builder;
-  }
-
-  montarTutorial({ titulo, autor, contexto, passos, conclusao, tags = [] }) {
-    const conteudo = [
-      "## Contexto",
-      contexto,
-      "## Passo a passo",
-      ...passos.map((p, i) => `${i + 1}. ${p}`),
-      "## Conclusão",
-      conclusao,
-    ].join("\n\n");
-
-    return this.builder
-      .comTitulo(titulo)
-      .comAutor(autor)
-      .comConteudo(conteudo)
-      .comTags(["tutorial", ...tags])
-      .build();
-  }
-
-  montarNoticia({ titulo, autor, texto, fonte }) {
-    const conteudo = `${texto}\n\nFonte: ${fonte}`;
-    return this.builder
-      .comTitulo(titulo)
-      .comAutor(autor)
-      .comConteudo(conteudo)
-      .comTags(["noticia"])
-      .build();
-  }
-}
-
-module.exports = DiretorPublicacao;
-```
-
-**Uso:**
-
-```javascript
-const PublicacaoBuilder = require("./PublicacaoBuilder");
-const DiretorPublicacao = require("./DiretorPublicacao");
-
-const tutorial = new DiretorPublicacao(new PublicacaoBuilder()).montarTutorial({
-  titulo: "Como usar o Builder em JavaScript",
-  autor: "Autor demonstrativo",
-  contexto: "Objetos com muitos atributos ficam difíceis de ler com construtores longos.",
-  passos: ["Crie o builder", "Configure os campos", "Chame build()"],
-  conclusao: "O Builder separa configuração e criação.",
-  tags: ["javascript"],
-});
-// tags resultantes: ["tutorial", "javascript"]
-```
-
-**Decisões de projeto:**
-
-- O Builder é **injetado** no construtor do Director. Assim, o Director não depende da forma como o módulo do Builder é exportado, e o mesmo Director pode ser usado com diferentes Builders.
-- O Director usa apenas os métodos públicos do Builder (`comTitulo`, `comAutor`, `comConteudo`, `comTags` e `build`). Por isso, ele funciona com a implementação de `PublicacaoBuilder` apresentada na seção 3 sem qualquer alteração nela.
-- O Director não conhece a classe `Publicacao`. Quem valida os campos obrigatórios continua sendo a própria `Publicacao`, o que mantém a regra de validação centralizada.
-
-**Verificação:** o `DiretorPublicacao` foi executado com o código de `Publicacao.js` e `PublicacaoBuilder.js` apresentado neste documento. Os testes do complemento (`node --test`, 15 testes) cobrem a estrutura do tutorial, a estrutura da notícia, a remoção de tags repetidas e vazias, a independência entre montagens sucessivas e o erro quando nenhum Builder é informado.
-
-A utilização do Director não é obrigatória. Para dois casos de uso, o ganho é pequeno; ele se justifica quando o número de estruturas repetidas aumentar.
-
-## 5. Testes automatizados
+## 6. Testes automatizados
 
 **Arquivo:** `test/PublicacaoBuilder.test.js`
 
-Os testes automatizados verificam o comportamento esperado do Builder e as validações realizadas pela classe `Publicacao`.
+```javascript
+const test = require("node:test");
+const assert = require("node:assert/strict");
+const PublicacaoBuilder = require("../src/PublicacaoBuilder");
 
-A implementação utiliza o módulo nativo `node:test` do Node.js e a biblioteca `node:assert/strict`, sem necessidade de instalar dependências externas.
+test("constrói uma publicação com dados válidos", () => {
+  const publicacao = new PublicacaoBuilder()
+    .comTitulo("Título")
+    .comConteudo("Conteúdo")
+    .comAutor("Autor")
+    .comTags(["GoF", "JS"])
+    .build();
 
-Os testes devem contemplar os seguintes cenários:
+  assert.equal(publicacao.titulo, "Título");
+  assert.equal(publicacao.conteudo, "Conteúdo");
+  assert.equal(publicacao.autor, "Autor");
+  assert.deepEqual(publicacao.tags, ["GoF", "JS"]);
+});
 
-1. Construção de uma publicação com os dados válidos.
-2. Rejeição de uma publicação sem título.
-3. Rejeição de uma publicação sem conteúdo.
-4. Rejeição de uma publicação sem autor.
-5. Rejeição de tags informadas em um formato diferente de array.
+test("remove espaços externos e tags repetidas ou vazias", () => {
+  const publicacao = new PublicacaoBuilder()
+    .comTitulo("  Título  ")
+    .comConteudo("  Conteúdo  ")
+    .comAutor("  Autor  ")
+    .comTags(["GoF", "GoF", "  JS  ", ""])
+    .build();
 
-**Importante:** para que esta seção represente fielmente o código do projeto, o conteúdo de `PublicacaoBuilder.test.js` deve ser incluído integralmente na documentação. Os cenários acima descrevem os comportamentos esperados, mas não substituem o código dos testes.
+  assert.equal(publicacao.titulo, "Título");
+  assert.deepEqual(publicacao.tags, ["GoF", "JS"]);
+});
 
-## 6. Configuração do projeto
+test("rejeita publicação sem título", () => {
+  assert.throws(
+    () => new PublicacaoBuilder().comConteudo("Conteúdo").comAutor("Autor").build(),
+    /título da publicação é obrigatório/i
+  );
+});
+
+test("rejeita publicação sem conteúdo", () => {
+  assert.throws(
+    () => new PublicacaoBuilder().comTitulo("Título").comAutor("Autor").build(),
+    /conteúdo da publicação é obrigatório/i
+  );
+});
+
+test("rejeita tags que não sejam array", () => {
+  assert.throws(
+    () => new PublicacaoBuilder().comTags("GoF"),
+    /tags devem ser informadas em um array/i
+  );
+});
+```
+
+A suíte usa `node:test` e `node:assert/strict`, sem dependências externas. Seus cinco casos verificam construção válida, normalização e deduplicação de tags, ausência de título, ausência de conteúdo e tipo inválido de tags.
+
+O código de `Publicacao` também rejeita autor ausente e normaliza o autor, mas a suíte atual não testa especificamente essas duas condições. Ela também não contém testes dedicados a `toJSON()` ou à reutilização do Builder. Assim, a cobertura descrita aqui corresponde aos casos presentes no arquivo, não a todos os comportamentos possíveis do produto.
+
+## 7. Configuração e comandos
 
 **Arquivo:** `package.json`
 
-A configuração do projeto deve declarar o uso do Node.js e disponibilizar comandos para executar o programa e os testes automatizados.
-
-Exemplo de configuração:
-
 ```json
 {
-  "name": "gof-builder-publicacao",
+  "name": "subequipe01-gof-criacionais-builder",
   "version": "1.0.0",
-  "description": "Exemplo didático do padrão GoF Builder aplicado à construção de publicações.",
-  "main": "src/index.js",
+  "private": true,
+  "description": "Exemplo didático do padrão GoF Builder aplicado a publicações de fórum",
   "scripts": {
     "start": "node src/index.js",
     "test": "node --test"
@@ -279,36 +230,20 @@ Exemplo de configuração:
 }
 ```
 
-Caso o arquivo `package.json` do projeto já exista, deve-se preservar sua configuração real e verificar se os comandos apresentados correspondem aos scripts definidos nele.
-
-## 7. Execução do programa
-
-Para executar o exemplo, é necessário ter o Node.js instalado, com versão 18 ou superior.
-
-Na raiz do projeto, execute:
-
-```bash
-node src/index.js
-```
-
-Para executar os testes automatizados:
-
-```bash
-node --test
-```
-
-Se os scripts correspondentes estiverem configurados no `package.json`, também será possível utilizar:
+Com Node.js 18 ou superior, execute os comandos a partir da pasta `docs/Base/Relatórios/SubEquipe01`:
 
 ```bash
 npm start
 npm test
 ```
 
-A execução deve ser registrada com evidências reais, como capturas de tela do terminal, mostrando o resultado do programa e a execução dos testes.
+Os comandos equivalentes sem scripts npm são `node src/index.js` e `node --test`. Não é necessário instalar dependências do projeto.
 
-## 8. Vídeo de apresentação da implementação
+Na execução verificada da suíte do Builder, os cinco testes passaram e nenhum falhou. Essa verificação valida apenas os cenários unitários acima; não comprova integração com o sistema real do Fórum TabNews.
 
-O vídeo a seguir apresenta a implementação do padrão de projeto GoF Builder, demonstrando a organização dos arquivos, as responsabilidades das classes desenvolvidas, o funcionamento dos métodos e a execução do programa. Também permite acompanhar, na prática, o processo de construção dos objetos e compreender como os componentes da implementação se relacionam.
+## 8. Vídeo de apresentação
+
+O vídeo apresenta a implementação do padrão Builder, a organização dos arquivos e a execução da demonstração:
 
 <iframe
   width="560"
@@ -320,318 +255,23 @@ O vídeo a seguir apresenta a implementação do padrão de projeto GoF Builder,
   allowfullscreen>
 </iframe>
 
-<p align="center"><strong>Fonte: Elaborado pelos autores (2026).</strong></p>
+<p align="center"><strong>Fonte: elaboração da SubEquipe 01.</strong></p>
 
-## 8. Aplicação Complementar do Builder no Cadastro de Usuários
+## 9. Participação e evidências
 
-### 8.1 Introdução
+Esta página documenta a implementação de publicações que está presente nos arquivos listados na seção 1. Os registros de participação individual, contribuições adicionais e comprobatórios da equipe estão consolidados em [Participações (Padrões de Projeto)](/Base/1.2.ParticipacoesPadroesDeProjeto.md) e em [IA Generativa](/Base/Relatórios/SubEquipe01/ia-generativa.md), evitando repetir esses relatos técnicos nesta seção.
 
-Além da construção de publicações, o padrão Builder pode ser aplicado à construção de objetos utilizados no cadastro de usuários. Em um fórum, esse processo pode envolver informações como nome, e-mail, nome de usuário e senha.
+## 10. Referências
 
-A utilização do Builder permite configurar esses dados de maneira gradual, separando a definição dos atributos da criação do objeto final. Essa aplicação complementar demonstra outra possibilidade de utilização do padrão no contexto do fórum, sem substituir a implementação principal de construção de publicações.
+GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. *Design Patterns: Elements of Reusable Object-Oriented Software*. Reading, MA: Addison-Wesley, 1994.
 
-### 8.2 Objetivo da implementação
+NODE.JS. *Test runner*. Disponível em: <https://nodejs.org/api/test.html>. Acesso em: 19 out. 2026.
 
-O exemplo utiliza a classe `CadastroUsuarioBuilder` para configurar os dados e a classe `Usuario` para representar o objeto construído.
-
-A implementação permite:
-
-- Configurar os dados do usuário de maneira gradual.
-- Encadear métodos para facilitar a leitura do código.
-- Verificar os campos obrigatórios antes de criar o objeto.
-- Retornar os dados públicos do usuário sem incluir a senha na representação JSON.
-
-O exemplo é independente do sistema de autenticação e do banco de dados do fórum.
-
-### 8.3 Classe `Usuario`
-
-A classe `Usuario` representa o objeto final construído pelo Builder. Ela recebe os dados configurados e verifica se as informações obrigatórias foram fornecidas.
-
-Arquivo: `src/Usuario.js`
-
-```javascript
-class Usuario {
-    constructor({ nome, email, nomeUsuario, senha }) {
-        if (
-            !nome?.trim() ||
-            !email?.trim() ||
-            !nomeUsuario?.trim() ||
-            !senha?.trim()
-        ) {
-            throw new Error(
-                "Todos os campos obrigatórios devem ser preenchidos."
-            );
-        }
-
-        this.nome = nome.trim();
-        this.email = email.trim();
-        this.nomeUsuario = nomeUsuario.trim();
-        this.senha = senha;
-    }
-
-    toJSON() {
-        return {
-            nome: this.nome,
-            email: this.email,
-            nomeUsuario: this.nomeUsuario
-        };
-    }
-}
-
-module.exports = Usuario;
-```
-
-A classe verifica a presença dos campos obrigatórios e armazena as informações. O método `toJSON()` retorna apenas os dados públicos do usuário, sem incluir a senha.
-
-Essa implementação realiza validações básicas de preenchimento. Ela não substitui a validação completa dos dados nem os mecanismos de segurança necessários em um cadastro real.
-
-### 8.4 Classe `CadastroUsuarioBuilder`
-
-A classe `CadastroUsuarioBuilder` configura os dados necessários para a construção do usuário. Cada método define uma informação e retorna a própria instância, permitindo o encadeamento de chamadas.
-
-Arquivo: `src/CadastroUsuarioBuilder.js`
-
-```javascript
-const Usuario = require("./Usuario");
-
-class CadastroUsuarioBuilder {
-    constructor() {
-        this.dados = {
-            nome: "",
-            email: "",
-            nomeUsuario: "",
-            senha: ""
-        };
-    }
-
-    comNome(nome) {
-        this.dados.nome = nome;
-        return this;
-    }
-
-    comEmail(email) {
-        this.dados.email = email;
-        return this;
-    }
-
-    comNomeUsuario(nomeUsuario) {
-        this.dados.nomeUsuario = nomeUsuario;
-        return this;
-    }
-
-    comSenha(senha) {
-        this.dados.senha = senha;
-        return this;
-    }
-
-    build() {
-        return new Usuario(this.dados);
-    }
-}
-
-module.exports = CadastroUsuarioBuilder;
-```
-
-O método `build()` finaliza o processo de construção e cria uma instância de `Usuario` com os dados configurados. Caso algum campo obrigatório esteja ausente ou vazio, a validação da classe `Usuario` impede a criação do objeto.
-
-### 8.5 Código cliente
-
-O código cliente utiliza o Builder para configurar os dados e construir o usuário.
-
-Arquivo: `src/index.js`
-
-```javascript
-const CadastroUsuarioBuilder =
-    require("./CadastroUsuarioBuilder");
-
-try {
-    const usuario = new CadastroUsuarioBuilder()
-        .comNome("Giovana Fontes")
-        .comEmail("giovana@example.com")
-        .comNomeUsuario("giovanafontes")
-        .comSenha("senha-de-exemplo")
-        .build();
-
-    console.log("Usuário construído com sucesso:");
-    console.log(usuario.toJSON());
-} catch (erro) {
-    console.error(
-        "Erro ao construir usuário:",
-        erro.message
-    );
-}
-```
-
-Nesse exemplo, o cliente configura os atributos por meio dos métodos do Builder e chama `build()` para obter o objeto final. O bloco `try/catch` permite tratar erros que possam ocorrer durante a construção.
-
-O endereço de e-mail e a senha utilizados são dados fictícios para demonstração.
-
-### 8.6 Exemplo de validação
-
-O comportamento da implementação pode ser observado quando um campo obrigatório não é informado.
-
-```javascript
-const CadastroUsuarioBuilder =
-    require("./CadastroUsuarioBuilder");
-
-try {
-    const usuario = new CadastroUsuarioBuilder()
-        .comNome("Giovana Fontes")
-        .comEmail("giovana@example.com")
-        .comNomeUsuario("giovanafontes")
-        .build();
-
-    console.log(usuario.toJSON());
-} catch (erro) {
-    console.error(erro.message);
-}
-```
-
-Nesse caso, a senha não foi informada. Como ela é um campo obrigatório, a construção do objeto resulta em um erro.
-
-O exemplo demonstra como a validação pode impedir a criação de instâncias incompletas. Essa validação, entretanto, não abrange requisitos adicionais, como formato de e-mail, unicidade do nome de usuário, armazenamento seguro de senhas ou autenticação.
-
-### 8.7 Relação com o padrão Builder
-
-A implementação complementar apresenta os seguintes participantes:
-
-- **Builder concreto:** `CadastroUsuarioBuilder`, responsável por configurar os dados.
-- **Produto:** `Usuario`, objeto criado ao final do processo.
-- **Cliente:** código que utiliza os métodos do Builder e solicita a construção por meio de `build()`.
-
-Não é necessária uma classe *Director*, pois o cliente define diretamente a sequência de configuração dos dados.
-
-## 9. Considerações sobre a implementação
-
-A implementação demonstra a aplicação do padrão GoF Builder na construção de objetos relacionados ao contexto de um fórum, contemplando tanto a criação de publicações quanto o cadastro de usuários.
-
-Na construção de publicações, as classes `Publicacao` e `PublicacaoBuilder` demonstram a separação entre o objeto final e o processo de configuração de seus atributos. Já na aplicação complementar, as classes `Usuario` e `CadastroUsuarioBuilder` apresentam a utilização do mesmo padrão para configurar gradualmente informações como nome, e-mail, nome de usuário e senha.
-
-A implementação complementar também demonstra a utilização de métodos encadeados, a validação de campos obrigatórios e a separação de responsabilidades entre o Builder e o objeto construído. O método `toJSON()` da classe `Usuario` retorna os dados públicos do usuário, sem incluir a senha na representação.
-
-O exemplo de validação permite observar que a ausência de um campo obrigatório impede a construção de uma instância válida. Entretanto, as verificações implementadas são básicas e não substituem mecanismos adicionais de segurança, autenticação ou validação de dados necessários em um sistema real.
-
-Dessa forma, as duas implementações contribuem para a compreensão prática do padrão Builder, demonstrando sua utilização em diferentes contextos e a importância da organização do código, da validação dos dados e da separação de responsabilidades. As soluções possuem finalidade didática e não representam uma integração funcional com o sistema real do Projeto Fórum.
-
-## 10. Pontos de Vista dos Integrantes
-
-Esta seção apresenta as percepções dos integrantes sobre a implementação do padrão de projeto GoF Builder, considerando sua aplicação na construção de publicações, a organização das responsabilidades e os conhecimentos relacionados à atividade.
-
-### Arthur Fernandes
-
-A elaboração da implementação permite compreender, na prática, como o padrão Builder organiza a criação de objetos com diferentes atributos. A separação entre `Publicacao` e `PublicacaoBuilder` evidencia a distinção entre o objeto final e o processo utilizado para construí-lo.
-
-Outro aspecto relevante é a utilização de métodos encadeados, que tornam a configuração dos atributos mais legível, além da centralização das validações na classe `Publicacao`. A atividade também permite relacionar os conceitos teóricos dos padrões GoF à implementação em JavaScript, considerando a organização do código, a validação de dados e a possibilidade de testar os comportamentos definidos.
-
-### João Pedro S. Maciel
-
-A contribuição de João Pedro concentrou-se na revisão da implementação e no complemento com o Director. Sua principal percepção é que o Director só se justifica quando a mesma sequência de construção se repete. Para o exemplo de publicações, o cliente já expressa a sequência de forma clara, de modo que o Director acrescenta uma classe sem ganho imediato. Ele passa a ser útil quando tutoriais, notícias ou outros tipos de conteúdo com estrutura fixa precisarem ser criados em vários pontos do sistema.
-
-Outro aprendizado foi a importância de testar a compatibilidade entre componentes desenvolvidos separadamente. Ao executar o Director com o código da implementação principal, foi identificado que a forma como o Builder era importado não correspondia à forma como ele era exportado. A solução foi injetar o Builder no construtor do Director, o que tornou a dependência explícita e eliminou o acoplamento com a forma de exportação do módulo.
-
-## 11. Participação e Evidências
-
-Esta seção registra as atividades relacionadas à implementação e à documentação do padrão Builder. As evidências devem corresponder aos arquivos desenvolvidos e aos resultados efetivamente obtidos.
-
-### Arthur Fernandes
-
-**Atividades desenvolvidas:**
-
-- Organização da documentação da implementação do padrão Builder.
-- Descrição das responsabilidades da classe `Publicacao`.
-- Documentação dos métodos da classe `PublicacaoBuilder`.
-- Apresentação do programa de demonstração em `src/index.js`.
-- Descrição dos procedimentos para execução do programa e dos testes automatizados.
-- Organização das informações técnicas sobre validação dos dados e construção do objeto final.
-
-**Evidências relacionadas:**
-
-| Evidência | Descrição |
-|---|---|
-| `src/Publicacao.js` | Implementação do objeto `Publicacao`, incluindo validação dos campos obrigatórios e tratamento das tags. |
-| `src/PublicacaoBuilder.js` | Implementação do Builder e dos métodos utilizados para configurar os atributos da publicação. |
-| `src/index.js` | Programa de demonstração da construção de uma publicação e exibição do resultado em JSON. |
-| `test/PublicacaoBuilder.test.js` | Arquivo destinado aos testes automatizados do Builder e das validações da publicação. |
-| `package.json` | Configuração do projeto e dos comandos de execução, caso corresponda ao arquivo efetivamente utilizado. |
-| Capturas de tela do terminal | Evidências da execução do programa e dos testes automatizados, após sua realização. |
-| Histórico de commits | [Histórico de commit](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/d96e0b265a936257dbbba7982933105fdb99a34c). |
-
-As evidências devem ser anexadas ou referenciadas no repositório conforme a organização definida pela equipe. A existência dos arquivos, a execução dos testes e os registros de contribuição devem ser verificados antes da entrega.
-
-### Giovana Fontes
-
-**Atividades desenvolvidas:**
-
-- Desenvolvimento integral da aplicação complementar do padrão GoF Builder para o cadastro de usuários, documentada na seção 8.
-- Implementação da classe `Usuario`, responsável por representar o objeto final e validar o preenchimento dos campos obrigatórios.
-- Implementação da classe `CadastroUsuarioBuilder`, com métodos para configurar nome, e-mail, nome de usuário e senha, além do método `build()` para construir o objeto.
-- Desenvolvimento do código cliente para demonstrar a construção de usuários por meio do Builder.
-- Elaboração do exemplo de validação, demonstrando o erro gerado quando um campo obrigatório não é informado.
-- Pesquisa e estudo sobre o padrão de projeto GoF Builder, com foco nos padrões criacionais e em sua aplicação ao cadastro de usuários.
-- Documentação e explicação da relação entre o Builder concreto, o produto e o cliente.
-- Revisão e correção de documentos relacionados à implementação e à documentação do trabalho.
-
-**Evidências relacionadas:**
-
-| Evidência | Descrição |
-|---|---|
-| `src/Usuario.js` | Implementação da classe `Usuario`, incluindo a validação dos campos obrigatórios e o método `toJSON()`, que não inclui a senha no retorno. |
-| `src/CadastroUsuarioBuilder.js` | Implementação do Builder para configurar gradualmente os dados do usuário e construir o objeto final. |
-| `src/index.js` | Código cliente que demonstra a utilização do `CadastroUsuarioBuilder`, o encadeamento de métodos e o tratamento de erros. |
-| Exemplo de validação da seção 8.6 | Demonstração da tentativa de construção de um usuário sem informar a senha e do erro resultante. |
-| Documentação da seção 8 | Registro da introdução, dos objetivos, das classes, do código cliente, da validação e da relação entre os participantes do padrão Builder. |
-| Pesquisa sobre padrões criacionais | Fundamentação teórica utilizada para compreender e explicar a aplicação do padrão GoF Builder. |
-| Revisão e correção da documentação | Alterações realizadas para melhorar a organização, a clareza e a correspondência entre a implementação e sua documentação. |
-| Histórico de alterações no GitHub | [Pull Request #3 — Repositório Entrega 3](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/3). |
-
-As evidências registram as atividades desenvolvidas na implementação complementar e na documentação. O histórico do Pull Request pode ser consultado para verificar as alterações e os registros de contribuição relacionados à entrega.
-
-### João Pedro S. Maciel
-
-**Atividades desenvolvidas:**
-
-- Revisão da implementação do Builder em relação à documentação, com identificação de lacunas na seção de testes e na numeração dos tópicos.
-- Implementação do complemento `DiretorPublicacao` (Director opcional), com os métodos `montarTutorial()` e `montarNoticia()`.
-- Escrita dos testes automatizados do complemento, com 15 casos executados por `node --test`.
-- Verificação de compatibilidade do Director com o código da implementação principal, com correção da forma de injeção do Builder.
-- Documentação do complemento na seção 4.1 e registro das decisões de projeto.
-
-**Evidências relacionadas:**
-
-| Evidência | Descrição |
-|---|---|
-| `src/DiretorPublicacao.js` | Implementação do Director opcional, com o Builder injetado no construtor. |
-| Testes do complemento | Arquivo de testes com 15 casos, executados com `node --test`, cobrindo estrutura do tutorial e da notícia, tags, independência entre montagens e erro sem Builder. |
-| Verificação de compatibilidade | Execução do Director com o código de `Publicacao.js` e `PublicacaoBuilder.js` apresentado nesta seção, sem alteração desse código. |
-| Seção 4.1 deste documento | Descrição do complemento, uso, decisões de projeto e verificação. |
-| Pull Request | preencher (link do PR com as alterações de João Pedro S. Maciel). |
-
-As evidências devem ser conferidas no repositório antes da entrega, incluindo a execução dos testes com o arquivo `test/PublicacaoBuilder.test.js` da equipe.
-
-## 12. Nível de Contribuição dos Integrantes
-
-O nível de contribuição considera as atividades realizadas pelos integrantes, incluindo implementação, pesquisa, documentação e revisão dos materiais, conforme as evidências disponíveis.
-
-| Integrante | Atividades desenvolvidas | Nível de contribuição | Justificativa |
-|---|---|---|---|
-| [Arthur Fernandes](https://github.com/arthurfernandesj) | Organização e documentação técnica da implementação do padrão Builder para construção de publicações. | 33,33% | Participação na implementação e na documentação técnica da construção de publicações, conforme as atividades realizadas. |
-| [Giovana Fontes](https://github.com/GiovanaFontesS) | Implementação complementar do Builder para cadastro de usuários, pesquisa sobre padrões criacionais, documentação da seção 8 e revisão e correção dos documentos. | 33,33% | Desenvolvimento das classes `Usuario` e `CadastroUsuarioBuilder`, elaboração do código cliente e do exemplo de validação, além da pesquisa teórica e da documentação da aplicação complementar. |
-| [João Pedro S. Maciel](https://github.com/jopesmp) | Revisão da implementação, complemento com Director opcional, testes automatizados do complemento e verificação de compatibilidade. | 33,33% | Implementação e testes do complemento `DiretorPublicacao`, revisão da documentação e verificação da integração com o código principal. |
-
-**Observação:** os percentuais devem ser compatíveis com os critérios de avaliação e a distribuição de atividades acordada pela equipe. As evidências e o histórico de alterações devem corresponder às contribuições efetivamente realizadas.
-
-## 13. Referências
-
-GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Software*. Boston: Addison-Wesley, 1994.
-
-NODE.JS. *Node.js Documentation*. Disponível em: <https://nodejs.org/docs/latest/api/>. Acesso em: 08 out. 2026.
-
-MERMAID. *Mermaid Documentation*. Disponível em: <https://mermaid.js.org/>. Acesso em: 08 out. 2026.
-
-## 13. Histórico de Versões
+## 11. Histórico de Versões
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
-|:---:|:---:|:---|:---|:---|:---|
-| 1.0 | 08/10/2026 | Documentação da implementação didática do padrão Builder para construção de publicações. | [Arthur Fernandes](https://github.com/arthurfernandesj) |  [Giovana Fontes](https://github.com/GiovanaFontesS)  | Organização da documentação técnica, descrição das classes, procedimentos de execução, testes, participação e contribuição. |
-| 1.1 | 16/10/2026 | Documentação da implementação didática do padrão Builder para construção de cadastro. | [Giovana Fontes](https://github.com/GiovanaFontesS) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Padrão Builder para construção de cadastro, participação e contribuição. |
-| 1.2 | 17/10/2026 | Inclusão do complemento com Director opcional (seção 4.1), dos testes do complemento e da contribuição de João Pedro S. Maciel. | [João Pedro S. Maciel](https://github.com/jopesmp) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Descrição do DiretorPublicacao, decisões de projeto, verificação de compatibilidade com a implementação principal e atualização das seções de pontos de vista, participação, nível de contribuição e evidências. |
+|:---:|:---:|:---|:---|:---:|:---|
+| 1.0 | 08/10/2026 | Documentação da implementação didática do padrão Builder para construção de publicações. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Organização da documentação técnica, descrição das classes, procedimentos de execução, testes, participação e contribuição. |
+| 1.1 | 16/10/2026 | Documentação da implementação didática do padrão Builder para construção de cadastro. | [Giovana Fontes](https://github.com/GiovanaFontesS) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Registro da aplicação complementar do Builder para cadastro, participação e contribuição. |
+| 1.2 | 17/10/2026 | Inclusão do complemento com Director opcional, testes do complemento e contribuição de João Pedro S. Maciel. | [João Pedro S. Maciel](https://github.com/jopesmp) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Registro histórico do complemento e das revisões correspondentes. |
+| 1.3 | 19/10/2026 | Reorganização e complementação da documentação do código, alinhada aos arquivos presentes na SubEquipe 01. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Inclusão do código completo disponível, cobertura real dos testes, configuração efetiva do pacote, comandos de execução e distinção entre arquivos presentes e complementos registrados anteriormente. |

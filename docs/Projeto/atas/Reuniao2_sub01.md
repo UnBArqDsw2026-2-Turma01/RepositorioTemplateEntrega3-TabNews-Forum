@@ -44,4 +44,4 @@ Foram estabelecidas como próximas atividades:
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|---|---|---|---|
-| 1.0 | 17/10/2026 | Criação da Ata de Reunião 02, referente ao andamento da Entrega 03. | [Giovana de Souza Fontes](https://github.com/GiovanaFontesS) | [Arthur Fernandes](https://github.com/Arthurfernandesj) | Registro dos assuntos discutidos sobre o andamento das atividades, as pendências, a organização das próximas etapas e o planejamento do vídeo de apresentação. |
+| 1.0 | 17/10/2026 | Criação da Ata de Reunião 02, referente ao andamento da Entrega 03. | [Arthur Fernandes](https://github.com/Arthurfernandesj) |  [Giovana de Souza Fontes](https://github.com/GiovanaFontesS) | Registro dos assuntos discutidos sobre o andamento das atividades, as pendências, a organização das próximas etapas e o planejamento do vídeo de apresentação. |
