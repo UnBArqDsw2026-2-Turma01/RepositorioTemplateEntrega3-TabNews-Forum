@@ -352,6 +352,9 @@ Por fim, a padronização do ambiente com o `mise`, proposta como iniciativa ext
 
 ### Guilherme Moura da Silva Neto
 
+A etapa de execução foi importante para entender a teoria do padrão Observer. Ao configurar os cenários de teste e acompanhar a saída no terminal, pude ver na prática como as regras de negócio de moderação e auditoria operam de forma independente do serviço principal.
+A verificação dos critérios de validação por meio da suíte automatizada trouxe segurança para a entrega. A execução bem-sucedida de todos os testes e a demonstração do comportamento esperado, como a tolerância a falhas, comprovaram na prática que a arquitetura construída atende aos requisitos de resiliência e baixo acoplamento.
+
 ### Leonardo Fachinello Bonetti
 
 A execução tornou visível o funcionamento do padrão. Como cada mensagem do terminal é identificada pelo componente que a produziu, é possível acompanhar um único evento sendo entregue, em ordem, a cada observador inscrito, sem que o `ServicoDeConteudo` conheça nenhum deles. A etapa extra mostrou na prática a RN06: o observador que falha de propósito gera um aviso, e o `NotificadorDeResposta`, inscrito depois dele, continua sendo notificado.
@@ -382,6 +385,17 @@ Esta seção registra as atividades relacionadas à execução e à verificaçã
 
 ### Guilherme Moura da Silva Neto
 
+**Atividades desenvolvidas:**
+
+* Estruturação do documento de execução (`execucao.md`), definindo os pré-requisitos, comandos e resultados esperados.
+* Definição dos critérios de validação base (CV01-CV06) para atestar o funcionamento do Observer, da moderação e da auditoria.
+
+**Evidências relacionadas:**
+
+| Evidência | Descrição |
+| --- | --- |
+| [`docs/execucao.md`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fa6f5d60f83afc88d736d3de35ae1e3a2be57bfb) | Autoria da estrutura base da página, comandos de terminal e critérios de validação. |
+
 ### Leonardo Fachinello Bonetti
 
 **Atividades desenvolvidas:**
@@ -407,7 +421,7 @@ O nível de contribuição deve refletir as atividades efetivamente realizadas n
 | Integrante | Atividades desenvolvidas | Nível de contribuição | Justificativa |
 |---|---|---|---|
 | [Caio Alexandre Ornelas Silva](https://github.com/bitterteriyaki) | Elaboração do Diagrama de Sequência que orientou as etapas da demonstração e configuração do `mise`, que fixa a versão do Node.js usada na execução. | 33,33% | O Diagrama de Sequência definiu as etapas executadas e verificadas nesta página, e a configuração do `mise` permite reproduzir a execução e os testes em um ambiente padronizado. |
-| [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, validação via testes e documentação de execução. | 33,33% | A classificação deve considerar a participação comprovada na implementação, na documentação e nas atividades relacionadas à entrega. |
+| [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, validação via testes e documentação de execução. | 33,33% | Participação comprovada pela definição dos critérios de validação, expansão dos testes automatizados para os cenários de moderação e autoria do documento de execução. |
 | [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Execução real da demonstração e dos testes, registro das saídas e das capturas do terminal, correção dos comandos e novos cenários de teste. | 33,33% | Participação comprovada pelos commits e pelos PRs #14 e #19. |
 
 ## 10. Referências
@@ -431,3 +445,4 @@ NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [ht
 | 1.4 | 18/10/2026 | Evidências de participação. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Guilherme Moura](github.com/Guilherme-Moura) | Inclusão das capturas do terminal e do PR de ajustes finais nas evidências. |
 | 1.5 | 18/10/2026 | Vídeo da execução. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão do vídeo da execução do programa e dos testes na seção 5.4. |
 | 1.6 | 18/10/2026 | Participação e evidências do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão das atividades desenvolvidas e das evidências do Caio na seção de Participação e Evidências. |
+| 1.7 | 18/10/2026 | Participação do Guilherme. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Registro das lições aprendidas (Ponto de Vista) sobre a execução, descrição das atividades de estruturação da página e inclusão de evidências. |
