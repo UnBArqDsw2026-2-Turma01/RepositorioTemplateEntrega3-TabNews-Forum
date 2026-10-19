@@ -47,4 +47,4 @@ Foram estabelecidas como próximas atividades:
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|---|---|---|---|
-| 1.0 | 18/10/2026 | Criação da Ata de Reunião 01 da SubEquipe 03, referente à organização da Entrega 03. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Registro da escolha do padrão Observer, das lições da Entrega 02, do andamento das atividades, da divisão de tarefas e do planejamento do vídeo. |
+| 1.0 | 18/10/2026 | Criação da Ata de Reunião 01 da SubEquipe 03, referente à organização da Entrega 03. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Guilherme Moura](https://github.com/Guilherme-Moura) | Registro da escolha do padrão Observer, das lições da Entrega 02, do andamento das atividades, da divisão de tarefas e do planejamento do vídeo. |
