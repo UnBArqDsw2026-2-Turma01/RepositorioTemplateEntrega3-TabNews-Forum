@@ -326,15 +326,25 @@ Dessa forma, os resultados obtidos demonstram o comportamento da implementação
 
 ## 7. Pontos de Vista dos Integrantes
 
-Esta seção apresenta as percepções dos integrantes sobre a execução e a verificação da implementação. Cada integrante escreve o próprio ponto de vista.
+Esta seção apresenta as percepções dos integrantes sobre a execução e a verificação da implementação.
+
+### Caio Alexandre Ornelas Silva
+
+### Guilherme Moura da Silva Neto
 
 ### Leonardo Fachinello Bonetti
 
-PREENCHER
+A execução tornou visível o funcionamento do padrão. Como cada mensagem do terminal é identificada pelo componente que a produziu, é possível acompanhar um único evento sendo entregue, em ordem, a cada observador inscrito, sem que o `ServicoDeConteudo` conheça nenhum deles. A etapa extra mostrou na prática a RN06: o observador que falha de propósito gera um aviso, e o `NotificadorDeResposta`, inscrito depois dele, continua sendo notificado.
+
+Os testes automatizados foram essenciais para a confiança no resultado. Ao executá-los sobre os fluxos de moderação, percebi que um mesmo autor podia ser creditado ou debitado mais de uma vez, o que levou ao controle de estado do conteúdo e aos cenários CT10 e CT11. Ao final, a demonstração e os 32 testes executaram sem falhas, com resultados iguais aos registrados nesta página.
 
 ## 8. Participação e Evidências
 
 Esta seção registra as atividades relacionadas à execução e à verificação da implementação.
+
+### Caio Alexandre Ornelas Silva
+
+### Guilherme Moura da Silva Neto
 
 ### Leonardo Fachinello Bonetti
 
@@ -349,7 +359,7 @@ Esta seção registra as atividades relacionadas à execução e à verificaçã
 | Evidência | Descrição |
 |---|---|
 | [Controle de estado na moderação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/825ed4de6c221413c44d41f99563e443ddb9e0f0) | Correção que originou os cenários CT10 e CT11 e o critério CV07. |
-| Pull Request da documentação | INSERIR LINK |
+| [PR #19 — Documentação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/19) | Saídas reais, capturas do terminal e correção dos comandos de execução. |
 
 ## 9. Nível de Contribuição dos Integrantes
 
@@ -357,11 +367,9 @@ O nível de contribuição deve refletir as atividades efetivamente realizadas n
 
 | Integrante | Atividades desenvolvidas | Nível de contribuição | Justificativa |
 |---|---|---|---|
-| [Caio Alexandre] | | | |
+| [Caio Alexandre](https://github.com/bitterteriyaki) | | | |
 | [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, validação via testes e documentação de execução. | 33,33% | A classificação deve considerar a participação comprovada na implementação, na documentação e nas atividades relacionadas à entrega. |
-| [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Implementação base do padrão, execução real da demonstração e dos testes e revisão da documentação de execução. | INSERIR | INSERIR |
-
-A classificação deverá ser definida conforme os critérios adotados pela equipe e a participação comprovada nas atividades.
+| [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Execução real da demonstração e dos testes, registro das saídas e das capturas do terminal, correção dos comandos e novos cenários de teste. | 33,33% | Participação comprovada pelos commits e pelos PRs #14 e #19. |
 
 ## 10. Referências
 
@@ -377,5 +385,6 @@ NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [ht
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
-| 1.0 | 16/10/2026 | Elaboração da documentação de execução do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | — | Organização dos pré-requisitos, procedimentos de execução (Terminal), cenários de testes, critérios de validação e referências. |
-| 1.1 | 17/10/2026 | Saídas reais e correção dos comandos. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | `node start` corrigido para `npm start` e execução na pasta da SubEquipe03; trecho do Builder removido; alternativa com `mise`; saídas reais de `npm start` e `npm test`; cenários CT08 a CT12 e critério CV07; capturas do terminal nas Figuras 1 e 2, com a tabela de evidências preenchida e os restos do Builder removidos; espaço para o vídeo, pontos de vista e participação. |
+| 1.0 | 16/10/2026 | Elaboração da documentação de execução do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Organização dos pré-requisitos, procedimentos de execução (Terminal), cenários de testes, critérios de validação e referências. |
+| 1.1 | 17/10/2026 | Saídas reais e correção dos comandos. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Comandos de execução corrigidos, saídas reais do programa e dos testes, novos cenários de teste e capturas do terminal. |
+| 1.2 | 18/10/2026 | Participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Ponto de vista e nível de contribuição do Leonardo, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |
