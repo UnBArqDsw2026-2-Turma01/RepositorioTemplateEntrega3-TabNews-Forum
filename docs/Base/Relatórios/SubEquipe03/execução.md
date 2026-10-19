@@ -314,14 +314,14 @@ O vídeo a seguir demonstra a execução do programa e dos testes automatizados 
 <iframe
   width="560"
   height="315"
-  src="https://www.youtube.com/embed/FNSx6Sck3r4"
+  src="https://www.youtube.com/embed/7dkUuQoRiaI"
   title="Execução da implementação do padrão Observer"
   frameborder="0"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
   allowfullscreen>
 </iframe>
 
-Caso o vídeo não carregue, ele também está disponível em: [https://www.youtube.com/watch?v=FNSx6Sck3r4](https://www.youtube.com/watch?v=FNSx6Sck3r4).
+Caso o vídeo não carregue, ele também está disponível em: [https://youtu.be/7dkUuQoRiaI](https://youtu.be/7dkUuQoRiaI).
 
 <p align="center"><strong>Fonte: Elaborado pelos autores (2026).</strong></p>
 
@@ -446,3 +446,4 @@ NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [ht
 | 1.5 | 18/10/2026 | Vídeo da execução. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão do vídeo da execução do programa e dos testes na seção 5.4. |
 | 1.6 | 18/10/2026 | Participação e evidências do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão das atividades desenvolvidas e das evidências do Caio na seção de Participação e Evidências. |
 | 1.7 | 18/10/2026 | Participação do Guilherme. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Registro das lições aprendidas (Ponto de Vista) sobre a execução, descrição das atividades de estruturação da página e inclusão de evidências. |
+| 1.8 | 19/10/2026 | Atualização do vídeo da execução. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Substituição do vídeo da seção 5.4 pela nova gravação da execução do programa e dos testes. |
