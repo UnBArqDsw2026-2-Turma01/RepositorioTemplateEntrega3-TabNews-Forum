@@ -194,6 +194,7 @@ Esta seção regista as atividades relacionadas à documentação dos procedimen
 ### Isaac Menezes Pereira
 
 **Atividades desenvolvidas:**
+
 | Descrição | Comprobatórios |
 | --- | --- |
 | Elaboração dos códigos para implementação do padrão Facade | [Commits no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/docs/Sub02/?author=pratamz250&since=2026-10-15&until=2026-10-16) | 

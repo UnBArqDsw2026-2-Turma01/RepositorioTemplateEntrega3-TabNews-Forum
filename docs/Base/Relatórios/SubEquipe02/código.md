@@ -218,6 +218,7 @@ O nível de contribuição deve considerar as atividades efetivamente realizadas
 |---|---|---|---|
 | [Isaac Menezes](https://github.com/pratamz250) | Organização e documentação técnica da implementação do padrão Facade. | 33,33% (proposto) | O percentual deve ser confirmado pela equipe com base na participação comprovada na implementação, na documentação e nas demais atividades relacionadas à entrega. |
 | [Pedro Ramos](https://github.com/PedroRSR) | Revisão da implementação e documentação do padrão Facade, além da descrição do fluxo de carregamento da tela inicial. | 33,33% | Participação relevante na organização e na explicação da solução, com foco na clareza da implementação e na documentação técnica. |
+| [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição de classes na implementação do padrão facade e ajustes no documento, além da incorporação das novas classes na fachada e no client. | 33,33% | Participação relevante na organização e na resolução do código, com foco na simplicidade e fidelidade da implementação. |
 
 **Observação:** o nível de contribuição deve ser definido de acordo com os critérios acordados pela equipe e com as atividades efetivamente realizadas. A tabela não substitui o registro de evidências.
 

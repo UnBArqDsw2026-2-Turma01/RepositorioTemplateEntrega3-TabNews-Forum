@@ -154,5 +154,5 @@ OBJECT MANAGEMENT GROUP (OMG). *OMG Unified Modeling Language (OMG UML)*. Dispon
 |:---:|:---:|---|---|---|---|
 | 1.0 | 13/10/2026 | Criação inicial da modelagem do padrão Facade. | [Isaac Menezes](https://github.com/pratamz250) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Versão inicial com diagrama de classes, participantes e fluxo de construção. |
 | 1.1 | 18/10/2026 | Preenchimento dos tópicos e fornecimento da print do modelo. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Isaac Menezes](https://github.com/pratamz250) | A contribuição foi relevante pelo fato da imagem ser um dos requisitos do projeto. |
-| 1.2 | 18/10/2026 | Remoção de tópicos desnecessários. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher |
-| 1.3 | 18/10/2026 | Adição de informações dos tópicos 4 e 5. | [Pedro Ramos](https://github.com/PedroRSR) | A preencher | A preencher |
+| 1.2 | 18/10/2026 | Remoção de tópicos desnecessários. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Remoção de tópicos não condizentes com nosso projeto |
+| 1.3 | 18/10/2026 | Adição de informações dos tópicos 4 e 5. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Preenchimento dos tópicos 4 e 5 |

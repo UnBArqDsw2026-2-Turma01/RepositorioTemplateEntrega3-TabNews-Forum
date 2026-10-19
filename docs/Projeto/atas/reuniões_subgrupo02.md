@@ -41,7 +41,7 @@
 
 ---
 
-## 1. Vídeo da reunião — [link](https://youtu.be/HiDmV_5vMlI)
+## 2. Vídeo da reunião — [link](https://youtu.be/HiDmV_5vMlI)
 
 <iframe
   width="560"
@@ -69,7 +69,7 @@
 
 ---
 
-## 1. Vídeo da reunião — [link](https://youtu.be/zLlgoQesqe8)
+## 3. Vídeo da reunião — [link](https://youtu.be/zLlgoQesqe8)
 
 <iframe
   width="560"
@@ -96,7 +96,7 @@
 
 ---
 
-## 1. Vídeo da reunião — [link](https://youtu.be/fdXLLoB3lsg)
+## 4. Video de apresentação do código — [link](https://youtu.be/fdXLLoB3lsg)
 
 <iframe
   width="560"
@@ -114,5 +114,6 @@
 
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|---|---|---|---|
-| 1.1 | 18/10/2026 | Registro de reuniões do subgrupo | [Isaac Menezes](https://github.com/pratamz250) | — | — | 
-| 1.2 | 18/10/2026 | Novo registro de reuniões do subgrupo | [Isaac Menezes](https://github.com/pratamz250) | — | — | 
+| 1.1 | 18/10/2026 | Registro de reuniões do subgrupo | [Isaac Menezes](https://github.com/pratamz250) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Criação do arquivo de registro e adição das primeiras reuniões | 
+| 1.2 | 18/10/2026 | Novo registro de reuniões do subgrupo | [Isaac Menezes](https://github.com/pratamz250) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição da reunião sobre o codigo |
+| 1.3 | 18/10/2026 | Correção dos titulos das reunioes | [Pablo Rodrigues](https://github.com/Pablo-R-L) | — | — | 

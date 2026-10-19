@@ -107,11 +107,11 @@ PYTHON SOFTWARE FOUNDATION. *unittest — Unit testing framework*. Disponível e
 | Versão | Data       | Descrição                                                                 | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:------:|:----------:|---------------------------------------------------------------------------|-----------|:-----------:|--------------------|
 | 1.0 | 16/10/2026 | Elaboração da documentação sobre o uso de IA Generativa na aplicação do padrão Facade. | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Organização do objetivo, da metodologia, do ponto de vista individual, da análise crítica e das evidências. |
-| 1.1 | 16/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
-| 1.2 | 16/10/2026 | Adição do meu ponto de vista e senso crítico. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Preencher | Preencher |
+| 1.1 | 16/10/2026 | Complementação da documentação sobre o uso de IA Generativa. | [Pedro Ramos](https://github.com/PedroRSR) |  [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição de informações relevantes ao decorrer dos tópicos |
+| 1.2 | 16/10/2026 | Adição do meu ponto de vista e senso crítico. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista de Pablo |
 | 1.3 | 16/10/2026 | Minhas impressões sobre IA Generativa | [Isaac Menezes](https://github.com/pratamz250) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista de Isaac sobre IA Generativa. |
 | 1.4 | 18/10/2026 | Preenchimento da tabela sobre evidência de uso de IA Generativa | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição das evidencias sobre onde IA generativa foi usada |
 | 1.5 | 18/10/2026 | Preenchimento da tabela sobre evidência de uso de IA Generativa | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição das evidencias sobre onde IA generativa foi usada |
-| 1.6 | 18/10/2026 | Preenchimento da tabela sobre participações | [Pedro Ramos](https://github.com/PedroRSR) | Preencher | Preencher |
+| 1.6 | 18/10/2026 | Preenchimento da tabela sobre participações | [Pedro Ramos](https://github.com/PedroRSR) | [Pablo Rodrigues](https://github.com/Pablo-R-L) | Adição da própria participação na tabela |
 
 <p align="center">Tabela 2: Histórico de Versões.</p>
