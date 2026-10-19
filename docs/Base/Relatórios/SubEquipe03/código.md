@@ -1127,6 +1127,10 @@ Por fim, a inclusão do `RegistroDeAtividades` sem nenhuma alteração no `Servi
 
 ### Guilherme Moura da Silva Neto
 
+Com a expansão da implementação do padrão Observer, compreendi na prática como ele resolve problemas de acoplamento. A adição do log de auditoria (`RegistroDeAtividades`) e dos fluxos de moderação evidenciou o Princípio Aberto/Fechado (OCP), pois foi possível criar novas reações a eventos sem precisar modificar o serviço central de conteúdos.
+
+Também percebi a importância de aliar a teoria a uma boa documentação de execução e testes. Acompanhar os logs no terminal e comprovar o isolamento de falhas demonstrou na prática como o desacoplamento impede que erros em reações secundárias (como uma falha no disparo de notificações) interrompam o fluxo principal do sistema, garantindo a resiliência da aplicação.
+
 ### Leonardo Fachinello Bonetti
 
 Implementar o Observer a partir do Diagrama de Classes mostrou o valor de uma modelagem bem definida: com os nomes, as responsabilidades e as regras já descritos, o código passou a ser uma tradução do diagrama, e qualquer divergência ficava evidente. Como o JavaScript não tem interfaces, a classe base `Observador`, que lança erro quando `atualizar` não é sobrescrito, foi a forma encontrada para garantir o contrato.
@@ -1157,6 +1161,22 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 | [Ponto de vista e nível de contribuição](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/c32a23ac3fd39218b21bd5f4a79b43fd6ac271b5) | Inclusão do ponto de vista e da linha de nível de contribuição nesta página. |
 
 ### Guilherme Moura da Silva Neto
+
+**Atividades desenvolvidas:**
+
+* Expansão da implementação com a criação do observador `RegistroDeAtividades` para atuar como log de auditoria (RN07).
+* Integração dos fluxos de moderação (Revisão e Restauração) nos arquivos `ServicoDeConteudo` e `ServicoDeTabCoins`.
+* Evolução da suíte de testes automatizados (`observer.test.js`) utilizando `node:test` para incluir a validação das regras de negócio de moderação e auditoria.
+* Elaboração e estruturação dos documentos referentes ao Código (`codigo.md`) e à Execução (`execucao.md`).
+
+**Evidências relacionadas:**
+
+| Evidência | Descrição |
+| --- | --- |
+| [`src/RegistroDeAtividades.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/aca6ba0bdfc39196b54449321a6386eb0b72c8cd) | Criação do observador concreto focado no log cronológico de auditoria (RN07). |
+| [Fluxos de Moderação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/756cd77a56de084432fa410c3264b5020c19e91c) | Refatoração de `ServicoDeConteudo` e `ServicoDeTabCoins` para tratar eventos de revisão e restauração. |
+| [`test/observer.test.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fdd9ed166317a1b36b65e50c9a253882ac5a82c1) | Implementação dos cenários de teste automatizados para auditoria e flutuação de moedas na moderação. |
+| [`docs/codigo.md`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/5df1a1dbf755776bb6bff98348d80009ff5b9131) | Estruturação final e formatação do documento de código. |
 
 ### Leonardo Fachinello Bonetti
 
@@ -1198,7 +1218,7 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 | Integrante | Atividades desenvolvidas | Nível de contribuição | Justificativa |
 |---|---|---|---|
 | [Caio Alexandre Ornelas Silva](https://github.com/bitterteriyaki) | Elaboração do Diagrama de Classes, do Diagrama de Sequência e da correspondência prevista entre modelagem e implementação (Tabela 4 da modelagem), que serviram de base para a organização do código. | 33,33% | A modelagem definiu os participantes, as classes, as regras de negócio e os arquivos implementados, além das decisões de projeto adotadas no código, como a classe base `Observador`, o modelo *push* e o isolamento de falhas (RN06). |
-| [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, evolução dos testes automatizados e documentação da implementação. | 33,33% | A classificação deve considerar a participação comprovada na implementação, na documentação e nas atividades relacionadas à entrega. |
+| [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, evolução dos testes automatizados e documentação da implementação. | 33,33% | Participação comprovada pela expansão do código (auditoria e moderação), evolução da cobertura de testes e autoria dos artefatos textuais da entrega. |
 | [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Implementação base do padrão, demonstração, testes automatizados, correção da moderação (RN08) e revisão da documentação do código. | 33,33% | Participação comprovada pelos commits e pelos PRs #14 e #19. |
 
 <p align="center">Tabela 4: Nível de contribuição dos integrantes.</p>
@@ -1224,5 +1244,6 @@ NODE.JS. **Test runner Documentation**. Disponível em: [https://nodejs.org/api/
 | 1.2 | 18/10/2026 | Participação individual. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Ponto de vista e nível de contribuição individuais, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |
 | 1.3 | 18/10/2026 | Participação do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Ponto de vista sobre a correspondência entre a modelagem e a implementação e nível de contribuição do Caio. |
 | 1.4 | 18/10/2026 | Participação e evidências do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão das atividades desenvolvidas e das evidências do Caio na seção de Participação e Evidências. |
+| 1.5 | 18/10/2026 | Participação do Guilherme. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Registro das lições aprendidas (Ponto de Vista), descrição das atividades desenvolvidas na moderação/auditoria e inclusão da tabela de commits de evidências. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
