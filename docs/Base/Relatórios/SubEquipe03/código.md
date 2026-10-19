@@ -1119,6 +1119,12 @@ Esta seção apresenta as percepções dos integrantes sobre a implementação d
 
 ### Caio Alexandre Ornelas Silva
 
+Como responsável pela modelagem, acompanhei a implementação principalmente pelo ponto de vista da correspondência entre o diagrama e o código. A Tabela 4 da modelagem previa um arquivo para cada classe, e o código seguiu essa organização. Isso permitiu verificar cada participante do GoF diretamente no arquivo correspondente. A decisão de representar o `Observador` como classe base, e não como contrato por convenção, também se mostrou acertada: a verificação com `new.target` e o erro lançado por `atualizar` tornaram explícito, em tempo de execução, um contrato que o JavaScript não oferece por meio de interfaces.
+
+A implementação também expôs lacunas da modelagem original. O primeiro Diagrama de Classes não previa o estado do conteúdo, e a moderação, da forma como foi modelada, permitia créditos duplicados de TabCoins. A falha só apareceu quando o código e os testes exercitaram a sequência de revisão e restauração, e foi corrigida com o `EstadoDoConteudo` (RN08), com a atualização dos diagramas. Do mesmo modo, as regras de inscrição e o tratamento de conteúdo inexistente, listados na seção 15, surgiram no código sem constar no modelo. Aprendi que o diagrama orienta a implementação, mas é a implementação que revela o que o diagrama deixou de dizer, e que os dois artefatos precisam ser revisados juntos.
+
+Por fim, a inclusão do `RegistroDeAtividades` sem nenhuma alteração no `ServicoDeConteudo` confirmou, no código, o argumento central da justificativa do padrão: novas reações a um evento passam a ser uma extensão, e não uma modificação, do serviço de conteúdos.
+
 ### Guilherme Moura da Silva Neto
 
 ### Leonardo Fachinello Bonetti
@@ -1174,7 +1180,7 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 
 | Integrante | Atividades desenvolvidas | Nível de contribuição | Justificativa |
 |---|---|---|---|
-| [Caio Alexandre](https://github.com/bitterteriyaki) | | | |
+| [Caio Alexandre Ornelas Silva](https://github.com/bitterteriyaki) | Elaboração do Diagrama de Classes, do Diagrama de Sequência e da correspondência prevista entre modelagem e implementação (Tabela 4 da modelagem), que serviram de base para a organização do código. | 33,33% | A modelagem definiu os participantes, as classes, as regras de negócio e os arquivos implementados, além das decisões de projeto adotadas no código, como a classe base `Observador`, o modelo *push* e o isolamento de falhas (RN06). |
 | [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, evolução dos testes automatizados e documentação da implementação. | 33,33% | A classificação deve considerar a participação comprovada na implementação, na documentação e nas atividades relacionadas à entrega. |
 | [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Implementação base do padrão, demonstração, testes automatizados, correção da moderação (RN08) e revisão da documentação do código. | 33,33% | Participação comprovada pelos commits e pelos PRs #14 e #19. |
 
@@ -1197,7 +1203,8 @@ NODE.JS. **Test runner Documentation**. Disponível em: [https://nodejs.org/api/
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 16/10/2026 | Criação da documentação e detalhamento da implementação do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão dos componentes GoF, código-fonte, suíte de testes e orientações de execução. |
-| 1.1 | 17/10/2026 | Ampliação da documentação do código. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Padronização da página com as demais subequipes: cada classe com seu trecho de código, papel no padrão e regras atendidas, testes automatizados e correspondência entre o diagrama e o código. |
-| 1.2 | 18/10/2026 | Participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Ponto de vista e nível de contribuição do Leonardo, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |
+| 1.1 | 17/10/2026 | Ampliação da documentação do código. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Padronização da página com as demais subequipes: cada classe com seu trecho de código, papel no padrão e regras atendidas, testes automatizados e correspondência entre o diagrama e o código. |
+| 1.2 | 18/10/2026 | Participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Ponto de vista e nível de contribuição do Leonardo, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |
+| 1.3 | 18/10/2026 | Participação do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Ponto de vista sobre a correspondência entre a modelagem e a implementação e nível de contribuição do Caio. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
