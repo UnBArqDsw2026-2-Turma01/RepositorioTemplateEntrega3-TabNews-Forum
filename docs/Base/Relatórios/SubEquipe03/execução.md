@@ -364,6 +364,22 @@ Esta seção registra as atividades relacionadas à execução e à verificaçã
 
 ### Caio Alexandre Ornelas Silva
 
+**Atividades desenvolvidas:**
+
+- Elaboração do Diagrama de Sequência, que definiu as etapas executadas pela demonstração e verificadas nesta página.
+- Configuração do `mise`, que fixa a versão do Node.js e permite executar a demonstração e os testes em um ambiente padronizado.
+- Inclusão do vídeo da execução do programa e dos testes na seção 5.4.
+- Registro do ponto de vista sobre a execução e a verificação da implementação e do nível de contribuição nesta página.
+
+**Evidências relacionadas:**
+
+| Evidência | Descrição |
+|---|---|
+| [Modelagem](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relatórios/SubEquipe03/modelagem) | Documento com o Diagrama de Sequência que orientou as etapas da demonstração. |
+| [Configuração do `mise`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/f9884403eaf8943188a1f2afacc2e3925dcaddf9) | Definição das versões das ferramentas usadas na execução local. |
+| [Vídeo da execução](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/6aaae410fc5dac5dc74cd316e840f602ab754248) | Inclusão do vídeo da execução na seção 5.4. |
+| [Ponto de vista e nível de contribuição](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/c32a23ac3fd39218b21bd5f4a79b43fd6ac271b5) | Inclusão do ponto de vista e da linha de nível de contribuição nesta página. |
+
 ### Guilherme Moura da Silva Neto
 
 ### Leonardo Fachinello Bonetti
@@ -414,3 +430,4 @@ NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [ht
 | 1.3 | 18/10/2026 | Participação do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Ponto de vista sobre a execução e a verificação da implementação e nível de contribuição do Caio. |
 | 1.4 | 18/10/2026 | Evidências de participação. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Guilherme Moura](github.com/Guilherme-Moura) | Inclusão das capturas do terminal e do PR de ajustes finais nas evidências. |
 | 1.5 | 18/10/2026 | Vídeo da execução. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão do vídeo da execução do programa e dos testes na seção 5.4. |
+| 1.6 | 18/10/2026 | Participação e evidências do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão das atividades desenvolvidas e das evidências do Caio na seção de Participação e Evidências. |

@@ -1139,6 +1139,23 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 
 ### Caio Alexandre Ornelas Silva
 
+**Atividades desenvolvidas:**
+
+- Elaboração do Diagrama de Classes, que definiu os participantes do padrão, as classes, os atributos e as operações implementados no código.
+- Elaboração do Diagrama de Sequência, que definiu as etapas reproduzidas pelo programa de demonstração (`index.js`).
+- Definição da correspondência prevista entre a modelagem e a implementação (Tabela 4 da modelagem), com um arquivo para cada classe.
+- Decisões de modelagem adotadas no código: `Observador` como classe base, modelo *push* com o `EventoDeConteudo` e isolamento de falhas entre observadores (RN06).
+- Registro do ponto de vista sobre a correspondência entre a modelagem e a implementação e do nível de contribuição nesta página.
+
+**Evidências relacionadas:**
+
+| Evidência | Descrição |
+|---|---|
+| [Modelagem](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/#/Base/Relatórios/SubEquipe03/modelagem) | Documento com os Diagramas de Classes e de Sequência e a Tabela 4 de correspondência com a implementação. |
+| [Commit da modelagem](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/9358072fb7ae404b92850deefcd7204ae53b467a) | Criação dos diagramas em PlantUML, das regras modeladas e das decisões de modelagem. |
+| [Suporte ao PlantUML](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/2db3b5efbe0a4b78c20dbf7f07a1128a36b97468) | Configuração que permite manter os diagramas como texto versionado junto ao código. |
+| [Ponto de vista e nível de contribuição](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/c32a23ac3fd39218b21bd5f4a79b43fd6ac271b5) | Inclusão do ponto de vista e da linha de nível de contribuição nesta página. |
+
 ### Guilherme Moura da Silva Neto
 
 ### Leonardo Fachinello Bonetti
@@ -1206,5 +1223,6 @@ NODE.JS. **Test runner Documentation**. Disponível em: [https://nodejs.org/api/
 | 1.1 | 17/10/2026 | Ampliação da documentação do código. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Padronização da página com as demais subequipes: cada classe com seu trecho de código, papel no padrão e regras atendidas, testes automatizados e correspondência entre o diagrama e o código. |
 | 1.2 | 18/10/2026 | Participação individual. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Ponto de vista e nível de contribuição individuais, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |
 | 1.3 | 18/10/2026 | Participação do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Ponto de vista sobre a correspondência entre a modelagem e a implementação e nível de contribuição do Caio. |
+| 1.4 | 18/10/2026 | Participação e evidências do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão das atividades desenvolvidas e das evidências do Caio na seção de Participação e Evidências. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
