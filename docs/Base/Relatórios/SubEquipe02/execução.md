@@ -139,7 +139,7 @@ Registe uma captura de ecrã que mostre o comando executado e a saída apresenta
 **Figura 1 — Execução da demonstração do padrão Facade.**
 
 <p align="center">
-  <img src="docs\images\Captura_terminal_Facade_sub02.png" alt="Comprovação de execução" width="300">
+  <img src="../../../images/Captura_terminal_Facade_sub02.png" alt="Comprovação de execução" width="300">
 </p>
 
 <p align="center">
