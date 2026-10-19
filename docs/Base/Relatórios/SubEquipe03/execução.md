@@ -309,7 +309,21 @@ A Figura 2 mostra o comando executado e o resultado dos testes, igual ao apresen
 
 ### 5.4. Vídeo da execução
 
-O vídeo que demonstra a execução do programa e dos testes está disponível em: INSERIR LINK DO VÍDEO.
+O vídeo a seguir demonstra a execução do programa e dos testes automatizados da implementação do padrão Observer.
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/FNSx6Sck3r4"
+  title="Execução da implementação do padrão Observer"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+
+Caso o vídeo não carregue, ele também está disponível em: [https://www.youtube.com/watch?v=FNSx6Sck3r4](https://www.youtube.com/watch?v=FNSx6Sck3r4).
+
+<p align="center"><strong>Fonte: Elaborado pelos autores (2026).</strong></p>
 
 ## 6. Limitações da demonstração
 
@@ -399,3 +413,4 @@ NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [ht
 | 1.2 | 18/10/2026 | Participação dindividual. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Ponto de vista e nível de contribuição individuais, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |
 | 1.3 | 18/10/2026 | Participação do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Ponto de vista sobre a execução e a verificação da implementação e nível de contribuição do Caio. |
 | 1.4 | 18/10/2026 | Evidências de participação. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Guilherme Moura](github.com/Guilherme-Moura) | Inclusão das capturas do terminal e do PR de ajustes finais nas evidências. |
+| 1.5 | 18/10/2026 | Vídeo da execução. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão do vídeo da execução do programa e dos testes na seção 5.4. |
