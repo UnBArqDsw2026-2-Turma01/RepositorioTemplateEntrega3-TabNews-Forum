@@ -1,7 +1,7 @@
 # Padrões GoF Criacionais no Projeto Fórum TabNews
 
 > **SubEquipe 01 — Entrega 03 — Padrões de Projeto**  
-> **Implementação demonstrativa analisada:** Builder para construção de publicações, em JavaScript com Node.js.
+> **Implementações demonstrativas analisadas:** Builder para construção de publicações; Factory Method para criação de publicações e comentários; Prototype para modelos de rascunho; e Singleton para a configuração da plataforma, todos em JavaScript com Node.js.
 
 ## 1. Contexto e escopo
 
@@ -9,9 +9,11 @@ Os padrões criacionais tratam de como objetos são criados. Em vez de deixar ca
 
 Na Entrega 03, a SubEquipe 01 documenta e demonstra o **Builder** na construção de uma publicação. Os arquivos disponíveis nesta implementação são `src/Publicacao.js`, `src/PublicacaoBuilder.js`, `src/index.js` e `test/PublicacaoBuilder.test.js`. O programa monta um objeto com título, conteúdo, autor e tags, valida os campos obrigatórios, normaliza textos e apresenta o resultado em JSON.
 
+A SubEquipe 01 também implementa **Factory Method**, **Prototype** e **Singleton**, em `src/factory-method/`, `src/prototype/` e `src/singleton/`, com testes próprios em `test/`. Esses padrões são detalhados na [seção 12](/Base/Relatórios/SubEquipe01/padrões-gof-criacionais.md?id=_12-factory-method-prototype-e-singleton).
+
 O escopo é acadêmico e demonstrativo. Embora os dados representem conceitos do Fórum TabNews, o código não está conectado à aplicação real: não autentica autores, não grava publicações no banco, não publica conteúdo, não cria comentários, não calcula TabCoins e não aplica moderação. O campo `autor` é uma string informada pelo cliente de demonstração, não a identidade de uma sessão autenticada.
 
-O catálogo GoF contém cinco padrões criacionais: Abstract Factory, Builder, Factory Method, Prototype e Singleton. Este relatório aprofunda o padrão que possui implementação comprovável nesta parte da entrega. Os demais são apresentados de forma comparativa para delimitar seu propósito, não como funcionalidades implementadas pela SubEquipe 01.
+O catálogo GoF contém cinco padrões criacionais: Abstract Factory, Builder, Factory Method, Prototype e Singleton. Quatro deles têm implementação comprovável nesta entrega: Builder (seções 4 a 11), Factory Method, Prototype e Singleton (seção 12). O Abstract Factory é discutido apenas de forma comparativa, pois não há no domínio estudado uma família de produtos que justifique sua adoção (seção 12.5).
 
 ## 2. Objetivos
 
@@ -27,6 +29,7 @@ Explicar a escolha e a aplicação demonstrativa do padrão Builder na criação
 - Explicar as regras de construção e identificar quais delas são verificadas pelos testes existentes.
 - Avaliar vantagens, custos, alternativas e limites da solução no contexto do Fórum TabNews.
 - Distinguir a demonstração local de uma integração com o sistema real.
+- Implementar, testar e demonstrar Factory Method, Prototype e Singleton no mesmo domínio, evidenciando como os padrões colaboram (seção 12).
 
 ## 3. Catálogo criacional e escolha para a entrega
 
@@ -34,9 +37,9 @@ Explicar a escolha e a aplicação demonstrativa do padrão Builder na criação
 |:---|:---|:---|
 | **Abstract Factory** | Criar famílias de objetos relacionados sem expor suas classes concretas. | Não há famílias de produtos ou implementações de fábricas abstratas nesta demonstração. Seria pertinente se o sistema precisasse criar conjuntos compatíveis de componentes para variantes distintas de uma plataforma. |
 | **Builder** | Separar a montagem gradual de um objeto de sua representação final. | É o padrão demonstrado no código da SubEquipe 01 para configurar uma `Publicacao` e validá-la ao concluir `build()`. |
-| **Factory Method** | Definir um método de criação cuja implementação concreta decide qual produto instanciar. | Não há hierarquia de criadores nem método de fábrica implementados neste recorte. A escolha entre classes concretas não é o problema tratado pelo Builder atual. |
-| **Prototype** | Criar novos objetos copiando um protótipo existente. | Não há operação de clonagem implementada. Reaproveitar um modelo de conteúdo seria outro requisito e exigiria definir quais dados podem ou não ser copiados. |
-| **Singleton** | Restringir uma classe a uma instância acessível de forma compartilhada. | Não há singleton implementado. Estado global de publicação ou de usuário não é necessário para construir o objeto da demonstração. |
+| **Factory Method** | Definir um método de criação cuja implementação concreta decide qual produto instanciar. | **Implementado** em `src/factory-method/`: `CriadorDeConteudoRaiz` e `CriadorDeComentario` decidem se o produto é um `ConteudoRaiz` ou um `Comentario` (seção 12.1). |
+| **Prototype** | Criar novos objetos copiando um protótipo existente. | **Implementado** em `src/prototype/`: `RegistroDeModelos` entrega cópias profundas de `ModeloDeConteudo` para criar rascunhos (seção 12.2). |
+| **Singleton** | Restringir uma classe a uma instância acessível de forma compartilhada. | **Implementado** em `src/singleton/`: `ConfiguracaoDoForum` oferece uma instância única e somente leitura com os limites de título e corpo (seção 12.3). |
 
 A escolha do Builder é motivada pela **montagem dos dados de uma publicação**, não pela necessidade de selecionar um tipo de conteúdo, clonar um conteúdo existente ou compartilhar um serviço global. O objeto demonstrativo combina atributos textuais e uma coleção; a construção encadeada nomeia cada atributo e deixa a validação final a cargo da classe do produto.
 
@@ -186,10 +189,10 @@ O documento de participação da entrega também registra uma contribuição de 
 | Pergunta de projeto | Padrão mais diretamente relacionado | Por que não é o foco desta implementação |
 |:---|:---|:---|
 | Como configurar um objeto com etapas e atributos nomeados antes de produzi-lo? | **Builder** | É o problema demonstrado por `PublicacaoBuilder`. |
-| Qual implementação concreta de produto uma subclasse deve criar? | **Factory Method** | O código não seleciona entre subclasses ou tipos concretos. |
+| Qual implementação concreta de produto uma subclasse deve criar? | **Factory Method** | O Builder não seleciona entre tipos concretos; essa decisão é tratada pelos criadores da seção 12.1. |
 | Como criar famílias coerentes de produtos relacionados? | **Abstract Factory** | Não há família de objetos intercambiáveis nesta implementação. |
-| Como obter um novo objeto copiando um existente? | **Prototype** | Não há protótipo, clone ou política de cópia de publicação. |
-| Como restringir o acesso a uma instância compartilhada? | **Singleton** | A construção de `Publicacao` não depende de instância global. |
+| Como obter um novo objeto copiando um existente? | **Prototype** | O Builder monta do zero; a cópia de modelos é tratada pelo `RegistroDeModelos` da seção 12.2. |
+| Como restringir o acesso a uma instância compartilhada? | **Singleton** | A construção de `Publicacao` não depende de instância global; a configuração compartilhada é tratada na seção 12.3. |
 
 Esses padrões não são versões alternativas do mesmo mecanismo. Builder trata da montagem; Factory Method e Abstract Factory tratam da decisão sobre qual produto ou família criar; Prototype trata de cópia; Singleton restringe a quantidade de instâncias. A presença de todos no catálogo não implica que todos devam ser adotados no mesmo domínio.
 
@@ -215,17 +218,114 @@ Uma função nomeada que receba os dados e retorne `new Publicacao(dados)` poder
 
 Esses limites descrevem o escopo da demonstração, não defeitos de um sistema de produção. Qualquer expansão deve começar por requisitos explícitos e atualizar código, testes, modelagem e documentação em conjunto.
 
-## 12. Considerações finais
+## 12. Factory Method, Prototype e Singleton
+
+> **Responsável:** [João Pedro S. Maciel](https://github.com/jopesmp)  
+> **Código:** `src/factory-method/`, `src/prototype/` e `src/singleton/`, com testes em `test/FactoryMethod.test.js`, `test/Prototype.test.js` e `test/Singleton.test.js`.  
+> **Modelagem, código e execução:** [Modelagem](/Base/Relatórios/SubEquipe01/modelagem.md), [Código](/Base/Relatórios/SubEquipe01/código.md) e [Execução](/Base/Relatórios/SubEquipe01/execução.md).
+
+Esta seção apresenta os três padrões criacionais que complementam o Builder. Cada um resolve uma pergunta diferente sobre a criação de objetos do fórum, e os três foram implementados, testados e executados no mesmo pacote Node.js da SubEquipe 01, sem alterar os arquivos do Builder.
+
+| Padrão | Pergunta de criação respondida | Elemento do fórum | Classes principais |
+|:---|:---|:---|:---|
+| **Factory Method** | Quem decide *qual classe concreta* de conteúdo instanciar? | Publicação (conteúdo raiz) e comentário | `CriadorDeConteudo`, `CriadorDeConteudoRaiz`, `CriadorDeComentario`, `Conteudo`, `ConteudoRaiz`, `Comentario` |
+| **Prototype** | Como criar um objeto novo *copiando* um modelo pronto, sem alterar o modelo? | Modelos de rascunho (dúvida, tutorial) | `Prototipo`, `ModeloDeConteudo`, `RegistroDeModelos` |
+| **Singleton** | Como garantir *uma única instância* de um objeto compartilhado? | Parâmetros globais da plataforma | `ConfiguracaoDoForum` |
+
+### 12.1 Factory Method
+
+**Intenção (GAMMA et al., 1994):** definir uma interface para criar um objeto, deixando que as subclasses decidam qual classe instanciar. O Factory Method permite que uma classe adie a instanciação para suas subclasses.
+
+**Problema no domínio.** No TabNews, publicações e comentários são o mesmo tipo de registro (*content*): o que os diferencia é a presença de um conteúdo pai (`parent_id`). Por isso, as regras de criação dependem do tipo. Um conteúdo raiz precisa de título, e o código-fonte do TabNews verifica isso com uma condição explícita (`checkRootContentTitle`, que exige `title` quando não há `parent_id`). Um comentário, por outro lado, não precisa de título, mas precisa indicar a qual conteúdo responde (TABNEWS, 2026). Na modelagem da [Entrega 02 da SubEquipe 01](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_01/ModelagemEstatica), as mesmas entidades aparecem como as classes `Publicacao` e `Comentario`, ligadas pelas associações "recebe" e "responde".
+
+Se o código cliente decidisse o tipo com condicionais (`if (temPai) ... else ...`), cada novo tipo de conteúdo (por exemplo, uma enquete) exigiria alterar todos os pontos de criação.
+
+**Solução aplicada.** A classe abstrata `CriadorDeConteudo` define a operação comum `prepararConteudo(dados)`, que chama o método-fábrica `criarConteudo(dados)`, confere se o resultado é um `Conteudo` e contabiliza a criação. As subclasses decidem apenas o produto:
+
+| Participante GoF | Classe | Responsabilidade |
+|:---|:---|:---|
+| *Creator* | `CriadorDeConteudo` | Declara o método-fábrica `criarConteudo()` e implementa a operação `prepararConteudo()`, que depende apenas da abstração `Conteudo`. |
+| *ConcreteCreator* | `CriadorDeConteudoRaiz` | Sobrescreve `criarConteudo()` para devolver um `ConteudoRaiz`. |
+| *ConcreteCreator* | `CriadorDeComentario` | Sobrescreve `criarConteudo()` para devolver um `Comentario`. |
+| *Product* | `Conteudo` | Classe abstrata com o que é comum (autor, corpo e limite de tamanho do corpo). |
+| *ConcreteProduct* | `ConteudoRaiz` | Exige título, respeita o limite de 255 caracteres e gera um *slug* a partir do título. |
+| *ConcreteProduct* | `Comentario` | Exige o identificador do conteúdo pai e não possui título. |
+
+**Consequências.** O cliente (`enviarConteudo()` em `src/factory-method/index.js`) conhece somente a interface do criador e chama a mesma operação para qualquer tipo de conteúdo. Um novo tipo exige um novo par criador/produto, sem alteração do cliente nem dos criadores existentes (princípio Aberto/Fechado). Em contrapartida, há uma subclasse criadora para cada produto. Esse custo é aceitável com dois tipos, mas deve ser reavaliado se surgirem muitos tipos que diferem apenas por um detalhe.
+
+**Diferença em relação a uma fábrica simples.** Uma função `criar(tipo, dados)` com `switch` centralizaria a criação, mas continuaria baseada em condicionais e precisaria ser modificada a cada novo tipo. No Factory Method, a decisão de criação é distribuída por polimorfismo, e a operação comum (`prepararConteudo`) permanece no criador abstrato.
+
+### 12.2 Prototype
+
+**Intenção (GAMMA et al., 1994):** especificar os tipos de objetos a criar por meio de uma instância-protótipo e criar novos objetos copiando esse protótipo.
+
+**Problema no domínio.** Publicações recorrentes em um fórum técnico seguem estruturas parecidas: uma dúvida costuma ter contexto, tentativas e mensagem de erro; um tutorial costuma ter introdução, passo a passo e conclusão. A demonstração propõe uma funcionalidade **hipotética**, que não existe no TabNews: oferecer modelos de rascunho prontos ao autor. Se o modelo fosse entregue por referência, o primeiro autor que o preenchesse alteraria o modelo de todos os demais. Se cada rascunho fosse montado do zero, a estrutura do modelo ficaria repetida no código cliente.
+
+**Solução aplicada.**
+
+| Participante GoF | Classe | Responsabilidade |
+|:---|:---|:---|
+| *Prototype* | `Prototipo` | Classe abstrata que declara `clonar()`. |
+| *ConcretePrototype* | `ModeloDeConteudo` | Guarda nome, título sugerido e seções; implementa `clonar()` com **cópia profunda** das seções (`structuredClone`). |
+| *Gerenciador de protótipos* | `RegistroDeModelos` | Registra protótipos por chave e devolve somente cópias (`criar(chave)`). Corresponde à variação *prototype manager* descrita por Gamma et al. (1994). |
+| *Client* | `src/prototype/index.js` | Pede uma cópia ao registro, personaliza o rascunho e o envia ao Factory Method como conteúdo raiz. |
+
+**Decisão crítica: cópia rasa ou profunda.** As seções são objetos dentro de um array. Uma cópia rasa (`{ ...modelo }`) produziria um novo objeto que ainda compartilharia o mesmo array de seções, e preencher uma seção no rascunho alteraria o modelo original. Por isso, `clonar()` copia as seções em profundidade. Os testes verificam explicitamente que a cópia não compartilha o array nem os objetos de seção e que as cópias seguintes continuam vazias.
+
+**Consequências.** Novos tipos de rascunho são adicionados registrando novos protótipos em tempo de execução, sem criar novas classes. O cliente não conhece a classe concreta dos modelos. O custo é manter `clonar()` correto: se o modelo ganhar atributos com objetos aninhados, a cópia precisa acompanhá-los.
+
+### 12.3 Singleton
+
+**Intenção (GAMMA et al., 1994):** garantir que uma classe tenha somente uma instância e fornecer um ponto global de acesso a ela.
+
+**Problema no domínio.** Os limites de tamanho de um conteúdo precisam ser os mesmos em qualquer ponto que crie ou valide conteúdos. Se cada componente criasse o próprio objeto de configuração, valores divergentes poderiam ser aplicados no mesmo sistema. Os limites usados na demonstração são os mesmos do validador do TabNews: até 255 caracteres no título e até 20.000 no corpo (TABNEWS, 2026).
+
+**Solução aplicada.** `ConfiguracaoDoForum` mantém a instância em um campo estático privado (`#instancia`) e a cria somente no primeiro acesso a `obterInstancia()` (inicialização preguiçosa). Como o JavaScript não possui construtores privados, o construtor só executa quando `obterInstancia()` autoriza a criação por meio de um campo estático privado. Uma chamada direta a `new ConfiguracaoDoForum()` lança erro. Depois de criada, a instância é congelada com `Object.freeze`, o que torna os parâmetros somente leitura.
+
+| Participante GoF | Classe | Responsabilidade |
+|:---|:---|:---|
+| *Singleton* | `ConfiguracaoDoForum` | Guarda a instância única, controla sua criação e expõe `obterInstancia()` e `obter(chave)`. |
+| Clientes | `Conteudo`, `ConteudoRaiz` e `src/singleton/index.js` | Consultam os limites sempre pela instância única. |
+
+**Análise crítica.** O Singleton é o padrão criacional mais controverso, por três motivos:
+
+- **Estado global.** Um Singleton mutável funciona como uma variável global. A demonstração reduz esse risco ao congelar a instância, de modo que ela não pode ser alterada por quem a consulta.
+- **Testabilidade.** Classes que chamam `obterInstancia()` diretamente ficam acopladas à classe concreta e são difíceis de testar com outra configuração. Em um sistema maior, injetar a configuração no construtor seria preferível.
+- **Alternativa idiomática.** O cache de módulos do Node.js já garante que um módulo seja avaliado uma única vez por processo. Exportar um objeto congelado (`module.exports = Object.freeze({...})`) produziria o mesmo efeito com menos código, e é próximo do que o TabNews faz ao declarar os limites diretamente no esquema do validador. A implementação em classe foi mantida para evidenciar os participantes e o controle de instanciação descritos pelo GoF.
+
+### 12.4 Colaboração entre os padrões
+
+Os três padrões não foram implementados de forma isolada. Na demonstração, eles colaboram em uma sequência coerente:
+
+1. O cliente do **Prototype** copia o modelo "tutorial" e preenche o rascunho.
+2. O rascunho é enviado ao `CriadorDeConteudoRaiz`, do **Factory Method**, que cria um `ConteudoRaiz`.
+3. Durante a criação, o produto consulta os limites de título e corpo na instância única de `ConfiguracaoDoForum`, do **Singleton**.
+
+O Builder permanece independente. Ele resolve a montagem passo a passo de `Publicacao`, enquanto o Factory Method decide qual tipo de conteúdo criar. Em uma evolução do projeto, um criador concreto poderia usar um Builder internamente para montar produtos com muitos atributos opcionais.
+
+### 12.5 Abstract Factory
+
+O Abstract Factory é o único padrão criacional do catálogo que não foi implementado. Ele seria adequado se o fórum precisasse criar **famílias** de objetos compatíveis entre si, por exemplo, conjuntos de componentes de interface para temas diferentes. Os conteúdos demonstrados não formam famílias: cada criador produz um único tipo de produto. Por isso, implementar o Abstract Factory exigiria inventar um requisito sem relação com o domínio estudado.
+
+## 13. Considerações finais
 
 A implementação da SubEquipe 01 demonstra o padrão criacional Builder por meio de uma API fluente que configura uma publicação e delega ao próprio produto a validação de seus campos obrigatórios. O encadeamento deixa os atributos nomeados visíveis; a normalização de texto e tags ocorre durante a criação de `Publicacao`; e o teste automatizado comprova cinco comportamentos específicos.
 
-O principal resultado da entrega é a compreensão do processo de criação e das responsabilidades entre Builder, produto e cliente. A solução permanece pequena e didática: ela não integra a aplicação real do Fórum TabNews, e o uso do padrão deve ser reavaliado caso a criação direta continue sendo suficientemente clara para o objeto atual. Os demais padrões criacionais foram delimitados conceitualmente, sem apresentá-los como código implementado neste recorte.
+O principal resultado da entrega é a compreensão do processo de criação e das responsabilidades entre Builder, produto e cliente. A solução permanece pequena e didática: ela não integra a aplicação real do Fórum TabNews, e o uso do padrão deve ser reavaliado caso a criação direta continue sendo suficientemente clara para o objeto atual. Os padrões Factory Method, Prototype e Singleton completam a entrega com implementações executáveis e testadas. O Factory Method substitui condicionais de tipo por polimorfismo na criação de publicações e comentários. O Prototype cria rascunhos por cópia profunda de modelos registrados. O Singleton garante uma configuração única e imutável. A demonstração integrada mostra que os padrões são complementares: cada um responde a uma pergunta de criação diferente, e o Abstract Factory foi conscientemente deixado de fora por falta de um problema real que o justificasse.
 
 ## Referências
 
 GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. *Design Patterns: Elements of Reusable Object-Oriented Software*. Reading, MA: Addison-Wesley, 1994.
 
 NODE.JS. *Test runner*. Disponível em: <https://nodejs.org/api/test.html>. Acesso em: 19 out. 2026.
+
+GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. *Padrões de Projeto: soluções reutilizáveis de software orientado a objetos*. Porto Alegre: Bookman, 2000.
+
+REFACTORING.GURU. *Padrões criacionais*. Disponível em: <https://refactoring.guru/pt-br/design-patterns/creational-patterns>. Acesso em: 19 out. 2026.
+
+TABNEWS. *tabnews.com.br* (código-fonte; arquivos `models/content.js` e `models/validator.js`). GitHub. Disponível em: <https://github.com/filipedeschamps/tabnews.com.br>. Acesso em: 19 out. 2026.
+
+SUBEQUIPE 01. *Modelagem Estática na Notação UML*. Entrega 02 — Projeto Fórum. Disponível em: <https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_01/ModelagemEstatica>. Acesso em: 19 out. 2026.
 
 ## Histórico de Versões
 
@@ -236,3 +336,4 @@ NODE.JS. *Test runner*. Disponível em: <https://nodejs.org/api/test.html>. Aces
 | 1.2 | 13/10/2026 | Inclusão e correção de exemplos. | [Giovana Fontes](https://github.com/GiovanaFontesS) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Correção de exemplos citados na aplicação complementar do Builder no cadastro de usuários. |
 | 1.3 | 14/10/2026 | Inclusão de complemento sobre Factory Method, Prototype e Singleton. | [João Pedro S. Maciel](https://github.com/jopesmp) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Complemento comparativo dos padrões criacionais. |
 | 1.4 | 19/10/2026 | Revisão aprofundada do relatório, com foco no Builder implementado e no escopo demonstrativo do Fórum TabNews. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Detalhamento de responsabilidades, fluxo, regras, testes, decisões de projeto, comparação dos padrões criacionais e limites de integração. |
+| 1.5 | 19/10/2026 | Implementação e documentação de Factory Method, Prototype e Singleton. | [João Pedro S. Maciel](https://github.com/jopesmp) | — | Inclusão da seção 12 (participantes, problema no domínio, decisões e análise crítica de cada padrão, colaboração entre os padrões e justificativa para não implementar o Abstract Factory) e atualização das seções 1, 3, 10 e 13, que descreviam esses padrões como não implementados. |

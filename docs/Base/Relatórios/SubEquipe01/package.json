@@ -5,7 +5,10 @@
   "description": "Exemplo didático do padrão GoF Builder aplicado a publicações de fórum",
   "scripts": {
     "start": "node src/index.js",
-    "test": "node --test"
+    "test": "node --test",
+    "start:singleton": "node src/singleton/index.js",
+    "start:factory-method": "node src/factory-method/index.js",
+    "start:prototype": "node src/prototype/index.js"
   },
   "engines": {
     "node": ">=18"
