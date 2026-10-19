@@ -8,6 +8,8 @@ A solução permite que o cliente configure título, conteúdo, autor e tags por
 
 O cenário é inspirado na criação de publicações de um fórum, mas os componentes são executados em memória e não se comunicam com o sistema real do TabNews. O autor é uma string demonstrativa; não há autenticação, persistência, publicação efetiva, moderação ou cálculo de TabCoins. Portanto, o processo modelado termina na criação e apresentação de um objeto JavaScript.
 
+A seção 9 apresenta a modelagem dos padrões **Factory Method**, **Prototype** e **Singleton**, também implementados pela SubEquipe 01, com Diagramas de Classes e de Sequência em PlantUML e rastreabilidade com a modelagem da Entrega 02.
+
 O relatório mantém as três figuras que já faziam parte da documentação e acrescenta fontes editáveis mais completas em Mermaid. As fontes podem ser copiadas para um editor compatível, como Mermaid Live Editor, e exportadas como imagem para substituir as figuras quando a equipe concluir a revisão visual. O código Mermaid também pode ser guardado em um bloco de código no Notion; para renderizá-lo como figura, use a opção de incorporação ou imagem disponível no fluxo de trabalho adotado pela equipe.
 
 ## 2. Escopo e participantes
@@ -186,19 +188,543 @@ Não há arquivo `DiretorPublicacao.js` entre os arquivos atuais da SubEquipe 01
 
 As figuras antigas continuam vinculadas aos arquivos originais. Os links foram escritos com a URL estável do GitHub Pages para evitar que o caminho relativo seja resolvido a partir da rota do Docsify. Se o endereço público do projeto mudar, atualize o prefixo `https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/` nas três referências.
 
-## 9. Considerações finais
+## 9. Modelagem de Factory Method, Prototype e Singleton
+
+> **Responsável:** [João Pedro S. Maciel](https://github.com/jopesmp)
+
+Esta seção modela os três padrões criacionais que complementam o Builder. Para cada padrão são apresentados um **Diagrama de Classes**, que descreve a estrutura dos participantes, e um **Diagrama de Sequência**, que descreve a colaboração em tempo de execução. Os diagramas foram escritos em PlantUML, de modo que o código-fonte de cada diagrama é o próprio artefato versionado no repositório e é renderizado pelo GitPages (ver [Iniciativas Extras](/Base/1.3.IniciativasExtras.md)). Todos os elementos dos diagramas correspondem a classes, métodos e atributos existentes em `src/factory-method/`, `src/prototype/` e `src/singleton/`.
+
+### 9.1 Rastreabilidade com a Entrega 02
+
+Na [Modelagem Estática da Entrega 02](https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_01/ModelagemEstatica), a SubEquipe 01 modelou as classes `Publicacao` (com `titulo`, `conteudo`, `status` e a operação `criar()`) e `Comentario` (com `conteudo`, a operação `criar()` e a autoassociação "responde"), além da associação "recebe" entre elas. Naquele diagrama, cada classe cria a si mesma, e não se define quem decide qual tipo de conteúdo deve ser instanciado. A modelagem desta entrega transfere essa decisão para os criadores do Factory Method:
+
+| Elemento da Entrega 02 | Elemento desta modelagem | Papel no padrão |
+|:---|:---|:---|
+| `Publicacao` (`titulo`, `conteudo`) | `ConteudoRaiz` (`titulo`, `corpo`, `slug`) | *ConcreteProduct* do Factory Method |
+| `Comentario` (`conteudo`) e associações "recebe"/"responde" | `Comentario` (`corpo`, `idDoConteudoPai`) | *ConcreteProduct* do Factory Method |
+| Atributos comuns às duas classes (autor e texto) | `Conteudo` | *Product* abstrato |
+| Operações `Publicacao.criar()` e `Comentario.criar()` | `CriadorDeConteudo.prepararConteudo()` e `criarConteudo()` | *Creator* e método-fábrica |
+| — (nova funcionalidade) | `ModeloDeConteudo` e `RegistroDeModelos` | *ConcretePrototype* e gerenciador de protótipos |
+| — (regras de tamanho não modeladas) | `ConfiguracaoDoForum` | *Singleton* |
+
+<p align="center">Tabela 9.1: Correspondência entre a Entrega 02 e a modelagem dos padrões Factory Method, Prototype e Singleton.</p>
+
+O nome `ConteudoRaiz` foi adotado, em vez de `Publicacao`, para não colidir com a classe `Publicacao` do Builder (`src/Publicacao.js`) e para seguir o vocabulário do TabNews, em que publicações e comentários são conteúdos e uma publicação é o conteúdo sem pai.
+
+### 9.2 Visão geral da colaboração
+
+```plantuml
+@startuml
+title Colaboracao entre os padroes criacionais da SubEquipe 01
+
+skinparam classAttributeIconSize 0
+hide empty members
+hide empty methods
+
+package "Prototype" {
+  class RegistroDeModelos <<PrototypeManager>>
+  abstract class Prototipo <<Prototype>>
+  class ModeloDeConteudo <<ConcretePrototype>>
+}
+package "Factory Method" {
+  abstract class CriadorDeConteudo <<Creator>>
+  class CriadorDeConteudoRaiz <<ConcreteCreator>>
+  class CriadorDeComentario <<ConcreteCreator>>
+  abstract class Conteudo <<Product>>
+  class ConteudoRaiz <<ConcreteProduct>>
+  class Comentario <<ConcreteProduct>>
+}
+package "Singleton" {
+  class ConfiguracaoDoForum <<Singleton>>
+}
+package "Builder" {
+  class PublicacaoBuilder <<Builder>>
+  class Publicacao <<Product>>
+}
+
+ModeloDeConteudo --|> Prototipo
+RegistroDeModelos o--> Prototipo
+CriadorDeConteudoRaiz --|> CriadorDeConteudo
+CriadorDeComentario --|> CriadorDeConteudo
+ConteudoRaiz --|> Conteudo
+Comentario --|> Conteudo
+CriadorDeConteudoRaiz ..> ConteudoRaiz : <<create>>
+CriadorDeComentario ..> Comentario : <<create>>
+Conteudo ..> ConfiguracaoDoForum : limites >
+ModeloDeConteudo ..> CriadorDeConteudoRaiz : titulo e corpo\n(via cliente) >
+PublicacaoBuilder ..> Publicacao : <<create>>
+@enduml
+```
+
+<p align="center">Figura 6: Visão geral dos padrões criacionais da SubEquipe 01. Fonte: SubEquipe 01 (2026).</p>
+
+A visão geral mostra os quatro padrões e as duas dependências entre eles: os produtos do Factory Method consultam os limites no Singleton, e o rascunho produzido pelo Prototype é transformado em `ConteudoRaiz` por meio do Factory Method. O Builder não depende dos demais.
+
+### 9.3 Factory Method
+
+#### 9.3.1 Diagrama de Classes
+
+```plantuml
+@startuml
+title Padrao Factory Method aplicado a criacao de conteudos do Forum
+
+skinparam classAttributeIconSize 0
+skinparam nodesep 50
+skinparam ranksep 60
+hide empty members
+
+abstract class CriadorDeConteudo <<Creator>> {
+  - conteudosPreparados : Integer
+  + {abstract} criarConteudo(dados : DadosDeConteudo) : Conteudo
+  + prepararConteudo(dados : DadosDeConteudo) : Conteudo
+  + conteudosPreparados() : Integer
+}
+
+class CriadorDeConteudoRaiz <<ConcreteCreator>> {
+  + criarConteudo(dados : DadosDeConteudo) : ConteudoRaiz
+}
+
+class CriadorDeComentario <<ConcreteCreator>> {
+  + criarConteudo(dados : DadosDeConteudo) : Comentario
+}
+
+abstract class Conteudo <<Product>> {
+  + autor : String
+  + corpo : String
+  + {abstract} tipo() : String
+  + {abstract} resumo() : String
+}
+
+class ConteudoRaiz <<ConcreteProduct>> {
+  + titulo : String
+  + slug : String
+  + tipo() : String
+  + resumo() : String
+  + {static} gerarSlug(titulo : String) : String
+}
+
+class Comentario <<ConcreteProduct>> {
+  + idDoConteudoPai : String
+  + tipo() : String
+  + resumo() : String
+}
+
+class ConfiguracaoDoForum <<Singleton>> {
+  + limiteDeCaracteresDoTitulo : Integer
+  + limiteDeCaracteresDoCorpo : Integer
+  + {static} obterInstancia() : ConfiguracaoDoForum
+}
+
+class "Cliente\n(factory-method/index.js)" as Cliente <<module>>
+
+CriadorDeConteudoRaiz --|> CriadorDeConteudo
+CriadorDeComentario --|> CriadorDeConteudo
+ConteudoRaiz --|> Conteudo
+Comentario --|> Conteudo
+
+CriadorDeConteudo ..> Conteudo : prepara >
+CriadorDeConteudoRaiz ..> ConteudoRaiz : <<create>>
+CriadorDeComentario ..> Comentario : <<create>>
+Conteudo ..> ConfiguracaoDoForum : consulta limites >
+Cliente ..> CriadorDeConteudo : usa >
+
+note right of CriadorDeConteudo
+  prepararConteudo(dados):
+    conteudo = this.criarConteudo(dados)
+    se nao for Conteudo -> TypeError
+    conteudosPreparados += 1
+    return conteudo
+end note
+
+note bottom of Comentario
+  Responde a um conteudo existente
+  (associacao "responde"/"recebe" do
+  diagrama de classes da Entrega 02).
+end note
+@enduml
+```
+
+<p align="center">Figura 7: Diagrama de Classes do padrão Factory Method. Fonte: SubEquipe 01 (2026).</p>
+
+- **`CriadorDeConteudo`** (*Creator*): classe abstrata. O método-fábrica `criarConteudo()` aparece em itálico por ser abstrato; no JavaScript, a implementação padrão lança erro, e a própria classe não pode ser instanciada (`new.target`). `prepararConteudo()` é a operação concreta que usa o método-fábrica: ela depende apenas da abstração `Conteudo`, nunca das classes concretas.
+- **`CriadorDeConteudoRaiz`** e **`CriadorDeComentario`** (*ConcreteCreator*): sobrescrevem somente `criarConteudo()`. A dependência `<<create>>` indica que cada criador concreto instancia exatamente um produto concreto.
+- **`Conteudo`** (*Product*): classe abstrata com os atributos comuns e as operações abstratas `tipo()` e `resumo()`.
+- **`ConteudoRaiz`** e **`Comentario`** (*ConcreteProduct*): implementam as regras específicas de cada tipo. `gerarSlug()` está sublinhado por ser estático.
+- **`ConfiguracaoDoForum`**: aparece apenas com os membros usados pelos produtos. O papel de Singleton é detalhado na seção 9.5.
+- **`DadosDeConteudo`**: não é uma classe. Representa o objeto literal `{ autor, titulo, corpo, idDoConteudoPai }` recebido pelos criadores.
+
+#### 9.3.2 Diagrama de Sequência
+
+```plantuml
+@startuml
+title Criacao polimorfica de conteudos com Factory Method
+
+participant "Cliente\n(index.js)" as C
+participant "criadorDeRaiz :\nCriadorDeConteudoRaiz" as CR
+participant "criadorDeComentario :\nCriadorDeComentario" as CC
+participant "publicacao :\nConteudoRaiz" as P
+participant "resposta :\nComentario" as R
+participant "configuracao :\nConfiguracaoDoForum" as CFG
+
+== Conteudo raiz ==
+C -> CR : prepararConteudo(dados)
+activate CR
+CR -> CR : criarConteudo(dados)
+activate CR
+CR -> P ** : new ConteudoRaiz(dados)
+activate P
+P -> CFG : obterInstancia()
+CFG --> P : configuracao
+P -> P : validar autor, corpo e titulo\nnos limites configurados
+P -> P : slug = gerarSlug(titulo)
+P --> CR
+deactivate P
+deactivate CR
+CR -> CR : conferir instanceof Conteudo\nconteudosPreparados += 1
+CR --> C : publicacao
+deactivate CR
+
+== Comentario (mesma operacao, outro criador) ==
+C -> CC : prepararConteudo(dados com idDoConteudoPai = publicacao.slug)
+activate CC
+CC -> CC : criarConteudo(dados)
+activate CC
+CC -> R ** : new Comentario(dados)
+activate R
+R -> CFG : obterInstancia()
+CFG --> R : configuracao
+R -> R : validar autor, corpo\ne idDoConteudoPai
+R --> CC
+deactivate R
+deactivate CC
+CC -> CC : conferir instanceof Conteudo\nconteudosPreparados += 1
+CC --> C : resposta
+deactivate CC
+
+== Regra especifica violada ==
+C -> CR : prepararConteudo(dados sem titulo)
+activate CR
+CR -> CR : criarConteudo(dados)
+CR --> C : Error("O titulo e obrigatorio...")
+note right of CR : o contador nao e incrementado
+deactivate CR
+@enduml
+```
+
+<p align="center">Figura 8: Diagrama de Sequência da criação polimórfica de conteúdos. Fonte: SubEquipe 01 (2026).</p>
+
+1. **Conteúdo raiz.** O cliente chama `prepararConteudo()` no criador. O criador chama o próprio método-fábrica (automensagem `criarConteudo`), que instancia `ConteudoRaiz`. O produto consulta a configuração única, valida autor, corpo e título dentro dos limites e gera o slug. Ao final, o criador confere o tipo do retorno e incrementa seu contador.
+2. **Comentário.** A mesma mensagem `prepararConteudo()` é enviada a outro criador e resulta em outro produto. O fluxo é idêntico até o ponto em que o método-fábrica decide a classe, o que evidencia a decisão de criação delegada à subclasse.
+3. **Regra violada.** Sem título, o construtor de `ConteudoRaiz` lança erro; a exceção atravessa `criarConteudo()` e `prepararConteudo()`, e o contador não é incrementado.
+
+### 9.4 Prototype
+
+#### 9.4.1 Diagrama de Classes
+
+```plantuml
+@startuml
+title Padrao Prototype aplicado a modelos de rascunho do Forum
+
+skinparam classAttributeIconSize 0
+hide empty members
+
+abstract class Prototipo <<Prototype>> {
+  + {abstract} clonar() : Prototipo
+}
+
+class ModeloDeConteudo <<ConcretePrototype>> {
+  + nome : String
+  + tituloSugerido : String
+  + secoes : Secao[0..*]
+  + clonar() : ModeloDeConteudo
+  + adicionarSecao(titulo : String, texto : String) : ModeloDeConteudo
+  + preencherSecao(titulo : String, texto : String) : ModeloDeConteudo
+  + montarCorpo() : String
+}
+
+class Secao <<datatype>> {
+  + titulo : String
+  + texto : String
+}
+
+class RegistroDeModelos <<PrototypeManager>> {
+  - prototipos : Map<String, Prototipo>
+  + registrar(chave : String, prototipo : Prototipo) : RegistroDeModelos
+  + criar(chave : String) : Prototipo
+  + listarChaves() : String[0..*]
+}
+
+class "Cliente\n(prototype/index.js)" as Cliente <<module>>
+
+class CriadorDeConteudoRaiz <<ConcreteCreator>> {
+  + prepararConteudo(dados : DadosDeConteudo) : Conteudo
+}
+
+ModeloDeConteudo --|> Prototipo
+ModeloDeConteudo *--> "0..*" Secao : contem >
+RegistroDeModelos o--> "0..*" Prototipo : guarda >
+Cliente ..> RegistroDeModelos : pede copias >
+Cliente ..> ModeloDeConteudo : preenche a copia >
+Cliente ..> CriadorDeConteudoRaiz : envia titulo e corpo >
+
+note right of ModeloDeConteudo
+  clonar() cria um novo ModeloDeConteudo
+  com structuredClone(secoes):
+  copia profunda, sem compartilhar
+  o array nem os objetos Secao.
+end note
+
+note bottom of RegistroDeModelos
+  criar(chave) nunca devolve o prototipo
+  registrado, apenas prototipo.clonar().
+end note
+@enduml
+```
+
+<p align="center">Figura 9: Diagrama de Classes do padrão Prototype. Fonte: SubEquipe 01 (2026).</p>
+
+- **`Prototipo`** (*Prototype*): classe abstrata que declara `clonar()`.
+- **`ModeloDeConteudo`** (*ConcretePrototype*): a relação com `Secao` é uma **composição**, pois as seções pertencem ao modelo e são copiadas junto com ele. Essa composição é o motivo de `clonar()` precisar de cópia profunda.
+- **`Secao`**: estereótipo `<<datatype>>`, porque no código é um objeto literal `{ titulo, texto }`, não uma classe.
+- **`RegistroDeModelos`** (gerenciador de protótipos): a relação com `Prototipo` é uma **agregação** com multiplicidade `0..*`, pois o registro guarda referências aos protótipos sem controlar a criação deles. O registro depende apenas da abstração `Prototipo`, e por isso aceita qualquer protótipo concreto.
+- **Cliente**: depende do registro para obter cópias e do `CriadorDeConteudoRaiz` para transformar o rascunho em conteúdo.
+
+#### 9.4.2 Diagrama de Sequência
+
+```plantuml
+@startuml
+title Criacao de rascunhos por copia de modelos registrados
+
+participant "Cliente\n(index.js)" as C
+participant "registro :\nRegistroDeModelos" as REG
+participant "tutorial :\nModeloDeConteudo" as M
+participant "rascunho :\nModeloDeConteudo" as RA
+participant "criador :\nCriadorDeConteudoRaiz" as CR
+
+== Registro dos prototipos ==
+C -> M ** : new ModeloDeConteudo(...)
+C -> REG : registrar("tutorial", tutorial)
+
+== Copia do modelo ==
+C -> REG : criar("tutorial")
+activate REG
+REG -> M : clonar()
+activate M
+M -> RA ** : new ModeloDeConteudo(nome, tituloSugerido,\nstructuredClone(secoes))
+M --> REG : rascunho
+deactivate M
+REG --> C : rascunho
+deactivate REG
+
+== Personalizacao da copia ==
+C -> RA : tituloSugerido = "Tutorial: aplicando..."
+C -> RA : preencherSecao(...) x3
+C -> RA : adicionarSecao("Referencias", ...)
+note over M : o modelo original\npermanece inalterado
+
+== Integracao com o Factory Method ==
+C -> RA : montarCorpo()
+RA --> C : corpo em Markdown
+C -> CR : prepararConteudo({autor, titulo, corpo})
+activate CR
+CR --> C : ConteudoRaiz
+deactivate CR
+
+== Chave inexistente ==
+C -> REG : criar("pitch")
+activate REG
+REG --> C : Error("Modelo nao registrado: pitch.")
+deactivate REG
+@enduml
+```
+
+<p align="center">Figura 10: Diagrama de Sequência da criação de rascunhos por cópia. Fonte: SubEquipe 01 (2026).</p>
+
+1. **Registro.** O cliente cria os modelos e os registra por chave.
+2. **Cópia.** `criar("tutorial")` não devolve o modelo: o registro chama `clonar()`, e o modelo cria um novo objeto com cópia profunda das seções.
+3. **Personalização.** As alterações são feitas apenas no rascunho. A nota sobre `tutorial` destaca que o protótipo permanece inalterado, o que a execução confirma ao gerar uma segunda cópia ainda vazia.
+4. **Integração.** O rascunho gera o corpo em Markdown e é enviado ao `CriadorDeConteudoRaiz`, reaproveitando o Factory Method.
+5. **Erro.** Uma chave não registrada resulta em erro, sem criação de objeto.
+
+### 9.5 Singleton
+
+#### 9.5.1 Diagrama de Classes
+
+```plantuml
+@startuml
+title Padrao Singleton aplicado a configuracao do Forum
+
+skinparam classAttributeIconSize 0
+hide empty members
+
+class ConfiguracaoDoForum <<Singleton>> {
+  - {static} instancia : ConfiguracaoDoForum [0..1]
+  - {static} criacaoAutorizada : Boolean
+  - {static} instanciasCriadas : Integer
+  + nomeDaPlataforma : String {readOnly}
+  + limiteDeCaracteresDoTitulo : Integer {readOnly}
+  + limiteDeCaracteresDoCorpo : Integer {readOnly}
+  - ConfiguracaoDoForum()
+  + {static} obterInstancia() : ConfiguracaoDoForum
+  + {static} instanciasCriadas() : Integer
+  + obter(chave : String) : Object
+}
+
+abstract class Conteudo <<Product>> {
+  + autor : String
+  + corpo : String
+}
+
+class ConteudoRaiz <<ConcreteProduct>> {
+  + titulo : String
+  + slug : String
+}
+
+class "Cliente\n(singleton/index.js)" as Cliente <<module>>
+
+ConfiguracaoDoForum --> "0..1" ConfiguracaoDoForum : instancia
+Cliente ..> ConfiguracaoDoForum : obterInstancia() >
+Conteudo ..> ConfiguracaoDoForum : consulta limite do corpo >
+ConteudoRaiz --|> Conteudo
+ConteudoRaiz ..> ConfiguracaoDoForum : consulta limite do titulo >
+
+note right of ConfiguracaoDoForum
+  O construtor so executa quando
+  obterInstancia() autoriza a criacao;
+  new direto lanca erro.
+  Apos criada, a instancia e congelada
+  (Object.freeze): parametros somente leitura.
+end note
+@enduml
+```
+
+<p align="center">Figura 11: Diagrama de Classes do padrão Singleton. Fonte: SubEquipe 01 (2026).</p>
+
+- **`ConfiguracaoDoForum`** (*Singleton*): os membros estáticos (sublinhados) guardam a instância única, a autorização de criação e a contagem de instâncias criadas. O construtor aparece como **privado** (`-`), pois só executa quando `obterInstancia()` autoriza a criação. Os parâmetros têm a restrição `{readOnly}`, que corresponde ao `Object.freeze` aplicado ao final do construtor.
+- **Autoassociação `instancia`** com multiplicidade `0..1`: representa a referência da classe para sua única instância, que é nula até o primeiro acesso.
+- **Clientes**: `Conteudo` e `ConteudoRaiz` dependem da configuração para os limites, e o módulo de demonstração a usa diretamente.
+
+#### 9.5.2 Diagrama de Sequência
+
+```plantuml
+@startuml
+title Obtencao da instancia unica de ConfiguracaoDoForum
+
+participant "Cliente\n(index.js)" as C
+participant "ConfiguracaoDoForum\n(classe)" as CL
+participant "configuracao :\nConfiguracaoDoForum" as I
+
+== Primeiro acesso (criacao preguicosa) ==
+C -> CL : obterInstancia()
+activate CL
+alt instancia == null
+  CL -> CL : criacaoAutorizada = true
+  CL -> I ** : new ConfiguracaoDoForum()
+  activate I
+  I -> I : definir parametros\ninstanciasCriadas += 1\nObject.freeze(this)
+  I --> CL
+  deactivate I
+  CL -> CL : criacaoAutorizada = false
+end
+CL --> C : configuracao
+deactivate CL
+
+== Segundo acesso ==
+C -> CL : obterInstancia()
+activate CL
+note right of CL : instancia ja existe:\nnenhum objeto novo e criado
+CL --> C : configuracao (mesma referencia)
+deactivate CL
+
+== Leitura de parametro ==
+C -> I : obter("limiteDeCaracteresDoTitulo")
+activate I
+I --> C : 255
+deactivate I
+
+== Tentativas de violar o padrao ==
+C -> CL : new ConfiguracaoDoForum()
+activate CL
+CL --> C : Error("use obterInstancia()")
+deactivate CL
+C -> I : limiteDeCaracteresDoTitulo = 10
+activate I
+I --> C : TypeError (objeto congelado)
+deactivate I
+@enduml
+```
+
+<p align="center">Figura 12: Diagrama de Sequência da obtenção da instância única. Fonte: SubEquipe 01 (2026).</p>
+
+1. **Primeiro acesso.** O fragmento `alt` mostra a inicialização preguiçosa: somente quando `instancia` é nula, a classe autoriza a criação, instancia o objeto, congela-o e retira a autorização.
+2. **Segundo acesso.** Nenhum objeto é criado, e a mesma referência é devolvida.
+3. **Leitura.** O parâmetro é lido pela instância única.
+4. **Violações.** O `new` direto falha porque a criação não está autorizada, e a escrita falha porque o objeto está congelado.
+
+### 9.6 Regras modeladas
+
+| ID | Regra | Componente | Teste que a verifica |
+|:---|:---|:---|:---|
+| FM01 | Cada criador concreto produz somente o seu tipo de conteúdo. | `CriadorDeConteudoRaiz`, `CriadorDeComentario` | `CriadorDeConteudoRaiz produz um ConteudoRaiz`; `CriadorDeComentario produz um Comentario` |
+| FM02 | O cliente cria qualquer tipo de conteúdo pela mesma operação `prepararConteudo()`. | `CriadorDeConteudo` | `o cliente usa a mesma operação para qualquer criador` |
+| FM03 | Criador e produto abstratos não podem ser instanciados. | `CriadorDeConteudo`, `Conteudo` | `classes abstratas não podem ser instanciadas` |
+| FM04 | O método-fábrica deve devolver um `Conteudo`; caso contrário, `prepararConteudo()` lança `TypeError`. | `CriadorDeConteudo` | `rejeita método-fábrica que não devolve Conteudo` |
+| FM05 | Conteúdo raiz exige título; comentário exige conteúdo pai. | `ConteudoRaiz`, `Comentario` | `aplica as regras específicas de cada produto` |
+| FM06 | Título até 255 caracteres e corpo até 20.000, conforme a configuração única. | `Conteudo`, `ConteudoRaiz` | `usa os limites do Singleton de configuração` (título) |
+| FM07 | O slug é gerado do título, sem acentos e com hifens. | `ConteudoRaiz` | `gera slug sem acentos a partir do título` |
+| FM08 | O contador só aumenta quando a criação é concluída. | `CriadorDeConteudo` | `cada criador conta apenas os conteúdos que preparou` |
+| PT01 | `clonar()` devolve um objeto novo com os mesmos dados. | `ModeloDeConteudo` | `clonar() cria um objeto novo com os mesmos dados` |
+| PT02 | A cópia é profunda: não compartilha o array nem os objetos de seção. | `ModeloDeConteudo` | `a cópia é profunda e não compartilha as seções` |
+| PT03 | O registro entrega apenas cópias, e alterar uma cópia não afeta as seguintes. | `RegistroDeModelos` | `o registro devolve cópias...`; `alterar uma cópia não afeta as cópias seguintes` |
+| PT04 | Só aceita objetos `Prototipo` e rejeita chaves desconhecidas. | `RegistroDeModelos` | `o registro rejeita chave desconhecida e objeto que não é Prototipo` |
+| PT05 | `Prototipo` é abstrato, e o modelo valida nome e seções. | `Prototipo`, `ModeloDeConteudo` | `Prototipo é abstrato e o modelo valida seus dados` |
+| SG01 | A instância é criada somente no primeiro acesso. | `ConfiguracaoDoForum` | `não cria a instância antes do primeiro acesso` |
+| SG02 | Todos os acessos devolvem a mesma instância. | `ConfiguracaoDoForum` | `acessos sucessivos devolvem a mesma instância` |
+| SG03 | A criação direta com `new` é impedida. | `ConfiguracaoDoForum` | `impede a criação direta com new` |
+| SG04 | Os parâmetros são somente leitura. | `ConfiguracaoDoForum` | `os parâmetros são somente leitura` |
+| SG05 | Chaves de configuração desconhecidas são rejeitadas. | `ConfiguracaoDoForum` | `obter() devolve parâmetros existentes e rejeita chaves desconhecidas` |
+
+<p align="center">Tabela 9.2: Regras modeladas e testes correspondentes.</p>
+
+O limite do corpo (FM06) é aplicado pelo código, mas a suíte testa explicitamente apenas o limite do título.
+
+### 9.7 Correspondência entre elementos e arquivos
+
+| Elemento modelado | Arquivo |
+|:---|:---|
+| `ConfiguracaoDoForum` | [`src/singleton/ConfiguracaoDoForum.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe01/src/singleton/ConfiguracaoDoForum.js) |
+| `Conteudo`, `ConteudoRaiz`, `Comentario` | [`src/factory-method/Conteudo.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe01/src/factory-method/Conteudo.js) |
+| `CriadorDeConteudo`, `CriadorDeConteudoRaiz`, `CriadorDeComentario` | [`src/factory-method/CriadorDeConteudo.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe01/src/factory-method/CriadorDeConteudo.js) |
+| `Prototipo`, `ModeloDeConteudo`, `Secao` | [`src/prototype/ModeloDeConteudo.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe01/src/prototype/ModeloDeConteudo.js) |
+| `RegistroDeModelos` | [`src/prototype/RegistroDeModelos.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe01/src/prototype/RegistroDeModelos.js) |
+| Clientes das Figuras 8, 10 e 12 | `src/factory-method/index.js`, `src/prototype/index.js`, `src/singleton/index.js` |
+
+### 9.8 Decisões de modelagem
+
+- **Classes abstratas em vez de interfaces.** O JavaScript não possui interfaces. Por isso, `CriadorDeConteudo`, `Conteudo` e `Prototipo` são modeladas como classes abstratas, cuja abstração é garantida em tempo de execução com `new.target`, como faz a SubEquipe 03 com `Observador`.
+- **Objetos literais como `<<datatype>>`.** `Secao` e `DadosDeConteudo` não são classes no código e não recebem comportamento nos diagramas.
+- **Chamadas estáticas na sequência.** No Diagrama de Sequência do Singleton, a classe e a instância aparecem como linhas de vida separadas, para distinguir `obterInstancia()` (operação de classe) de `obter()` (operação de instância).
+- **Fora do escopo.** Persistência, autenticação, status de publicação (`StatusPublicacao` da Entrega 02) e identificadores UUID não são modelados, pois não existem na demonstração. O `slug` do conteúdo raiz é usado como identificador do conteúdo pai no exemplo.
+
+## 10. Considerações finais
 
 A modelagem detalha a colaboração entre cliente, Builder e produto e explicita o percurso do estado temporário até a representação JSON. O diagrama de classes documenta os elementos e as dependências; o diagrama de sequência evidencia mensagens e retornos, incluindo exceções; o diagrama de atividades descreve decisões, ordem das validações e saídas.
 
 As fontes dos diagramas refletem o código disponível e registram como elementos conceituais aquilo que não existe como classe ou método independente. A demonstração tem valor didático no domínio de publicações de fórum, mas não deve ser confundida com uma funcionalidade integrada à aplicação real do TabNews.
 
-## 10. Referências
+A modelagem da seção 9 completa o conjunto dos padrões criacionais implementados. Os diagramas de classes tornam os papéis do GoF visíveis por estereótipos, e os diagramas de sequência mostram o momento em que cada padrão atua: a delegação da criação ao método-fábrica, a cópia profunda feita pelo protótipo e a inicialização preguiçosa da instância única. A tabela de regras liga cada comportamento modelado a um teste automatizado, o que permite conferir a modelagem diretamente contra o código.
+
+## 11. Referências
 
 GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. *Design Patterns: Elements of Reusable Object-Oriented Software*. Reading, MA: Addison-Wesley, 1994.
 
 OBJECT MANAGEMENT GROUP (OMG). *OMG Unified Modeling Language (OMG UML)*. Disponível em: <https://www.omg.org/spec/UML/>. Acesso em: 19 out. 2026.
 
 MERMAID. *Mermaid Documentation*. Disponível em: <https://mermaid.js.org/>. Acesso em: 19 out. 2026.
+
+PLANTUML. *Class Diagram* e *Sequence Diagram*. Disponível em: <https://plantuml.com/>. Acesso em: 19 out. 2026.
+
+SUBEQUIPE 01. *Modelagem Estática na Notação UML*. Entrega 02 — Projeto Fórum. Disponível em: <https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega2-TabNews-Forum/#/Base/Relatórios/SubEquipe_01/ModelagemEstatica>. Acesso em: 19 out. 2026.
 
 ## Histórico de Versões
 
@@ -209,3 +735,4 @@ MERMAID. *Mermaid Documentation*. Disponível em: <https://mermaid.js.org/>. Ace
 | 1.2 | 10/10/2026 | Adição de considerações sobre a aplicabilidade do padrão Builder. | [Giovana Fontes](https://github.com/GiovanaFontesS) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Comparação com a construção tradicional e análise de manutenibilidade, extensibilidade e limitações. |
 | 1.3 | 14/10/2026 | Adição de exemplos e modificação nas regras de negócio. | [João Pedro S. Maciel](https://github.com/jopesmp) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Inclusão de exemplo teórico com Director e atualização das regras. |
 | 1.4 | 19/10/2026 | Revisão detalhada dos diagramas e alinhamento da modelagem ao código atual. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Preservação das figuras anteriores, inclusão das fontes Mermaid ampliadas, detalhamento dos fluxos válidos e de erro e correção de descrições que não correspondiam aos arquivos disponíveis. |
+| 1.5 | 19/10/2026 | Modelagem de Factory Method, Prototype e Singleton. | [João Pedro S. Maciel](https://github.com/jopesmp) | — | Inclusão da seção 9: rastreabilidade com a Entrega 02, visão geral, Diagramas de Classes e de Sequência em PlantUML para os três padrões, regras ligadas aos testes, correspondência com os arquivos e decisões de modelagem. |
