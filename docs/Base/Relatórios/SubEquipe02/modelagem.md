@@ -20,7 +20,8 @@ O diagrama de classes apresenta os componentes da solução, seus atributos, mé
 
 <p align="center">
   <strong>Figura 1 — Diagrama de classes UML do padrão Facade aplicado ao carregamento da tela inicial.</strong><br>
-  Fonte: elaboração da SubEquipe02.
+  Fonte: elaboração da SubEquipe02. <br>
+  Resposáveis pelo diagrama: Pablo Rodrigues, Isaac Menezes e Pedro Ramos
 </p>
 
 

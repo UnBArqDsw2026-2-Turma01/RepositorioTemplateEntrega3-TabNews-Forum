@@ -23,7 +23,7 @@ Os três arquivos devem permanecer no mesmo diretório para que os imports relat
 
 ## 2. Arquivo `subsistemas.py`
 
-O arquivo `subsistemas.py` contém os subsistemas utilizados pela fachada. Cada classe representa um serviço com responsabilidade específica, permitindo que suas operações sejam executadas independentemente.
+O arquivo [subsistemas.py](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe02/src/subsistemas.py) contém os subsistemas utilizados pela fachada. Cada classe representa um serviço com responsabilidade específica, permitindo que suas operações sejam executadas independentemente.
 
 ### Classe `ServicoPostagensRelevantes`
 
@@ -31,27 +31,109 @@ A classe disponibiliza o método `buscar_relevantes()`, responsável por retorna
 
 Cada publicação é representada por um dicionário contendo identificador, título, quantidade de tabcoins e autor.
 
+```python
+class ServicoPostagensRelevantes:
+    def buscar_relevantes(self):
+        return [
+            {"id": 1, "titulo": "O que são Padrões de Projeto?", "tabcoins": 45, "autor": "usuario_a"},
+            {"id": 2, "titulo": "Dicas de Python para iniciantes", "tabcoins": 32, "autor": "usuario_b"}
+        ]
+```
+
 ### Classe `ServicoPostagensRecentes`
 
 A classe disponibiliza o método `buscar_recentes()`, responsável por retornar uma lista simulada de publicações recentes. No exemplo, os dados são definidos diretamente no código, sem consulta a um banco de dados ou ordenação efetiva por data.
+
+```python
+class ServicoPostagensRecentes:
+    def buscar_recentes(self):
+        return [
+            {"id": 3, "titulo": "Nova atualização do framework", "tabcoins": 1, "autor": "usuario_c"},
+            {"id": 4, "titulo": "imagina algo muito improprio aqui", "tabcoins": 100, "autor": "usuario_d"}
+        ]
+```
 
 ### Classe `ServicoEstatisticas`
 
 A classe disponibiliza o método `obter_status_sistema()`, responsável por retornar um dicionário com informações estatísticas, incluindo a quantidade de usuários online e o número de publicações realizadas no dia.
 
-As três classes simulam operações que, em um sistema real, poderiam envolver consultas ao banco de dados, leitura de cache ou acesso a serviços de monitoramento.
+```python
+class ServicoEstatisticas:
+    def obter_status_sistema(self):
+        return {
+            "usuarios_online": 142,
+            "publicacoes_hoje": 87
+        }
+```
+
+### Classe `ServicoPublicidade`
+
+A classe `ServicoPublicidade` representa o serviço responsável por entregar uma mensagem promocional para a tela inicial. O método `obter_publicidade_aleatoria()` simula a escolha de um anúncio ou campanha que será exibida junto ao conteúdo principal do fórum. A estrutura retornada é simples: um dicionário contendo identificador, título, empresa e conteúdo promocional.
+
+```python
+class ServicoPublicidade:
+    def obter_publicidade_aleatoria(self):
+        return {
+            "id": 1, "titulo": "Promoção", "empresa": "Amazono", "conteudo": "promoção do dia 10/10"
+        }
+```
+
+Essa classe é importante no contexto da fachada porque a tela inicial não precisa saber como uma campanha é selecionada ou como o anúncio é montado; basta solicitar a publicidade e receber o retorno já formatado.
+
+### Classe `ServicoAutorizacao`
+
+A classe `ServicoAutorizacao` encapsula a regra de moderação do conteúdo. O método `filtragem(data)` percorre as postagens recebidas e verifica se algum título contém termos inadequados, como `"improprio"`. Quando isso acontece, o título é substituído por uma mensagem segura e os tabcoins da publicação são zerados. Esse mecanismo serve como exemplo de controle de qualidade e segurança do conteúdo exibido ao usuário.
+
+```python
+class ServicoAutorizacao:
+    def filtragem(self, data):
+        for postagem in data:
+            if "improprio" in postagem['titulo']:
+                postagem['titulo'] = "AVISO: Conteudo Filtrado"
+                postagem["tabcoins"] = 0
+```
+
+Na prática, esse serviço demonstra como uma regra de negócio específica pode ser isolada em uma classe independente, mantendo a fachada responsável apenas pelo fluxo de carregamento dos dados.
+
+### Classe `ServicoUsuarios`
+
+A classe `ServicoUsuarios` simula a criação de um usuário anônimo quando o visitante acessa a página sem estar autenticado. O método `criar_anonimo()` retorna uma string simples, como `"Anonimo"`, representando um perfil genérico do visitante. Essa funcionalidade complementa a interface da tela inicial, pois o sistema pode exibir um identificador genérico antes de qualquer login do usuário.
+
+```python
+class ServicoUsuarios:
+    def criar_anonimo(self):
+        return "Anonimo"
+```
+
+Em um sistema real, essas operações poderiam consultar cache, validar conteúdo, montar campanhas promocionais, autenticar usuários ou criar perfis temporários de visitante. Assim, cada classe atua como um subsistema independente, e a fachada centraliza o acesso a todos esses serviços em uma única interface.
 
 ## 3. Classe `TelaInicialFacade`
 
-A classe `TelaInicialFacade`, definida em `tela_inicial_facade.py`, constitui o elemento central da implementação do padrão Facade.
+A classe [TelaInicialFacade](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe02/src/tela_inicial_facade.py), definida em `tela_inicial_facade.py`, constitui o elemento central da implementação do padrão Facade.
 
-Seu construtor instancia os três serviços necessários para carregar as informações da tela inicial:
+Seu construtor instancia os seis serviços necessários para carregar as informações da tela inicial:
 
 - `ServicoPostagensRelevantes`;
 - `ServicoPostagensRecentes`;
-- `ServicoEstatisticas`.
+- `ServicoEstatisticas`;
+- `ServicoAutorizacao`;
+- `ServicoPublicidade`;
+- `ServicoUsuario`.
 
-O método `carregar_dados()` coordena a execução dos serviços, obtendo as publicações relevantes, as publicações recentes e as estatísticas do sistema. Em seguida, consolida os resultados em um único dicionário, organizado em três categorias: `feed_relevante`, `feed_recente` e `informacoes_rodape`.
+```python
+from subsistemas import ServicoPostagensRelevantes, ServicoUsuarios, ServicoPublicidade, ServicoPostagensRecentes, ServicoEstatisticas, ServicoAutorizacao
+
+class TelaInicialFacade:
+    def __init__(self):
+        self._servico_relevantes = ServicoPostagensRelevantes()
+        self._servico_recentes = ServicoPostagensRecentes()
+        self._servico_estatisticas = ServicoEstatisticas()
+        self._servico_Autorizacao = ServicoAutorizacao()
+        self._servico_Publicidade = ServicoPublicidade()
+        self._servico_Usuario = ServicoUsuarios()
+```
+
+O método `carregar_dados()` coordena a execução dos serviços, obtendo as publicações relevantes, as publicações recentes, as estatísticas do sistema e publicidade. Em seguida, filtra as postagens relevantes e recentes em busca de conteúdo impróprio com a função `filtragem(data)` do serviço de autorização. E então consolida os resultados em um único dicionário, organizado em três categorias: `feed_relevante`, `feed_recente`, `informacoes_rodape` e `publicidade`.
 
 Quando a operação é concluída com sucesso, o método retorna uma estrutura contendo a chave `sucesso`, com valor `True`, e a chave `dados`, com os resultados consolidados.
 
@@ -59,23 +141,338 @@ Caso uma exceção ocorra durante a execução das operações, o método captur
 
 Dessa forma, a fachada oferece uma interface simplificada para o cliente, que não precisa conhecer os detalhes de instanciação e utilização de cada subsistema.
 
+A implementação concreta da fachada pode ser observada no trecho abaixo:
+
+```python
+    def carregar_dados(self):
+        try:
+            relevantes = self._servico_relevantes.buscar_relevantes()
+            recentes = self._servico_recentes.buscar_recentes()
+            estatisticas = self._servico_estatisticas.obter_status_sistema()
+            publicidade = self._servico_Publicidade.obter_publicidade_aleatoria()
+
+            self._servico_Autorizacao.filtragem(relevantes)
+            self._servico_Autorizacao.filtragem(recentes)
+
+            return {
+                "sucesso": True,
+                "dados": {
+                    "feed_relevante": relevantes,
+                    "feed_recente": recentes,
+                    "informacoes_rodape": estatisticas,
+                    "publicidade": publicidade
+                }
+            }
+        except Exception as erro:
+            return {
+                "sucesso": False,
+                "erro": f"Falha ao carregar a tela inicial: {str(erro)}"
+            }
+```
+
+O método `criar_usuario_anonimo()` representa a criação de um visitante temporário quando o usuário ainda não está autenticado. A fachada encapsula essa responsabilidade e delega a criação do perfil anônimo para o subsistema `ServicoUsuarios`, evitando que o cliente tenha que conhecer a implementação interna do mecanismo de identificação.
+
+```python
+    def criar_usuario_anonimo(self):
+        # assumindo que o usuario não está logado
+        try:
+            usuario = self._servico_Usuario.criar_anonimo()
+            return {
+                "sucesso": True,
+                "usuario": usuario
+            }
+        except Exception as erro:
+            return {
+                "sucesso": False,
+                "erro": f"Falha ao criar usuario anonimo: {str(erro)}"
+            }
+```
+
+Esse método procura manter um padrão de retorno consistente: ao sucesso, retorna `sucesso: True` e o nome do usuário; em caso de falha, retorna `sucesso: False` com a mensagem de erro. Dessa forma, o cliente pode solicitar esse comportamento sem precisar lidar diretamente com a criação da instância do serviço ou com detalhes específicos de autenticação e sessão.
+
+Nesse exemplo, a fachada centraliza a criação dos serviços, a execução das consultas e a normalização dos dados em um único retorno. A lógica de filtragem, de montagem do payload e da criação do usuário anônimo são ocultadas do cliente, que apenas solicita `carregar_dados()` e `criar_usuario_anonimo()` e recebe uma resposta em formato padronizado. Essa estrutura reduz a complexidade do código consumidor e garante que futuras mudanças em um subsistema não exijam ajustes em toda a interface do usuário.
+
 ## 4. Programa de demonstração
 
-O arquivo `main.py` apresenta o funcionamento da implementação por meio de uma execução no terminal.
+O arquivo [main.py](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe02/src/main.py) apresenta uma execução didática da fachada para a tela inicial de um fórum. Ele simula o consumo do serviço de dados e a apresentação visual das informações em terminal.
 
-A função `renderizar_tela_inicial()` instancia a classe `TelaInicialFacade` e chama seu método `carregar_dados()`. Em seguida, verifica o resultado da operação.
+### 4.1 Função `renderizar_tela_inicial()`
 
-Quando o carregamento é bem-sucedido, o programa percorre a lista de publicações relevantes e exibe seus títulos e quantidades de tabcoins. Depois, apresenta as publicações recentes com seus respectivos autores e informa a quantidade de usuários online.
+A função principal do programa é responsável por:
 
-Caso ocorra uma falha, o programa exibe a mensagem de erro retornada pela fachada.
+1. instanciar `TelaInicialFacade`;
+2. executar `carregar_dados()`;
+3. criar o usuário anônimo por meio de `criar_usuario_anonimo()`;
+4. verificar o sucesso da operação;
+5. exibir os dados formatados para o usuário final.
+
+```python
+from tela_inicial_facade import TelaInicialFacade
+
+def renderizar_tela_inicial():
+    facade = TelaInicialFacade()
+    
+    print("Iniciando o carregamento da Tela Inicial (TabNews)...\n")
+    
+    resposta = facade.carregar_dados()
+    usuario = facade.criar_usuario_anonimo()
+
+    if usuario.get("sucesso") == False:
+        print(usuario.get("erro"))
+        return
+
+    if resposta.get("sucesso"):
+        print(f"-Logado como usuário {usuario.get("usuario")}-\n")
+
+        dados = resposta["dados"]
+        print("=== PUBLICIDADE ===")
+        publicidade = dados["publicidade"]
+        print(f"- {publicidade["empresa"]}:\n    {publicidade["conteudo"]}")
+        
+        print("\n=== CONTEÚDO RELEVANTE ===")
+        for post in dados["feed_relevante"]:
+            print(f"- {post['titulo']} ({post['tabcoins']} tabcoins)")
+            
+        print("\n=== CONTEÚDO RECENTE ===")
+        for post in dados["feed_recente"]:
+            print(f"- {post['titulo']} (por {post['autor']})")
+            
+        print(f"\n[Status: {dados['informacoes_rodape']['usuarios_online']} usuários online agora]")
+    else:
+        print(resposta.get("erro"))
+```
+
+### 4.2 Fluxo de execução
+
+Quando a execução do programa começa, o código cria uma instância de `TelaInicialFacade` e solicita os dados da tela inicial. A fachada retorna um dicionário estruturado contendo:
+
+- `feed_relevante`;
+- `feed_recente`;
+- `informacoes_rodape`;
+- `publicidade`.
+
+Em seguida, o programa também chama `criar_usuario_anonimo()`, que simula a navegação do visitante sem login. Caso essa operação falhe, a execução é interrompida e a mensagem de erro é exibida. Se tudo ocorrer corretamente, os dados são impressos no terminal em um formato simples e legível.
+
+### 4.3 Saída esperada
+
+Para facilitar a compreensão, a execução produz uma saída no seguinte formato:
+
+```text
+Iniciando o carregamento da Tela Inicial (TabNews)...
+
+=== PUBLICIDADE ===
+- Amazono:
+    promoção do dia 10/10
+
+=== CONTEÚDO RELEVANTE ===
+- O que são Padrões de Projeto? (45 tabcoins)
+- Dicas de Python para iniciantes (32 tabcoins)
+
+=== CONTEÚDO RECENTE ===
+- AVISO: Conteudo Filtrado (por usuario_d)
+- Nova atualização do framework (por usuario_c)
+
+[Status: 142 usuários online agora]
+```
+
+Essa saída confirma que a fachada conseguiu centralizar a busca e a consolidação dos dados, abstraindo as complexidades internas dos subsistemas. O programa cliente apenas chama a fachada e exibe o resultado em uma interface de terminal.
 
 O bloco `if __name__ == "__main__":` garante que a função de demonstração seja chamada quando o arquivo `main.py` for executado diretamente.
 
 ## 5. Testes automatizados
 
+A implementação foi complementada por uma suíte automatizada em `src/test_facade.py`, utilizando a biblioteca padrão `unittest` do Python. Essa estrutura permite verificar, de forma reproduzível, o comportamento esperado da fachada e dos serviços que ela orquestra.
+
+Embora o projeto seja didático e não dependa de frameworks externos, os testes cobrem os principais cenários de uso da aplicação: carregamento bem-sucedido, tratamento de exceções, criação de usuário anônimo, desacoplamento do cliente e saída formatada no terminal.
+
+### 5.1 Objetivo da suíte
+
+A suíte de testes foi criada para validar que:
+
+- `carregar_dados()` executa corretamente quando todos os subsistemas respondem normalmente;
+- a fachada consolida os dados em um único payload, com as chaves esperadas;
+- erros internos dos subsistemas são capturados e convertidos em resposta útil;
+- `criar_usuario_anonimo()` retorna um usuário genérico com sucesso;
+- o código do cliente não depende diretamente dos subsistemas;
+- a renderização em terminal apresenta as informações em formato legível.
+
+### 5.2 Casos cobertos
+
+A classe `TestTelaInicial` contém testes automatizados para cada cenário relevante:
+
+- `test_ct01_cv01_cv02_carregamento_com_sucesso`: valida que a fachada orquestra os serviços corretamente e retorna o dicionário consolidado.
+- `test_ct02_cv03_falha_em_subsistema`: simula uma exceção em um subsistema e confirma que a fachada devolve `sucesso: False` e a mensagem de erro.
+- `test_ct04_criacao_usuario_anonimo`: verifica a criação de um usuário visitante sem autenticação.
+- `test_ct03_cv04_desacoplamento_e_independencia`: analisa o arquivo `main.py` para garantir que ele não importa diretamente `subsistemas.py`.
+- `test_cv05_saida_formatada_terminal`: captura a saída do terminal e valida se os textos esperados foram impressos corretamente.
+
+Esses testes ajudam a demonstrar que o padrão Facade não apenas simplifica a interface, mas também favorece a manutenção e a confiabilidade da aplicação.
+
+### 5.3 Exemplo de teste de sucesso
+
+```python
+@patch('tela_inicial_facade.ServicoEstatisticas')
+@patch('tela_inicial_facade.ServicoPostagensRecentes')
+@patch('tela_inicial_facade.ServicoPostagensRelevantes')
+@patch('tela_inicial_facade.ServicoPublicidade')
+@patch('tela_inicial_facade.ServicoAutorizacao')
+def test_ct01_cv01_cv02_carregamento_com_sucesso(
+    self, mock_autorizacao, mock_publicidade, mock_relevantes, mock_recentes, mock_estatisticas
+):
+    mock_relevantes_instance = mock_relevantes.return_value
+    mock_relevantes_instance.buscar_relevantes.return_value = [{
+        "id": 1, "titulo": "Teste", "tabcoins": 10, "autor": "a"
+    }]
+
+    mock_recentes_instance = mock_recentes.return_value
+    mock_recentes_instance.buscar_recentes.return_value = [{
+        "id": 2, "titulo": "Teste Recente", "tabcoins": 1, "autor": "b"
+    }]
+
+    mock_estatisticas_instance = mock_estatisticas.return_value
+    mock_estatisticas_instance.obter_status_sistema.return_value = {"usuarios_online": 10}
+
+    facade = TelaInicialFacade()
+    resultado = facade.carregar_dados()
+
+    self.assertTrue(resultado.get("sucesso"))
+    self.assertIn("feed_relevante", resultado["dados"])
+    self.assertIn("feed_recente", resultado["dados"])
+    self.assertIn("informacoes_rodape", resultado["dados"])
+    self.assertIn("publicidade", resultado["dados"])
+```
+
+Esse trecho mostra a lógica principal da validação: os subsistemas são simulados com `mock`, e a fachada é testada como se fosse o cliente real. Esse procedimento é uma prática comum em testes unitários, pois permite verificar a integração sem depender de serviços reais ou de banco de dados.
+
+### 5.4 Exemplo de teste de falha
+
+```python
+@patch('tela_inicial_facade.ServicoPostagensRelevantes')
+def test_ct02_cv03_falha_em_subsistema(self, mock_relevantes):
+    mock_relevantes_instance = mock_relevantes.return_value
+    mock_relevantes_instance.buscar_relevantes.side_effect = Exception("Erro de conexão ao Banco de Dados")
+
+    facade = TelaInicialFacade()
+    resultado = facade.carregar_dados()
+
+    self.assertFalse(resultado.get("sucesso"))
+    self.assertIn("Falha ao carregar a tela inicial", resultado.get("erro"))
+```
+
+Esse teste confirma que a fachada não deixa a exceção escapar para o código cliente. Em vez disso, a aplicação trata o erro de forma controlada e devolve uma resposta padronizada, evitanto falhas inesperadas e aumentando a robustez do sistema.
+
+### 5.5 Como executar os testes
+
+Para executar a suíte, basta abrir um terminal no diretório que contém os arquivos da implementação e rodar:
+
+```bash
+python3 -m unittest test_facade.py
+```
+
+Se a execução estiver dentro da pasta `src`, o comando pode ser simplificado para:
+
+```bash
+python3 -m unittest test_facade.py
+```
+
+A presença desses testes reforça a ideia de que a fachada foi desenvolvida não apenas como exemplo conceitual, mas como solução com comportamento verificável e passível de validação automatizada.
+
 Os arquivos fornecidos não incluem uma suíte de testes automatizados. Portanto, a implementação apresentada demonstra o funcionamento do padrão Facade, mas não comprova, por si só, a execução de testes automatizados.
 
 Como verificação inicial, é possível executar o programa e conferir se as informações esperadas são exibidas no terminal.
+
+Para ampliar a cobertura de testes, recomenda-se verificar:
+
+- Se `carregar_dados()` retorna `sucesso` igual a `True` quando todos os serviços funcionam corretamente.
+- Se os dados consolidados contêm as chaves `feed_relevante`, `feed_recente` e `informacoes_rodape`.
+- Se a fachada trata adequadamente exceções lançadas pelos serviços.
+- Se a função de demonstração exibe as informações retornadas pela fachada.
+
+Esses testes podem ser implementados com a biblioteca padrão `unittest`, sem a necessidade de instalar dependências externas. Sua realização e seus resultados devem ser registrados antes de serem apresentados como evidências da entrega.
+
+```python
+    @patch('tela_inicial_facade.ServicoPostagensRelevantes')
+    def test_ct02_cv03_falha_em_subsistema(self, mock_relevantes):
+        """
+        Testa CT02 (Falha num dos subsistemas) e CV03 (Tratamento de exceções).
+        """
+        # Simulando uma exceção durante a busca
+        mock_relevantes_instance = mock_relevantes.return_value
+        mock_relevantes_instance.buscar_relevantes.side_effect = Exception("Erro de conexão ao Banco de Dados")
+
+        facade = TelaInicialFacade()
+        resultado = facade.carregar_dados()
+
+        # Verifica CT02 e CV03: A Fachada captura a exceção, retorna sucesso: False e a mensagem de erro
+        self.assertFalse(resultado.get("sucesso"))
+        self.assertIn("Falha ao carregar a tela inicial", resultado.get("erro"))
+        self.assertIn("Erro de conexão ao Banco de Dados", resultado.get("erro"))
+
+    @patch('tela_inicial_facade.ServicoUsuarios')
+    def test_ct04_criacao_usuario_anonimo(self, mock_usuarios):
+        """
+        Testa a orquestração da criação de um usuário anônimo.
+        """
+        mock_usuarios_instance = mock_usuarios.return_value
+        mock_usuarios_instance.criar_anonimo.return_value = "Anonimo"
+
+        facade = TelaInicialFacade()
+        resultado = facade.criar_usuario_anonimo()
+
+        # Verifica se o retorno de sucesso e o valor estão corretos
+        self.assertTrue(resultado.get("sucesso"))
+        self.assertEqual(resultado.get("usuario"), "Anonimo")
+        mock_usuarios_instance.criar_anonimo.assert_called_once()
+
+    def test_ct03_cv04_desacoplamento_e_independencia(self):
+        """
+        Testa CT03 (Independência do cliente) e CV04 (Desacoplamento do arquivo main.py).
+        Lê o arquivo main.py estaticamente para garantir que a classe de subsistemas não foi importada.
+        """
+        try:
+            with open("main.py", "r", encoding="utf-8") as f:
+                codigo_main = f.read()
+        except FileNotFoundError:
+            self.fail("Arquivo main.py não encontrado.")
+
+        # Analisando a árvore de sintaxe abstrata (AST) do arquivo main.py
+        arvore = ast.parse(codigo_main)
+        importou_subsistemas = False
+        
+        for no in ast.walk(arvore):
+            if isinstance(no, ast.Import):
+                for alias in no.names:
+                    if 'subsistemas' in alias.name:
+                        importou_subsistemas = True
+            elif isinstance(no, ast.ImportFrom):
+                if no.module and 'subsistemas' in no.module:
+                    importou_subsistemas = True
+
+        # Verifica CV04: O cliente main.py não importa nada de subsistemas.py
+        self.assertFalse(importou_subsistemas, "O arquivo main.py não deve importar diretamente de 'subsistemas.py'")
+
+    @patch('sys.stdout', new_callable=io.StringIO)
+    def test_cv05_saida_formatada_terminal(self, mock_stdout):
+        """
+        Testa CV05 (Saída do programa impressa e formatada corretamente).
+        Captura o 'print' do terminal ao rodar renderizar_tela_inicial().
+        """
+        # Executa a função principal que imprime no terminal
+        main.renderizar_tela_inicial()
+        saida_terminal = mock_stdout.getvalue()
+
+        # Verifica CV05: Checa se os cabeçalhos esperados e as formatações foram impressos no terminal
+        self.assertIn("Iniciando o carregamento da Tela Inicial", saida_terminal)
+        self.assertIn("-Logado como usuário Anonimo-", saida_terminal)
+        self.assertIn("=== PUBLICIDADE ===", saida_terminal)
+        self.assertIn("=== CONTEÚDO RELEVANTE ===", saida_terminal)
+        self.assertIn("=== CONTEÚDO RECENTE ===", saida_terminal)
+        self.assertIn("[Status:", saida_terminal)
+        self.assertIn("usuários online agora]", saida_terminal)
+
+if __name__ == '__main__':
+    unittest.main()
+```
 
 Para ampliar a cobertura de testes, recomenda-se verificar:
 
@@ -236,3 +633,4 @@ GAMMA, Erich et al. *Design Patterns: Elements of Reusable Object-Oriented Softw
 | 1.3 | 17/10/2026 | Adição do meu ponto de vista e participação. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Adição do ponto de vista e participação de Pablo |
 | 1.4 | 18/10/2026 | Atualização dos links dos meus commits. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Atualização dos links dos commits do Pablo |
 | 1.5 | 18/10/2026 | Complementação do topico 8. | [Pablo Rodrigues](https://github.com/Pablo-R-L) | [Pedro Ramos](https://github.com/PedroRSR) | Conteúdo do tópico 8 foi atualizado |
+| 1.6 | 19/10/2026 | Complemento de informação e adição do código dos tópicos 2 ao 5. | [Pablo Rodrigues](https://github.com/Pablo-R-L) |  | |

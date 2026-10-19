@@ -11,7 +11,7 @@ class ServicoPostagensRecentes:
         # Simula uma busca ordenando estritamente pela data de criação
         return [
             {"id": 3, "titulo": "Nova atualização do framework", "tabcoins": 1, "autor": "usuario_c"},
-           {"id": 3, "titulo": "imagina algo muito improprio aqui", "tabcoins": 100, "autor": "usuario_d"}
+           {"id": 4, "titulo": "imagina algo muito improprio aqui", "tabcoins": 100, "autor": "usuario_d"}
         ]
     
 class ServicoEstatisticas:
