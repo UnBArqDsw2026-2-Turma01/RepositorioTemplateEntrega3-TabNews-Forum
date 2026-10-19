@@ -82,7 +82,7 @@ Assim, a IA foi considerada uma ferramenta auxiliar de redação e compreensão.
 |---|---|---|---|
 | [Isaac Menezes](https://github.com/pratamz250) | ChatGPT | Auxílio na compreensão do padrão Facade | [Contribuição no repositório](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/f5f6df47536e2cae4499061fd2696128958a9b0c) |
 | [Pablo Rodrigues](https://github.com/Pablo-R-L) | GPT e Copilot | Copreender o padrão Facade, tirar dúvidas e ter uma noção geral do que fazer no projeto. Apoio à redação e correção dentro da documentação | [Padrões GoF estruturais](./padrões-gof-estruturais.md), [modelagem](https://chatgpt.com/share/6ad52525-66c0-83ea-8e5f-4ad405f44e5d), [Execução](https://chatgpt.com/share/6ad524e3-b104-83e8-90fe-efb6787dcfea) |
-| [Pedro Ramos](https://github.com/PedroRSR) | Assistente de IA no VS Code (Copilot) e Gemini | Apoio à organização, redação, revisão crítica da documentação e aprendizado sobre o padrão Facade. | 1. [test_facade.py](./src/test_facade.py), 2. [execução.md](./execução.md), 3. [ia-generativa.md](./ia-generativa.md) e 4. [modelagem.md](./modelagem.md) |
+| [Pedro Ramos](https://github.com/PedroRSR) | Assistente de IA no VS Code (Copilot) e Gemini | Apoio à organização, redação, revisão crítica da documentação e aprendizado sobre o padrão Facade. | 1. [test_facade.py](./src/test_facade.py), 2. [execução.md](execução.md), 3. [ia-generativa.md](ia-generativa.md) e 4. [modelagem.md](modelagem.md) |
 
 ## Nível de Contribuição dos Integrantes
 
