@@ -71,13 +71,13 @@ Os testes automatizados foram a parte mais importante do aprendizado. Foi ao esc
 
 **Uso da IA Generativa e senso crítico**
 
-Utilizei a IA Generativa como apoio, principalmente para entender como organizar e executar os testes com o `node:test` e como estruturar a demonstração para que a saída do terminal deixasse claro o comportamento do padrão. A ferramenta sugeriu formas de organizar os cenários e as mensagens, que serviram de ponto de partida para os testes e para a demonstração apresentados.
+Utilizei a IA Generativa como apoio. Com o Claude Code, o uso principal foi entender como organizar e executar os testes com o `node:test` e como estruturar a demonstração para que a saída do terminal deixasse claro o comportamento do padrão. A ferramenta sugeriu formas de organizar os cenários e as mensagens, que serviram de ponto de partida para os testes e para a demonstração apresentados. Também usei o Gemini para resumir a transcrição da reunião de alinhamento da subequipe, e conferi e ajustei o resumo antes de registrá-lo na ata.
 
 As decisões e a validação ficaram comigo. Conferi cada sugestão com o Diagrama de Classes e com as regras da modelagem, rodei a demonstração e os testes para confirmar os resultados e descartei propostas que fugiam do que a equipe havia definido, como mudanças de nomes ou dependências externas. A IA ajudou a ganhar tempo e a melhorar a apresentação dos resultados, mas o entendimento do padrão e a responsabilidade pelo que foi entregue continuaram sendo meus.
 
 ## Análise Crítica do Uso de IA Generativa
 
-Os três integrantes utilizaram a IA Generativa como ferramenta de apoio: o Claude Code, no caso de Caio e Leonardo, e o Gemini, no caso de Guilherme. Nos três relatos, a ferramenta acelerou tarefas operacionais, como a escrita dos diagramas em PlantUML, a formatação da documentação, a estrutura inicial dos testes e a organização da demonstração no terminal, enquanto a escolha do padrão e as decisões de modelagem permaneceram com a equipe.
+Os três integrantes utilizaram a IA Generativa como ferramenta de apoio: o Claude Code, no caso de Caio e Leonardo, e o Gemini, no caso de Guilherme e, para o resumo da reunião, de Leonardo. Nos três relatos, a ferramenta acelerou tarefas operacionais, como a escrita dos diagramas em PlantUML, a formatação da documentação, a estrutura inicial dos testes e a organização da demonstração no terminal, enquanto a escolha do padrão e as decisões de modelagem permaneceram com a equipe.
 
 Os relatos também convergem nas limitações. A ferramenta produziu erros que ela mesma não percebeu, como links internos quebrados no Docsify; sugeriu conteúdo além do pedido; propôs bibliotecas de teste diferentes da adotada, dependências externas e mudanças de nomes; e chegou a alterar regras de negócio. Em todos esses casos, a correção dependeu da revisão dos integrantes, feita com base no Diagrama de Classes, nas regras da modelagem e na literatura de referência.
 
@@ -100,6 +100,7 @@ A principal lição é que o uso da IA só foi seguro porque havia formas objeti
 | Caio Alexandre Ornelas Silva | Claude (Claude Code) | Levantamento das pendências da entrega, elaboração dos diagramas UML em PlantUML, redação da documentação do padrão Observer e automação do versionamento (organização dos commits e redação das mensagens). | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main?author=bitterteriyaki) |
 | [Guilherme Moura](github.com/Guilherme-Moura) | Gemini | Apoio na formatação da documentação, realização de ajustes nos diagramas UML via PlantUML e geração de boilerplate para a suíte de testes automatizados. | |
 | [Leonardo Bonetti](https://github.com/LeoFacB) | Claude (Claude Code) | Apoio na organização e na execução dos testes automatizados, na estruturação da demonstração no terminal e na conferência da consistência entre diagramas, código e documentação. | [Histórico de commits](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commits/main?author=LeoFacB) |
+| [Leonardo Bonetti](https://github.com/LeoFacB) | Gemini | Resumo da transcrição da reunião de alinhamento da SubEquipe 03, revisado antes de compor a [ata](/Projeto/atas/Reuniao1_sub03.md). | [Conversa no Gemini](https://share.gemini.google/EVf68uiES3rP) |
 
 <p align="center">Tabela 2: Evidências do uso de IA Generativa.</p>
 
@@ -124,6 +125,7 @@ PLANTUML. **PlantUML**. Disponível em: [https://plantuml.com/](https://plantuml
 | 1.2 | 16/10/2026 | Adição do ponto de vista | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | |
 | 1.3 | 17/10/2026 | Seção e evidências do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão da seção do Leonardo, das evidências dele nas Tabelas 1 e 2 e das ferramentas utilizadas nas referências. |
 | 1.4 | 18/10/2026 | Ponto de vista do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Registro das lições aprendidas e do uso da IA Generativa, e atualização das evidências com o PR da documentação e o histórico de commits, registro dos revisores das versões anteriores e consolidação da análise crítica a partir dos três pontos de vista. |
+| 1.5 | 18/10/2026 | Uso do Gemini pelo Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Registro do uso do Gemini no resumo da reunião de alinhamento, com o link da conversa como evidência. |
 
 <p align="center">Tabela 3: Histórico de Versões.</p>
 
