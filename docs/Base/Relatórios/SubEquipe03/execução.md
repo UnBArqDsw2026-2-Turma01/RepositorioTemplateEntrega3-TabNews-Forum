@@ -330,6 +330,12 @@ Esta seção apresenta as percepções dos integrantes sobre a execução e a ve
 
 ### Caio Alexandre Ornelas Silva
 
+A execução tornou observável o que, na modelagem, estava apenas descrito no Diagrama de Sequência. Os prefixos de cada mensagem no terminal mostram a ordem em que o sujeito percorre a lista de observadores. Com isso, a natureza síncrona da notificação, registrada como limitação na modelagem, deixa de ser uma afirmação teórica e passa a ser visível na saída. A etapa extra da RN06 cumpre papel semelhante: demonstra que a falha de um observador é isolada, algo que o diagrama só conseguia indicar por meio de uma nota.
+
+Também percebi a complementaridade entre a demonstração e os testes automatizados. A demonstração é útil para apresentar o padrão e acompanhar o fluxo de uma ponta à outra, mas são os testes que verificam cada regra de forma isolada e repetível, inclusive os cenários de moderação que revelaram a necessidade da RN08.
+
+Por fim, a padronização do ambiente com o `mise`, proposta como iniciativa extra, mostrou utilidade além do site da documentação: ao fixar a versão do Node.js, permite que qualquer integrante reproduza a execução e os testes nas mesmas condições registradas nesta página.
+
 ### Guilherme Moura da Silva Neto
 
 ### Leonardo Fachinello Bonetti
@@ -370,7 +376,7 @@ O nível de contribuição deve refletir as atividades efetivamente realizadas n
 
 | Integrante | Atividades desenvolvidas | Nível de contribuição | Justificativa |
 |---|---|---|---|
-| [Caio Alexandre](https://github.com/bitterteriyaki) | | | |
+| [Caio Alexandre Ornelas Silva](https://github.com/bitterteriyaki) | Elaboração do Diagrama de Sequência que orientou as etapas da demonstração e configuração do `mise`, que fixa a versão do Node.js usada na execução. | 33,33% | O Diagrama de Sequência definiu as etapas executadas e verificadas nesta página, e a configuração do `mise` permite reproduzir a execução e os testes em um ambiente padronizado. |
 | [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, validação via testes e documentação de execução. | 33,33% | A classificação deve considerar a participação comprovada na implementação, na documentação e nas atividades relacionadas à entrega. |
 | [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Execução real da demonstração e dos testes, registro das saídas e das capturas do terminal, correção dos comandos e novos cenários de teste. | 33,33% | Participação comprovada pelos commits e pelos PRs #14 e #19. |
 
@@ -389,6 +395,7 @@ NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [ht
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 16/10/2026 | Elaboração da documentação de execução do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Organização dos pré-requisitos, procedimentos de execução (Terminal), cenários de testes, critérios de validação e referências. |
-| 1.1 | 17/10/2026 | Saídas reais e correção dos comandos. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Comandos de execução corrigidos, saídas reais do programa e dos testes, novos cenários de teste e capturas do terminal. |
-| 1.2 | 18/10/2026 | Participação individual. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Ponto de vista e nível de contribuição individuais, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |
-| 1.3 | 18/10/2026 | Evidências de participação. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão das capturas do terminal e do PR de ajustes finais nas evidências. |
+| 1.1 | 17/10/2026 | Saídas reais e correção dos comandos. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Comandos de execução corrigidos, saídas reais do programa e dos testes, novos cenários de teste e capturas do terminal. |
+| 1.2 | 18/10/2026 | Participação dindividual. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Ponto de vista e nível de contribuição individuais, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |
+| 1.3 | 18/10/2026 | Participação do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Ponto de vista sobre a execução e a verificação da implementação e nível de contribuição do Caio. |
+| 1.4 | 18/10/2026 | Evidências de participação. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Guilherme Moura](github.com/Guilherme-Moura) | Inclusão das capturas do terminal e do PR de ajustes finais nas evidências. |
