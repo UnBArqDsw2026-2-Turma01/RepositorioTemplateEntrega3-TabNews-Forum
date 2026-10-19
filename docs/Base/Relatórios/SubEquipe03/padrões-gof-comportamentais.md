@@ -71,7 +71,7 @@ Na solução proposta, os participantes do padrão correspondem às seguintes cl
 | *ConcreteObserver* | `NotificadorDeResposta` | Notifica o autor de um conteúdo quando ele recebe uma resposta. |
 | *ConcreteObserver* | `RegistroDeAtividades` | Grava um log de auditoria sequencial de todos os eventos do sistema, independentemente do tipo. |
 
-<p align="center">Tabela 1: Participantes do padrão Observer na solução proposta.</p>
+<p align="center">Tabela 1: Participantes do padrão Observer na solução proposta.<br>Autoria: [Caio Alexandre](https://github.com/bitterteriyaki) ([fd46c42](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fd46c42)); linha do `RegistroDeAtividades`: [Guilherme Moura](https://github.com/Guilherme-Moura) ([3507ba6](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/3507ba6)); responsabilidades de moderação do `ServicoDeConteudo`: [Leonardo Bonetti](https://github.com/LeoFacB) ([29d85ed](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/29d85ed)).</p>
 
 ## 4. Problema Abordado
 
@@ -107,7 +107,7 @@ Outros padrões comportamentais foram considerados e descartados para este cená
 | *Chain of Responsibility* | Repassa uma requisição ao longo de uma cadeia até que *um* objeto a trate. No cenário, *todos* os interessados devem reagir ao evento, e não apenas o primeiro capaz de fazê-lo. |
 | *Strategy* | Permite trocar o algoritmo utilizado por um objeto. O problema não é variar a forma como uma única operação é realizada, mas acrescentar novas reações a um evento. |
 
-<p align="center">Tabela 2: Padrões comportamentais considerados e motivos do descarte.</p>
+<p align="center">Tabela 2: Padrões comportamentais considerados e motivos do descarte.<br>Autoria: [Caio Alexandre](https://github.com/bitterteriyaki) ([fd46c42](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fd46c42)).</p>
 
 O Observer não é necessário em todos os casos. Quando um evento tem um único interessado, estável e conhecido, a chamada direta é mais simples e mais fácil de acompanhar. A adoção do padrão se justifica, neste cenário, pela multiplicidade e pela variabilidade das reações aos eventos de conteúdo.
 
@@ -141,7 +141,7 @@ O Observer é um dos padrões GoF mais presentes no cotidiano do desenvolvimento
 | Redis | [*Pub/Sub*](https://redis.io/docs/latest/develop/interact/pubsub/) | Clientes assinam canais (`SUBSCRIBE`) e recebem as mensagens publicadas neles (`PUBLISH`) por outros clientes. |
 | RabbitMQ | [*Exchanges* do tipo *fanout*](https://www.rabbitmq.com/tutorials/tutorial-three-javascript) | Uma mensagem publicada em um *exchange* é entregue a todas as filas vinculadas a ele, cada uma consumida por um serviço interessado. |
 
-<p align="center">Tabela 3: Exemplos de adoção da ideia do Observer no desenvolvimento de software.</p>
+<p align="center">Tabela 3: Exemplos de adoção da ideia do Observer no desenvolvimento de software.<br>Autoria: [Caio Alexandre](https://github.com/bitterteriyaki) ([fd46c42](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fd46c42)).</p>
 
 É importante distinguir o Observer, tal como descrito pelo GoF, do ***publish/subscribe*** utilizado por ferramentas como o Redis e o RabbitMQ. Embora o GoF cite *Publish-Subscribe* como um nome alternativo do padrão, as duas abordagens diferem em um ponto essencial:
 
@@ -220,5 +220,6 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.3 | 16/10/2026 | Expansão do escopo do padrão para englobar Moderação e Auditoria. | [Guilherme Moura](https://github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão do `RegistroDeAtividades` como novo ConcreteObserver; alinhamento do `ServicoDeConteudo` com o ciclo completo do Diagrama de Estados da Entrega 02 (fluxos *Em Revisão* e *Restaurado*). |
 | 1.4 | 17/10/2026 | Rastreabilidade, escopo de objeto e considerações finais. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Ligação do padrão com o Diagrama de Implantação da Entrega 02, explicação do escopo de objeto e inclusão das considerações finais, para padronizar a página com as demais subequipes. |
 | 1.5 | 18/10/2026 | Registro dos revisores. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Registro dos revisores das versões anteriores, conforme as revisões e os merges dos Pull Requests. |
+| 1.6 | 19/10/2026 | Autoria das tabelas. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão, nas legendas das Tabelas 1 a 3, de quem elaborou cada tabela e quem alterou cada linha, com os commits, para identificar a contribuição individual. |
 
 <p align="center">Tabela 4: Histórico de Versões.</p>
