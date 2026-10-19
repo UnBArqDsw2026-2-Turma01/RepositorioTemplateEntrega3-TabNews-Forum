@@ -33,7 +33,7 @@ O padrão Observer resolve esse problema ao definir uma dependência um-para-mui
 | — (nova funcionalidade) | `RegistroDeAtividades` | Observador concreto |
 | Chamada direta `creditarPorPublicacao` | `notificar(evento)` → `atualizar(evento)` | Protocolo de notificação |
 
-<p align="center">Tabela 1: Correspondência entre os artefatos da Entrega 02 e esta modelagem.</p>
+<p align="center">Tabela 1: Correspondência entre os artefatos da Entrega 02 e esta modelagem.<br>Autoria: Caio Alexandre; linha do `RegistroDeAtividades`: Guilherme Moura; linha do Serviço de e-mail: Leonardo Bonetti.</p>
 
 ## 3. Diagrama de Classes UML
 
@@ -160,7 +160,7 @@ end note
 @enduml
 ```
 
-<p align="center">Figura 1: Diagrama de Classes do padrão Observer aplicado aos eventos de conteúdo. Fonte: SubEquipe_03 (2026).</p>
+<p align="center">Figura 1: Diagrama de Classes do padrão Observer aplicado aos eventos de conteúdo. Fonte: SubEquipe_03 (2026).<br>Elaboração: Caio Alexandre. Atualizações: Guilherme Moura e Leonardo Bonetti.</p>
 
 ### 3.1 Interpretação do diagrama
 
@@ -380,7 +380,7 @@ deactivate SC
 @enduml
 ```
 
-<p align="center">Figura 2: Diagrama de Sequência da notificação dos observadores. Fonte: SubEquipe_03 (2026).</p>
+<p align="center">Figura 2: Diagrama de Sequência da notificação dos observadores. Fonte: SubEquipe_03 (2026).<br>Elaboração: Caio Alexandre. Atualizações: Guilherme Moura e Leonardo Bonetti.</p>
 
 ### 4.1 Descrição da sequência
 
@@ -407,7 +407,7 @@ A comparação com o Diagrama de Sequência da Entrega 02 mostra a mudança estr
 | RN07 | Todas as mudanças de estado do conteúdo (publicação, remoção, revisão e restauração) são gravadas em um histórico sequencial. | `RegistroDeAtividades` | Decisão da SubEquipe_03 (Log de Auditoria) |
 | RN08 | Só um conteúdo publicado pode ser enviado para revisão, o que suspende os créditos do autor; só um conteúdo em revisão pode ser restaurado, o que os devolve; e a remoção de um conteúdo em revisão não debita os créditos de novo. | `ServicoDeConteudo` / `ServicoDeTabCoins` | Diagrama de Estados da Entrega 02 |
 
-<p align="center">Tabela 2: Regras representadas na modelagem.</p>
+<p align="center">Tabela 2: Regras representadas na modelagem.<br>Autoria: RN01–RN06, Caio Alexandre; RN07, Guilherme Moura; RN08 e origem da RN03, Leonardo Bonetti.</p>
 
 ## 6. Decisões de modelagem e senso crítico
 
@@ -437,7 +437,7 @@ Como apresentado em [Padrões GoF Comportamentais](/Base/Relatórios/SubEquipe03
 | Dados da notificação | Objeto `command` com o campo `type` | `EventoDeConteudo` com o campo `tipo` |
 | Falha em um observador | Interrompe a notificação dos seguintes | Isolada; os demais continuam sendo notificados (RN06) |
 
-<p align="center">Tabela 3: Comparação entre a implementação de referência e esta modelagem.</p>
+<p align="center">Tabela 3: Comparação entre a implementação de referência e esta modelagem.<br>Autoria: Caio Alexandre.</p>
 
 Os pontos de **convergência** reforçam decisões desta modelagem. As duas soluções adotam o modelo *push*, com um objeto de dados que carrega o tipo do evento, e um único ponto de entrada no observador, que decide como reagir a cada tipo. No jogo, o mesmo `notifyAll` transporta comandos como `move-player` e `add-player`, e cada observador trata os tipos que lhe interessam, exatamente como o `NotificadorDeResposta` ignora o evento `CONTEUDO_REMOVIDO`.
 
@@ -462,7 +462,7 @@ As **divergências** decorrem de objetivos diferentes:
 | Cliente | [`src/index.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/src/index.js) | Composição dos objetos e demonstração do fluxo. |
 | Regras RN01–RN07 | [`test/observer.test.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/test/observer.test.js) | Testes automatizados de cada participante e regra. |
 
-<p align="center">Tabela 4: Correspondência entre os elementos da modelagem e os arquivos de código.</p>
+<p align="center">Tabela 4: Correspondência entre os elementos da modelagem e os arquivos de código.<br>Autoria: Caio Alexandre definiu os arquivos previstos; Leonardo Bonetti ligou cada elemento ao arquivo real.</p>
 
 Os arquivos listados são a referência para a etapa de [Código](/Base/Relatórios/SubEquipe03/código.md). Qualquer divergência introduzida na implementação deve ser refletida nos diagramas desta página.
 
@@ -495,8 +495,9 @@ SUBEQUIPE_03. **Modelagem Dinâmica na Notação UML**. Entrega 02 — Projeto F
 | 1.2 | 14/10/2026 | Relação das limitações da solução com ferramentas de mensageria. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Inclusão, nas limitações reconhecidas, da evolução da notificação síncrona para um intermediário de mensagens, como o RabbitMQ ou o Pub/Sub do Redis, com referência à distinção entre Observer e publish/subscribe. |
 | 1.3 | 14/10/2026 | Inclusão da documentação do PlantUML nas referências. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Inclusão das páginas de referência dos diagramas de classes e de sequência do PlantUML, ferramenta utilizada na elaboração dos diagramas. |
 | 1.4 | 16/10/2026 |  Inclusão do observador `RegistroDeAtividades` e alinhamento com a moderação. | [Guilherme Moura](https://github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Atualização do Diagrama de Classes e do Diagrama de Sequência para incluir o log de auditoria e os eventos de revisão/restauração, fechando o ciclo com o Diagrama de Estados da Entrega 02. |
-| 1.5 | 17/10/2026 | Revisão do Diagrama de Classes e da rastreabilidade. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Associações rotuladas com verbos; `NotificadorDeResposta` ligado ao nó Serviço de e-mail do Diagrama de Implantação da Entrega 02; operações privadas `creditar`, `debitar` e `registrar` incluídas; Tabela 4 com links para os arquivos reais e com `Notificacao`; consequências do modelo push na seção 6. |
-| 1.6 | 17/10/2026 | Correção da moderação nos diagramas. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Inclusão de `estado` em `Conteudo` e do enum `EstadoDoConteudo`, para seguir o Diagrama de Estados da Entrega 02 e evitar créditos duplicados (RN08). No Diagrama de Sequência, o `RegistroDeAtividades` passou para dentro do laço de notificação (antes era chamado diretamente, contrariando a RN05) e o `NotificadorDeResposta` voltou às etapas em que ignora o evento. |
+| 1.5 | 17/10/2026 | Associações com verbos, operações privadas e rastreabilidade. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | **Diagrama de Classes:** as associações, antes sem rótulo ou só com o nome do papel (`observadores`, `repositorio`), passaram a ter verbos com sentido de leitura (`notifica >`, `persiste em >`, `armazena >`, `refere-se a >`, `classifica-se como >`, `registra >`); inclusão das operações privadas `creditar`, `debitar` e `registrar`, que já apareciam como automensagens no Diagrama de Sequência.<br>**Rastreabilidade:** ligação do `NotificadorDeResposta` ao nó Serviço de e-mail do Diagrama de Implantação da Entrega 02 (Tabela 1 e origem da RN03); a Tabela 4 passou dos arquivos previstos para os links dos arquivos reais e ganhou a `Notificacao`.<br>**Texto:** consequências do modelo *push* no Fórum, na seção 6. |
+| 1.6 | 17/10/2026 | Estado do conteúdo e correção do Diagrama de Sequência. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | **Diagrama de Classes:** inclusão do atributo `estado` em `Conteudo` e do enum `EstadoDoConteudo` (`PUBLICADO`, `EM_REVISAO`), como no Diagrama de Estados da Entrega 02. Sem o estado, o mesmo conteúdo podia ir para revisão ou ser restaurado mais de uma vez, creditando ou debitando TabCoins em duplicidade.<br>**Diagrama de Sequência:** o `RegistroDeAtividades` era chamado diretamente pelo `ServicoDeConteudo`, fora do `notificar`, o que contraria a RN05 (o sujeito não conhece os observadores concretos); a chamada passou para dentro do laço de notificação. A moderação passou a verificar o estado antes de notificar, a remoção ganhou um fragmento `alt` que só debita conteúdo publicado e o `NotificadorDeResposta` voltou às etapas em que ignora o evento.<br>**Regras:** inclusão da RN08 na Tabela 2. |
 | 1.7 | 18/10/2026 | Registro dos revisores. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Registro dos revisores das versões anteriores, conforme as revisões e os merges dos Pull Requests. |
+| 1.8 | 19/10/2026 | Autoria das figuras e tabelas. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Guilherme Moura](https://github.com/Guilherme-Moura) | Inclusão, nas legendas, dos integrantes que elaboraram cada figura e tabela, e reescrita do detalhe das versões 1.5 e 1.6, separando o que mudou em cada diagrama e por quê, para identificar a contribuição individual na modelagem. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>

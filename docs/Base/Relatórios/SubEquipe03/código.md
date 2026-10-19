@@ -611,7 +611,7 @@ O arquivo define três auxiliares: `SujeitoDeTeste`, que expõe `notificar` por 
 | | Depois de desinscrito, deixa de notificar enquanto o TabCoins continua. | — |
 | `RegistroDeAtividades (ConcreteObserver - Auditoria)` | Grava um histórico sequencial de todos os eventos. | RN07 |
 
-<p align="center">Tabela 1: Testes automatizados e regras cobertas.</p>
+<p align="center">Tabela 1: Testes automatizados e regras cobertas.<br>Autoria: Leonardo Bonetti, a partir dos testes de Leonardo Bonetti e Guilherme Moura.</p>
 
 Três testes merecem observação:
 
@@ -1097,7 +1097,7 @@ A tabela a seguir confirma que cada elemento do [Diagrama de Classes](/Base/Rela
 | `NotificadorDeResposta` registra `Notificacao` (`0..*`) | Composição | As notificações são criadas e guardadas apenas pelo notificador | `src/NotificadorDeResposta.js` |
 | `Conteudo` encontra-se em `EstadoDoConteudo` (`1`) | Associação | Atributo `estado` | `src/RepositorioDeConteudo.js` |
 
-<p align="center">Tabela 2: Correspondência entre os elementos do Diagrama de Classes e o código.</p>
+<p align="center">Tabela 2: Correspondência entre os elementos do Diagrama de Classes e o código.<br>Autoria: Leonardo Bonetti.</p>
 
 ## 15. Considerações sobre a implementação
 
@@ -1182,14 +1182,13 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 
 **Atividades desenvolvidas:**
 
-- Implementação das classes `Observador` e `Sujeito`, incluindo o isolamento de falhas da RN06.
-- Implementação de `EventoDeConteudo`, `TipoDeEvento`, `RepositorioDeConteudo` e `Conteudo`.
-- Implementação do sujeito concreto `ServicoDeConteudo` e dos observadores concretos `ServicoDeTabCoins` e `NotificadorDeResposta`.
-- Desenvolvimento do programa de demonstração com as etapas do Diagrama de Sequência e a etapa extra da RN06.
-- Elaboração dos testes automatizados com `node:test`, cobrindo as regras RN01 a RN06.
-- Configuração do `package.json` e do `README.md`.
-- Correção da moderação com o controle do estado do conteúdo (RN08), com novos testes, e alinhamento do estilo do código de moderação e auditoria.
-- Revisão desta página: código de todas as classes extraído dos arquivos, participante GoF e regras de cada trecho, tabela de testes e correspondência entre o Diagrama de Classes e o código.
+- Implementação da base do padrão: classes `Observador` e `Sujeito`, com o isolamento de falhas entre observadores (RN06), `EventoDeConteudo` imutável, enum `TipoDeEvento` e `RepositorioDeConteudo` e `Conteudo` em memória.
+- Implementação do sujeito concreto `ServicoDeConteudo`, que salva o conteúdo antes de notificar, e dos observadores concretos `ServicoDeTabCoins` (RN01 e RN02) e `NotificadorDeResposta` (RN03 e RN04).
+- Programa de demonstração (`index.js`) com as etapas do Diagrama de Sequência e uma etapa extra em que um observador falha de propósito (RN06).
+- Testes automatizados com `node:test` para as regras RN01 a RN06, `package.json` com os scripts `start` e `test` e `README.md`.
+- Correção da moderação: enum `EstadoDoConteudo`, verificação do estado em `enviarParaRevisao` e `restaurarConteudo` e débito apenas de conteúdo publicado (RN08), com novos testes, e alinhamento do código de moderação e auditoria ao padrão do grupo.
+- Ampliação desta página: código de todas as classes extraído dos arquivos, participante GoF e regras de cada trecho, Tabela 1 (testes) e Tabela 2 (correspondência com o Diagrama de Classes).
+- Criação das seções de pontos de vista, participação e nível de contribuição desta página, com o ponto de vista do Leonardo.
 
 **Evidências relacionadas:**
 
@@ -1208,6 +1207,8 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 | [`test/observer.test.js`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/d5fa8ad5e4124cdb0c5c6a5712c7c45073a729b6) | Testes automatizados com `node:test`. |
 | [`README.md`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/e8076001e5d94cd83ca75d97f0fe23c27b3ee910) | Instruções de execução. |
 | [Controle de estado na moderação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/825ed4de6c221413c44d41f99563e443ddb9e0f0) | `EstadoDoConteudo`, verificações em `ServicoDeConteudo`, débito condicional em `ServicoDeTabCoins` e testes da RN08. |
+| [Documentação do código](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/dc7606d) | Ampliação desta página com todas as classes, a Tabela 1 e a Tabela 2. |
+| [Pontos de vista e participação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/9bb8fd6) | Criação das seções 16 a 18 e ponto de vista do Leonardo. |
 | [Estilo da moderação e auditoria](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/dffa00ff35cb9ad9afecce0706e5a6b34a703f32) | Alinhamento do código de `RegistroDeAtividades` e da moderação ao padrão do grupo. |
 | [PR #19](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/19) | Pull Request da documentação do código, da execução e da correção da moderação. |
 
@@ -1219,7 +1220,7 @@ Esta seção registra as atividades relacionadas à implementação e à documen
 |---|---|---|---|
 | [Caio Alexandre Ornelas Silva](https://github.com/bitterteriyaki) | Elaboração do Diagrama de Classes, do Diagrama de Sequência e da correspondência prevista entre modelagem e implementação (Tabela 4 da modelagem), que serviram de base para a organização do código. | 33,33% | A modelagem definiu os participantes, as classes, as regras de negócio e os arquivos implementados, além das decisões de projeto adotadas no código, como a classe base `Observador`, o modelo *push* e o isolamento de falhas (RN06). |
 | [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, evolução dos testes automatizados e documentação da implementação. | 33,33% | Participação comprovada pela expansão do código (auditoria e moderação), evolução da cobertura de testes e autoria dos artefatos textuais da entrega. |
-| [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Implementação base do padrão, demonstração, testes automatizados, correção da moderação (RN08) e revisão da documentação do código. | 33,33% | Participação comprovada pelos commits e pelos PRs #14 e #19. |
+| [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Implementação base do padrão (sujeito, observadores, evento, repositório), demonstração, testes automatizados, correção da moderação (RN08) e ampliação da documentação do código. | 33,33% | As classes que o Guilherme ampliou partiram da base implementada pelo Leonardo; participação comprovada pelos commits da Tabela 3 e pelos PRs [#14](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/14) e [#19](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/19). |
 
 <p align="center">Tabela 4: Nível de contribuição dos integrantes.</p>
 
@@ -1240,10 +1241,11 @@ NODE.JS. **Test runner Documentation**. Disponível em: [https://nodejs.org/api/
 | Versão | Data | Descrição | Autor(es) | Revisor(es) | Detalhe da Revisão |
 |:---:|:---:|:---|:---|:---|:---|
 | 1.0 | 16/10/2026 | Criação da documentação e detalhamento da implementação do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão dos componentes GoF, código-fonte, suíte de testes e orientações de execução. |
-| 1.1 | 17/10/2026 | Ampliação da documentação do código. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Padronização da página com as demais subequipes: cada classe com seu trecho de código, papel no padrão e regras atendidas, testes automatizados e correspondência entre o diagrama e o código. |
-| 1.2 | 18/10/2026 | Participação individual. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Ponto de vista e nível de contribuição individuais, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |
+| 1.1 | 17/10/2026 | Ampliação da documentação do código. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Inclusão do código de todas as classes, extraído dos arquivos de `src/`, com o participante GoF e as regras de cada trecho; Tabela 1 com os testes e as regras cobertas; Tabela 2 com a correspondência entre o Diagrama de Classes e o código; seções de pontos de vista, participação e nível de contribuição, no formato das demais subequipes. |
+| 1.2 | 18/10/2026 | Participação individual. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Caio Alexandre](https://github.com/bitterteriyaki) | Ponto de vista do Leonardo e linha dele no nível de contribuição; espaços para os pontos de vista de Caio e Guilherme; link do PR #19 nas evidências; preenchimento da coluna de revisores das versões anteriores. |
 | 1.3 | 18/10/2026 | Participação do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Ponto de vista sobre a correspondência entre a modelagem e a implementação e nível de contribuição do Caio. |
 | 1.4 | 18/10/2026 | Participação e evidências do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão das atividades desenvolvidas e das evidências do Caio na seção de Participação e Evidências. |
 | 1.5 | 18/10/2026 | Participação do Guilherme. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Registro das lições aprendidas (Ponto de Vista), descrição das atividades desenvolvidas na moderação/auditoria e inclusão da tabela de commits de evidências. |
+| 1.6 | 19/10/2026 | Autoria das tabelas e participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) | [Guilherme Moura](https://github.com/Guilherme-Moura) | Inclusão do nome de quem elaborou as Tabelas 1 e 2 e detalhamento das atividades e evidências do Leonardo e do histórico das versões 1.1 e 1.2, para identificar a contribuição individual. |
 
 <p align="center">Tabela 5: Histórico de Versões.</p>
