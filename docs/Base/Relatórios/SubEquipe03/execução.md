@@ -353,13 +353,16 @@ Esta seção registra as atividades relacionadas à execução e à verificaçã
 - Execução real da demonstração e dos testes e registro das saídas obtidas nas seções 2.1 e 3.2.
 - Correção dos comandos e da pasta de execução e inclusão da alternativa com o `mise`.
 - Ampliação dos cenários de teste e dos critérios de validação para as regras RN05 e RN08.
+- Captura das telas do terminal da execução e dos testes (Figuras 1 e 2).
 
 **Evidências relacionadas:**
 
 | Evidência | Descrição |
 |---|---|
 | [Controle de estado na moderação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/825ed4de6c221413c44d41f99563e443ddb9e0f0) | Correção que originou os cenários CT10 e CT11 e o critério CV07. |
+| [Capturas do terminal](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/78f1645) | Figuras 1 e 2 da seção 5. |
 | [PR #19 — Documentação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/19) | Saídas reais, capturas do terminal e correção dos comandos de execução. |
+| [PR #25 — Ajustes finais](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/25) | Ponto de vista e nível de contribuição. |
 
 ## 9. Nível de Contribuição dos Integrantes
 
@@ -388,3 +391,4 @@ NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [ht
 | 1.0 | 16/10/2026 | Elaboração da documentação de execução do padrão Observer. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Organização dos pré-requisitos, procedimentos de execução (Terminal), cenários de testes, critérios de validação e referências. |
 | 1.1 | 17/10/2026 | Saídas reais e correção dos comandos. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Comandos de execução corrigidos, saídas reais do programa e dos testes, novos cenários de teste e capturas do terminal. |
 | 1.2 | 18/10/2026 | Participação individual. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Ponto de vista e nível de contribuição individuais, espaços para os demais integrantes, link do PR da documentação e registro dos revisores das versões anteriores. |
+| 1.3 | 18/10/2026 | Evidências de participação. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão das capturas do terminal e do PR de ajustes finais nas evidências. |
