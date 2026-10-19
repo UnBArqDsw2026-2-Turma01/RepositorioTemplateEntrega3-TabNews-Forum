@@ -177,6 +177,8 @@ Os cenários abaixo resumem os 32 testes de `test/observer.test.js`. A relação
 | CT11 | Remoção de conteúdo em revisão (RN08). | O autor não é debitado de novo, pois os créditos já foram suspensos. |
 | CT12 | Conteúdo inexistente. | Publicar em resposta a um pai inexistente ou remover um id inexistente lança um erro e não notifica. |
 
+*Autoria: CT01 a CT07, [Guilherme Moura](https://github.com/Guilherme-Moura) ([fa6f5d6](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fa6f5d6)); CT08 a CT12, [Leonardo Bonetti](https://github.com/LeoFacB) ([4e6c94b](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/4e6c94b)).*
+
 ### 3.2. Resultado obtido dos testes
 
 A saída abaixo foi copiada do terminal após a execução real de `npm test` em 17/10/2026, com o Node.js v24.20.0. Cada suíte aparece com os testes que a compõem, seguida do resumo final.
@@ -261,6 +263,8 @@ A implementação será considerada validada quando os seguintes critérios fore
 | CV06 | Suíte de Testes. | Todos os testes automatizados da arquitetura encerram sem falhas. |
 | CV07 | Moderação coerente com o estado. | Só conteúdos publicados vão para revisão, só conteúdos em revisão são restaurados e nenhum autor é debitado duas vezes pelo mesmo conteúdo. |
 
+*Autoria: CV01 a CV06, [Guilherme Moura](https://github.com/Guilherme-Moura) ([fa6f5d6](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fa6f5d6)); CV07, [Leonardo Bonetti](https://github.com/LeoFacB) ([4e6c94b](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/4e6c94b)).*
+
 
 ## 5. Evidências de execução
 
@@ -282,7 +286,7 @@ A Figura 1 mostra o comando executado e a saída completa no terminal, igual à 
 
 ![Saída do comando npm start no terminal](assets/execucao-programa.png)
 
-*Fonte: elaboração própria.*
+*Fonte: elaboração própria. Captura: [Leonardo Bonetti](https://github.com/LeoFacB) ([78f1645](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/78f1645)).*
 
 ### 5.2. Execução dos testes automatizados
 
@@ -298,7 +302,7 @@ A Figura 2 mostra o comando executado e o resultado dos testes, igual ao apresen
 
 ![Resultado do comando npm test no terminal](assets/execucao-testes.png)
 
-*Fonte: elaboração própria.*
+*Fonte: elaboração própria. Captura: [Leonardo Bonetti](https://github.com/LeoFacB) ([78f1645](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/78f1645)).*
 
 ### 5.3. Registro das evidências
 
@@ -306,6 +310,8 @@ A Figura 2 mostra o comando executado e o resultado dos testes, igual ao apresen
 |---|---|---|
 | Execução do programa | [`assets/execucao-programa.png`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/assets/execucao-programa.png) | As seis etapas e o resumo foram exibidos; o observador com falha não impediu a notificação dos demais (RN06). |
 | Testes automatizados | [`assets/execucao-testes.png`](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/blob/main/docs/Base/Relat%C3%B3rios/SubEquipe03/assets/execucao-testes.png) | 32 testes em 8 suítes aprovados, sem falhas. |
+
+*Autoria: estrutura da tabela, [Guilherme Moura](https://github.com/Guilherme-Moura) ([fa6f5d6](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/fa6f5d6)); capturas e resultados observados, [Leonardo Bonetti](https://github.com/LeoFacB) ([78f1645](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/78f1645)).*
 
 ### 5.4. Vídeo da execução
 
@@ -323,7 +329,7 @@ O vídeo a seguir demonstra a execução do programa e dos testes automatizados 
 
 Caso o vídeo não carregue, ele também está disponível em: [https://youtu.be/7dkUuQoRiaI](https://youtu.be/7dkUuQoRiaI).
 
-<p align="center"><strong>Fonte: Elaborado pelos autores (2026).</strong></p>
+<p align="center"><strong>Fonte: Elaborado pelos autores (2026).</strong><br>Vídeo incluído e atualizado por [Caio Alexandre](https://github.com/bitterteriyaki) ([6aaae41](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/6aaae41), [c720971](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/c720971)).</p>
 
 ## 6. Limitações da demonstração
 
@@ -400,19 +406,22 @@ Esta seção registra as atividades relacionadas à execução e à verificaçã
 
 **Atividades desenvolvidas:**
 
-- Execução real da demonstração e dos testes e registro das saídas obtidas nas seções 2.1 e 3.2.
-- Correção dos comandos e da pasta de execução e inclusão da alternativa com o `mise`.
-- Ampliação dos cenários de teste e dos critérios de validação para as regras RN05 e RN08.
-- Captura das telas do terminal da execução e dos testes (Figuras 1 e 2).
+- Execução real da demonstração (`npm start`) e dos testes (`npm test`), com a substituição dos resultados esperados pelas saídas obtidas no terminal, nas seções 2.1 e 3.2.
+- Correção dos comandos, que passaram a ser executados na pasta da SubEquipe03, e inclusão da alternativa de instalação do Node.js com o `mise`.
+- Inclusão dos cenários CT08 a CT12 e do critério CV07, que cobrem o desacoplamento do sujeito (RN05), a inscrição e a desinscrição, a moderação com controle de estado (RN08) e os conteúdos inexistentes.
+- Captura das telas do terminal da execução e dos testes (Figuras 1 e 2) e preenchimento do registro das evidências (seção 5.3).
+- Criação das seções de pontos de vista, participação e nível de contribuição desta página, com o ponto de vista do Leonardo.
 
 **Evidências relacionadas:**
 
 | Evidência | Descrição |
 |---|---|
-| [Controle de estado na moderação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/825ed4de6c221413c44d41f99563e443ddb9e0f0) | Correção que originou os cenários CT10 e CT11 e o critério CV07. |
-| [Capturas do terminal](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/78f1645) | Figuras 1 e 2 da seção 5. |
-| [PR #19 — Documentação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/19) | Saídas reais, capturas do terminal e correção dos comandos de execução. |
-| [PR #25 — Ajustes finais](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/25) | Ponto de vista e nível de contribuição. |
+| [Saídas reais e comandos](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/4e6c94b) | Saídas reais da demonstração e dos testes, comandos corrigidos, alternativa com o `mise`, cenários CT08 a CT12 e critério CV07. |
+| [Controle de estado na moderação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/825ed4d) | Correção do código que originou os cenários CT10 e CT11 e o critério CV07. |
+| [Capturas do terminal](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/78f1645) | Figuras 1 e 2 e registro das evidências da seção 5.3. |
+| [Pontos de vista e participação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/1fe5938) | Criação das seções 7 a 9 e ponto de vista do Leonardo. |
+| [PR #19 — Documentação](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/19) | Pull Request das saídas reais, das capturas do terminal e da correção dos comandos. |
+| [PR #25 — Ajustes finais](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/25) | Pull Request do ponto de vista e do nível de contribuição. |
 
 ## 9. Nível de Contribuição dos Integrantes
 
@@ -422,7 +431,7 @@ O nível de contribuição deve refletir as atividades efetivamente realizadas n
 |---|---|---|---|
 | [Caio Alexandre Ornelas Silva](https://github.com/bitterteriyaki) | Elaboração do Diagrama de Sequência que orientou as etapas da demonstração e configuração do `mise`, que fixa a versão do Node.js usada na execução. | 33,33% | O Diagrama de Sequência definiu as etapas executadas e verificadas nesta página, e a configuração do `mise` permite reproduzir a execução e os testes em um ambiente padronizado. |
 | [Guilherme Moura](github.com/Guilherme-Moura) | Implementação da Moderação/Auditoria, validação via testes e documentação de execução. | 33,33% | Participação comprovada pela definição dos critérios de validação, expansão dos testes automatizados para os cenários de moderação e autoria do documento de execução. |
-| [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Execução real da demonstração e dos testes, registro das saídas e das capturas do terminal, correção dos comandos e novos cenários de teste. | 33,33% | Participação comprovada pelos commits e pelos PRs #14 e #19. |
+| [Leonardo Fachinello Bonetti](https://github.com/LeoFacB) | Execução real da demonstração e dos testes, registro das saídas e das capturas do terminal, correção dos comandos, cenários CT08 a CT12 e critério CV07. | 33,33% | As saídas e as capturas registradas nesta página comprovam o funcionamento da implementação; participação comprovada pelos commits [4e6c94b](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/4e6c94b) e [78f1645](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/commit/78f1645) e pelos PRs [#19](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/19) e [#25](https://github.com/UnBArqDsw2026-2-Turma01/RepositorioTemplateEntrega3-TabNews-Forum/pull/25). |
 
 ## 10. Referências
 
@@ -447,3 +456,4 @@ NODE.JS. **Test runner (node:test)**. Node.js Documentation. Disponível em: [ht
 | 1.6 | 18/10/2026 | Participação e evidências do Caio. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Inclusão das atividades desenvolvidas e das evidências do Caio na seção de Participação e Evidências. |
 | 1.7 | 18/10/2026 | Participação do Guilherme. | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | Registro das lições aprendidas (Ponto de Vista) sobre a execução, descrição das atividades de estruturação da página e inclusão de evidências. |
 | 1.8 | 19/10/2026 | Atualização do vídeo da execução. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Leonardo Bonetti](https://github.com/LeoFacB) | Substituição do vídeo da seção 5.4 pela nova gravação da execução do programa e dos testes. |
+| 1.9 | 19/10/2026 | Autoria das evidências e participação do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão de quem elaborou cada figura, tabela e o vídeo, e detalhamento das atividades e evidências do Leonardo, com os commits, para identificar a contribuição individual. |
