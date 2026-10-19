@@ -77,7 +77,11 @@ As decisões e a validação ficaram comigo. Conferi cada sugestão com o Diagra
 
 ## Análise Crítica do Uso de IA Generativa
 
-*Seção a ser consolidada pela SubEquipe_03 a partir dos pontos de vista individuais, reunindo as contribuições e as limitações observadas no uso de IA Generativa durante a entrega.*
+Os três integrantes utilizaram a IA Generativa como ferramenta de apoio: o Claude Code, no caso de Caio e Leonardo, e o Gemini, no caso de Guilherme. Nos três relatos, a ferramenta acelerou tarefas operacionais, como a escrita dos diagramas em PlantUML, a formatação da documentação, a estrutura inicial dos testes e a organização da demonstração no terminal, enquanto a escolha do padrão e as decisões de modelagem permaneceram com a equipe.
+
+Os relatos também convergem nas limitações. A ferramenta produziu erros que ela mesma não percebeu, como links internos quebrados no Docsify; sugeriu conteúdo além do pedido; propôs bibliotecas de teste diferentes da adotada, dependências externas e mudanças de nomes; e chegou a alterar regras de negócio. Em todos esses casos, a correção dependeu da revisão dos integrantes, feita com base no Diagrama de Classes, nas regras da modelagem e na literatura de referência.
+
+A principal lição é que o uso da IA só foi seguro porque havia formas objetivas de verificação: a renderização dos diagramas, a comparação com a modelagem e, principalmente, a execução da demonstração e dos testes automatizados. Assim, a IA Generativa contribuiu para ganhar tempo e melhorar a apresentação dos resultados, mas o entendimento do padrão Observer, as decisões técnicas e a responsabilidade pelo que foi entregue continuaram sendo dos integrantes.
 
 ## Evidências de Participação
 
@@ -119,7 +123,7 @@ PLANTUML. **PlantUML**. Disponível em: [https://plantuml.com/](https://plantuml
 | 1.1 | 14/10/2026 | Inclusão da seção de referências. | [Caio Alexandre](https://github.com/bitterteriyaki) | [Arthur Fernandes](https://github.com/arthurfernandesj) | Criação da seção de referências, com a documentação do Claude Code, ferramenta de IA Generativa utilizada, e do PlantUML, ferramenta utilizada na elaboração dos diagramas. |
 | 1.2 | 16/10/2026 | Adição do ponto de vista | [Guilherme Moura](github.com/Guilherme-Moura) | [Leonardo Bonetti](https://github.com/LeoFacB) | |
 | 1.3 | 17/10/2026 | Seção e evidências do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Inclusão da seção do Leonardo, das evidências dele nas Tabelas 1 e 2 e das ferramentas utilizadas nas referências. |
-| 1.4 | 18/10/2026 | Ponto de vista do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Registro das lições aprendidas e do uso da IA Generativa, e atualização das evidências com o PR da documentação e o histórico de commits, e registro dos revisores das versões anteriores. |
+| 1.4 | 18/10/2026 | Ponto de vista do Leonardo. | [Leonardo Bonetti](https://github.com/LeoFacB) |  | Registro das lições aprendidas e do uso da IA Generativa, e atualização das evidências com o PR da documentação e o histórico de commits, registro dos revisores das versões anteriores e consolidação da análise crítica a partir dos três pontos de vista. |
 
 <p align="center">Tabela 3: Histórico de Versões.</p>
 
