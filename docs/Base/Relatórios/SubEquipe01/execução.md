@@ -357,6 +357,12 @@ A execução deixou visível a diferença entre os três padrões, que no papel 
 
 Por fim, rodar a suíte completa depois de adicionar os padrões confirmou que o Builder continuou funcionando, o que mostra que os padrões puderam ser acrescentados sem modificar o código já existente.
 
+### Giovana Fontes
+
+A análise da execução mostrou como o padrão Builder facilita a criação de uma publicação ao separar a configuração dos dados da construção do objeto final. Os testes também permitem verificar se os campos obrigatórios são respeitados e se as tags são tratadas corretamente, tornando o comportamento mais previsível. Além disso, observar os outros padrões ajudou a compreender como cada um resolve diferentes necessidades relacionadas à criação de objetos.
+
+Porém, como a demonstração funciona apenas em memória, ela não comprova uma publicação real no TabNews. Por isso, é importante apresentar os resultados junto com suas limitações e deixar claro quais comportamentos foram efetivamente testados.
+
 ## 9. Participação e comprobatórios
 
 Esta página registra o procedimento de execução e a verificação da implementação Builder da SubEquipe 01. A implementação é rastreável aos arquivos `src/Publicacao.js`, `src/PublicacaoBuilder.js` e `src/index.js`; os testes estão em `test/PublicacaoBuilder.test.js`. As contribuições individuais e seus comprovantes são consolidados em [Participações (Padrões de Projeto)](/Base/1.2.ParticipacoesPadroesDeProjeto.md), evitando duplicar aqui os registros da equipe.
@@ -375,4 +381,5 @@ GAMMA, Erich; HELM, Richard; JOHNSON, Ralph; VLISSIDES, John. *Padrões de Proje
 |:---:|:---:|:---|:---|:---:|:---|
 | 1.0 | 08/10/2026 | Elaboração da documentação de execução do padrão Builder. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Organização dos pré-requisitos, procedimentos de execução, cenários de teste, critérios de validação, evidências, participação e referências. |
 | 1.1 | 19/10/2026 | Complementação da execução do Builder com resultados observados, cenários de teste e critérios rastreáveis ao código atual. | [Arthur Fernandes](https://github.com/arthurfernandesj) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Registro das versões de Node.js e npm, das saídas reais de `npm start` e `npm test`, da cobertura existente, das limitações e da situação das capturas de tela. |
-| 1.2 | 19/10/2026 | Execução de Factory Method, Prototype e Singleton. | [João Pedro S. Maciel](https://github.com/jopesmp) | — | Inclusão da seção 6, com comandos, saídas reais, capturas do terminal, análise dos resultados e critérios de validação dos três padrões; atualização da estrutura do pacote; inclusão do ponto de vista de João Pedro. |
+| 1.2 | 19/10/2026 | Execução de Factory Method, Prototype e Singleton. | [João Pedro S. Maciel](https://github.com/jopesmp) | [Giovana Fontes](https://github.com/GiovanaFontesS) | Inclusão da seção 6, com comandos, saídas reais, capturas do terminal, análise dos resultados e critérios de validação dos três padrões; atualização da estrutura do pacote; inclusão do ponto de vista de João Pedro. |
+| 1.2 | 19/10/2026 | Inclusão de Limitações da execusão e ponto de vista. | [Giovana Fontes](https://github.com/GiovanaFontesS) | [João Pedro S. Maciel](https://github.com/jopesmp) | Inclusão das Limitacoes 6.1 da execusão e a inclusão de ponto de vista  |
