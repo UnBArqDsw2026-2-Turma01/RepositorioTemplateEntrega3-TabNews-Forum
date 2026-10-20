@@ -31,7 +31,7 @@ Não há `Builder` abstrato, hierarquia de Builders nem Director nesta versão d
 A figura abaixo é mantida como registro da versão anterior do diagrama. Ela apresenta os três participantes principais, mas não mostra alguns detalhes da implementação: assinatura dos parâmetros de `Publicacao`, tipos mais precisos, comportamento de cópia e validação, operações de normalização e serialização, nem os retornos de cada método encadeável. A fonte Mermaid da seção seguinte expande esses pontos.
 
 <p align="center">
-  <img src="../../../images/diagrama_classes.png" alt="Diagrama de classes original do padrão Builder" width="520">
+  <img src="https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/images/diagrama_classes.png" alt="Diagrama de classes original do padrão Builder" width="520">
 </p>
 
 <p align="center">
@@ -44,7 +44,7 @@ A figura abaixo é mantida como registro da versão anterior do diagrama. Ela ap
 O diagrama abaixo mostra as classes e operações observáveis no código. As dependências tracejadas indicam uso/criação, não herança. `PublicacaoBuilder` possui um estado de configuração `dados`; `build()` usa esse estado para criar um novo produto. O desenho também distingue o módulo cliente das classes de domínio.
 
 <p align="center">
-  <img src="../../../images/ClienteIndex.png" alt="Diagrama de classes ampliado do padrão Builder" width="800">
+  <img src="https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/images/ClienteIndex.png" alt="Diagrama de classes ampliado do padrão Builder" width="800">
 </p>
 
 <p align="center">
@@ -73,7 +73,7 @@ Os métodos de configuração retornam `PublicacaoBuilder`, porque cada um execu
 A figura anterior é mantida. Ela já mostra as mensagens centrais de configuração e construção, mas usa um único caminho simplificado: não evidencia o teste de tipo em `comTags`, a ordem das validações, o caminho de exceção, o retorno de `toJSON()` ou a chamada real a `JSON.stringify`.
 
 <p align="center">
-  <img src="../../../images/diagrama_sequencia_UML.png" alt="Diagrama de sequência original do padrão Builder" width="700">
+  <img src="https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/images/diagrama_sequencia_UML.png" alt="Diagrama de sequência original do padrão Builder" width="700">
 </p>
 
 <p align="center">
@@ -86,7 +86,7 @@ A figura anterior é mantida. Ela já mostra as mensagens centrais de configura�
 Este diagrama representa o cenário válido do `src/index.js` e inclui alternativas para tipo de tags inválido e campos obrigatórios inválidos. As mensagens de erro são retornos excepcionais: se uma exceção ocorre, o fluxo normal de construção e impressão não continua.
 
 <p align="center">
-  <img src="../../../images/fonte_ampliada.png" alt="Diagrama de sequência ampliado do padrão Builder" width="900">
+  <img src="https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/images/fonte_ampliada.png" alt="Diagrama de sequência ampliado do padrão Builder" width="900">
 </p>
 
 <p align="center">
@@ -111,7 +111,7 @@ Este diagrama representa o cenário válido do `src/index.js` e inclui alternati
 A figura anterior é mantida como referência, mas o fluxo visual atual sugere uma verificação genérica de “campos obrigatórios” depois de `build()`. No código, não há uma operação de validação separada: as validações acontecem sequencialmente dentro do construtor `Publicacao`, e as tags podem lançar `TypeError` antes de `build()`.
 
 <p align="center">
-  <img src="../../../images/diagrama_de_atividades.png" alt="Diagrama de atividades original do padrão Builder" width="550">
+  <img src="https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/images/diagrama_de_atividades.png" alt="Diagrama de atividades original do padrão Builder" width="550">
 </p>
 
 <p align="center">

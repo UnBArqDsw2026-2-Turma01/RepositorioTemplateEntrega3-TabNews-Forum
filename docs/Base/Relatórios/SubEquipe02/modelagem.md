@@ -15,7 +15,7 @@ Esta modelagem corresponde à implementação demonstrativa em Python; os subsis
 O diagrama de classes apresenta os componentes da solução, seus atributos, métodos e relacionamentos.
 
 <p align="center">
-  <img src="../../../images/Padrao_GOF_Fachada_sub02.png" alt="Diagrama de Classes UML" width="800">
+  <img src="https://unbarqdsw2026-2-turma01.github.io/RepositorioTemplateEntrega3-TabNews-Forum/images/Padrao_GOF_Fachada_sub02.png" alt="Diagrama de Classes UML" width="800">
 </p>
 
 <p align="center">
